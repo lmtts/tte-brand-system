@@ -1,0 +1,484 @@
+/**
+ * ============================================================
+ * TO THE ENDS OF THE EARTH — Design Tokens
+ * CSS Custom Properties
+ * ============================================================
+ * Source of truth: tokens.json
+ * Last updated: 2025
+ * 
+ * USAGE:
+ * Never use raw hex values in your CSS.
+ * Always reference semantic tokens:
+ *   ✅  color: var(--color-text-default);
+ *   ❌  color: #28272A;
+ *
+ * LAYERS:
+ *   1. primitives   → raw values, never used directly in components
+ *   2. brand        → what each value means for TTE
+ *   3. semantic     → where and how each value is used
+ * ============================================================
+ */
+
+:root {
+
+  /* ==========================================================
+     PRIMITIVES — Raw values. Do not use directly in components.
+     ========================================================== */
+
+  /* Color */
+  --primitive-color-fire-orange: #FE5442;
+  --primitive-color-black:       #28272A;
+  --primitive-color-white:       #FFFFFF;
+
+  /* Biomes — PENDING FINAL APPROVAL */
+  --primitive-color-biome-desert: #B86C55;
+  --primitive-color-biome-arctic: #7BA7BC;
+  --primitive-color-biome-city:   #4A4A52;
+  --primitive-color-biome-forest: #2D5A3D;
+
+  /* Parent brand — Hope Channel, do not use in TTE components */
+  --primitive-color-parent-brand-hope-channel-blue:   #264CA3;
+  --primitive-color-parent-brand-hope-channel-yellow: #FAD306;
+
+  /* Spacing scale — base 4px */
+  --primitive-spacing-0:   0px;
+  --primitive-spacing-1:   4px;
+  --primitive-spacing-2:   8px;
+  --primitive-spacing-3:   12px;
+  --primitive-spacing-4:   16px;
+  --primitive-spacing-5:   20px;
+  --primitive-spacing-6:   24px;
+  --primitive-spacing-8:   32px;
+  --primitive-spacing-10:  40px;
+  --primitive-spacing-12:  48px;
+  --primitive-spacing-16:  64px;
+  --primitive-spacing-20:  80px;
+  --primitive-spacing-24:  96px;
+  --primitive-spacing-32:  128px;
+
+  /* Font size scale */
+  --primitive-font-size-10: 10px;
+  --primitive-font-size-12: 12px;
+  --primitive-font-size-13: 13px;
+  --primitive-font-size-14: 14px;
+  --primitive-font-size-16: 16px;
+  --primitive-font-size-20: 20px;
+  --primitive-font-size-22: 22px;
+  --primitive-font-size-28: 28px;
+  --primitive-font-size-36: 36px;
+  --primitive-font-size-48: 48px;
+  --primitive-font-size-60: 60px;
+  --primitive-font-size-72: 72px;
+  --primitive-font-size-96: 96px;
+
+
+  /* ==========================================================
+     BRAND — The meaning behind each value.
+     ========================================================== */
+
+  /* Brand colors */
+  --brand-color-primary: var(--primitive-color-fire-orange); /* Fire of the Holy Spirit, urgency */
+  --brand-color-dark:    var(--primitive-color-black);       /* The earth, soil, unreached places */
+  --brand-color-light:   var(--primitive-color-white);       /* Gospel light piercing darkness */
+
+  /* Brand fonts */
+  --brand-font-primary:   'Mona Sans', sans-serif;   /* Headings, display, wordmark */
+  --brand-font-secondary: 'Space Mono', monospace;   /* HUD, data, body text */
+
+
+  /* ==========================================================
+     SEMANTIC — Where and how values are used.
+     ========================================================== */
+
+  /* --- Text --- */
+  --color-text-default:  var(--brand-color-dark);    /* Default body text */
+  --color-text-inverted: var(--brand-color-light);   /* Text on dark surfaces */
+  --color-text-accent:   var(--brand-color-primary); /* Emphasis — use sparingly */
+
+  /* --- Surfaces / Backgrounds --- */
+  --color-surface-dark:   var(--brand-color-dark);    /* Dark backgrounds, cards */
+  --color-surface-light:  var(--brand-color-light);   /* Light backgrounds */
+  --color-surface-accent: var(--brand-color-primary); /* CTA, highlighted elements */
+
+  /* --- Icons --- */
+  --color-icon-primary: var(--brand-color-primary); /* TTE bird orange wing, action icons */
+  --color-icon-dark:    var(--brand-color-dark);    /* Icons on light backgrounds */
+  --color-icon-light:   var(--brand-color-light);   /* Icons on dark backgrounds */
+
+  /* --- Borders --- */
+  --color-border-default: var(--brand-color-dark);    /* Default borders, dividers */
+  --color-border-accent:  var(--brand-color-primary); /* Active, branded borders */
+  --color-border-subtle:  var(--brand-color-light);   /* Subtle borders on dark — use at low opacity */
+
+  /* --- HUD System --- */
+  --color-hud-text:       var(--brand-color-light);   /* HUD data text — always on dark */
+  --color-hud-accent:     var(--brand-color-primary); /* HUD labels, field names */
+  --color-hud-background: var(--brand-color-dark);    /* HUD panel background */
+
+  /* --- Biome Accents (PENDING FINAL APPROVAL) --- */
+  --color-biome-desert: var(--primitive-color-biome-desert);
+  --color-biome-arctic: var(--primitive-color-biome-arctic);
+  --color-biome-city:   var(--primitive-color-biome-city);
+  --color-biome-forest: var(--primitive-color-biome-forest);
+
+  /* --- Component Spacing --- */
+  --spacing-padding-xs: var(--primitive-spacing-2);   /* 8px  — badges, chips, small tags */
+  --spacing-padding-sm: var(--primitive-spacing-3);   /* 12px — compact elements */
+  --spacing-padding-md: var(--primitive-spacing-4);   /* 16px — buttons, inputs */
+  --spacing-padding-lg: var(--primitive-spacing-6);   /* 24px — cards, sections */
+  --spacing-padding-xl: var(--primitive-spacing-8);   /* 32px — hero, containers */
+
+  --spacing-gap-xs: var(--primitive-spacing-1);       /* 4px  — icon+label pairs, HUD fields */
+  --spacing-gap-sm: var(--primitive-spacing-2);       /* 8px  — related elements */
+  --spacing-gap-md: var(--primitive-spacing-4);       /* 16px — component groups */
+  --spacing-gap-lg: var(--primitive-spacing-6);       /* 24px — section separators */
+  --spacing-gap-xl: var(--primitive-spacing-12);      /* 48px — layout gaps */
+
+  /* --- Layout Spacing --- */
+  --spacing-page-margin-mobile:  var(--primitive-spacing-4);   /* 16px */
+  --spacing-page-margin-tablet:  var(--primitive-spacing-8);   /* 32px */
+  --spacing-page-margin-desktop: var(--primitive-spacing-16);  /* 64px */
+  --spacing-section-gap:         var(--primitive-spacing-24);  /* 96px */
+
+  /* --- Control Sizing — unified height scale for interactive controls ---
+     Button, Input, Select all size from these. "default" = one promise everywhere. */
+  --sizing-control-sm:      36px; /* dense · HUD · operate */
+  --sizing-control-default: 44px; /* SYSTEM DEFAULT */
+  --sizing-control-lg:      56px; /* hero CTAs */
+
+  /* --- Border Radius — ZERO. TTE is angular and tactical. --- */
+  --radius-none:    0px;
+  --radius-default: 0px;
+  --radius-full:    9999px; /* EXCEPTION ONLY — circular/pill elements */
+
+  /* --- Border Width --- */
+  --border-width-thin:    1px; /* HUD lines, dividers */
+  --border-width-default: 2px; /* Standard borders */
+  --border-width-thick:   4px; /* Active states, emphasis */
+
+  /* --- Opacity --- */
+  --opacity-topographic:    0.12; /* Topographic pattern overlay */
+  --opacity-overlay-light:  0.08; /* Subtle background tint */
+  --opacity-overlay-medium: 0.24; /* Image overlay for legibility */
+  --opacity-overlay-heavy:  0.64; /* Strong scrim — HUD backgrounds */
+  --opacity-disabled:       0.40; /* Disabled interactive elements */
+
+  /* --- Elevation / Shadow --- */
+  --elevation-none: none;
+  --elevation-sm:   0 2px 8px  rgba(0, 0, 0, 0.30); /* Tooltips, dropdowns */
+  --elevation-md:   0 4px 16px rgba(0, 0, 0, 0.50); /* Cards on dark */
+  --elevation-lg:   0 8px 32px rgba(0, 0, 0, 0.70); /* Modals, overlays */
+  --elevation-hud:  0 0  24px  rgba(254, 84, 66, 0.20); /* HUD orange glow */
+
+  /* --- Typography: Font Families --- */
+  --font-primary:   'Mona Sans', sans-serif;
+  --font-secondary: 'Space Mono', monospace;
+
+  /* --- Typography: Mona Sans Scale --- */
+  --text-display-2xl-size:    var(--primitive-font-size-96);
+  --text-display-2xl-height:  0.95;
+  --text-display-2xl-spacing: 0.02em;
+  --text-display-2xl-weight:  900;
+
+  --text-display-xl-size:    var(--primitive-font-size-72);
+  --text-display-xl-height:  0.95;
+  --text-display-xl-spacing: 0.02em;
+  --text-display-xl-weight:  900;
+
+  --text-display-l-size:    var(--primitive-font-size-60);
+  --text-display-l-height:  1.00;
+  --text-display-l-spacing: 0.02em;
+  --text-display-l-weight:  800;
+
+  --text-heading-h1-size:    var(--primitive-font-size-48);
+  --text-heading-h1-height:  1.05;
+  --text-heading-h1-spacing: 0.01em;
+  --text-heading-h1-weight:  800;
+
+  --text-heading-h2-size:    var(--primitive-font-size-36);
+  --text-heading-h2-height:  1.10;
+  --text-heading-h2-spacing: 0.01em;
+  --text-heading-h2-weight:  800;
+
+  --text-heading-h3-size:    var(--primitive-font-size-28);
+  --text-heading-h3-height:  1.00;
+  --text-heading-h3-spacing: 0.01em;
+  --text-heading-h3-weight:  700;
+
+  --text-heading-h4-size:    var(--primitive-font-size-22);
+  --text-heading-h4-height:  1.00;
+  --text-heading-h4-spacing: 0.02em;
+  --text-heading-h4-weight:  700;
+
+  --text-label-lg-size:    var(--primitive-font-size-16);
+  --text-label-lg-height:  1.00;
+  --text-label-lg-spacing: 0.04em;
+  --text-label-lg-weight:  800;
+
+  --text-label-md-size:    var(--primitive-font-size-13);
+  --text-label-md-height:  1.00;
+  --text-label-md-spacing: 0.04em;
+  --text-label-md-weight:  800;
+
+  /* Mona Sans Body — EXCEPTION: sentence case, not uppercase */
+  --text-mona-body-size:       var(--primitive-font-size-16);
+  --text-mona-body-height:     1.20;
+  --text-mona-body-spacing:    0em;
+  --text-mona-body-weight:     500;
+
+  --text-mona-body-sm-size:    var(--primitive-font-size-14);
+  --text-mona-body-sm-height:  1.20;
+  --text-mona-body-sm-spacing: 0em;
+  --text-mona-body-sm-weight:  500;
+
+  /* --- Typography: Space Mono Scale --- */
+  --text-hud-xl-size:    var(--primitive-font-size-20);
+  --text-hud-xl-height:  1.20;
+  --text-hud-xl-spacing: 0.06em;
+  --text-hud-xl-weight:  700;
+
+  --text-hud-default-size:    var(--primitive-font-size-14);
+  --text-hud-default-height:  1.20;
+  --text-hud-default-spacing: 0.06em;
+  --text-hud-default-weight:  400;
+
+  --text-hud-small-size:    var(--primitive-font-size-12);
+  --text-hud-small-height:  1.20;
+  --text-hud-small-spacing: 0.06em;
+  --text-hud-small-weight:  400;
+
+  --text-hud-micro-size:    var(--primitive-font-size-10);
+  --text-hud-micro-height:  1.20;
+  --text-hud-micro-spacing: 0.06em;
+  --text-hud-micro-weight:  400;
+
+  --text-body-regular-size:    var(--primitive-font-size-16);
+  --text-body-regular-height:  1.40;
+  --text-body-regular-spacing: 0.01em;
+  --text-body-regular-weight:  400;
+
+  --text-body-small-size:    var(--primitive-font-size-14);
+  --text-body-small-height:  1.40;
+  --text-body-small-spacing: 0.01em;
+  --text-body-small-weight:  400;
+
+  --text-mono-label-size:    var(--primitive-font-size-12);
+  --text-mono-label-height:  1.40;
+  --text-mono-label-spacing: 0.03em;
+  --text-mono-label-weight:  700;
+
+}
+
+
+/* ==========================================================
+   UTILITY CLASSES
+   Ready-to-use classes built from semantic tokens.
+   ========================================================== */
+
+/* Backgrounds */
+.bg-dark    { background-color: var(--color-surface-dark); }
+.bg-light   { background-color: var(--color-surface-light); }
+.bg-accent  { background-color: var(--color-surface-accent); }
+
+/* Text colors */
+.text-default  { color: var(--color-text-default); }
+.text-inverted { color: var(--color-text-inverted); }
+.text-accent   { color: var(--color-text-accent); }
+
+/* Typography: Mona Sans */
+.type-display-2xl {
+  font-family:     var(--font-primary);
+  font-size:       var(--text-display-2xl-size);
+  font-weight:     var(--text-display-2xl-weight);
+  line-height:     var(--text-display-2xl-height);
+  letter-spacing:  var(--text-display-2xl-spacing);
+  text-transform:  uppercase;
+}
+.type-display-xl {
+  font-family:     var(--font-primary);
+  font-size:       var(--text-display-xl-size);
+  font-weight:     var(--text-display-xl-weight);
+  line-height:     var(--text-display-xl-height);
+  letter-spacing:  var(--text-display-xl-spacing);
+  text-transform:  uppercase;
+}
+.type-display-l {
+  font-family:     var(--font-primary);
+  font-size:       var(--text-display-l-size);
+  font-weight:     var(--text-display-l-weight);
+  line-height:     var(--text-display-l-height);
+  letter-spacing:  var(--text-display-l-spacing);
+  text-transform:  uppercase;
+}
+.type-h1 {
+  font-family:     var(--font-primary);
+  font-size:       var(--text-heading-h1-size);
+  font-weight:     var(--text-heading-h1-weight);
+  line-height:     var(--text-heading-h1-height);
+  letter-spacing:  var(--text-heading-h1-spacing);
+  text-transform:  uppercase;
+}
+.type-h2 {
+  font-family:     var(--font-primary);
+  font-size:       var(--text-heading-h2-size);
+  font-weight:     var(--text-heading-h2-weight);
+  line-height:     var(--text-heading-h2-height);
+  letter-spacing:  var(--text-heading-h2-spacing);
+  text-transform:  uppercase;
+}
+.type-h3 {
+  font-family:     var(--font-primary);
+  font-size:       var(--text-heading-h3-size);
+  font-weight:     var(--text-heading-h3-weight);
+  line-height:     var(--text-heading-h3-height);
+  letter-spacing:  var(--text-heading-h3-spacing);
+  text-transform:  uppercase;
+}
+.type-h4 {
+  font-family:     var(--font-primary);
+  font-size:       var(--text-heading-h4-size);
+  font-weight:     var(--text-heading-h4-weight);
+  line-height:     var(--text-heading-h4-height);
+  letter-spacing:  var(--text-heading-h4-spacing);
+  text-transform:  uppercase;
+}
+.type-label-lg {
+  font-family:     var(--font-primary);
+  font-size:       var(--text-label-lg-size);
+  font-weight:     var(--text-label-lg-weight);
+  line-height:     var(--text-label-lg-height);
+  letter-spacing:  var(--text-label-lg-spacing);
+  text-transform:  uppercase;
+}
+.type-label-md {
+  font-family:     var(--font-primary);
+  font-size:       var(--text-label-md-size);
+  font-weight:     var(--text-label-md-weight);
+  line-height:     var(--text-label-md-height);
+  letter-spacing:  var(--text-label-md-spacing);
+  text-transform:  uppercase;
+}
+/* Mona Sans Body — sentence case exception */
+.type-mona-body {
+  font-family:    var(--font-primary);
+  font-size:      var(--text-mona-body-size);
+  font-weight:    var(--text-mona-body-weight);
+  line-height:    var(--text-mona-body-height);
+  letter-spacing: var(--text-mona-body-spacing);
+}
+.type-mona-body-sm {
+  font-family:    var(--font-primary);
+  font-size:      var(--text-mona-body-sm-size);
+  font-weight:    var(--text-mona-body-sm-weight);
+  line-height:    var(--text-mona-body-sm-height);
+  letter-spacing: var(--text-mona-body-sm-spacing);
+}
+
+/* Typography: Space Mono */
+.type-hud-xl {
+  font-family:     var(--font-secondary);
+  font-size:       var(--text-hud-xl-size);
+  font-weight:     var(--text-hud-xl-weight);
+  line-height:     var(--text-hud-xl-height);
+  letter-spacing:  var(--text-hud-xl-spacing);
+  text-transform:  uppercase;
+}
+.type-hud-default {
+  font-family:     var(--font-secondary);
+  font-size:       var(--text-hud-default-size);
+  font-weight:     var(--text-hud-default-weight);
+  line-height:     var(--text-hud-default-height);
+  letter-spacing:  var(--text-hud-default-spacing);
+  text-transform:  uppercase;
+}
+.type-hud-small {
+  font-family:     var(--font-secondary);
+  font-size:       var(--text-hud-small-size);
+  font-weight:     var(--text-hud-small-weight);
+  line-height:     var(--text-hud-small-height);
+  letter-spacing:  var(--text-hud-small-spacing);
+  text-transform:  uppercase;
+}
+.type-hud-micro {
+  font-family:     var(--font-secondary);
+  font-size:       var(--text-hud-micro-size);
+  font-weight:     var(--text-hud-micro-weight);
+  line-height:     var(--text-hud-micro-height);
+  letter-spacing:  var(--text-hud-micro-spacing);
+  text-transform:  uppercase;
+}
+.type-body {
+  font-family:     var(--font-secondary);
+  font-size:       var(--text-body-regular-size);
+  font-weight:     var(--text-body-regular-weight);
+  line-height:     var(--text-body-regular-height);
+  letter-spacing:  var(--text-body-regular-spacing);
+}
+.type-body-sm {
+  font-family:     var(--font-secondary);
+  font-size:       var(--text-body-small-size);
+  font-weight:     var(--text-body-small-weight);
+  line-height:     var(--text-body-small-height);
+  letter-spacing:  var(--text-body-small-spacing);
+}
+.type-mono-label {
+  font-family:     var(--font-secondary);
+  font-size:       var(--text-mono-label-size);
+  font-weight:     var(--text-mono-label-weight);
+  line-height:     var(--text-mono-label-height);
+  letter-spacing:  var(--text-mono-label-spacing);
+  text-transform:  uppercase;
+}
+
+/* Borders */
+.border-default { border: var(--border-width-default) solid var(--color-border-default); }
+.border-accent  { border: var(--border-width-default) solid var(--color-border-accent); }
+.border-thick   { border: var(--border-width-thick)   solid var(--color-border-default); }
+
+/* Border radius — always zero for TTE */
+* { border-radius: var(--radius-default); }
+.radius-full { border-radius: var(--radius-full); } /* Exception only */
+
+/* Elevation */
+.elevation-sm  { box-shadow: var(--elevation-sm); }
+.elevation-md  { box-shadow: var(--elevation-md); }
+.elevation-lg  { box-shadow: var(--elevation-lg); }
+.elevation-hud { box-shadow: var(--elevation-hud); }
+
+/* Topographic pattern overlay */
+.topo-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/patterns/topographic-overlay.svg');
+  background-size: cover;
+  opacity: var(--opacity-topographic);
+  pointer-events: none;
+}
+
+/* HUD Panel */
+.hud-panel {
+  background-color: var(--color-hud-background);
+  color:            var(--color-hud-text);
+  border:           var(--border-width-thin) solid var(--color-border-accent);
+  box-shadow:       var(--elevation-hud);
+  padding:          var(--spacing-padding-md);
+}
+
+.hud-label {
+  color:           var(--color-hud-accent);
+  font-family:     var(--font-secondary);
+  font-size:       var(--text-hud-small-size);
+  font-weight:     var(--text-hud-small-weight);
+  letter-spacing:  var(--text-hud-small-spacing);
+  text-transform:  uppercase;
+}
+
+.hud-value {
+  color:           var(--color-hud-text);
+  font-family:     var(--font-secondary);
+  font-size:       var(--text-hud-default-size);
+  font-weight:     var(--text-hud-default-weight);
+  letter-spacing:  var(--text-hud-default-spacing);
+  text-transform:  uppercase;
+}

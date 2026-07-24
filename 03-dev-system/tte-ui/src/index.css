@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Brand fonts — the only two typefaces allowed in TTE */
+@import "@fontsource-variable/mona-sans";
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/**
+ * ============================================================
+ * TTE Design System — token layer
+ * ============================================================
+ * Source of truth: 01-brand-system/tokens/tokens.json
+ * Values are mirrored here into the slots shadcn/ui expects.
+ * Never hardcode a hex value in a component — always a token.
+ *
+ * TTE is DARK-FIRST: brand.dark (#28272A) is the default surface,
+ * so :root carries the dark theme and .light is the inversion.
+ * ============================================================
+ */
+
+:root {
+  /* ---- Primitives (raw values — never used directly) ---- */
+  --tte-fire-orange: #fe5442;
+  --tte-black: #28272a;
+  --tte-white: #ffffff;
+
+  /* Imagery-only white. Photography never contains pure white. */
+  --tte-warm-white: #f4f3f1;
+
+  /* Biome accents — secondary only, never replace Fire Orange */
+  --tte-biome-desert: #b86c55;
+  --tte-biome-arctic: #7ba7bc;
+  --tte-biome-city: #4a4a52;
+  --tte-biome-forest: #2d5a3d;
+
+  /* ---- shadcn slots — TTE dark theme (default) ---- */
+  --background: var(--tte-black);
+  --foreground: var(--tte-white);
+
+  --card: var(--tte-black);
+  --card-foreground: var(--tte-white);
+  --popover: var(--tte-black);
+  --popover-foreground: var(--tte-white);
+
+  /* Fire Orange = maximum emphasis. CTAs only, never a dominant surface. */
+  --primary: var(--tte-fire-orange);
+  --primary-foreground: var(--tte-white);
+
+  --secondary: color-mix(in srgb, var(--tte-white) 10%, transparent);
+  --secondary-foreground: var(--tte-white);
+
+  --muted: color-mix(in srgb, var(--tte-white) 8%, transparent);
+  --muted-foreground: color-mix(in srgb, var(--tte-white) 55%, transparent);
+
+  --accent: color-mix(in srgb, var(--tte-white) 12%, transparent);
+  --accent-foreground: var(--tte-white);
+
+  --destructive: var(--tte-fire-orange);
+  --destructive-foreground: var(--tte-white);
+
+  --border: color-mix(in srgb, var(--tte-white) 14%, transparent);
+  --input: color-mix(in srgb, var(--tte-white) 14%, transparent);
+  --ring: var(--tte-fire-orange);
+
+  /* ---- Non-negotiable: zero radius everywhere ---- */
+  --radius: 0px;
+
+  /* Exception: circular avatars only */
+  --radius-full: 9999px;
+
+  /* ---- Semantic opacity ---- */
+  --opacity-topographic: 0.12;
+}
+
+/* Light / editorial inversion */
+.light {
+  --background: var(--tte-white);
+  --foreground: var(--tte-black);
+
+  --card: var(--tte-white);
+  --card-foreground: var(--tte-black);
+  --popover: var(--tte-white);
+  --popover-foreground: var(--tte-black);
+
+  --primary: var(--tte-fire-orange);
+  --primary-foreground: var(--tte-white);
+
+  --secondary: color-mix(in srgb, var(--tte-black) 6%, transparent);
+  --secondary-foreground: var(--tte-black);
+
+  --muted: color-mix(in srgb, var(--tte-black) 5%, transparent);
+  --muted-foreground: color-mix(in srgb, var(--tte-black) 60%, transparent);
+
+  --accent: color-mix(in srgb, var(--tte-black) 8%, transparent);
+  --accent-foreground: var(--tte-black);
+
+  --border: color-mix(in srgb, var(--tte-black) 16%, transparent);
+  --input: color-mix(in srgb, var(--tte-black) 16%, transparent);
+  --ring: var(--tte-fire-orange);
+}
+
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand colors, addressable directly */
+  --color-fire: var(--tte-fire-orange);
+  --color-brand-dark: var(--tte-black);
+  --color-brand-light: var(--tte-white);
+  --color-warm-white: var(--tte-warm-white);
+  --color-biome-desert: var(--tte-biome-desert);
+  --color-biome-arctic: var(--tte-biome-arctic);
+  --color-biome-city: var(--tte-biome-city);
+  --color-biome-forest: var(--tte-biome-forest);
+
+  /* Typography — only two families, ever */
+  --font-display: "Mona Sans Variable", "Mona Sans", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  /* Radius — zero, by brand rule */
+  --radius-none: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  /* ---- Control size scale — single source of truth ----
+     Every interactive control (Button, Select, Input, …) sizes from these.
+     Generates h-control / size-control / h-control-sm / h-control-lg utilities,
+     so any new control aligns to the system without inventing its own height. */
+  --spacing-control-sm: 2.25rem; /* 36px — dense · HUD · operate */
+  --spacing-control:     2.75rem; /* 44px — SYSTEM DEFAULT */
+  --spacing-control-lg:  3.5rem;  /* 56px — hero CTAs */
+
+  /* HUD glow */
+  --shadow-hud: 0 0 24px rgb(254 84 66 / 0.2);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Mona Sans is always UPPERCASE in display use.
+     Exception: Mona Sans Body, which is sentence case. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+  }
+
+  /* Lucide icons keep their original rounded terminals.
+     Documented exception to the zero-radius rule — forcing square
+     caps would deform the glyphs. Same class of exception as avatars. */
+}
+
+/* Topographic pattern overlay — semantic.opacity.topographic-overlay */
+.topo-overlay {
+  opacity: var(--opacity-topographic);
+}

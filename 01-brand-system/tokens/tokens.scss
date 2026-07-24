@@ -1,0 +1,334 @@
+// =============================================================
+// TO THE ENDS OF THE EARTH — Design Tokens
+// SCSS Variables
+// =============================================================
+// Source of truth: tokens.json
+// Generated from: tokens.json (validated against Figma)
+//
+// USAGE:
+// Never use raw hex values in your SCSS.
+// Always reference semantic variables:
+//   ✅  color: $color-text-default;
+//   ❌  color: #28272A;
+//
+// LAYERS:
+//   1. primitives   → raw values, never used directly in components
+//   2. brand        → what each value means for TTE
+//   3. semantic     → where and how each value is used
+//
+// REFERENCE CHAINS are shown in comments, e.g.:
+//   $color-text-default: #28272A; // brand.dark → primitives.color.black
+// =============================================================
+
+
+// =============================================================
+// LAYER 1 — PRIMITIVES
+// Raw values. Do not use directly in components.
+// =============================================================
+
+// --- Color ---
+$primitive-color-fire-orange:               #FE5442;
+$primitive-color-black:                     #28272A;
+$primitive-color-white:                     #FFFFFF;
+
+// Biomes — PENDING FINAL APPROVAL
+$primitive-color-biome-desert:              #B86C55;
+$primitive-color-biome-arctic:              #7BA7BC;
+$primitive-color-biome-city:                #4A4A52;
+$primitive-color-biome-forest:              #2D5A3D;
+
+// Parent brand — Hope Channel. Do not use in TTE components.
+$primitive-color-parent-brand-hc-blue:      #264CA3;
+$primitive-color-parent-brand-hc-yellow:    #FAD306;
+
+// --- Spacing — base 4px ---
+$primitive-spacing-0:                       0px;
+$primitive-spacing-1:                       4px;
+$primitive-spacing-2:                       8px;
+$primitive-spacing-3:                       12px;
+$primitive-spacing-4:                       16px;
+$primitive-spacing-5:                       20px;
+$primitive-spacing-6:                       24px;
+$primitive-spacing-8:                       32px;
+$primitive-spacing-10:                      40px;
+$primitive-spacing-12:                      48px;
+$primitive-spacing-16:                      64px;
+$primitive-spacing-20:                      80px;
+$primitive-spacing-24:                      96px;
+$primitive-spacing-32:                      128px;
+
+// --- Font size scale ---
+$primitive-font-size-10:                    10px;
+$primitive-font-size-12:                    12px;
+$primitive-font-size-13:                    13px;
+$primitive-font-size-14:                    14px;
+$primitive-font-size-16:                    16px;
+$primitive-font-size-20:                    20px;
+$primitive-font-size-22:                    22px;
+$primitive-font-size-28:                    28px;
+$primitive-font-size-36:                    36px;
+$primitive-font-size-48:                    48px;
+$primitive-font-size-60:                    60px;
+$primitive-font-size-72:                    72px;
+$primitive-font-size-96:                    96px;
+
+
+// =============================================================
+// LAYER 2 — BRAND
+// What each value means for TTE.
+// =============================================================
+
+// --- Brand colors ---
+$brand-color-primary:  $primitive-color-fire-orange; // Fire of the Holy Spirit, urgency, breakthrough
+$brand-color-dark:     $primitive-color-black;       // The earth, soil, unreached places
+$brand-color-light:    $primitive-color-white;       // Gospel light piercing darkness
+
+// --- Brand fonts ---
+$brand-font-primary:   'Mona Sans', sans-serif;      // Headings, display, wordmark — editorial and activist
+$brand-font-secondary: 'Space Mono', monospace;      // HUD, data, coordinates, body — tactical and disruptive
+
+
+// =============================================================
+// LAYER 3 — SEMANTIC
+// Where and how each value is used.
+// =============================================================
+
+// --- Text ---
+$color-text-default:        $brand-color-dark;     // brand.dark → primitives.color.black → #28272A
+$color-text-inverted:       $brand-color-light;    // brand.light → primitives.color.white → #FFFFFF
+$color-text-accent:         $brand-color-primary;  // brand.primary → primitives.color.fire-orange → #FE5442
+
+// --- Surfaces / Backgrounds ---
+$color-surface-dark:        $brand-color-dark;     // brand.dark → #28272A
+$color-surface-light:       $brand-color-light;    // brand.light → #FFFFFF
+$color-surface-accent:      $brand-color-primary;  // brand.primary → #FE5442
+
+// --- Icons ---
+$color-icon-primary:        $brand-color-primary;  // TTE bird orange wing, action icons → #FE5442
+$color-icon-dark:           $brand-color-dark;     // Icons on light backgrounds → #28272A
+$color-icon-light:          $brand-color-light;    // Icons on dark backgrounds → #FFFFFF
+
+// --- Borders ---
+$color-border-default:      $brand-color-dark;     // Default borders, dividers → #28272A
+$color-border-accent:       $brand-color-primary;  // Active, branded borders → #FE5442
+$color-border-subtle:       $brand-color-light;    // Subtle on dark — apply at low opacity → #FFFFFF
+
+// --- HUD System ---
+$color-hud-text:            $brand-color-light;    // HUD data text — always on dark → #FFFFFF
+$color-hud-accent:          $brand-color-primary;  // HUD labels, field names → #FE5442
+$color-hud-background:      $brand-color-dark;     // HUD panel background → #28272A
+
+// --- Biome accents (PENDING FINAL APPROVAL) ---
+$color-biome-desert:        $primitive-color-biome-desert; // #B86C55
+$color-biome-arctic:        $primitive-color-biome-arctic; // #7BA7BC
+$color-biome-city:          $primitive-color-biome-city;   // #4A4A52
+$color-biome-forest:        $primitive-color-biome-forest; // #2D5A3D
+
+// --- Component Spacing ---
+$spacing-padding-xs:        $primitive-spacing-2;   // 8px  — badges, chips, small tags
+$spacing-padding-sm:        $primitive-spacing-3;   // 12px — compact elements
+$spacing-padding-md:        $primitive-spacing-4;   // 16px — buttons, inputs
+$spacing-padding-lg:        $primitive-spacing-6;   // 24px — cards, sections
+$spacing-padding-xl:        $primitive-spacing-8;   // 32px — hero, containers
+
+$spacing-gap-xs:            $primitive-spacing-1;   // 4px  — icon+label pairs, HUD fields
+$spacing-gap-sm:            $primitive-spacing-2;   // 8px  — related elements
+$spacing-gap-md:            $primitive-spacing-4;   // 16px — component groups
+$spacing-gap-lg:            $primitive-spacing-6;   // 24px — section separators
+$spacing-gap-xl:            $primitive-spacing-12;  // 48px — layout gaps
+
+// --- Layout Spacing ---
+$spacing-page-margin-mobile:    $primitive-spacing-4;   // 16px
+$spacing-page-margin-tablet:    $primitive-spacing-8;   // 32px
+$spacing-page-margin-desktop:   $primitive-spacing-16;  // 64px
+$spacing-section-gap:           $primitive-spacing-24;  // 96px
+
+// --- Control Sizing — unified height scale for interactive controls ---
+// Button, Input, Select all size from these. "default" = one promise everywhere.
+$sizing-control-sm:         36px;   // dense · HUD · operate
+$sizing-control-default:    44px;   // SYSTEM DEFAULT
+$sizing-control-lg:         56px;   // hero CTAs
+
+// --- Border Radius — ZERO. TTE is angular and tactical. ---
+$radius-none:               0px;
+$radius-default:            0px;
+$radius-full:               9999px; // EXCEPTION ONLY — circular/pill elements
+
+// --- Border Width ---
+$border-width-thin:         1px;    // HUD lines, dividers
+$border-width-default:      2px;    // Standard borders
+$border-width-thick:        4px;    // Active states, emphasis
+
+// --- Opacity ---
+$opacity-topographic:       0.12;   // Topographic pattern overlay on dark backgrounds
+$opacity-overlay-light:     0.08;   // Subtle background tint
+$opacity-overlay-medium:    0.24;   // Image overlay for text legibility
+$opacity-overlay-heavy:     0.64;   // Strong scrim — HUD background
+$opacity-disabled:          0.40;   // Disabled interactive elements
+
+// --- Elevation / Shadow ---
+$elevation-none:            none;
+$elevation-sm:              0 2px 8px   rgba(0, 0, 0, 0.30);    // Tooltips, dropdowns
+$elevation-md:              0 4px 16px  rgba(0, 0, 0, 0.50);    // Cards on dark
+$elevation-lg:              0 8px 32px  rgba(0, 0, 0, 0.70);    // Modals, overlays
+$elevation-hud:             0 0   24px  rgba(254, 84, 66, 0.20); // HUD orange glow
+
+// --- Font Families ---
+$font-primary:              $brand-font-primary;    // 'Mona Sans', sans-serif
+$font-secondary:            $brand-font-secondary;  // 'Space Mono', monospace
+
+
+// =============================================================
+// TYPOGRAPHY SCALE — Mona Sans (display, headings, labels)
+// =============================================================
+
+// Display / 2XL — 96px · 0.95 lh · 0.02em ls · 900 · UPPERCASE
+$text-display-2xl-font:    $font-primary;
+$text-display-2xl-size:    $primitive-font-size-96;  // 96px
+$text-display-2xl-weight:  900;                      // Black
+$text-display-2xl-height:  0.95;                     // 95%
+$text-display-2xl-spacing: 0.02em;                   // 2%
+$text-display-2xl-case:    uppercase;
+
+// Display / XL — 72px · 0.95 lh · 0.02em ls · 900 · UPPERCASE
+$text-display-xl-font:     $font-primary;
+$text-display-xl-size:     $primitive-font-size-72;  // 72px
+$text-display-xl-weight:   900;                      // Black
+$text-display-xl-height:   0.95;                     // 95%
+$text-display-xl-spacing:  0.02em;                   // 2%
+$text-display-xl-case:     uppercase;
+
+// Display / L — 60px · 1.00 lh · 0.02em ls · 800 · UPPERCASE
+$text-display-l-font:      $font-primary;
+$text-display-l-size:      $primitive-font-size-60;  // 60px
+$text-display-l-weight:    800;                      // ExtraBold
+$text-display-l-height:    1.00;                     // 100%
+$text-display-l-spacing:   0.02em;                   // 2%
+$text-display-l-case:      uppercase;
+
+// Heading / H1 — 48px · 1.05 lh · 0.01em ls · 800 · UPPERCASE
+$text-heading-h1-font:     $font-primary;
+$text-heading-h1-size:     $primitive-font-size-48;  // 48px
+$text-heading-h1-weight:   800;                      // ExtraBold
+$text-heading-h1-height:   1.05;                     // 105%
+$text-heading-h1-spacing:  0.01em;                   // 1%
+$text-heading-h1-case:     uppercase;
+
+// Heading / H2 — 36px · 1.10 lh · 0.01em ls · 800 · UPPERCASE
+$text-heading-h2-font:     $font-primary;
+$text-heading-h2-size:     $primitive-font-size-36;  // 36px
+$text-heading-h2-weight:   800;                      // ExtraBold
+$text-heading-h2-height:   1.10;                     // 110%
+$text-heading-h2-spacing:  0.01em;                   // 1%
+$text-heading-h2-case:     uppercase;
+
+// Heading / H3 — 28px · 1.00 lh · 0.01em ls · 700 · UPPERCASE
+$text-heading-h3-font:     $font-primary;
+$text-heading-h3-size:     $primitive-font-size-28;  // 28px
+$text-heading-h3-weight:   700;                      // Bold
+$text-heading-h3-height:   1.00;                     // 100%
+$text-heading-h3-spacing:  0.01em;                   // 1%
+$text-heading-h3-case:     uppercase;
+
+// Heading / H4 — 22px · 1.00 lh · 0.02em ls · 700 · UPPERCASE
+$text-heading-h4-font:     $font-primary;
+$text-heading-h4-size:     $primitive-font-size-22;  // 22px
+$text-heading-h4-weight:   700;                      // Bold
+$text-heading-h4-height:   1.00;                     // 100%
+$text-heading-h4-spacing:  0.02em;                   // 2%
+$text-heading-h4-case:     uppercase;
+
+// Label / Large — 16px · 1.00 lh · 0.04em ls · 800 · UPPERCASE
+$text-label-large-font:    $font-primary;
+$text-label-large-size:    $primitive-font-size-16;  // 16px
+$text-label-large-weight:  800;                      // ExtraBold
+$text-label-large-height:  1.00;                     // 100%
+$text-label-large-spacing: 0.04em;                   // 4%
+$text-label-large-case:    uppercase;
+
+// Label / Medium — 13px · 1.00 lh · 0.04em ls · 800 · UPPERCASE
+$text-label-medium-font:    $font-primary;
+$text-label-medium-size:    $primitive-font-size-13; // 13px
+$text-label-medium-weight:  800;                     // ExtraBold
+$text-label-medium-height:  1.00;                    // 100%
+$text-label-medium-spacing: 0.04em;                  // 4%
+$text-label-medium-case:    uppercase;
+
+// Mona Sans / Body / Regular — 16px · 1.20 lh · 0em ls · 500 · sentence case
+// EXCEPTION to uppercase rule — editorial, longer-form reading contexts
+$text-mona-body-regular-font:    $font-primary;
+$text-mona-body-regular-size:    $primitive-font-size-16;  // 16px
+$text-mona-body-regular-weight:  500;                      // Medium
+$text-mona-body-regular-height:  1.20;                     // 120%
+$text-mona-body-regular-spacing: 0em;                      // 0%
+$text-mona-body-regular-case:    none;                     // sentence case
+
+// Mona Sans / Body / Small — 14px · 1.20 lh · 0em ls · 500 · sentence case
+// EXCEPTION to uppercase rule — captions, secondary editorial
+$text-mona-body-small-font:      $font-primary;
+$text-mona-body-small-size:      $primitive-font-size-14;  // 14px
+$text-mona-body-small-weight:    500;                      // Medium
+$text-mona-body-small-height:    1.20;                     // 120%
+$text-mona-body-small-spacing:   0em;                      // 0%
+$text-mona-body-small-case:      none;                     // sentence case
+
+
+// =============================================================
+// TYPOGRAPHY SCALE — Space Mono (HUD, data, body)
+// =============================================================
+
+// HUD / XL — 20px · 1.20 lh · 0.06em ls · 700 · UPPERCASE
+$text-hud-xl-font:         $font-secondary;
+$text-hud-xl-size:         $primitive-font-size-20; // 20px
+$text-hud-xl-weight:       700;                     // Bold
+$text-hud-xl-height:       1.20;                    // 120%
+$text-hud-xl-spacing:      0.06em;                  // 6%
+$text-hud-xl-case:         uppercase;
+
+// HUD / Default — 14px · 1.20 lh · 0.06em ls · 400 · UPPERCASE
+$text-hud-default-font:    $font-secondary;
+$text-hud-default-size:    $primitive-font-size-14; // 14px
+$text-hud-default-weight:  400;                     // Regular
+$text-hud-default-height:  1.20;                    // 120%
+$text-hud-default-spacing: 0.06em;                  // 6%
+$text-hud-default-case:    uppercase;
+
+// HUD / Small — 12px · 1.20 lh · 0.06em ls · 400 · UPPERCASE
+$text-hud-small-font:      $font-secondary;
+$text-hud-small-size:      $primitive-font-size-12; // 12px
+$text-hud-small-weight:    400;                     // Regular
+$text-hud-small-height:    1.20;                    // 120%
+$text-hud-small-spacing:   0.06em;                  // 6%
+$text-hud-small-case:      uppercase;
+
+// HUD / Micro — 10px · 1.20 lh · 0.06em ls · 400 · UPPERCASE
+$text-hud-micro-font:      $font-secondary;
+$text-hud-micro-size:      $primitive-font-size-10; // 10px
+$text-hud-micro-weight:    400;                     // Regular
+$text-hud-micro-height:    1.20;                    // 120%
+$text-hud-micro-spacing:   0.06em;                  // 6%
+$text-hud-micro-case:      uppercase;
+
+// Body / Regular — 16px · 1.40 lh · 0.01em ls · 400 · sentence case
+$text-body-regular-font:    $font-secondary;
+$text-body-regular-size:    $primitive-font-size-16; // 16px
+$text-body-regular-weight:  400;                     // Regular
+$text-body-regular-height:  1.40;                    // 140%
+$text-body-regular-spacing: 0.01em;                  // 1%
+$text-body-regular-case:    none;                    // sentence case
+
+// Body / Small — 14px · 1.40 lh · 0.01em ls · 400 · sentence case
+$text-body-small-font:      $font-secondary;
+$text-body-small-size:      $primitive-font-size-14; // 14px
+$text-body-small-weight:    400;                     // Regular
+$text-body-small-height:    1.40;                    // 140%
+$text-body-small-spacing:   0.01em;                  // 1%
+$text-body-small-case:      none;                    // sentence case
+
+// Label / Default (mono) — 12px · 1.40 lh · 0.03em ls · 700 · UPPERCASE
+$text-mono-label-font:      $font-secondary;
+$text-mono-label-size:      $primitive-font-size-12; // 12px
+$text-mono-label-weight:    700;                     // Bold
+$text-mono-label-height:    1.40;                    // 140%
+$text-mono-label-spacing:   0.03em;                  // 3%
+$text-mono-label-case:      uppercase;

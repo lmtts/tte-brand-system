@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TTE — AI Image Prompt System</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap');
+
+  :root {
+    --fire: #FE5442;
+    --fire-dim: rgba(254,84,66,0.12);
+    --dark: #28272A;
+    --dark2: #1C1B1E;
+    --dark3: #141316;
+    --mid: #888780;
+    --light: #D3D1C7;
+    --cream: #F4F3F1;
+    --white: #FFFFFF;
+    --mono: 'Space Mono', monospace;
+    --condensed: 'Mona Sans', sans-serif;
+    --body: 'Mona Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--dark3);
+    color: var(--cream);
+    font-family: var(--body);
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRAIN OVERLAY ─────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ─── TOPO PATTERN ──────────────────────────── */
+  .topo-bg {
+    position: fixed;
+    right: -100px;
+    top: -100px;
+    width: 600px;
+    height: 600px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── HEADER ────────────────────────────────── */
+  header {
+    border-bottom: 1px solid rgba(211,209,199,0.12);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    background: rgba(20,19,22,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-logo {
+    height: 22px;
+    width: auto;
+    display: block;
+  }
+
+  .header-title { display: none; }
+
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--mid);
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── MAIN LAYOUT ───────────────────────────── */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 48px 120px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── PAGE HERO ─────────────────────────────── */
+  .hero {
+    margin-bottom: 72px;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--fire);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-family: var(--condensed);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 80px);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  .hero-title em {
+    color: var(--fire);
+    font-style: normal;
+  }
+
+  .hero-desc {
+    max-width: 560px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--light);
+    font-weight: 300;
+  }
+
+  /* ─── SECTION TITLES ────────────────────────── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--fire);
+    letter-spacing: 0.12em;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .section-title {
+    font-family: var(--condensed);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  section {
+    margin-bottom: 72px;
+  }
+
+  /* ─── PROMPT BUILDER ────────────────────────── */
+  .prompt-builder {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(211,209,199,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .builder-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(211,209,199,0.1);
+    overflow-x: auto;
+  }
+
+  .builder-tab {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    border: none;
+    background: transparent;
+    color: var(--mid);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .builder-tab:hover { color: var(--cream); }
+  .builder-tab.active {
+    color: var(--fire);
+    border-bottom-color: var(--fire);
+  }
+
+  .builder-content {
+    padding: 32px;
+  }
+
+  /* ─── BLOCK GROUPS ──────────────────────────── */
+  .block-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .block-group-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 8px;
+    margin-top: 20px;
+  }
+
+  .block-group-label:first-child { margin-top: 0; }
+
+  .block-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(211,209,199,0.12);
+    border-radius: 2px;
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--light);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+
+  .block-btn:hover {
+    border-color: rgba(254,84,66,0.4);
+    color: var(--cream);
+    background: rgba(254,84,66,0.06);
+  }
+
+  .block-btn.selected {
+    border-color: var(--fire);
+    background: var(--fire-dim);
+    color: var(--fire);
+  }
+
+  /* ─── OUTPUT ────────────────────────────────── */
+  .output-area {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(211,209,199,0.1);
+    border-radius: 2px;
+    padding: 20px 24px;
+    margin-top: 24px;
+  }
+
+  .output-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fire);
+    margin-bottom: 12px;
+  }
+
+  .output-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--cream);
+    word-break: break-word;
+    min-height: 64px;
+    white-space: pre-wrap;
+  }
+
+  .output-text .tag-layer { color: #FE8F82; }
+  .output-text .tag-shot { color: #F5C842; }
+  .output-text .tag-light { color: #A8D8A8; }
+  .output-text .tag-grade { color: #84C9E4; }
+  .output-text .tag-tech { color: #C9A8E4; }
+  .output-text .tag-style { color: var(--light); }
+
+  .output-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-copy, .btn-reset {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 9px 18px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1px solid;
+  }
+
+  .btn-copy {
+    background: var(--fire);
+    border-color: var(--fire);
+    color: var(--white);
+  }
+
+  .btn-copy:hover { background: #e04030; }
+
+  .btn-reset {
+    background: transparent;
+    border-color: rgba(211,209,199,0.2);
+    color: var(--mid);
+  }
+
+  .btn-reset:hover {
+    border-color: var(--mid);
+    color: var(--cream);
+  }
+
+  /* ─── BLOCK REFERENCE TABLES ────────────────── */
+  .block-ref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(211,209,199,0.08);
+  }
+
+  @media (max-width: 700px) {
+    .block-ref-grid { grid-template-columns: 1fr; }
+    header { padding: 0 20px; }
+    main { padding: 40px 20px 80px; }
+    .builder-content { padding: 20px; }
+  }
+
+  .ref-card {
+    background: var(--dark2);
+    padding: 20px 24px;
+  }
+
+  .ref-card-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .ref-card-title {
+    font-family: var(--condensed);
+    font-weight: 700;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .ref-card-desc {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--mid);
+    margin-bottom: 12px;
+  }
+
+  .ref-card-blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 4px 8px;
+    border-radius: 1px;
+    letter-spacing: 0.06em;
+    color: var(--dark);
+    background: var(--light);
+  }
+
+  .chip.fire { background: var(--fire); color: var(--white); }
+  .chip.dim { background: rgba(211,209,199,0.12); color: var(--light); }
+
+  /* ─── KEYWORD LIBRARY ───────────────────────── */
+  .keyword-section {
+    margin-bottom: 32px;
+  }
+
+  .keyword-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fire);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(254,84,66,0.2);
+  }
+
+  .keyword-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .kw {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 5px 10px;
+    border-radius: 1px;
+    border: 1px solid rgba(211,209,199,0.14);
+    color: var(--light);
+    background: rgba(255,255,255,0.02);
+    cursor: pointer;
+    transition: all 0.12s;
+    user-select: none;
+  }
+
+  .kw:hover {
+    border-color: var(--fire);
+    color: var(--fire);
+  }
+
+  .kw.copied {
+    border-color: #A8D8A8;
+    color: #A8D8A8;
+    transition: none;
+  }
+
+  /* ─── LAYER ANATOMY ─────────────────────────── */
+  .layer-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: rgba(211,209,199,0.06);
+  }
+
+  @media (max-width: 800px) {
+    .layer-cards { grid-template-columns: 1fr; }
+  }
+
+  .layer-card {
+    background: var(--dark2);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .layer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+  }
+
+  .layer-card.l1::before { background: #F5C842; }
+  .layer-card.l2::before { background: var(--fire); }
+  .layer-card.l3::before { background: #84C9E4; }
+  .layer-card.l4::before { background: #C9A8E4; }
+
+  .layer-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+
+  .layer-card.l1 .layer-num { color: #F5C842; }
+  .layer-card.l2 .layer-num { color: var(--fire); }
+  .layer-card.l3 .layer-num { color: #84C9E4; }
+  .layer-card.l4 .layer-num { color: #C9A8E4; }
+
+  .layer-name {
+    font-family: var(--condensed);
+    font-weight: 800;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .layer-sub {
+    font-size: 12px;
+    color: var(--mid);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .layer-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+    align-items: flex-start;
+  }
+
+  .layer-row-key {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    min-width: 60px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .layer-row-val {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--light);
+    line-height: 1.5;
+  }
+
+  /* ─── DIVIDER ───────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: rgba(211,209,199,0.08);
+    margin: 64px 0;
+  }
+
+  /* ─── COPY TOAST ────────────────────────────── */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--dark);
+    border: 1px solid var(--fire);
+    color: var(--fire);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 12px 20px;
+    border-radius: 2px;
+    z-index: 500;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.2s;
+    pointer-events: none;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── FOOTER ────────────────────────────────── */
+  footer {
+    border-top: 1px solid rgba(211,209,199,0.08);
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--mid);
+  }
+
+  .footer-coords {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: rgba(211,209,199,0.3);
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPO SVG -->
+<svg class="topo-bg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M50,200 Q100,100 200,150 Q300,200 350,100" stroke="#FE5442" stroke-width="1" fill="none"/>
+  <path d="M30,250 Q120,120 220,180 Q320,240 370,120" stroke="#FE5442" stroke-width="1" fill="none"/>
+  <path d="M10,300 Q140,140 240,210 Q340,280 390,140" stroke="#FE5442" stroke-width="1" fill="none"/>
+  <path d="M0,350 Q160,160 260,240 Q360,320 400,160" stroke="#FE5442" stroke-width="1" fill="none"/>
+  <path d="M60,160 Q110,80 190,120 Q280,160 340,80" stroke="#FE5442" stroke-width="1" fill="none"/>
+  <path d="M80,350 Q160,200 280,260 Q360,300 400,220" stroke="#FE5442" stroke-width="1" fill="none"/>
+  <path d="M0,180 Q80,60 180,100 Q260,140 320,60" stroke="#FE5442" stroke-width="1" fill="none"/>
+</svg>
+
+<!-- HEADER -->
+<header>
+  <div class="header-brand">
+    <svg class="header-logo" viewBox="0 0 1500 265" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="To The Ends of The Earth">
+      <path d="M45.7893 264.111L43.1497 264.178L40.6719 263.284L38.2833 262.213L36.3748 260.432L34.5555 258.629L33.1212 256.502L31.7595 254.274L31.0229 251.751L30.7829 249.116L31.4694 246.56L31.7707 243.925L32.9538 241.552L34.6392 239.52L36.6594 237.851L38.5177 235.964L40.6663 234.451L42.8706 233L44.9745 231.42L46.978 229.723L49.0596 228.121L51.1523 226.524L53.1279 224.782L55.003 222.923L57.252 221.528L59.3001 219.881L61.2143 218.072L63.268 216.431L65.4723 214.98L67.593 213.428L69.5518 211.664L71.7394 210.195L73.6368 208.359L75.5845 206.578L77.9116 205.283L79.9541 203.619L81.8013 201.721L84.0727 200.354L86.0482 198.606L88.3865 196.982L85.998 195.329L83.9276 193.604L81.7176 192.047L79.6751 190.283L77.5656 188.608L75.5175 186.844L73.3411 185.253L71.226 183.578L69.2449 181.742L66.8396 180.436L64.8863 178.565L62.682 177.002L60.779 175.06L58.5244 173.558L56.3982 171.906L54.4114 170.063L52.1848 168.528L50.1088 166.803L47.9379 165.201L43.6408 161.93L41.442 160.35L39.4888 158.407L37.3011 156.76L35.5432 154.628L33.4003 152.92L31.4917 150.971L29.5384 149.057L27.9424 146.813L26.1621 144.747L24.3205 142.732L22.7021 140.532L20.8828 138.484L19.1584 136.351L17.9307 133.884L16.1616 131.762L14.9283 129.317L13.7954 126.816L12.1379 124.606L11.0385 122.093L9.98938 119.565L8.79512 117.103L7.63993 114.619L6.83631 111.995L6.21686 109.315L4.8775 106.876L4.31385 104.191L3.85066 101.483L2.98007 98.8817L2.37178 96.2189L2.07601 93.4891L1.38958 90.8318L1.09939 88.1132L0.937551 85.3834L0.541324 82.6759L0.552485 79.9349L0.284614 77.2107L0.463195 74.4809L0.223226 71.8292L0.368324 69.1776L0.0948713 66.5259L0 63.8742L0.323678 61.2226L0.390646 58.5709L0.195323 55.9193L0.206484 53.2676L0.452034 50.616L0.351582 47.9643L0.491098 45.3182L0.178581 42.6666L0.33484 40.0149L0.329259 37.3633L0.212065 34.7116L0.262291 32.0544L0.106033 29.4027L0.262291 26.751L0.223226 24.0994L0.0613873 21.4477L0.0111613 18.7905L0.329259 16.1332L0.362743 13.5486L1.27797 11.137L2.1653 8.71977L3.72788 6.66543L5.5974 4.91813L7.60086 3.29922L10.0173 2.42278L12.3946 1.30629L15.0064 1.2393L17.4563 1.65798L19.789 2.4172L22.0213 3.39412L24.3707 4.33755L26.1621 6.39189L28.467 7.79866L30.4425 9.61854L32.5464 11.2765L34.734 12.8284L36.9105 14.3971L39.0311 16.0272L40.9565 17.914L43.1218 19.4939L45.1252 21.2858L47.1622 23.0276L49.3498 24.5739L51.4872 26.1928L53.7362 27.6666L55.6727 29.5367L57.9384 30.9993L60.0647 32.6238L62.163 34.2873L64.0214 36.2579L66.1308 37.9103L68.2961 39.4957L70.2605 41.3324L72.6602 42.6107L74.5744 44.5088L76.6057 46.2561L78.6315 48.0145L81.0033 49.3376L83.1295 50.9676L85.2334 52.6145L87.0695 54.6074L89.2069 56.2207L91.3778 57.795L93.4314 59.5199L95.5186 61.1947L97.656 62.8192L99.9441 64.2371L101.858 66.1407L103.99 67.7596L106.06 69.4623L108.304 70.9472L110.307 72.728L112.344 74.4753L114.482 76.0886L116.468 77.9029L118.857 79.2036L120.872 80.9732L123.026 82.5698L124.884 84.5404L127.267 85.8523L129.103 87.8508L131.224 89.492L133.255 91.2393L135.616 92.5847L137.602 94.3878L139.74 96.0067L141.648 97.9215L144.076 99.1776L146.046 101.003L148.278 102.505L150.131 104.481L152.33 106.027L154.344 107.797L156.443 109.466L158.591 111.074L160.829 112.57L162.978 114.178L164.769 116.238L167.04 117.689L169.055 119.464L171.27 120.988L173.419 122.601L175.344 124.505L177.554 126.018L179.496 124.176L181.706 122.652L183.978 121.206L186.104 119.576L187.951 117.594L190.222 116.154L192.109 114.217L194.268 112.631L196.35 110.945L198.632 109.516L200.608 107.702L202.784 106.133L204.738 104.286L206.875 102.672L209.018 101.064L211.368 99.7191L213.393 97.9606L215.374 96.1407L217.596 94.639L219.46 92.674L221.759 91.2728L223.69 89.386L225.81 87.7559L228.087 86.3212L230.174 84.6465L232.161 82.8434L234.371 81.3138L236.408 79.572L238.372 77.741L240.8 76.5017L242.575 74.4306L245.002 73.1913L246.972 71.3659L248.992 69.5962L250.996 67.8099L253.368 66.498L255.388 64.7395L257.369 62.9252L259.529 61.3398L261.487 59.4976L263.887 58.2136L265.924 56.4719L268.101 54.9088L269.914 52.8824L272.001 51.1965L274.278 49.7563L276.276 47.9643L278.609 46.6022L280.691 44.9107L282.672 43.0908L284.837 41.5166L286.773 39.6409L288.95 38.0722L291.266 36.6878L293.292 34.9237L295.457 33.3383L297.55 31.6636L299.514 29.8214L301.462 27.968L303.672 26.444L305.703 24.6967L307.857 23.0945L310.117 21.6375L312.305 20.0856L314.13 18.0648L316.468 16.7027L318.622 15.1005L320.626 13.3085L322.579 11.4552L324.895 10.0596L326.759 8.09453L328.98 6.57611L330.928 4.70599L333.126 3.15966L335.331 2.02084L337.518 0.909937L339.896 0.234462L342.362 0L344.907 0.45776L347.446 0.904355L349.796 1.99851L351.866 3.55043L353.624 5.42613L354.969 7.5977L356.437 9.75252L356.682 12.3484L357.425 14.8772L356.872 17.5177L357.319 20.1638L357.196 22.8098L357.402 25.4559L357.43 28.102L357.419 30.7481L357.229 33.3941L357.391 36.0402L356.978 38.6863L357.151 41.3324L357.341 43.9729L357.034 46.6189L357.425 49.265L357.413 51.9111L356.934 54.5572L357.134 57.2032L356.917 59.8493L357.162 62.4954L356.894 65.147L357.107 67.7931L357.229 70.4448L356.973 73.0964L357.24 75.8262L357.107 78.5616L356.783 81.2747L356.694 84.0101L356.515 86.7399L355.661 89.3804L355.427 92.1046L354.701 94.7451L354.383 97.4638L353.97 100.182L352.96 102.739L352.408 105.424L351.448 107.987L350.27 110.465L349.266 113L348.434 115.601L347.513 118.18L346.18 120.575L345.052 123.065L343.657 125.415L342.608 127.966L341.034 130.21L339.477 132.46L337.87 134.671L336.302 136.904L334.829 139.209L333.188 141.398L331.374 143.452L329.493 145.434L327.892 147.672L325.955 149.609L323.879 151.396L319.822 155.052L317.891 157L315.592 158.508L313.365 160.06L311.412 161.958L309.375 163.755L307.243 165.436L304.955 166.909L302.963 168.768L300.641 170.197L298.638 172.04L296.367 173.552L294.291 175.305L292.142 176.93L290.172 178.772L287.979 180.341L286.026 182.205L283.944 183.919L281.667 185.376L279.669 187.19L277.376 188.631L275.227 190.249L273.212 192.047L271.209 193.856L268.949 195.341L266.806 196.965L264.97 198.986L262.754 200.527L260.533 202.062L258.507 203.843L256.448 205.579L254.272 207.175L252.09 208.755L250.114 210.597L247.887 212.127L245.917 213.98L243.841 215.694L241.754 217.402L239.639 219.066L237.39 220.562L235.264 222.22L233.216 223.973L230.917 225.408L228.93 227.244L226.876 228.986L224.538 230.376L222.562 232.224L220.313 233.731L218.483 235.757L216.15 237.159L214.102 238.923L212.166 240.826L209.766 242.133L207.612 243.763L205.435 245.359L203.237 246.922L201.032 248.502L198.593 249.691L196.194 250.925L193.872 252.315L191.361 253.325L188.944 254.531L186.489 255.648L183.983 256.647L181.388 257.406L178.938 258.578L176.388 259.477L173.693 259.879L171.153 260.828L168.575 261.682L165.924 262.224L163.246 262.603L160.539 262.793L157.922 263.575L155.226 263.832L152.531 264.072L149.824 264.044L147.117 263.915L144.422 264.027L141.76 264.284L139.098 263.91L136.43 264.083L133.768 264.01L131.106 264.083L128.439 263.904L125.777 264.127L123.109 264.356L120.447 264.166L117.785 264.284L115.118 264.15L112.45 264.066L109.788 264.306L107.121 264.172L104.459 264.328L101.791 264.284L99.1237 264.206L96.4617 264.379L93.7942 264.133L91.1322 263.926L88.4647 264.116L85.7971 264.401L83.1295 264.233L80.462 264.06L77.8 264.083L75.1324 264.088L72.4649 264.122L69.8029 264.295L67.1354 263.932L64.4678 263.988L61.8002 264.434L59.1327 264.3L56.4651 264.15L53.8032 264.111L51.13 264.144L48.4625 264.133L45.7893 264.111Z" fill="white"/><path d="M468.911 1.49243L471.334 0.648285L473.868 0.290066L476.424 0.0111389L478.958 0.374991L481.503 0.112427L484.048 0.101265L486.593 0.0725465L489.138 0.112427L491.683 0.0390499L494.228 0.146731L496.773 0.0167084L499.318 0.101265L501.863 0.0390499L504.408 0.134449L506.953 0.0502587L509.498 0.134449L512.043 0.101265L514.588 0.0558281L517.133 0.219673L519.678 0.146731L522.218 0.152299L524.752 0.207994L527.342 0.0893769L529.898 0.421013L532.453 0.0781681L534.992 0.28448L537.531 0.0167084L540.076 0.241L542.621 0.387261L545.166 0.134449L547.705 0.0167084L550.244 0.219673L552.789 0.241L555.334 0.112427L557.879 0.101265L560.419 0.275318L562.952 0.0111389L565.491 0.0334165L568.036 0.101265L570.581 0.0725465L573.12 0.112427L575.659 0.0781681L578.204 0.0390499L580.749 0.0167084L583.289 0.0948854L585.828 0.174309L588.373 0.0725465L590.918 0.0893769L593.457 0.134449L595.996 0.0334165L598.541 0.241L601.08 0.0725465L603.619 0.0334165L606.164 0.0167084L608.709 0.241L611.248 0.101265L613.793 0.0558281L616.338 0.0167084L618.877 0.0390499L621.417 0.112427L623.956 0.0111389L626.501 0.134449L629.04 0.101265L631.574 0.0167084L634.119 0.241L636.664 0.0948854L639.203 0.241L641.748 0.219673L644.287 0.146731L646.832 0.0167084L649.377 0.219673L651.922 0.134449L654.467 0.241L657.006 0.0167084L659.545 0.241L662.09 0.0781681L664.635 0.0558281L667.174 0.0334165L669.719 0.0390499L672.264 0.241L674.803 0.0558281L677.348 0.101265L679.893 0.0948854L682.432 0.219673L684.971 0.0167084L687.516 0.174309L690.061 0.101265L692.6 0.0948854L695.134 0.241L697.668 0.0334165L700.213 0.0725465L702.758 0.241L705.303 0.241L707.842 0.134449L710.387 0.219673L712.932 0.101265L715.471 0.241L718.016 0.0167084L720.555 0.0334165L723.1 0.219673L725.639 0.241L728.184 0.219673L730.723 0.241L733.268 0.134449L735.813 0.219673L738.357 0.241L740.625 0.870529L742.75 1.72579L744.641 3.02518L746.387 4.54359L747.789 6.44635L748.881 8.49511L749.523 10.6607L749.9 12.9263L750 15.2255L749.945 17.5303L749.978 19.8072L750 22.1564L749.856 24.4277L749.834 26.7826L749.867 29.1208L749.878 31.47L749.834 33.8024L749.856 36.1515L749.912 38.4897L749.834 40.8389L749.945 43.166L749.756 45.4762L749.856 47.8198L749.923 50.152L749.834 52.479L749.978 54.8227L749.89 57.1386L749.912 59.4657L749.9 61.8204L749.967 64.1531L749.878 66.5132L749.878 68.8516L749.923 71.2007L749.989 73.5444L749.978 75.9213L749.945 78.2762L749.989 80.642L749.923 82.9912L750 85.3403L749.989 87.7006L749.967 90.0553L749.967 92.404L750 94.7587L749.945 97.1357L749.934 99.5015L750 101.878L749.923 104.244L749.967 106.61L749.889 108.989L749.956 111.366L749.923 113.732L749.878 116.109L749.856 118.481L750 120.864L749.934 123.224L749.901 125.601L749.934 127.972L749.845 130.348L749.889 132.725L749.889 135.096L749.978 137.478L749.934 139.849L749.923 142.237L749.912 144.603L749.956 146.979L749.923 149.378L749.978 151.749L749.934 154.131L749.945 156.502L749.978 158.89L749.923 161.261L749.89 163.643L749.878 166.031L749.912 168.408L749.934 170.796L749.923 173.172L749.834 175.554L749.967 177.931L749.856 180.318L749.901 182.689L749.923 185.082L749.934 187.458L749.978 189.846L749.934 192.234L749.934 194.61L749.923 196.998L749.867 199.375L749.989 201.757L749.867 204.145L749.901 206.516L749.923 208.904L749.912 211.281L749.845 213.658L749.945 216.045L749.912 218.421L749.934 220.81L749.912 223.197L749.867 225.574L749.901 227.962L749.923 230.339L749.934 232.716L749.845 235.104L749.856 237.48L749.845 239.857L749.867 242.234L749.834 244.622L749.856 247.01L749.823 249.387L749.867 251.764L749.845 254.141L749.89 256.529L748.747 258.878L747.578 261.073L746.065 262.969L744.152 264.435L742.017 265L739.672 264.89L737.249 264.84L734.826 264.867L732.403 264.84L729.958 264.773L727.535 264.784L725.09 264.817L722.667 264.817L720.244 264.851L717.799 264.829L715.376 264.79L712.953 264.79L710.508 264.784L708.085 264.734L705.64 264.818L703.217 264.862L700.772 264.834L698.349 264.84L695.904 264.828L693.481 264.862L691.036 264.851L688.613 264.834L686.168 264.828L683.723 264.856L681.278 264.789L678.855 264.817L676.41 264.828L673.987 264.84L671.542 264.789L669.097 264.828L666.674 264.856L664.229 264.856L661.784 264.789L659.361 264.817L656.916 264.784L654.471 264.817L652.026 264.851L649.603 264.834L647.158 264.84L644.713 264.856L642.268 264.801L639.823 264.784L637.378 264.817L634.955 264.817L632.51 264.789L630.065 264.779L627.62 264.795L625.197 264.845L622.752 264.845L620.307 264.834L617.862 264.812L615.417 264.784L612.994 264.834L610.549 264.806L608.104 264.818L605.659 264.851L603.214 264.818L600.769 264.845L598.324 264.845L595.879 264.812L593.434 264.79L591.011 264.812L588.566 264.79L586.121 264.784L583.676 264.795L581.253 264.839L578.808 264.862L576.363 264.818L573.918 264.806L571.473 264.862L569.028 264.839L566.583 264.778L564.138 264.817L561.715 264.839L559.27 264.806L556.847 264.817L554.402 264.839L551.957 264.862L549.534 264.834L547.089 264.817L544.644 264.862L542.199 264.862L539.754 264.839L537.331 264.845L534.886 264.817L532.441 264.817L529.996 264.839L527.573 264.862L525.128 264.862L522.683 264.795L520.238 264.845L517.793 264.806L515.37 264.862L512.925 264.862L510.48 264.828L508.057 264.862L505.612 264.862L503.189 264.856L500.744 264.862L498.299 264.784L495.876 264.862L493.431 264.862L490.986 264.84L488.563 264.851L486.118 264.856L483.673 264.784L481.25 264.817L478.805 264.851L476.36 264.851L473.937 264.856L471.492 264.862L469.513 264.145L468.012 262.924L466.921 261.364L466.234 259.627L465.881 257.778L465.925 255.879L465.87 253.986L465.914 252.088L465.87 250.195L465.892 248.302L465.87 246.404L465.898 244.506L465.881 242.613L465.892 240.715L465.876 238.816L465.876 236.918L465.898 235.02L465.892 233.122L465.87 231.223L465.87 229.325L465.887 227.427L465.892 225.529L465.876 223.631L465.876 221.733L465.892 219.835L465.876 217.937L465.876 216.039L465.887 214.141L465.876 212.243L465.876 210.344L465.892 208.446L465.876 206.548L465.876 204.65L465.892 202.751L465.876 200.853L465.876 198.955L465.892 197.057L465.876 195.159L465.876 193.261L465.887 191.363L465.876 189.465L465.876 187.567L465.892 185.668L465.876 183.77L465.876 181.872L465.892 179.974L465.876 178.076L465.876 176.178L465.887 174.28L465.876 172.382L465.876 170.484L465.892 168.586L465.876 166.688L465.876 164.789L465.892 162.891L465.876 160.993L465.876 159.095L465.887 157.197L465.876 155.299L465.876 153.401L465.892 151.503L465.876 149.605L465.876 147.707L465.892 145.809L465.876 143.91L465.876 142.012L465.887 140.114L465.876 138.216L465.876 136.318L465.887 134.42L465.892 132.522L465.876 130.624L465.876 128.726L465.892 126.828L465.876 124.929L465.876 123.031L465.892 121.133L465.876 119.235L465.876 117.337L465.892 115.439L465.876 113.541L465.876 111.643L465.892 109.745L465.876 107.847L465.876 105.949L465.892 104.051L465.876 102.153L465.876 100.254L465.892 98.3561L465.876 96.4579L465.876 94.5597L465.892 92.6616L465.876 90.7634L465.876 88.8652L465.887 86.9671L465.876 85.0689L465.876 83.1707L465.892 81.2726L465.876 79.3744L465.876 77.4762L465.887 75.5781L465.876 73.6799L465.876 71.7817L465.892 69.8836L465.876 67.9854L465.876 66.0872L465.887 64.1891L465.876 62.2909L465.876 60.3927L465.892 58.4946L465.876 56.5964L465.876 54.6982L465.887 52.8001L465.876 50.9019L465.876 49.0037L465.892 47.1056L465.876 45.2074L465.876 43.3092L465.887 41.4111L465.876 39.5129L465.876 37.6147L465.892 35.7166L465.876 33.8184L465.876 31.9202L465.887 30.0221L465.876 28.1239L465.876 26.2257L465.892 24.3276L465.876 22.4294L465.881 20.5312L466.067 18.6554L466.688 16.8804L467.626 15.2391L468.911 13.8209L468.911 1.49243Z" fill="white"/><path d="M1015.65 125.653C1015.11 126.106 1014.84 126.82 1014.64 127.601C1014.14 129.789 1013.55 131.93 1012.75 134.109C1011.7 136.876 1010.3 139.663 1009.37 142.488C1008.51 145.631 1007.66 148.687 1006.46 151.83C1004.93 157.683 1003.25 163.516 1001.36 169.301C999.873 173.148 998.338 177.178 997.382 181.257C996.832 183.503 995.876 185.422 995.181 187.668C994.631 189.481 994.418 191.294 993.772 193.164C991.937 198.505 989.91 204.098 988.356 209.526C987.265 212.746 986.541 215.947 985.769 219.167C984.591 222.648 983.047 225.849 982.4 229.561C981.975 233.1 979.832 236.301 978.867 239.637C977.843 243.252 977.226 246.839 975.884 250.339C974.735 253.955 974.233 257.464 972.756 261.012C972.129 262.478 971.511 264.069 973.934 264.069C976.781 264.098 979.919 264.454 982.825 264.406C986.879 264.541 990.75 264.146 994.689 263.644C999.535 263.789 1004.16 263.606 1009.01 263.76C1010.33 263.914 1011.89 263.779 1012.5 262.43C1013.43 260.125 1013.49 257.705 1014.26 255.275C1015.8 250.503 1017.7 245.566 1018.92 240.688C1019.57 239.222 1021.07 238.991 1022.62 238.933C1025.77 238.769 1029.07 239.02 1032.23 239.241C1036.18 239.762 1039.83 239.261 1043.66 238.962C1048.85 239.251 1054.1 239.54 1059.41 239.579C1064.86 239.598 1068.06 238.2 1068.78 245.123C1068.93 247.36 1069.75 249.5 1070.39 251.621C1071.03 255.246 1072.5 258.852 1073.93 262.256C1075.03 264.175 1077.47 263.76 1079.42 264.04C1084.8 264.782 1090.53 264.194 1095.9 263.943C1100.74 264.04 1105.4 264.396 1110.2 263.905C1111.35 263.828 1112.89 264.204 1113.79 263.529C1114.26 263.085 1114.09 262.208 1113.79 261.263C1113.09 259.094 1112.35 257.194 1111.53 255.083C1109.35 250.233 1108.69 245.451 1107.29 240.437C1105.36 236.089 1104 231.711 1102.68 227.112C1101.24 222.986 1099.9 218.782 1099.04 214.501C1096.71 207.472 1094.7 200.173 1092.08 193.289C1090.91 190.455 1090 187.408 1089.59 184.419C1089.21 182.375 1088.38 180.736 1087.79 178.846C1087.15 176.532 1086.64 174.025 1085.51 171.895C1084.52 169.966 1084.32 167.797 1083.94 165.695C1083.12 161.954 1081.5 158.811 1080.19 155.195C1079 152.312 1078.67 149.323 1077.76 146.306C1076.46 142.459 1074.86 138.371 1073.63 134.446C1072.9 131.997 1072.4 129.674 1071.75 127.302C1071.4 125.875 1070.51 124.882 1068.98 124.969C1061.73 125.798 1054.6 124.776 1047.28 125.036C1044.49 124.834 1041.6 124.737 1038.82 124.863C1036.13 124.776 1033.29 124.583 1030.66 125.123C1026.41 125.663 1022.03 124.959 1017.75 125.046C1017 125.065 1016.31 125.181 1015.78 125.566L1015.67 125.663L1015.65 125.653ZM1027.39 209.545C1027.05 209.121 1027.14 208.35 1027.33 207.53C1027.91 204.686 1029.25 202.179 1029.89 199.315C1030.45 195.545 1032.37 192.103 1033.12 188.391C1033.78 185.402 1034.9 182.597 1035.56 179.56C1036.4 175.655 1037.56 171.846 1038.57 167.999C1039.11 164.548 1039.92 161.356 1041.28 158.107C1041.7 157.046 1042.04 153.971 1043.39 154.289C1043.86 154.54 1044.38 155.446 1044.72 156.343C1046.24 160.334 1046.37 164.567 1047.58 168.578C1049.82 173.919 1049.91 179.695 1052.39 184.959C1053.31 187.36 1053.52 189.934 1054.09 192.422C1055.02 197.098 1056.65 201.803 1057.99 206.412C1058.4 207.713 1058.94 209.613 1057.1 209.796C1053.49 209.95 1049.74 210.21 1046.18 209.902C1040.8 209.815 1035.37 210.326 1030.01 210.037C1029.16 210.037 1028.05 210.172 1027.46 209.632L1027.39 209.545Z" fill="white"/>
+    </svg>
+  </div>
+  <div class="header-tag">AI IMAGERY SYSTEM — PROMPT GUIDE</div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">// IMAGERY SYSTEM — PROMPT ARCHITECTURE</div>
+    <h1 class="hero-title">AI Image<br><em>Prompt</em><br>System</h1>
+    <p class="hero-desc">A modular prompt construction kit and keyword library for generating and sourcing TTE-aligned imagery. Every block reflects the brand's photographic identity — Explorer archetype, expedition editorial, earned light.</p>
+  </div>
+
+  <!-- ─── PROMPT BUILDER ─────────────────────── -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">01 //</span>
+      <span class="section-title">Interactive Prompt Builder</span>
+    </div>
+    <p style="font-size:13px; color:var(--mid); margin-bottom:24px; font-family:var(--mono); line-height:1.6;">Select one block from each category to assemble a complete prompt. Click to toggle. Tap <strong style="color:var(--cream)">Copy Prompt</strong> to use in Midjourney, DALL·E, Firefly, or Stable Diffusion.</p>
+
+    <div class="prompt-builder">
+      <div class="builder-tabs">
+        <button class="builder-tab active" onclick="switchTab('all')">All Blocks</button>
+        <button class="builder-tab" onclick="switchTab('layer')">Layer</button>
+        <button class="builder-tab" onclick="switchTab('shot')">Shot & Lens</button>
+        <button class="builder-tab" onclick="switchTab('light')">Lighting</button>
+        <button class="builder-tab" onclick="switchTab('grade')">Color Grade</button>
+        <button class="builder-tab" onclick="switchTab('tech')">Film & Grain</button>
+        <button class="builder-tab" onclick="switchTab('style')">Style Ref</button>
+      </div>
+
+      <div class="builder-content">
+
+        <!-- LAYER -->
+        <div class="block-group" data-tab="layer">
+          <div class="block-group-label">// Narrative Layer</div>
+          <div class="block-grid">
+            <button class="block-btn" data-cat="layer" data-val="extreme wide shot of tiny human figure against vast hostile landscape, missionary silhouette, scale of the impossible" onclick="toggle(this)">THE SCALE<br><span style="color:var(--mid);font-size:9px;">Where mission occurs</span></button>
+            <button class="block-btn" data-cat="layer" data-val="medium portrait, subject tack-sharp amid motion-blurred crowd, eyes closed in prayer, stillness within chaos, spiritual intensity" onclick="toggle(this)">THE STILLNESS<br><span style="color:var(--mid);font-size:9px;">Focus on protagonist</span></button>
+            <button class="block-btn" data-cat="layer" data-val="first person POV handheld, looking through dusty vehicle window, boots on red dirt, gripping a worn passport, immersive raw field dispatch" onclick="toggle(this)">THE POV<br><span style="color:var(--mid);font-size:9px;">Raw field moment</span></button>
+            <button class="block-btn" data-cat="layer" data-val="extreme tight close-up portrait, weathered face with skin texture detail, one intense eye in sharp focus, data overlay aesthetic, mission intel feel" onclick="toggle(this)">THE HUD<br><span style="color:var(--mid);font-size:9px;">Mission intel</span></button>
+          </div>
+        </div>
+
+        <!-- SHOT -->
+        <div class="block-group" data-tab="shot">
+          <div class="block-group-label">// Shot Type & Perspective</div>
+          <div class="block-grid">
+            <button class="block-btn" data-cat="shot" data-val="ultra wide angle 16mm, low horizon, human figure 10% of frame height" onclick="toggle(this)">ULTRA WIDE<br><span style="color:var(--mid);font-size:9px;">16mm · horizon low</span></button>
+            <button class="block-btn" data-cat="shot" data-val="24mm wide angle, environmental portrait, subject in context, slight foreground element" onclick="toggle(this)">WIDE ENV.<br><span style="color:var(--mid);font-size:9px;">24mm · context</span></button>
+            <button class="block-btn" data-cat="shot" data-val="50mm standard lens, medium shot, natural perspective compression, documentary framing" onclick="toggle(this)">STANDARD<br><span style="color:var(--mid);font-size:9px;">50mm · natural</span></button>
+            <button class="block-btn" data-cat="shot" data-val="85mm portrait lens, f/1.8 shallow depth of field, subject sharp, background bokeh separation" onclick="toggle(this)">PORTRAIT<br><span style="color:var(--mid);font-size:9px;">85mm · f/1.8</span></button>
+            <button class="block-btn" data-cat="shot" data-val="135mm compressed portrait, extreme close-up face, skin pores visible, tactile texture" onclick="toggle(this)">COMPRESSED<br><span style="color:var(--mid);font-size:9px;">135mm · texture</span></button>
+            <button class="block-btn" data-cat="shot" data-val="asymmetric rule-of-thirds composition, subject off-center, generous negative space, visual tension" onclick="toggle(this)">ASYMMETRIC<br><span style="color:var(--mid);font-size:9px;">Tension composition</span></button>
+          </div>
+        </div>
+
+        <!-- LIGHT -->
+        <div class="block-group" data-tab="light">
+          <div class="block-group-label">// Lighting Condition</div>
+          <div class="block-grid">
+            <button class="block-btn" data-cat="light" data-val="golden hour directional sunlight, long warm shadows, amber rim light on subject, low sun angle" onclick="toggle(this)">GOLDEN HOUR<br><span style="color:var(--mid);font-size:9px;">Primary TTE light</span></button>
+            <button class="block-btn" data-cat="light" data-val="overcast diffuse daylight, soft even illumination, no harsh shadows, reveals skin texture and fabric detail" onclick="toggle(this)">OVERCAST<br><span style="color:var(--mid);font-size:9px;">Soft diffuse</span></button>
+            <button class="block-btn" data-cat="light" data-val="strong backlight, dramatic rim halo on subject silhouette, contre-jour, spiritual intensity" onclick="toggle(this)">BACKLIT RIM<br><span style="color:var(--mid);font-size:9px;">Spiritual intensity</span></button>
+            <button class="block-btn" data-cat="light" data-val="single candle or campfire practical light, intimate warm glow, deep surrounding shadows, inhabited darkness" onclick="toggle(this)">PRACTICAL<br><span style="color:var(--mid);font-size:9px;">Candle / fire</span></button>
+            <button class="block-btn" data-cat="light" data-val="blue hour dusk, urban mixed artificial and ambient, neon reflections on wet surfaces, inhabited night environment" onclick="toggle(this)">BLUE HOUR<br><span style="color:var(--mid);font-size:9px;">Dusk / urban night</span></button>
+            <button class="block-btn" data-cat="light" data-val="harsh midday side-light, high contrast, deep shadow and bright highlight, unforgiving equatorial sun" onclick="toggle(this)">HARSH MID<br><span style="color:var(--mid);font-size:9px;">High contrast</span></button>
+          </div>
+        </div>
+
+        <!-- GRADE -->
+        <div class="block-group" data-tab="grade">
+          <div class="block-group-label">// Color Grade</div>
+          <div class="block-grid">
+            <button class="block-btn" data-cat="grade" data-val="muted earthy color palette, desaturated 20%, warm amber shadows, controlled highlights, cinematic film grade" onclick="toggle(this)">TTE STANDARD<br><span style="color:var(--mid);font-size:9px;">Primary grade</span></button>
+            <button class="block-btn" data-cat="grade" data-val="Kodak Portra 400 film simulation, warm fine grain, rich shadow detail, preserved skin warmth" onclick="toggle(this)">PORTRA 400<br><span style="color:var(--mid);font-size:9px;">Film warmth</span></button>
+            <button class="block-btn" data-cat="grade" data-val="Roger Deakins Sicario grade, teal-orange complementary palette, precise shadow detail, vast atmosphere" onclick="toggle(this)">DEAKINS TEAL<br><span style="color:var(--mid);font-size:9px;">Cinematic contrast</span></button>
+            <button class="block-btn" data-cat="grade" data-val="Emmanuel Lubezki natural light grade, lifted shadows, desaturated midtones, organic color rendering" onclick="toggle(this)">LUBEZKI NAT.<br><span style="color:var(--mid);font-size:9px;">Natural organic</span></button>
+            <button class="block-btn" data-cat="grade" data-val="Bradford Young underexposed aesthetic, dark lifted blacks, textured shadows, spiritual weight in darkness" onclick="toggle(this)">BRADFORD DARK<br><span style="color:var(--mid);font-size:9px;">Underexposed weight</span></button>
+            <button class="block-btn" data-cat="grade" data-val="National Geographic color philosophy, saturated subjects against muted environments, story-first palette" onclick="toggle(this)">NATGEO SAT.<br><span style="color:var(--mid);font-size:9px;">Subject-forward</span></button>
+          </div>
+        </div>
+
+        <!-- TECH -->
+        <div class="block-group" data-tab="tech">
+          <div class="block-group-label">// Film & Grain Treatment</div>
+          <div class="block-grid">
+            <button class="block-btn" data-cat="tech" data-val="visible film grain, analog texture, fine grain Kodak structure, photographic noise, not digital smoothing" onclick="toggle(this)">FINE GRAIN<br><span style="color:var(--mid);font-size:9px;">Portra / analog</span></button>
+            <button class="block-btn" data-cat="tech" data-val="high ISO grain, coarse photographic noise, documentary texture, 3200 ISO pushed film aesthetic" onclick="toggle(this)">COARSE GRAIN<br><span style="color:var(--mid);font-size:9px;">Pushed ISO</span></button>
+            <button class="block-btn" data-cat="tech" data-val="subtle halation around highlights, analog glow, warm light bleed, film lens flare, not digital perfect" onclick="toggle(this)">HALATION<br><span style="color:var(--mid);font-size:9px;">Analog glow</span></button>
+            <button class="block-btn" data-cat="tech" data-val="motion blur on background movement, 1/30 shutter, panning technique, subject sharp amid environmental blur" onclick="toggle(this)">MOTION BLUR<br><span style="color:var(--mid);font-size:9px;">Slow shutter</span></button>
+            <button class="block-btn" data-cat="tech" data-val="slightly underexposed, preserve shadow detail, no blown highlights, latitude of Fujifilm color negative" onclick="toggle(this)">UNDEREXPOSED<br><span style="color:var(--mid);font-size:9px;">Protected shadows</span></button>
+            <button class="block-btn" data-cat="tech" data-val="photojournalistic handheld instability, slightly imperfect framing, authentic reportage feel, not tripod-perfect" onclick="toggle(this)">HANDHELD<br><span style="color:var(--mid);font-size:9px;">Reportage energy</span></button>
+          </div>
+        </div>
+
+        <!-- STYLE -->
+        <div class="block-group" data-tab="style">
+          <div class="block-group-label">// Style & Photographer Reference</div>
+          <div class="block-grid">
+            <button class="block-btn" data-cat="style" data-val="in the style of Steve McCurry National Geographic portraiture, dignified subject, direct eye contact, rich environmental color" onclick="toggle(this)">MCCURRY<br><span style="color:var(--mid);font-size:9px;">Dignified portraiture</span></button>
+            <button class="block-btn" data-cat="style" data-val="in the style of Chris Burkard adventure photography, tiny human in epic landscape, extreme environment, explorer energy" onclick="toggle(this)">BURKARD<br><span style="color:var(--mid);font-size:9px;">Adventure scale</span></button>
+            <button class="block-btn" data-cat="style" data-val="in the style of Paolo Pellegrin Magnum photojournalism, raw urgency, motion and grain as emotion, field dispatch" onclick="toggle(this)">PELLEGRIN<br><span style="color:var(--mid);font-size:9px;">Raw urgency</span></button>
+            <button class="block-btn" data-cat="style" data-val="in the style of Sebastiao Salgado documentary photography, human endurance as sacred subject, monumental scale and dignity" onclick="toggle(this)">SALGADO<br><span style="color:var(--mid);font-size:9px;">Monumental dignity</span></button>
+            <button class="block-btn" data-cat="style" data-val="in the style of Jimmy Nelson indigenous portraiture, epic scale, ceremonial dignity, environment as cultural statement" onclick="toggle(this)">NELSON<br><span style="color:var(--mid);font-size:9px;">Cultural epic</span></button>
+            <button class="block-btn" data-cat="style" data-val="editorial photography style, National Geographic expedition, Arc'teryx campaign, field documentary, award-winning photojournalism" onclick="toggle(this)">EDITORIAL<br><span style="color:var(--mid);font-size:9px;">Magazine grade</span></button>
+          </div>
+        </div>
+
+        <!-- SUBJECT (always visible) -->
+        <div class="block-group" data-tab="subject">
+          <div class="block-group-label">// Subject / Environment (Optional — add manually)</div>
+          <div class="block-grid">
+            <button class="block-btn" data-cat="subject" data-val="remote mountain village, Central Asian highland, ancient stone architecture, dust and prayer flags" onclick="toggle(this)">CENTRAL ASIA<br><span style="color:var(--mid);font-size:9px;">Mountain / highland</span></button>
+            <button class="block-btn" data-cat="subject" data-val="North African desert, endless sand dunes, lone figure, scorched horizon, arid Spiritual Biome" onclick="toggle(this)">DESERT BIOME<br><span style="color:var(--mid);font-size:9px;">Arid / unreached</span></button>
+            <button class="block-btn" data-cat="subject" data-val="dense urban megacity, crowded market, anonymous crowd, concrete and chaos, urban unreached biome" onclick="toggle(this)">URBAN BIOME<br><span style="color:var(--mid);font-size:9px;">City / megacity</span></button>
+            <button class="block-btn" data-cat="subject" data-val="Amazon or Congo jungle border, impenetrable vegetation, river fog, isolated access point, jungle Spiritual Biome" onclick="toggle(this)">JUNGLE BIOME<br><span style="color:var(--mid);font-size:9px;">Forest / remote</span></button>
+            <button class="block-btn" data-cat="subject" data-val="South Asian woman in blue headscarf, dignified gaze, rich fabric texture, warm environmental portrait" onclick="toggle(this)">PORTRAIT — WOMAN<br><span style="color:var(--mid);font-size:9px;">Dignified subject</span></button>
+            <button class="block-btn" data-cat="subject" data-val="weathered elderly man, Central Asian features, lined face, traditional clothing, strength and history in his expression" onclick="toggle(this)">PORTRAIT — ELDER<br><span style="color:var(--mid);font-size:9px;">Dignified elder</span></button>
+          </div>
+        </div>
+
+        <!-- QUALITY SUFFIX -->
+        <div class="block-group-label" style="margin-top:20px;">// Always Append (Quality Anchors)</div>
+        <div style="background:rgba(254,84,66,0.06); border:1px solid rgba(254,84,66,0.2); border-radius:2px; padding:12px 16px; font-family:var(--mono); font-size:10px; color:var(--light); line-height:1.8;" id="suffix-display">
+          photorealistic, award-winning photography, editorial quality, Magnum Photos standard, no stock photo aesthetic, no artificial lighting, no posed composition, no AI smoothing, ultra-detailed, 8K
+        </div>
+
+        <!-- OUTPUT -->
+        <div class="output-area">
+          <div class="output-label">// Generated Prompt</div>
+          <div class="output-text" id="output-text">Select blocks above to build your prompt →</div>
+          <div class="output-actions">
+            <button class="btn-copy" onclick="copyPrompt()">Copy Prompt</button>
+            <button class="btn-reset" onclick="resetAll()">Reset All</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── LAYER ANATOMY ──────────────────────── -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">02 //</span>
+      <span class="section-title">Layer Prompt Anatomy</span>
+    </div>
+    <p style="font-size:13px; color:var(--mid); margin-bottom:24px; font-family:var(--mono); line-height:1.6;">Each narrative layer has a fixed prompt DNA. Use these as standalone templates or as a base to customize.</p>
+
+    <div class="layer-cards">
+
+      <div class="layer-card l1">
+        <div class="layer-num">LAYER 01 //</div>
+        <div class="layer-name">The Scale</div>
+        <div class="layer-sub">Where the Mission Occurs</div>
+        <div class="layer-row"><span class="layer-row-key">Shot</span><span class="layer-row-val">Extreme wide, 16–24mm</span></div>
+        <div class="layer-row"><span class="layer-row-key">Subject</span><span class="layer-row-val">5–15% of frame, tiny silhouette</span></div>
+        <div class="layer-row"><span class="layer-row-key">Light</span><span class="layer-row-val">Golden hour, backlit rim</span></div>
+        <div class="layer-row"><span class="layer-row-key">Grade</span><span class="layer-row-val">Earthy muted, Deakins teal-warm</span></div>
+        <div class="layer-row"><span class="layer-row-key">Grain</span><span class="layer-row-val">Fine, Portra 400</span></div>
+        <div class="layer-row" style="margin-top:12px;"><span class="layer-row-key">Copy-ready</span><span class="layer-row-val" style="color:rgba(211,209,199,0.5);font-size:9px;" id="p1">extreme wide angle 16mm, lone human silhouette 10% of frame height, towering mountain range, golden hour amber light, long directional shadows, muted earthy palette, Kodak Portra 400 grain, in the style of Chris Burkard, photorealistic editorial, National Geographic quality, award-winning photography</span></div>
+        <button class="btn-copy" style="margin-top:10px;font-size:9px;padding:6px 12px;" onclick="copyText('p1')">Copy</button>
+      </div>
+
+      <div class="layer-card l2">
+        <div class="layer-num">LAYER 02 //</div>
+        <div class="layer-name">The Stillness</div>
+        <div class="layer-sub">Focus on the Protagonist</div>
+        <div class="layer-row"><span class="layer-row-key">Shot</span><span class="layer-row-val">50–85mm, medium to close-up</span></div>
+        <div class="layer-row"><span class="layer-row-key">Subject</span><span class="layer-row-val">Tack-sharp, eyes closed/locked</span></div>
+        <div class="layer-row"><span class="layer-row-key">Light</span><span class="layer-row-val">Overcast diffuse, rim halo</span></div>
+        <div class="layer-row"><span class="layer-row-key">Grade</span><span class="layer-row-val">NatGeo saturated subject, muted bg</span></div>
+        <div class="layer-row"><span class="layer-row-key">Grain</span><span class="layer-row-val">Fine to medium, Fuji simulation</span></div>
+        <div class="layer-row" style="margin-top:12px;"><span class="layer-row-key">Copy-ready</span><span class="layer-row-val" style="color:rgba(211,209,199,0.5);font-size:9px;" id="p2">85mm portrait lens, f/1.8, South Asian woman in blue headscarf, eyes closed in prayer, sharp subject against motion-blurred crowded market background, stillness amid chaos, overcast soft light, Kodak Portra 400 grade, in the style of Steve McCurry, dignified portraiture, National Geographic editorial quality</span></div>
+        <button class="btn-copy" style="margin-top:10px;font-size:9px;padding:6px 12px;" onclick="copyText('p2')">Copy</button>
+      </div>
+
+      <div class="layer-card l3">
+        <div class="layer-num">LAYER 03 //</div>
+        <div class="layer-name">The POV</div>
+        <div class="layer-sub">The Raw Moment</div>
+        <div class="layer-row"><span class="layer-row-key">Shot</span><span class="layer-row-val">24–35mm, handheld, first person</span></div>
+        <div class="layer-row"><span class="layer-row-key">Subject</span><span class="layer-row-val">Hands, boots, windows, objects</span></div>
+        <div class="layer-row"><span class="layer-row-key">Light</span><span class="layer-row-val">Available, practical, raw</span></div>
+        <div class="layer-row"><span class="layer-row-key">Grade</span><span class="layer-row-val">Lubezki natural, lifted shadows</span></div>
+        <div class="layer-row"><span class="layer-row-key">Grain</span><span class="layer-row-val">Coarse, pushed ISO, motion blur OK</span></div>
+        <div class="layer-row" style="margin-top:12px;"><span class="layer-row-key">Copy-ready</span><span class="layer-row-val" style="color:rgba(211,209,199,0.5);font-size:9px;" id="p3">first person POV, 28mm handheld, looking through dusty small aircraft window at remote jungle airstrip below, one worn hand gripping seat edge, motion blur on environment, high ISO grain, natural available light, lifted shadow grade, photojournalistic handheld energy, documentary dispatch aesthetic, in the style of Paolo Pellegrin</span></div>
+        <button class="btn-copy" style="margin-top:10px;font-size:9px;padding:6px 12px;" onclick="copyText('p3')">Copy</button>
+      </div>
+
+      <div class="layer-card l4">
+        <div class="layer-num">LAYER 04 //</div>
+        <div class="layer-name">The HUD</div>
+        <div class="layer-sub">Mission Intel</div>
+        <div class="layer-row"><span class="layer-row-key">Shot</span><span class="layer-row-val">85–135mm, extreme close-up</span></div>
+        <div class="layer-row"><span class="layer-row-key">Subject</span><span class="layer-row-val">Weathered face, one eye detail</span></div>
+        <div class="layer-row"><span class="layer-row-key">Light</span><span class="layer-row-val">Side-lit, high contrast, harsh</span></div>
+        <div class="layer-row"><span class="layer-row-key">Grade</span><span class="layer-row-val">Bradford underexposed, dark weight</span></div>
+        <div class="layer-row"><span class="layer-row-key">Grain</span><span class="layer-row-val">Visible grain, tactile skin texture</span></div>
+        <div class="layer-row" style="margin-top:12px;"><span class="layer-row-key">Copy-ready</span><span class="layer-row-val" style="color:rgba(211,209,199,0.5);font-size:9px;" id="p4">135mm extreme close-up portrait, weathered Central Asian man face, one eye sharp with visible iris detail, skin pores and texture, harsh side-light, dark underexposed Bradford Young aesthetic, coarse film grain, Magnum photojournalism quality, environmental documentary, ultra-detailed skin texture, editorial portrait</span></div>
+        <button class="btn-copy" style="margin-top:10px;font-size:9px;padding:6px 12px;" onclick="copyText('p4')">Copy</button>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── KEYWORD LIBRARY ────────────────────── -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">03 //</span>
+      <span class="section-title">Search Keyword Library</span>
+    </div>
+    <p style="font-size:13px; color:var(--mid); margin-bottom:32px; font-family:var(--mono); line-height:1.6;">Use these keywords to search stock libraries (Getty, Unsplash, Pexels, Stocksy), inspiration platforms (Behance, Pinterest, Are.na, Tumblr), and photographer archives. Click any keyword to copy it.</p>
+
+    <div class="keyword-section">
+      <div class="keyword-label">// Photographer & Cinematic Reference</div>
+      <div class="keyword-pool" id="kw1">
+        <span class="kw" onclick="copyKw(this)">Steve McCurry</span>
+        <span class="kw" onclick="copyKw(this)">Chris Burkard</span>
+        <span class="kw" onclick="copyKw(this)">Paolo Pellegrin</span>
+        <span class="kw" onclick="copyKw(this)">Sebastiao Salgado</span>
+        <span class="kw" onclick="copyKw(this)">Jimmy Nelson</span>
+        <span class="kw" onclick="copyKw(this)">Jonas Bendiksen</span>
+        <span class="kw" onclick="copyKw(this)">Magnum Photos</span>
+        <span class="kw" onclick="copyKw(this)">Roger Deakins</span>
+        <span class="kw" onclick="copyKw(this)">Emmanuel Lubezki</span>
+        <span class="kw" onclick="copyKw(this)">Bradford Young</span>
+        <span class="kw" onclick="copyKw(this)">National Geographic photography</span>
+        <span class="kw" onclick="copyKw(this)">Hiro Murai</span>
+        <span class="kw" onclick="copyKw(this)">VII Photo Agency</span>
+        <span class="kw" onclick="copyKw(this)">World Press Photo</span>
+        <span class="kw" onclick="copyKw(this)">Pulitzer photography</span>
+      </div>
+    </div>
+
+    <div class="keyword-section">
+      <div class="keyword-label">// Photographic Style & Genre</div>
+      <div class="keyword-pool">
+        <span class="kw" onclick="copyKw(this)">expedition photography</span>
+        <span class="kw" onclick="copyKw(this)">documentary portrait</span>
+        <span class="kw" onclick="copyKw(this)">environmental portraiture</span>
+        <span class="kw" onclick="copyKw(this)">photojournalism</span>
+        <span class="kw" onclick="copyKw(this)">editorial travel photography</span>
+        <span class="kw" onclick="copyKw(this)">adventure photography</span>
+        <span class="kw" onclick="copyKw(this)">field photography</span>
+        <span class="kw" onclick="copyKw(this)">humanitarian photography</span>
+        <span class="kw" onclick="copyKw(this)">reportage photography</span>
+        <span class="kw" onclick="copyKw(this)">analog film photography</span>
+        <span class="kw" onclick="copyKw(this)">cinematic photography</span>
+        <span class="kw" onclick="copyKw(this)">raw documentary</span>
+        <span class="kw" onclick="copyKw(this)">immersive POV photography</span>
+        <span class="kw" onclick="copyKw(this)">long exposure landscape</span>
+        <span class="kw" onclick="copyKw(this)">handheld reportage</span>
+      </div>
+    </div>
+
+    <div class="keyword-section">
+      <div class="keyword-label">// Aesthetic & Color</div>
+      <div class="keyword-pool">
+        <span class="kw" onclick="copyKw(this)">earthy tones photography</span>
+        <span class="kw" onclick="copyKw(this)">muted color palette</span>
+        <span class="kw" onclick="copyKw(this)">Kodak Portra 400</span>
+        <span class="kw" onclick="copyKw(this)">film grain texture</span>
+        <span class="kw" onclick="copyKw(this)">golden hour warm light</span>
+        <span class="kw" onclick="copyKw(this)">teal orange grade</span>
+        <span class="kw" onclick="copyKw(this)">cinematic color grade</span>
+        <span class="kw" onclick="copyKw(this)">desaturated film look</span>
+        <span class="kw" onclick="copyKw(this)">analog grain aesthetic</span>
+        <span class="kw" onclick="copyKw(this)">warm shadow tones</span>
+        <span class="kw" onclick="copyKw(this)">underexposed film</span>
+        <span class="kw" onclick="copyKw(this)">tactile texture</span>
+        <span class="kw" onclick="copyKw(this)">Fujifilm color rendering</span>
+        <span class="kw" onclick="copyKw(this)">natural light photography</span>
+        <span class="kw" onclick="copyKw(this)">contre-jour backlight</span>
+      </div>
+    </div>
+
+    <div class="keyword-section">
+      <div class="keyword-label">// Landscape & Environment (Spiritual Biomes)</div>
+      <div class="keyword-pool">
+        <span class="kw" onclick="copyKw(this)">remote mountain village</span>
+        <span class="kw" onclick="copyKw(this)">Central Asia highlands</span>
+        <span class="kw" onclick="copyKw(this)">Saharan desert landscape</span>
+        <span class="kw" onclick="copyKw(this)">Amazon jungle edge</span>
+        <span class="kw" onclick="copyKw(this)">urban megacity crowd</span>
+        <span class="kw" onclick="copyKw(this)">Himalayan terrain</span>
+        <span class="kw" onclick="copyKw(this)">Mongolian steppe</span>
+        <span class="kw" onclick="copyKw(this)">Middle Eastern medina</span>
+        <span class="kw" onclick="copyKw(this)">Sub-Saharan landscape</span>
+        <span class="kw" onclick="copyKw(this)">Southeast Asian delta</span>
+        <span class="kw" onclick="copyKw(this)">Arctic tundra</span>
+        <span class="kw" onclick="copyKw(this)">remote airstrip</span>
+        <span class="kw" onclick="copyKw(this)">hostile terrain</span>
+        <span class="kw" onclick="copyKw(this)">unreached village</span>
+        <span class="kw" onclick="copyKw(this)">border crossing</span>
+      </div>
+    </div>
+
+    <div class="keyword-section">
+      <div class="keyword-label">// Subject & People</div>
+      <div class="keyword-pool">
+        <span class="kw" onclick="copyKw(this)">indigenous portrait dignified</span>
+        <span class="kw" onclick="copyKw(this)">woman headscarf blue</span>
+        <span class="kw" onclick="copyKw(this)">weathered face elder</span>
+        <span class="kw" onclick="copyKw(this)">prayer portrait</span>
+        <span class="kw" onclick="copyKw(this)">solo hiker vast landscape</span>
+        <span class="kw" onclick="copyKw(this)">Central Asian man portrait</span>
+        <span class="kw" onclick="copyKw(this)">crowd from above</span>
+        <span class="kw" onclick="copyKw(this)">South Asian woman portrait</span>
+        <span class="kw" onclick="copyKw(this)">tribal elder documentary</span>
+        <span class="kw" onclick="copyKw(this)">child eyes contact</span>
+        <span class="kw" onclick="copyKw(this)">pilgrim journey</span>
+        <span class="kw" onclick="copyKw(this)">market crowd eyes</span>
+        <span class="kw" onclick="copyKw(this)">backpacker mountain ridge</span>
+        <span class="kw" onclick="copyKw(this)">traveler window seat</span>
+      </div>
+    </div>
+
+    <div class="keyword-section">
+      <div class="keyword-label">// Brand Archetype — Search Platforms</div>
+      <div class="keyword-pool">
+        <span class="kw" onclick="copyKw(this)">The North Face campaign</span>
+        <span class="kw" onclick="copyKw(this)">Patagonia photography</span>
+        <span class="kw" onclick="copyKw(this)">Arc'teryx editorial</span>
+        <span class="kw" onclick="copyKw(this)">Red Bull adventure photography</span>
+        <span class="kw" onclick="copyKw(this)">National Geographic cover</span>
+        <span class="kw" onclick="copyKw(this)">TIME magazine photo essay</span>
+        <span class="kw" onclick="copyKw(this)">Monocle travel editorial</span>
+        <span class="kw" onclick="copyKw(this)">Explorer archetype brand</span>
+        <span class="kw" onclick="copyKw(this)">adventure campaign editorial</span>
+        <span class="kw" onclick="copyKw(this)">outdoor brand photography</span>
+        <span class="kw" onclick="copyKw(this)">mission photography</span>
+        <span class="kw" onclick="copyKw(this)">Are.na expedition</span>
+      </div>
+    </div>
+
+    <div class="keyword-section">
+      <div class="keyword-label">// Negative Keywords (Avoid in Searches)</div>
+      <div class="keyword-pool">
+        <span class="kw" style="border-color:rgba(254,84,66,0.3);color:rgba(254,84,66,0.6);" onclick="copyKw(this)">NOT stock photo smile</span>
+        <span class="kw" style="border-color:rgba(254,84,66,0.3);color:rgba(254,84,66,0.6);" onclick="copyKw(this)">NOT posed donation</span>
+        <span class="kw" style="border-color:rgba(254,84,66,0.3);color:rgba(254,84,66,0.6);" onclick="copyKw(this)">NOT ring light portrait</span>
+        <span class="kw" style="border-color:rgba(254,84,66,0.3);color:rgba(254,84,66,0.6);" onclick="copyKw(this)">NOT poverty tourism</span>
+        <span class="kw" style="border-color:rgba(254,84,66,0.3);color:rgba(254,84,66,0.6);" onclick="copyKw(this)">NOT lens flare holy</span>
+        <span class="kw" style="border-color:rgba(254,84,66,0.3);color:rgba(254,84,66,0.6);" onclick="copyKw(this)">NOT oversaturated filter</span>
+        <span class="kw" style="border-color:rgba(254,84,66,0.3);color:rgba(254,84,66,0.6);" onclick="copyKw(this)">NOT HDR landscape</span>
+        <span class="kw" style="border-color:rgba(254,84,66,0.3);color:rgba(254,84,66,0.6);" onclick="copyKw(this)">NOT church media</span>
+        <span class="kw" style="border-color:rgba(254,84,66,0.3);color:rgba(254,84,66,0.6);" onclick="copyKw(this)">NOT influencer travel</span>
+        <span class="kw" style="border-color:rgba(254,84,66,0.3);color:rgba(254,84,66,0.6);" onclick="copyKw(this)">NOT studio backdrop</span>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── NEGATIVE PROMPT BLOCK ──────────────── -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">04 //</span>
+      <span class="section-title">Universal Negative Prompt</span>
+    </div>
+    <p style="font-size:13px; color:var(--mid); margin-bottom:20px; font-family:var(--mono); line-height:1.6;">Append to every AI generation to prevent off-brand results. Compatible with Midjourney (--no flag), Stable Diffusion (negative prompt field), and Firefly.</p>
+
+    <div class="output-area">
+      <div class="output-label">// Negative Prompt — Copy & Append</div>
+      <div class="output-text" id="neg-prompt" style="color:rgba(254,84,66,0.7);">lens flare halo, soft focus glow, church media aesthetic, stock photo smile, posed donation composition, ring light, studio backdrop, HDR over-processed, oversaturated filter, influencer travel, poverty tourism framing, AI smooth skin, digital noise reduction, perfect symmetry, western savior framing, gradient background, corporate headshot</div>
+      <div class="output-actions">
+        <button class="btn-copy" onclick="copyText('neg-prompt')">Copy Negative Prompt</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">TO THE ENDS OF THE EARTH ® · HOPE CHANNEL INTERNATIONAL · AI IMAGERY SYSTEM</div>
+  <div class="footer-coords">39.0560° N 76.9634° W</div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+  const selections = {};
+
+  function toggle(btn) {
+    const cat = btn.dataset.cat;
+    const val = btn.dataset.val;
+
+    if (selections[cat] === btn) {
+      btn.classList.remove('selected');
+      delete selections[cat];
+    } else {
+      document.querySelectorAll(`.block-btn[data-cat="${cat}"]`).forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selections[cat] = btn;
+      selections[cat].val = val;
+    }
+    buildPrompt();
+  }
+
+  function buildPrompt() {
+    const order = ['layer','shot','light','grade','tech','style','subject'];
+    const parts = [];
+    order.forEach(cat => {
+      if (selections[cat]) parts.push(selections[cat].val);
+    });
+    const suffix = "photorealistic, award-winning photography, editorial quality, Magnum Photos standard, no stock photo aesthetic, no artificial lighting, no posed composition, no AI smoothing, ultra-detailed, 8K";
+    const out = document.getElementById('output-text');
+    if (parts.length === 0) {
+      out.textContent = 'Select blocks above to build your prompt →';
+    } else {
+      out.textContent = parts.join(', ') + ', ' + suffix;
+    }
+  }
+
+  function copyToClipboard(text, successMsg) {
+    // Modern API (HTTPS or localhost)
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function() {
+        showToast(successMsg || 'Copied');
+      }).catch(function() {
+        fallbackCopy(text, successMsg);
+      });
+    } else {
+      fallbackCopy(text, successMsg);
+    }
+  }
+
+  function fallbackCopy(text, successMsg) {
+    // Works on desktop HTTP, older browsers, and file:// protocol
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand('copy');
+      showToast(successMsg || 'Copied');
+    } catch(e) {
+      showToast('Press Ctrl+C to copy');
+    }
+    document.body.removeChild(ta);
+  }
+
+  function copyPrompt() {
+    const text = document.getElementById('output-text').textContent;
+    if (text.includes('Select blocks')) return;
+    copyToClipboard(text, 'Prompt copied');
+  }
+
+  function copyText(id) {
+    const text = document.getElementById(id).textContent;
+    copyToClipboard(text, 'Copied');
+  }
+
+  function copyKw(el) {
+    copyToClipboard(el.textContent, '"' + el.textContent + '" copied');
+    el.classList.add('copied');
+    setTimeout(() => el.classList.remove('copied'), 1200);
+  }
+
+  function resetAll() {
+    Object.keys(selections).forEach(k => delete selections[k]);
+    document.querySelectorAll('.block-btn.selected').forEach(b => b.classList.remove('selected'));
+    document.getElementById('output-text').textContent = 'Select blocks above to build your prompt →';
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.builder-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    const groups = document.querySelectorAll('.block-group');
+    groups.forEach(g => {
+      if (tab === 'all') {
+        g.style.display = '';
+      } else {
+        g.style.display = (g.dataset.tab === tab || g.dataset.tab === 'subject') ? '' : 'none';
+      }
+    });
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  }
+</script>
+</body>
+</html>

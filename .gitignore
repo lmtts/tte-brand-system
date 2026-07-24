@@ -1,0 +1,29 @@
+# === Dependencies ===
+node_modules/
+
+# === Build outputs ===
+dist/
+build/
+*.tsbuildinfo
+.vite/
+
+# === 05-applications — large source files (PSDs, AIs), excluded by request ===
+# The folder is kept (empty) in the repo via .gitkeep; local files stay on disk.
+05-applications/*
+!05-applications/.gitkeep
+
+# === 00-archive — 1.1 GB of exploration binaries (PNGs, PDFs, EPS, AI, pptx) ===
+# Excluded to keep the repo lean. Local files stay on disk.
+00-archive/*
+!00-archive/.gitkeep
+
+# === Tooling / editor ===
+.impeccable/
+.DS_Store
+Thumbs.db
+*.log
+
+# === Env / secrets (safety net — none expected in this repo) ===
+.env
+.env.*
+*.pem
