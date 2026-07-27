@@ -1,0 +1,164 @@
+# Brand Guidelines Site — Plano de Implementação
+**To the Ends of the Earth** · site interativo experiencial (scrollytelling + motion HUD) · deploy Vercel
+*Documento vivo — atualizar o status ao fim de cada fase. Criado 2026-07-27.*
+
+---
+
+## 0. Resumo
+
+Um **site experiencial** do brand guidelines — não um documento estático. Cada seção é uma cena com imagem dominante, motion temático e a linguagem tática do TTE, **fiel aos frames do Figma**. Stack profissional, responsivo (mobile por conta do dev), deploy em produção na Vercel. O PDF é uma fase posterior, sob medida.
+
+Regra de ouro que corrige o problema da tentativa anterior: **no desktop o layout é pixel-fiel ao frame de 1440 do Figma** (px, tamanhos, spacing, opacidades e assets literais), verificado lado a lado antes de avançar.
+
+---
+
+## 1. Stack (decidida)
+
+| Camada | Escolha |
+|---|---|
+| Framework | **Next.js 15** — App Router, TypeScript, `output: 'export'` (site estático) |
+| Estilo | **Tailwind v4** conectado aos **tokens TTE** (`tokens.tailwind.js` / `tokens.css`) — zero hardcoded |
+| Motion | **GSAP + ScrollTrigger** + **Lenis** (smooth scroll) + **motion tokens** próprios (duração/easing) |
+| Fontes | **self-hosted** via `next/font/local` — Mona Sans (variável) + Space Mono, pesos exatos |
+| Assets | **exatos exportados do Figma**, commitados no repo (sem substituição) |
+| Deploy | **Vercel**, root directory = `04-brand-book/site/` |
+
+O motion também resolve o follow-up "motion ainda não definido" do `DESIGN.md`: os tokens de duração/easing nascem aqui e voltam para o sistema.
+
+---
+
+## 2. Repositório e estrutura (decidida)
+
+**Mesmo repo do TTE Brand System**, site numa subpasta. `node_modules`/builds no `.gitignore` — o versionado é leve. O site consome tokens/assets do brand system (fonte única de verdade).
+
+```
+04-brand-book/
+  BRAND-GUIDELINES-SITE-PLAN.md      ← este documento
+  site/                               ← app Next.js
+    app/                              rotas (App Router)
+    components/
+      primitives/                     Type, Eyebrow, HudLabel, Rule, PoweredBy…
+      organisms/                      CoverHero, NavRail, MobileNav, SectionShell, ImageBand…
+      sections/                       SectionCover, SectionBrand, … (uma por seção)
+    lib/                              motion.ts (tokens de motion), hud/ (efeitos), sections.config.ts
+    public/assets/                    fotos/SVGs exatos exportados do Figma
+    src/tokens/                       cópia sincronizada dos tokens (via script sync-tokens)
+    next.config.ts · tailwind · tsconfig · package.json
+```
+
+**Sincronização de tokens:** `01-brand-system/tokens/` continua canônico. Um passo `sync-tokens` copia para `site/src/tokens/` no build — Princípio 7 preservado (nunca duas fontes divergentes).
+
+---
+
+## 3. Fidelidade ao Figma (a correção central)
+
+Cada erro apontado na tentativa anterior e a regra que o elimina:
+
+| Erro anterior | Regra |
+|---|---|
+| Tamanhos inflados | Desktop = **pixel-match ao frame de 1440**. Px, font-sizes, spacing e posições **literais** do Figma (via `get_design_context` + `get_variable_defs`). Sem type fluido inflando no desktop. |
+| Textura com opacidade/posição/rotação erradas | Reproduzir o **transform e a opacidade exatos** do frame (na 02 a textura é rotacionada, ancorada à esquerda, tamanho específico). |
+| Logo na versão errada | Usar o **asset exato exportado do frame**, não um SVG genérico do repo. |
+| Ícone Hope Channel invertido | Usar o asset na **orientação correta** (sem reproduzir flips do Figma). |
+| Espaçamentos de menu errados | Gaps/margens vêm dos **valores do frame**, não de estimativa. |
+
+**Verificação obrigatória (LOOP):** ao terminar cada seção, gerar **comparação lado a lado (screenshot do frame Figma × build a 1440)**. Só avançar quando bate. Registrar o print no fim da seção.
+
+---
+
+## 4. Sistema de Motion — Inteligência & Programação
+
+O motion se comporta como um **sistema de dados / engenharia** — leitura de inteligência, não mira ou arma. **Referência de sensação: [contentarchitecture.dev](https://www.contentarchitecture.dev/)** (Next.js + Lenis; transforms guiados por variáveis CSS; easings ~520ms cubic-bezier; efeito *odometer* de texto/números). **Sem qualquer customização de cursor. Sem crosshair, reticle ou iconografia de mira/arma.** Tudo com fallback em `prefers-reduced-motion`.
+
+**Assinaturas de motion:**
+- **Odometer / rolling** *(gesto-assinatura da referência)*: números e textos-chave rolam na vertical até a posição final (dígitos/letras em Space Mono), como um contador/painel de dados.
+- **Decode / index-in:** labels e coordenadas resolvem por scramble de caracteres monoespaçados (feel de terminal/compilação).
+- **Boot / load:** sequência de "compile/index" — blocos e módulos assentam em stagger, readouts de dados populam, barra de progresso preenche. O logo entra por reveal limpo (clip/stroke), sem bracket de mira.
+- **Reveal de seção (scroll):** transforms guiados por variável CSS (`--progress`) + ScrollTrigger — clip/opacity/y; uma linha-guia fina Fire Orange conduz a headline; bandas de imagem com scale/clip sutil.
+- **Scroll:** Lenis (momentum). **Moldura de instrumento fixa** discreta — marcas de registro (print/tech) nos cantos, índice da seção e coordenadas "live", progresso como leitura de dados. Marcas de registro, nunca mira.
+- **Hovers:** transições de cor/opacidade (~300ms) + **troca de label por rolling** (odometer); keyline/sublinhado Fire Orange que desenha; item de nav revela metadado. Sem reticle.
+- **Números:** count-up / odometer (ex: 3.6B) em Space Mono.
+- **Transição entre seções:** conteúdo "carrega/fetch" com reveal escalonado — sem linguagem de alvo.
+- **Loading de rota:** micro-loader estilo "indexing / building".
+- **Acento opcional:** campo sutil (canvas/three.js leve) tipo contorno topográfico/partículas, discreto — como a referência usa three.js de forma mínima.
+
+**Motion tokens (`lib/motion.ts`):** durações (fast / base ~300ms / slow ~520ms / cinematic), easings cubic-bezier (reveals suaves; roll mecânico do odometer), staggers — consistentes em todo o site.
+
+---
+
+## 5. Arquitetura (atômica, espelhando o sistema)
+
+- **Primitivos:** Type, Eyebrow, HudLabel, Rule, PoweredBy.
+- **Organismos:** CoverHero, NavRail (desktop), MobileNav (overlay), SectionShell, ImageBand, HudFrame (moldura persistente).
+- **Uma seção = um componente** (`SectionCover`, `SectionBrand`, …).
+- **`sections.config.ts`** = ordem única-fonte da navegação.
+
+**Ordem canônica das seções (definida por Lucas):**
+`01 Cover · 02 The Brand · 03 Logos · 04 Color · 05 Typography · 06 Patterns · 07 Imagery · 08 Voice · 09 System · 10 Tokens`
+
+---
+
+## 6. Responsividade — 100% por conta do dev
+
+Lucas desenha **apenas os frames desktop**. **Toda a responsividade e a adaptação desktop→mobile são responsabilidade do dev** (Claude Code). Abordagem mobile-first; desktop = alvo pixel-fiel de 1440; reflow/escala para tablet e mobile derivados por mim, mantendo a experiência e o tema HUD. Mostro o mobile para aprovação junto de cada seção.
+
+---
+
+## 7. Fases (início → fim)
+
+Legenda de status: ⬜ pendente · 🟡 em andamento · ✅ concluído
+
+- ✅ **Fase 0 — Fundação** *(2026-07-27)*: Next.js 16 + React 19 + Tailwind v4 em `04-brand-book/site/` (`output: export`); tokens TTE via `@theme`; fontes Mona Sans + Space Mono self-hosted (`next/font/local`); GSAP + Lenis; `HudFrame`, `DecodeText`, `CountUp`, `LenisProvider`; `sections.config.ts` + `motion.ts`; home skeleton provando fontes/tokens/motion; `npm run build` verde (static export). `#949494` tokenizado como `text.muted` e sincronizado em tokens.json/css/scss/tailwind.js + DESIGN.md. **Deploy Vercel adiado** (fazer quando conectar a conta).
+- ⬜ **Fase 1 — 01 Cover:** fiel ao frame `411:3` (usar este frame do Figma). Assets certos, motion de boot + parallax + pin. Sign-off lado a lado.
+- ⬜ **Fase 2 — 02 The Brand:** **AGUARDA design atualizado.** Lucas vai revisar a 02 no Figma para incluir um **menu index lateral off-screen** (fora da tela, abre por interação). **Antes de iniciar a Fase 2, perguntar a Lucas pelo design atualizado da 02.** Depois: implementar fiel, textura correta, transição seamless, reveals HUD. Sign-off.
+- ⬜ **Fases 3–10 — Seções restantes:** para cada uma, Lucas manda o frame **desktop**; eu implemento (fidelidade + motion HUD + responsivo mobile) com comparação lado a lado. Agrupar as repetitivas.
+- ⬜ **Fase 11 — Polish global:** transições entre todas as seções, performance (Lighthouse), acessibilidade, reduced-motion, cross-browser, passada mobile completa.
+- ⬜ **Fase 12 — Deploy produção:** Vercel (domínio a decidir).
+- ⬜ **Fase 13 — PDF (posterior):** build de impressão dedicado.
+
+---
+
+## 8. O que preciso de Lucas
+
+- **GitHub + Vercel:** autorizar o deploy a partir deste repo (root `04-brand-book/site/`). Eu conduzo o técnico, Lucas autoriza. *(Fase 0)*
+- **Frames Figma desktop** das seções conforme avançamos. Cover `01` ✅ disponível. **`02` será atualizada** (menu index lateral). Demais: sob demanda.
+- **Domínio:** a decidir mais pra frente.
+
+---
+
+## 9. Regras (guardrails)
+
+1. **Fidelidade primeiro:** desktop = frame de 1440, verificado lado a lado antes de avançar.
+2. **Tokens sempre**, nunca hardcoded; `#949494` tokenizado e sincronizado nos 4 formatos.
+3. **Assets exatos do Figma**, orientação correta, sem substituições.
+4. **Duas fontes só** (Mona Sans + Space Mono); **radius 0**; **Fire Orange só ênfase**.
+5. **Sempre "To the Ends of the Earth", nunca "TTE".**
+6. **Motion** tokenizado, temático (**inteligência & programação** — ref. contentarchitecture.dev) e **reduced-motion safe**. **Sem customização de cursor; sem crosshair / reticle / iconografia de mira ou arma.**
+7. **LOOP** por seção: construir → auto-revisar (diff visual) → sign-off de Lucas → próxima. Nunca pular o sign-off.
+8. **Sem Artifacts / HTML único** — isto é um repo/site real.
+
+---
+
+## 10. Pendências abertas
+
+- [x] GitHub configurado — repo `lmtts/tte-brand-system`, `gh` autenticado como `lmtts`.
+- [ ] **Vercel** — conectar o repo para deploy (root `04-brand-book/site/`). A resolver na Fase 0/deploy.
+- [ ] Design atualizado da **02 The Brand** com menu index lateral off-screen (antes da Fase 2).
+- [x] `brand-book.html` (tentativas rejeitadas) movido para `00-archive/`.
+- [ ] Domínio de produção.
+
+---
+
+## 11. Log de decisões
+
+| Data | Decisão |
+|---|---|
+| 2026-07-27 | Pivô de HTML único → site Next.js interativo com motion. |
+| 2026-07-27 | Stack: Next.js + Tailwind(tokens) + GSAP + Lenis + Vercel. |
+| 2026-07-27 | PDF numa fase posterior (não capturar site ao vivo). |
+| 2026-07-27 | Fidelidade: Lucas desenha frames-chave desktop; dev extrapola/responsivo com sign-off. |
+| 2026-07-27 | Repo: mesmo repositório, site em `04-brand-book/site/`. |
+| 2026-07-27 | Motion 100% temático HUD/mission-intel. |
+| 2026-07-27 | Mobile é responsabilidade do dev; Lucas só desenha desktop. |
+| 2026-07-27 | Motion refinado: inteligência & programação (ref. contentarchitecture.dev, efeito odometer). Sem cursor custom, sem mira/arma. |
+| 2026-07-27 | GitHub confirmado (lmtts/tte-brand-system). Vercel a conectar no deploy. |

@@ -39,6 +39,7 @@ module.exports = {
       DEFAULT:  '#28272A', // brand.dark  → primitives.color.black
       inverted: '#FFFFFF', // brand.light → primitives.color.white
       accent:   '#FE5442', // brand.primary → primitives.color.fire-orange
+      muted:    '#949494', // primitives.color.grey — inactive nav, labels on dark
     },
     surface: {
       dark:   '#28272A', // brand.dark

@@ -29,6 +29,7 @@
   --primitive-color-fire-orange: #FE5442;
   --primitive-color-black:       #28272A;
   --primitive-color-white:       #FFFFFF;
+  --primitive-color-grey:        #949494;
 
   /* Biomes — PENDING FINAL APPROVAL */
   --primitive-color-biome-desert: #B86C55;
@@ -94,6 +95,7 @@
   --color-text-default:  var(--brand-color-dark);    /* Default body text */
   --color-text-inverted: var(--brand-color-light);   /* Text on dark surfaces */
   --color-text-accent:   var(--brand-color-primary); /* Emphasis — use sparingly */
+  --color-text-muted:    var(--primitive-color-grey); /* Muted/secondary — inactive nav, labels on dark */
 
   /* --- Surfaces / Backgrounds --- */
   --color-surface-dark:   var(--brand-color-dark);    /* Dark backgrounds, cards */
@@ -284,6 +286,7 @@
 .text-default  { color: var(--color-text-default); }
 .text-inverted { color: var(--color-text-inverted); }
 .text-accent   { color: var(--color-text-accent); }
+.text-muted    { color: var(--color-text-muted); }
 
 /* Typography: Mona Sans */
 .type-display-2xl {

@@ -109,6 +109,7 @@ Context-specific accents for regional/biome content only. Never replace Fire Ora
 text.default     → Black      Body text on light
 text.inverted    → White      Text on dark
 text.accent      → Fire Orange Emphasis — use sparingly
+text.muted       → Grey #949494 Muted/secondary — inactive nav, labels on dark
 surface.dark     → Black      Dark panels, immersive bg
 surface.light    → White      Light/editorial layouts
 surface.accent   → Fire Orange CTA backgrounds only

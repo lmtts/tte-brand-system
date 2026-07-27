@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/* =============================================================
+   TO THE ENDS OF THE EARTH — theme
+   Tokens mirrored from 01-brand-system/tokens/tokens.json.
+   Single source of truth stays in the brand system; this @theme
+   is the site's synced consumption layer (see sync-tokens plan).
+   ============================================================= */
+@theme {
+  /* ---- Color ---- */
+  --color-fire: #fe5442;   /* brand.primary — emphasis only */
+  --color-ink: #28272a;    /* brand.dark — default surface */
+  --color-paper: #ffffff;  /* brand.light — editorial / text on dark */
+  --color-muted: #949494;  /* text.muted — inactive nav, labels (tokenized from Figma) */
+
+  /* Biome accents (secondary) */
+  --color-biome-desert: #b86c55;
+  --color-biome-arctic: #7ba7bc;
+  --color-biome-city: #4a4a52;
+  --color-biome-forest: #2d5a3d;
+
+  /* ---- Type scale · Mona Sans (display/headings) ---- */
+  --text-display-2xl: 96px;  --text-display-2xl--line-height: 0.95; --text-display-2xl--letter-spacing: 0.02em;
+  --text-display-xl: 72px;   --text-display-xl--line-height: 0.95;  --text-display-xl--letter-spacing: 0.02em;
+  --text-display-l: 60px;    --text-display-l--line-height: 1;      --text-display-l--letter-spacing: 0.02em;
+  --text-h1: 48px;           --text-h1--line-height: 1.05;          --text-h1--letter-spacing: 0.01em;
+  --text-h2: 36px;           --text-h2--line-height: 1.1;           --text-h2--letter-spacing: 0.01em;
+  --text-h3: 28px;           --text-h3--line-height: 1;             --text-h3--letter-spacing: 0.01em;
+  --text-h4: 22px;           --text-h4--line-height: 1;             --text-h4--letter-spacing: 0.02em;
+  --text-label-lg: 16px;     --text-label-lg--line-height: 1;       --text-label-lg--letter-spacing: 0.04em;
+  --text-label-md: 13px;     --text-label-md--line-height: 1;       --text-label-md--letter-spacing: 0.04em;
+  --text-mona-body: 16px;    --text-mona-body--line-height: 1.2;    --text-mona-body--letter-spacing: 0;
+
+  /* ---- Type scale · Space Mono (HUD/data/body) ---- */
+  --text-hud-xl: 20px;       --text-hud-xl--line-height: 1.2;       --text-hud-xl--letter-spacing: 0.06em;
+  --text-hud: 14px;          --text-hud--line-height: 1.2;          --text-hud--letter-spacing: 0.06em;
+  --text-hud-sm: 12px;       --text-hud-sm--line-height: 1.2;       --text-hud-sm--letter-spacing: 0.06em;
+  --text-hud-micro: 10px;    --text-hud-micro--line-height: 1.2;    --text-hud-micro--letter-spacing: 0.06em;
+  --text-body: 16px;         --text-body--line-height: 1.4;         --text-body--letter-spacing: 0.01em;
+  --text-body-sm: 14px;      --text-body-sm--line-height: 1.4;      --text-body-sm--letter-spacing: 0.01em;
+  --text-mono-label: 12px;   --text-mono-label--line-height: 1.4;   --text-mono-label--letter-spacing: 0.03em;
+
+  /* ---- Radius (angular) ---- */
+  --radius-none: 0px;
+
+  /* ---- Elevation ---- */
+  --shadow-hud: 0 0 24px rgba(254, 84, 66, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+
+  /* ---- Motion (durations / easing) ---- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-odometer: cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+/* Font families wired to next/font CSS variables (kept as var refs). */
+@theme inline {
+  --font-display: var(--font-mona);
+  --font-mono: var(--font-space);
+}
+
+/* Dark-first ground. */
+html {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body {
+  font-family: var(--font-space), ui-monospace, monospace;
+}
+::selection {
+  background: var(--color-fire);
+  color: var(--color-paper);
+}
+
+/* Lenis smooth-scroll baseline (disabled when reduced motion). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

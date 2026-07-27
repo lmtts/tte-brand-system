@@ -30,6 +30,7 @@
 $primitive-color-fire-orange:               #FE5442;
 $primitive-color-black:                     #28272A;
 $primitive-color-white:                     #FFFFFF;
+$primitive-color-grey:                      #949494;
 
 // Biomes — PENDING FINAL APPROVAL
 $primitive-color-biome-desert:              #B86C55;
@@ -97,6 +98,7 @@ $brand-font-secondary: 'Space Mono', monospace;      // HUD, data, coordinates, 
 $color-text-default:        $brand-color-dark;     // brand.dark → primitives.color.black → #28272A
 $color-text-inverted:       $brand-color-light;    // brand.light → primitives.color.white → #FFFFFF
 $color-text-accent:         $brand-color-primary;  // brand.primary → primitives.color.fire-orange → #FE5442
+$color-text-muted:          $primitive-color-grey; // Muted/secondary — inactive nav, labels on dark → #949494
 
 // --- Surfaces / Backgrounds ---
 $color-surface-dark:        $brand-color-dark;     // brand.dark → #28272A
