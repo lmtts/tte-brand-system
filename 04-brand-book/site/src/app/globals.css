@@ -85,8 +85,70 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* Scroll cue — continuous bob. */
+.cv-chevron {
+  animation: cv-bob 2.1s ease-in-out infinite;
+}
+@keyframes cv-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* Cover (desktop + tablet) — one design-pixel scales with the viewport:
+   the smaller of height-ratio (1024) and width-ratio (1440), capped at 1,
+   floored so tablet stays legible. Sizes scale; horizontal layout stays full-width. */
+.cv-d {
+  --u: max(0.62px, min(0.09766vh, 0.06944vw, 1px));
+}
+.cv-pad {
+  padding-left: calc(96 * var(--u));
+  padding-right: calc(96 * var(--u));
+}
+.cv-hud {
+  font-family: var(--font-space), monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  font-size: calc(20 * var(--u));
+}
+.cv-hud-reg {
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+.cv-logo-d {
+  height: calc(79.86 * var(--u));
+  width: auto;
+}
+.cv-mark-d {
+  height: calc(38.45 * var(--u));
+  width: auto;
+}
+.cv-chev-d {
+  width: calc(34 * var(--u));
+  height: calc(34 * var(--u));
+}
+.cv-cuegap {
+  gap: calc(14 * var(--u));
+}
+.cv-pwrgap {
+  gap: calc(12.88 * var(--u));
+}
+.cv-line {
+  margin-left: calc(40 * var(--u));
+  margin-right: calc(40 * var(--u));
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .cv-chevron {
+    animation: none;
   }
 }

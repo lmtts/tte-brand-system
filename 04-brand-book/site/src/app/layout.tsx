@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { mona, spaceMono } from "./fonts";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
-import HudFrame from "@/components/HudFrame";
 
 export const metadata: Metadata = {
   title: "To the Ends of the Earth — Brand Book",
@@ -20,7 +19,6 @@ export default function RootLayout({
     >
       <body className="min-h-dvh bg-ink text-paper">
         <LenisProvider />
-        <HudFrame index="00" label="FOUNDATION" />
         {children}
       </body>
     </html>
