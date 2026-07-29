@@ -64,7 +64,7 @@ export default function LogosSection() {
       index="03"
       name="Logos"
       poweredTone="light"
-      heading={<>The mark is a dove fused with flame &mdash; forward, upward, unmistakable.</>}
+      heading={<>The mark is a dove fused with flame: forward, upward, unmistakable.</>}
       body={
         <>
           <p>

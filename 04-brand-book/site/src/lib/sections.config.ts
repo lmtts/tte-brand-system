@@ -17,7 +17,7 @@ export const SECTIONS: Section[] = [
   { id: "cover", index: "01", name: "Cover", status: "ready" },
   { id: "the-brand", index: "02", name: "The Brand", status: "ready" },
   { id: "logos", index: "03", name: "Logos", status: "ready" },
-  { id: "color", index: "04", name: "Color", status: "pending" },
+  { id: "color", index: "04", name: "Color", status: "ready" },
   { id: "typography", index: "05", name: "Typography", status: "pending" },
   { id: "patterns", index: "06", name: "Patterns", status: "pending" },
   { id: "imagery", index: "07", name: "Imagery", status: "pending" },
