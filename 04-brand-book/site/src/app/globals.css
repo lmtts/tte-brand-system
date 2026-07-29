@@ -144,6 +144,17 @@ html.lenis body {
   margin-right: calc(40 * var(--u));
 }
 
+/* Content section — one design px scales with viewport width, capped at the
+   frame size (1440) and floored for legibility. Same idea as the cover.
+   Everything sizes off --u so the section reads like the Figma frame. */
+.secd {
+  --u: max(0.66px, min(0.06944vw, 1px));
+}
+/* image left edge = Figma col 6 start (616 / 1440), fluid; bleeds to the right. */
+.sec-imgleft {
+  left: 42.78%;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

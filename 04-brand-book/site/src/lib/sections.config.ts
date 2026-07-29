@@ -7,8 +7,8 @@ export type Section = {
 };
 
 export const SECTIONS: Section[] = [
-  { id: "cover", index: "01", name: "Cover", status: "pending" },
-  { id: "the-brand", index: "02", name: "The Brand", status: "pending" },
+  { id: "cover", index: "01", name: "Cover", status: "ready" },
+  { id: "the-brand", index: "02", name: "The Brand", status: "ready" },
   { id: "logos", index: "03", name: "Logos", status: "pending" },
   { id: "color", index: "04", name: "Color", status: "pending" },
   { id: "typography", index: "05", name: "Typography", status: "pending" },

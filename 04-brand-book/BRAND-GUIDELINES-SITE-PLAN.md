@@ -110,7 +110,8 @@ Legenda de status: ⬜ pendente · 🟡 em andamento · ✅ concluído
 
 - ✅ **Fase 0 — Fundação** *(2026-07-27)*: Next.js 16 + React 19 + Tailwind v4 em `04-brand-book/site/` (`output: export`); tokens TTE via `@theme`; fontes Mona Sans + Space Mono self-hosted (`next/font/local`); GSAP + Lenis; `HudFrame`, `DecodeText`, `CountUp`, `LenisProvider`; `sections.config.ts` + `motion.ts`; home skeleton provando fontes/tokens/motion; `npm run build` verde (static export). `#949494` tokenizado como `text.muted` e sincronizado em tokens.json/css/scss/tailwind.js + DESIGN.md. **Deploy Vercel adiado** (fazer quando conectar a conta).
 - ⬜ **Fase 1 — 01 Cover:** fiel ao frame `411:3` (usar este frame do Figma). Assets certos, motion de boot + parallax + pin. Sign-off lado a lado.
-- ⬜ **Fase 2 — 02 The Brand:** **AGUARDA design atualizado.** Lucas vai revisar a 02 no Figma para incluir um **menu index lateral off-screen** (fora da tela, abre por interação). **Antes de iniciar a Fase 2, perguntar a Lucas pelo design atualizado da 02.** Depois: implementar fiel, textura correta, transição seamless, reveals HUD. Sign-off.
+- ✅ **Fase 2 — 02 The Brand** *(2026-07-29)*: layout de conteúdo (grid 36/24/12col), texto descritivo à esquerda (4 cols) + label, imagem full-bleed à direita, topo laranja (9%). Index desktop = painel colapsável (menu↔X, lista 01–10, 02 ativo). Mobile/tablet = **nav bar fixo no topo** (some na capa) + **menu full-page**. Powered-by com awareness de fundo. Escala proporcional `--u` (como a capa). Refatorado em **`SectionShell` reutilizável** para as próximas seções. Cópia real (Atos 1:8), heading branco.
+  - **Regras de seção (aplicar em 03+):** body = **Space Mono 14px** (Body/Small); heading = Mona Sans 22px (H4); label 14px. Layout via `SectionShell` (`image` = direita full-bleed; `children` = conteúdo dentro das margens). Verificação visual com **Chrome headless** (não Playwright — [[feedback_avoid_playwright]]).
 - ⬜ **Fases 3–10 — Seções restantes:** para cada uma, Lucas manda o frame **desktop**; eu implemento (fidelidade + motion HUD + responsivo mobile) com comparação lado a lado. Agrupar as repetitivas.
 - ⬜ **Fase 11 — Polish global:** transições entre todas as seções, performance (Lighthouse), acessibilidade, reduced-motion, cross-browser, passada mobile completa.
 - ⬜ **Fase 12 — Deploy produção:** Vercel (domínio a decidir).
@@ -143,7 +144,7 @@ Legenda de status: ⬜ pendente · 🟡 em andamento · ✅ concluído
 
 - [x] GitHub configurado — repo `lmtts/tte-brand-system`, `gh` autenticado como `lmtts`.
 - [ ] **Vercel** — conectar o repo para deploy (root `04-brand-book/site/`). A resolver na Fase 0/deploy.
-- [ ] Design atualizado da **02 The Brand** com menu index lateral off-screen (antes da Fase 2).
+- [x] Design da **02 The Brand** implementado (index colapsável desktop + nav bar/menu full-page mobile).
 - [x] `brand-book.html` (tentativas rejeitadas) movido para `00-archive/`.
 - [ ] Domínio de produção.
 
