@@ -48,9 +48,9 @@ function DownloadArrow() {
 function LogosGrid() {
   return (
     <div className="grid h-full w-full grid-cols-1 sm:grid-cols-2" style={{ gap: "calc(24*var(--u))" }}>
-      <LogoCard src="/assets/logos/complete.svg" alt="To the Ends of the Earth — complete lockup" label="Complete Logo" />
-      <LogoCard src="/assets/logos/icon.svg" alt="To the Ends of the Earth — icon mark" label="Icon" />
-      <LogoCard src="/assets/logos/wordmark.svg" alt="To the Ends of the Earth — wordmark" label="Wordmark" />
+      <LogoCard src="/assets/logos/complete.svg" alt="To the Ends of the Earth: complete lockup" label="Complete Logo" />
+      <LogoCard src="/assets/logos/icon.svg" alt="To the Ends of the Earth: icon mark" label="Icon" />
+      <LogoCard src="/assets/logos/wordmark.svg" alt="To the Ends of the Earth: wordmark" label="Wordmark" />
       <LogoCard src="/assets/logos/hope-channel.svg" alt="To the Ends of the Earth, powered by Hope Channel" label="Hope Channel Connection" />
     </div>
   );
@@ -61,9 +61,6 @@ export default function LogosSection() {
   return (
     <SectionShell
       id="logos"
-      index="03"
-      name="Logos"
-      poweredTone="light"
       heading={<>The mark is a dove fused with flame: forward, upward, unmistakable.</>}
       body={
         <>

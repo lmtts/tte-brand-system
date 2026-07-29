@@ -5,6 +5,13 @@ export type Section = {
   name: string;
   status: "ready" | "pending";
   /**
+   * The tone of the SECTION'S OWN background — drives PoweredByHope and the
+   * fixed footer label's text color. "light" = for dark backgrounds (white
+   * text/mark, the current default everywhere). "dark" = for light/editorial
+   * backgrounds, once one exists.
+   */
+  poweredTone: "light" | "dark";
+  /**
    * A numbered section can span more than one scrollable page (e.g. "03
    * Logos" → showcase page + a misuse-rules page). List every page id here,
    * in scroll order; the nav keeps this section's index highlighted while
@@ -14,16 +21,16 @@ export type Section = {
 };
 
 export const SECTIONS: Section[] = [
-  { id: "cover", index: "01", name: "Cover", status: "ready" },
-  { id: "the-brand", index: "02", name: "The Brand", status: "ready" },
-  { id: "logos", index: "03", name: "Logos", status: "ready" },
-  { id: "color", index: "04", name: "Color", status: "ready" },
-  { id: "typography", index: "05", name: "Typography", status: "pending" },
-  { id: "patterns", index: "06", name: "Patterns", status: "pending" },
-  { id: "imagery", index: "07", name: "Imagery", status: "pending" },
-  { id: "voice", index: "08", name: "Voice", status: "pending" },
-  { id: "system", index: "09", name: "System", status: "pending" },
-  { id: "tokens", index: "10", name: "Tokens", status: "pending" },
+  { id: "cover", index: "01", name: "Cover", status: "ready", poweredTone: "light" },
+  { id: "the-brand", index: "02", name: "The Brand", status: "ready", poweredTone: "light" },
+  { id: "logos", index: "03", name: "Logos", status: "ready", poweredTone: "light" },
+  { id: "color", index: "04", name: "Color", status: "ready", poweredTone: "light" },
+  { id: "typography", index: "05", name: "Typography", status: "pending", poweredTone: "light" },
+  { id: "patterns", index: "06", name: "Patterns", status: "pending", poweredTone: "light" },
+  { id: "imagery", index: "07", name: "Imagery", status: "pending", poweredTone: "light" },
+  { id: "voice", index: "08", name: "Voice", status: "pending", poweredTone: "light" },
+  { id: "system", index: "09", name: "System", status: "pending", poweredTone: "light" },
+  { id: "tokens", index: "10", name: "Tokens", status: "pending", poweredTone: "light" },
 ];
 
 // All page ids belonging to a section, in scroll order (defaults to [id]).

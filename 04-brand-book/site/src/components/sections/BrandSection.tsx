@@ -5,12 +5,9 @@ export default function BrandSection() {
   return (
     <SectionShell
       id="the-brand"
-      index="02"
-      name="The Brand"
-      poweredTone="light"
       image={{
         src: "/assets/brand/portrait.webp",
-        alt: "A man on the frontier, wrapped against the cold — a face of the unreached world.",
+        alt: "A man on the frontier, wrapped against the cold: a face of the unreached world.",
       }}
       heading={
         <>

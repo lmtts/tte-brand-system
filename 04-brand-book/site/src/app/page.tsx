@@ -4,6 +4,7 @@ import LogosSection from "@/components/sections/LogosSection";
 import ColorSection from "@/components/sections/ColorSection";
 import MobileNav from "@/components/MobileNav";
 import SectionNav from "@/components/SectionNav";
+import SectionFooter from "@/components/SectionFooter";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <BrandSection />
       <LogosSection />
       <ColorSection />
+      <SectionFooter />
     </main>
   );
 }
