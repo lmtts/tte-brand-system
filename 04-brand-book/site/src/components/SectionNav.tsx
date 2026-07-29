@@ -3,19 +3,31 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { SECTIONS } from "@/lib/sections.config";
+import { useActiveSection } from "@/lib/useActiveSection";
 import { prefersReducedMotion } from "@/lib/motion";
 
 const BIRD = "/assets/brand/bird-index.svg";
 
 /**
- * The Index — desktop-only collapsible section navigation, top-left of a
- * content section. Closed: logo + label + menu. Open: adds the 01–10 index.
- * Sizes scale with the section unit (--u). Mobile uses MobileNav instead.
+ * The Index — desktop persistent navigation. A single fixed panel (not one
+ * per section — it never scrolls, never repeats). Closed: logo + label +
+ * menu. Open: adds the 01–10 index with the current section highlighted.
+ * Hidden while on the cover, fades in once scrolled past it (mirrors
+ * MobileNav's behavior). Mobile/tablet uses MobileNav instead.
  */
-export default function SectionNav({ active }: { active: string }) {
+export default function SectionNav() {
+  const active = useActiveSection();
   const [open, setOpen] = useState(false);
+  const [past, setPast] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
+
+  useEffect(() => {
+    const onScroll = () => setPast(window.scrollY > window.innerHeight * 0.72);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const el = listRef.current;
@@ -56,71 +68,78 @@ export default function SectionNav({ active }: { active: string }) {
   };
 
   return (
-    <nav
-      className="hidden w-fit border border-solid border-fire bg-ink/95 backdrop-blur-sm lg:block"
-      style={{ padding: "calc(35*var(--u)) calc(30*var(--u))" }}
-      aria-label="Brand book index"
+    <div
+      className={`secd fixed z-30 hidden transition-opacity duration-300 lg:block ${
+        past ? "opacity-100" : "pointer-events-none opacity-0"
+      }`}
+      style={{ left: "calc(36*var(--u))", top: "calc(45*var(--u))" }}
     >
-      {/* header row */}
-      <div className="flex items-center" style={{ gap: "calc(40*var(--u))" }}>
-        <div className="flex items-center" style={{ gap: "calc(22*var(--u))" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={BIRD} alt="" style={{ height: "calc(36*var(--u))" }} className="w-auto" aria-hidden />
-          <div
-            className="font-mono uppercase leading-[1.3] tracking-[0.06em] text-paper"
-            style={{ fontSize: "calc(12*var(--u))" }}
-          >
-            <div>To the Ends of the Earth</div>
-            <div>Brand Guidelines v1.0</div>
+      <nav
+        className="w-fit border border-solid border-fire bg-ink/95 backdrop-blur-sm"
+        style={{ padding: "calc(35*var(--u)) calc(30*var(--u))" }}
+        aria-label="Brand book index"
+      >
+        {/* header row */}
+        <div className="flex items-center" style={{ gap: "calc(40*var(--u))" }}>
+          <div className="flex items-center" style={{ gap: "calc(22*var(--u))" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={BIRD} alt="" style={{ height: "calc(36*var(--u))" }} className="w-auto" aria-hidden />
+            <div
+              className="font-mono uppercase leading-[1.3] tracking-[0.06em] text-paper"
+              style={{ fontSize: "calc(12*var(--u))" }}
+            >
+              <div>To the Ends of the Earth</div>
+              <div>Brand Guidelines v1.0</div>
+            </div>
           </div>
+          <button
+            onClick={() => setOpen((o) => !o)}
+            className="grid shrink-0 place-items-center text-paper transition-colors hover:text-fire"
+            style={{ width: "calc(24*var(--u))", height: "calc(24*var(--u))" }}
+            aria-expanded={open}
+            aria-label={open ? "Close index" : "Open index"}
+          >
+            {open ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
+                <path d="M3 6h18M3 12h18M3 18h18" />
+              </svg>
+            )}
+          </button>
         </div>
-        <button
-          onClick={() => setOpen((o) => !o)}
-          className="grid shrink-0 place-items-center text-paper transition-colors hover:text-fire"
-          style={{ width: "calc(24*var(--u))", height: "calc(24*var(--u))" }}
-          aria-expanded={open}
-          aria-label={open ? "Close index" : "Open index"}
-        >
-          {open ? (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
-              <path d="M3 6h18M3 12h18M3 18h18" />
-            </svg>
-          )}
-        </button>
-      </div>
 
-      {/* index list (animated) */}
-      <div ref={listRef}>
-        <div
-          className="w-full bg-paper/15"
-          style={{ height: "1px", marginTop: "calc(35*var(--u))", marginBottom: "calc(32*var(--u))" }}
-        />
-        <ul className="flex flex-col" style={{ gap: "calc(26*var(--u))" }}>
-          {SECTIONS.map((s) => {
-            const isActive = s.index === active;
-            const ready = s.status === "ready";
-            return (
-              <li key={s.id} className="nav-item">
-                <button
-                  onClick={() => go(s.id, ready)}
-                  disabled={!ready}
-                  className={`flex items-center font-mono uppercase tracking-[0.06em] transition-colors ${
-                    ready ? "cursor-pointer" : "cursor-default"
-                  } ${isActive ? "" : "text-muted"} ${ready && !isActive ? "hover:text-paper" : ""}`}
-                  style={{ gap: "calc(28*var(--u))", fontSize: "calc(14*var(--u))" }}
-                >
-                  <span className={isActive ? "text-fire" : ""}>{s.index}</span>
-                  <span className={isActive ? "text-paper" : ""}>{s.name}</span>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </nav>
+        {/* index list (animated) */}
+        <div ref={listRef}>
+          <div
+            className="w-full bg-paper/15"
+            style={{ height: "1px", marginTop: "calc(35*var(--u))", marginBottom: "calc(32*var(--u))" }}
+          />
+          <ul className="flex flex-col" style={{ gap: "calc(26*var(--u))" }}>
+            {SECTIONS.map((s) => {
+              const isActive = s.index === active;
+              const ready = s.status === "ready";
+              return (
+                <li key={s.id} className="nav-item">
+                  <button
+                    onClick={() => go(s.id, ready)}
+                    disabled={!ready}
+                    className={`flex items-center font-mono uppercase tracking-[0.06em] transition-colors ${
+                      ready ? "cursor-pointer" : "cursor-default"
+                    } ${isActive ? "" : "text-muted"} ${ready && !isActive ? "hover:text-paper" : ""}`}
+                    style={{ gap: "calc(28*var(--u))", fontSize: "calc(14*var(--u))" }}
+                  >
+                    <span className={isActive ? "text-fire" : ""}>{s.index}</span>
+                    <span className={isActive ? "text-paper" : ""}>{s.name}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </nav>
+    </div>
   );
 }

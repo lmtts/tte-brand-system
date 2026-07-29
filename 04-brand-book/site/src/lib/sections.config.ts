@@ -1,9 +1,16 @@
 // Single source of truth for the brand book section order (Lucas-defined).
 export type Section = {
-  id: string;
+  id: string; // primary page id — where nav clicks jump to
   index: string; // "01".."10"
   name: string;
   status: "ready" | "pending";
+  /**
+   * A numbered section can span more than one scrollable page (e.g. "03
+   * Logos" → showcase page + a misuse-rules page). List every page id here,
+   * in scroll order; the nav keeps this section's index highlighted while
+   * any of its pages is in view. Defaults to [id] when omitted.
+   */
+  pageIds?: string[];
 };
 
 export const SECTIONS: Section[] = [
@@ -18,6 +25,17 @@ export const SECTIONS: Section[] = [
   { id: "system", index: "09", name: "System", status: "pending" },
   { id: "tokens", index: "10", name: "Tokens", status: "pending" },
 ];
+
+// All page ids belonging to a section, in scroll order (defaults to [id]).
+export function pageIdsOf(section: Section): string[] {
+  return section.pageIds ?? [section.id];
+}
+
+// Resolve a DOM page id back to its parent section index, e.g. for a future
+// "logos-misuse" second page, this still resolves to "03".
+export function sectionIndexForPageId(pageId: string): string | undefined {
+  return SECTIONS.find((s) => pageIdsOf(s).includes(pageId))?.index;
+}
 
 // Field-dispatch coordinate stamp (Hope Channel International HQ).
 export const COORDS = "39.0560° N  76.9634° W";

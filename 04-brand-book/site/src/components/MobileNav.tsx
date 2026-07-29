@@ -2,42 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { SECTIONS } from "@/lib/sections.config";
+import { useActiveSection } from "@/lib/useActiveSection";
 
 const BIRD = "/assets/brand/bird-index.svg";
 
 /**
  * Mobile / tablet navigation — a full-width bar pinned to the top of every
  * content section (hidden on the cover). Tapping it opens a full-page menu to
- * jump to any section. Desktop uses the per-section SectionNav panel instead.
+ * jump to any section. Desktop uses the persistent SectionNav panel instead.
  */
 export default function MobileNav() {
   const [past, setPast] = useState(false); // scrolled past the cover
   const [openMenu, setOpenMenu] = useState(false);
-  const [active, setActive] = useState("02");
+  const active = useActiveSection();
 
   useEffect(() => {
     const onScroll = () => setPast(window.scrollY > window.innerHeight * 0.72);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const secs = SECTIONS.map((s) => document.getElementById(s.id)).filter(Boolean) as HTMLElement[];
-    if (!secs.length) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            const s = SECTIONS.find((x) => x.id === e.target.id);
-            if (s) setActive(s.index);
-          }
-        });
-      },
-      { rootMargin: "-45% 0px -45% 0px" }
-    );
-    secs.forEach((s) => io.observe(s));
-    return () => io.disconnect();
   }, []);
 
   useEffect(() => {

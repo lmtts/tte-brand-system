@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SectionNav from "@/components/SectionNav";
 import PoweredByHope from "@/components/PoweredByHope";
 import { prefersReducedMotion } from "@/lib/motion";
 
@@ -26,8 +25,10 @@ type Props = {
 /**
  * Reusable content-section layout (Figma 02/03 pattern):
  * left = descriptive text (4 cols) + section label; right = image (bleeds) or
- * brand content (within margins). Everything scales with --u. Desktop shows the
- * SectionNav panel; mobile uses the global MobileNav. HUD scroll reveal.
+ * brand content (within margins, with top/bottom breathing room clearing the
+ * fixed index and the footer row — image mode intentionally bleeds edge to
+ * edge instead). Everything scales with --u. The persistent SectionNav panel
+ * and MobileNav live outside this component (mounted once at page level).
  * Type sizes: heading 22 (Mona H4), body 14 (Space Mono Body/Small), label 14.
  */
 export default function SectionShell({
@@ -99,7 +100,14 @@ export default function SectionShell({
             <img src={image.src} alt={image.alt} className="b-img h-full w-full object-cover object-center" />
           </div>
         ) : (
-          <div className="sec-imgleft absolute inset-y-0 right-0" style={{ paddingRight: "calc(36*var(--u))" }}>
+          <div
+            className="sec-imgleft absolute inset-y-0 right-0"
+            style={{
+              paddingRight: "calc(36*var(--u))",
+              paddingTop: "calc(150*var(--u))",
+              paddingBottom: "calc(100*var(--u))",
+            }}
+          >
             {children}
           </div>
         )}
@@ -119,11 +127,6 @@ export default function SectionShell({
             <Body style={{ fontSize: "calc(14*var(--u))" }} />
           </div>
           <Label style={{ fontSize: "calc(14*var(--u))", marginTop: "calc(28*var(--u))" }} />
-        </div>
-
-        {/* index */}
-        <div className="absolute z-20" style={{ left: "calc(36*var(--u))", top: "calc(45*var(--u))" }}>
-          <SectionNav active={index} />
         </div>
 
         {/* powered by */}

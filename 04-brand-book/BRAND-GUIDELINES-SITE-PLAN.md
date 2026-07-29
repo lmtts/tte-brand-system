@@ -96,6 +96,10 @@ O motion se comporta como um **sistema de dados / engenharia** — leitura de in
 **Ordem canônica das seções (definida por Lucas):**
 `01 Cover · 02 The Brand · 03 Logos · 04 Color · 05 Typography · 06 Patterns · 07 Imagery · 08 Voice · 09 System · 10 Tokens`
 
+**Navegação persistente (corrigido 2026-07-29):** o índice desktop (`SectionNav`) e a barra mobile (`MobileNav`) são montados **uma única vez** em `page.tsx`, fora de qualquer seção — `position: fixed`, nunca se repetem por seção e nunca scrollam com o conteúdo. Ambos leem o estado "ativo" do hook compartilhado `useActiveSection` (`lib/useActiveSection.ts`), via `IntersectionObserver`.
+
+**Multi-página por seção:** `Section` em `sections.config.ts` aceita `pageIds?: string[]` — uma seção numerada (ex: "03 Logos") pode ocupar mais de uma tela rolável (ex: showcase + regras de uso incorreto) sem precisar de uma entrada extra no índice; o hook resolve qualquer `pageIds` de volta ao índice numérico da seção-mãe. Ainda não usado (nenhuma seção tem uma segunda página construída), mas a arquitetura já suporta.
+
 ---
 
 ## 6. Responsividade — 100% por conta do dev
@@ -113,6 +117,7 @@ Legenda de status: ⬜ pendente · 🟡 em andamento · ✅ concluído
 - ✅ **Fase 2 — 02 The Brand** *(2026-07-29)*: layout de conteúdo (grid 36/24/12col), texto descritivo à esquerda (4 cols) + label, imagem full-bleed à direita, topo laranja (9%). Index desktop = painel colapsável (menu↔X, lista 01–10, 02 ativo). Mobile/tablet = **nav bar fixo no topo** (some na capa) + **menu full-page**. Powered-by com awareness de fundo. Escala proporcional `--u` (como a capa). Refatorado em **`SectionShell` reutilizável** para as próximas seções. Cópia real (Atos 1:8), heading branco.
   - **Regras de seção (aplicar em 03+):** body = **Space Mono 14px** (Body/Small); heading = Mona Sans 22px (H4); label 14px. Layout via `SectionShell` (`image` = direita full-bleed; `children` = conteúdo dentro das margens). Verificação visual com **Chrome headless** (não Playwright — [[feedback_avoid_playwright]]).
 - ✅ **Fase 3 — 03 Logos** *(2026-07-29)*: `SectionShell` em modo `children` (conteúdo dentro das margens, não bleed). Grid 2×2 de 4 lockups representativos (Complete, Icon, Wordmark, Hope Channel Connection) em cards estilo HUD (borda fina, label com tick laranja). Texto descritivo + regra de clearspace + **botão "Download logo kit"**. **Kit de logos:** script `scripts/build-logo-kit.mjs` gera `public/downloads/tte-logo-kit.zip` automaticamente (`predev`/`prebuild`) a partir da fonte de verdade `01-brand-system/atoms/logo/` — nunca duplicação manual, sempre sincronizado. Zip não é commitado (gitignored, gerado a cada build).
+  - **Correções pós sign-off** *(2026-07-29)*: (1) **Lenis+GSAP** — `LenisProvider` agora roda no ticker do GSAP e sincroniza `ScrollTrigger.update`, corrigindo o assentamento de scroll entre seções. (2) **Índice desktop fixo e único** — `SectionNav` virou singleton `position:fixed` montado uma vez em `page.tsx` (não mais um por seção); estado ativo via `useActiveSection`. (3) **Arquitetura multi-página** — `pageIds` em `sections.config.ts` (ver acima). (4) **Margens verticais no `children` mode** — `paddingTop: 150*u` / `paddingBottom: 100*u` no `SectionShell`, alinhando o conteúdo ao índice fixo (topo) e ao rodapé (base); modo `image` continua bleed total (Seção 02 intocada).
 - ⬜ **Fases 4–10 — Seções restantes:** para cada uma, Lucas manda o frame **desktop**; eu implemento (fidelidade + motion HUD + responsivo mobile) com comparação lado a lado. Agrupar as repetitivas.
 - ⬜ **Fase 11 — Polish global:** transições entre todas as seções, performance (Lighthouse), acessibilidade, reduced-motion, cross-browser, passada mobile completa.
 - ⬜ **Fase 12 — Deploy produção:** Vercel (domínio a decidir).
@@ -168,3 +173,5 @@ Legenda de status: ⬜ pendente · 🟡 em andamento · ✅ concluído
 | 2026-07-29 | Fase 2 (The Brand) aprovada; body 16px→14px vira regra de seção; layout extraído em `SectionShell` reutilizável. |
 | 2026-07-29 | Preferência registrada: evitar Playwright (alto custo de tokens), usar Chrome headless via Bash. |
 | 2026-07-29 | Fase 3 (Logos): 4 lockups representativos + kit de download gerado por script a partir do brand system (nunca duplicado manualmente). |
+| 2026-07-29 | Índice desktop virou singleton fixo (era 1 por seção, causando repetição/scroll junto). Lenis agora sincronizado ao ticker do GSAP. |
+| 2026-07-29 | Arquitetura de navegação passa a suportar seções com múltiplas páginas (`pageIds`), para casos como "Logos" ganhar uma página de misuse futuramente. |
