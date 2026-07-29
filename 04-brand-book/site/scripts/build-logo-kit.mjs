@@ -1,7 +1,8 @@
-// Zips a curated set of official logo files (source of truth: 01-brand-system)
-// into public/downloads/tte-logo-kit.zip. Runs automatically before dev/build
-// (see package.json predev/prebuild) so the download is always in sync with
-// the brand system — never a hand-copied, driftable duplicate.
+// Zips the entire official logo folder (source of truth: 01-brand-system,
+// also mirrored in the GitHub repo) into public/downloads/tte-logo-kit.zip.
+// Runs automatically before dev/build (see package.json predev/prebuild) so
+// the download is always in sync with the brand system — never a
+// hand-copied, driftable subset.
 import { createWriteStream, existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -14,34 +15,17 @@ const LOGO_SRC = path.join(REPO_ROOT, "01-brand-system", "atoms", "logo");
 const OUT_DIR = path.join(SITE_ROOT, "public", "downloads");
 const OUT_FILE = path.join(OUT_DIR, "tte-logo-kit.zip");
 
-// zip-relative path -> source file (relative to LOGO_SRC)
-const FILES = {
-  "complete/vertical-white.svg": "complete/vertical-white.svg",
-  "complete/vertical-black.svg": "complete/vertical-black.svg",
-  "complete/horizontal-white.svg": "complete/horizontal-white.svg",
-  "complete/horizontal-black.svg": "complete/horizontal-black.svg",
-  "icon/mark-full-white.svg": "mark/mark-full-white.svg",
-  "icon/mark-full-black.svg": "mark/mark-full-black.svg",
-  "wordmark/horizontal-white.svg": "wordmark/horizontal-white.svg",
-  "wordmark/horizontal-black.svg": "wordmark/horizontal-black.svg",
-  "wordmark/horizontal-orange-white.svg": "wordmark/horizontal-orange-white.svg",
-  "wordmark/horizontal-orange-black.svg": "wordmark/horizontal-orange-black.svg",
-  "hope-channel/complete-dark-bg.svg": "hope-channel/complete-dark-bg.svg",
-  "hope-channel/complete-light-bg.svg": "hope-channel/complete-light-bg.svg",
-  "hope-channel/horizontal-powered-white.svg": "hope-channel/horizontal-powered-white.svg",
-  "hope-channel/horizontal-powered-black.svg": "hope-channel/horizontal-powered-black.svg",
-};
-
 const README = `TO THE ENDS OF THE EARTH — LOGO KIT
 Hope Channel International · Brand System v1.0
 
-Four lockups, each in white (for dark/photographic backgrounds) and black
-(for light backgrounds):
+The complete logo folder: every lockup, in every exported format
+(SVG + PNG, white/black/on-brand variants), plus the pre-optimized set.
 
-  complete/      Stacked mark + wordmark — the primary lockup.
-  icon/          The mark alone — the bird in flight.
-  wordmark/      Type only, with the Fire Orange "THE EARTH" treatment.
-  hope-channel/  Co-brand lockup and the "Powered by" endorsement mark.
+  complete/      Stacked + horizontal mark + wordmark — the primary lockups.
+  mark/          The icon alone — the bird in flight.
+  wordmark/      Type only, including the Fire Orange "THE EARTH" treatment.
+  hope-channel/  Co-brand lockups and the "Powered by" endorsement mark.
+  optimized/     Web-optimized SVGs of the above.
 
 Rules:
   - Clearspace = the height of the "T" in the wordmark, on all sides.
@@ -53,16 +37,11 @@ Full system: 01-brand-system/DESIGN.md in the TTE Brand System repository.
 `;
 
 async function build() {
-  if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive: true });
-
-  const missing = [];
-  for (const rel of Object.values(FILES)) {
-    if (!existsSync(path.join(LOGO_SRC, rel))) missing.push(rel);
-  }
-  if (missing.length) {
-    console.error("[logo-kit] missing source files:\n" + missing.map((m) => `  - ${m}`).join("\n"));
+  if (!existsSync(LOGO_SRC)) {
+    console.error(`[logo-kit] source folder not found: ${LOGO_SRC}`);
     process.exit(1);
   }
+  if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive: true });
 
   const output = createWriteStream(OUT_FILE);
   const archive = new ZipArchive({ zlib: { level: 9 } });
@@ -74,9 +53,8 @@ async function build() {
 
   archive.pipe(output);
   archive.append(README, { name: "README.txt" });
-  for (const [zipPath, srcRel] of Object.entries(FILES)) {
-    archive.file(path.join(LOGO_SRC, srcRel), { name: zipPath });
-  }
+  // Mirror the entire logo/ folder as-is, recursively.
+  archive.directory(LOGO_SRC, false);
   await archive.finalize();
   await done;
 

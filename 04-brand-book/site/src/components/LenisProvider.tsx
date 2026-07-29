@@ -29,8 +29,10 @@ export default function LenisProvider() {
     if (prefersReducedMotion()) return;
 
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.3, // heavier catch-up — reinforces the "locked" slide feel
       smoothWheel: true,
+      wheelMultiplier: 0.8, // each wheel tick covers less distance — needs a stronger push
+      touchMultiplier: 1,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
@@ -48,7 +50,7 @@ export default function LenisProvider() {
 
     const snap = new Snap(lenis, {
       type: "mandatory",
-      duration: 0.9,
+      duration: 0.95,
     });
     snap.addElements(slideEls);
 
