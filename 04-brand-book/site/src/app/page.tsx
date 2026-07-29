@@ -1,5 +1,6 @@
 import CoverSection from "@/components/sections/CoverSection";
 import BrandSection from "@/components/sections/BrandSection";
+import LogosSection from "@/components/sections/LogosSection";
 import MobileNav from "@/components/MobileNav";
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <MobileNav />
       <CoverSection />
       <BrandSection />
+      <LogosSection />
     </main>
   );
 }

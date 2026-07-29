@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# generated at dev/build time — see scripts/build-logo-kit.mjs
+/public/downloads/
+
 # production
 /build
 

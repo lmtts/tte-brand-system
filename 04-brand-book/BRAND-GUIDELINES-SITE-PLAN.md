@@ -109,10 +109,11 @@ Lucas desenha **apenas os frames desktop**. **Toda a responsividade e a adaptaç
 Legenda de status: ⬜ pendente · 🟡 em andamento · ✅ concluído
 
 - ✅ **Fase 0 — Fundação** *(2026-07-27)*: Next.js 16 + React 19 + Tailwind v4 em `04-brand-book/site/` (`output: export`); tokens TTE via `@theme`; fontes Mona Sans + Space Mono self-hosted (`next/font/local`); GSAP + Lenis; `HudFrame`, `DecodeText`, `CountUp`, `LenisProvider`; `sections.config.ts` + `motion.ts`; home skeleton provando fontes/tokens/motion; `npm run build` verde (static export). `#949494` tokenizado como `text.muted` e sincronizado em tokens.json/css/scss/tailwind.js + DESIGN.md. **Deploy Vercel adiado** (fazer quando conectar a conta).
-- ⬜ **Fase 1 — 01 Cover:** fiel ao frame `411:3` (usar este frame do Figma). Assets certos, motion de boot + parallax + pin. Sign-off lado a lado.
+- ✅ **Fase 1 — 01 Cover** *(2026-07-28)*: fiel ao frame `411:3` — asset exato (logo, mark Hope Channel, pattern-tile), motion de boot + parallax. Composição inteira escala como bloco único (`--u`) ao viewport — corrige o "tamanhos inflados". Sign-off de Lucas obtido.
 - ✅ **Fase 2 — 02 The Brand** *(2026-07-29)*: layout de conteúdo (grid 36/24/12col), texto descritivo à esquerda (4 cols) + label, imagem full-bleed à direita, topo laranja (9%). Index desktop = painel colapsável (menu↔X, lista 01–10, 02 ativo). Mobile/tablet = **nav bar fixo no topo** (some na capa) + **menu full-page**. Powered-by com awareness de fundo. Escala proporcional `--u` (como a capa). Refatorado em **`SectionShell` reutilizável** para as próximas seções. Cópia real (Atos 1:8), heading branco.
   - **Regras de seção (aplicar em 03+):** body = **Space Mono 14px** (Body/Small); heading = Mona Sans 22px (H4); label 14px. Layout via `SectionShell` (`image` = direita full-bleed; `children` = conteúdo dentro das margens). Verificação visual com **Chrome headless** (não Playwright — [[feedback_avoid_playwright]]).
-- ⬜ **Fases 3–10 — Seções restantes:** para cada uma, Lucas manda o frame **desktop**; eu implemento (fidelidade + motion HUD + responsivo mobile) com comparação lado a lado. Agrupar as repetitivas.
+- ✅ **Fase 3 — 03 Logos** *(2026-07-29)*: `SectionShell` em modo `children` (conteúdo dentro das margens, não bleed). Grid 2×2 de 4 lockups representativos (Complete, Icon, Wordmark, Hope Channel Connection) em cards estilo HUD (borda fina, label com tick laranja). Texto descritivo + regra de clearspace + **botão "Download logo kit"**. **Kit de logos:** script `scripts/build-logo-kit.mjs` gera `public/downloads/tte-logo-kit.zip` automaticamente (`predev`/`prebuild`) a partir da fonte de verdade `01-brand-system/atoms/logo/` — nunca duplicação manual, sempre sincronizado. Zip não é commitado (gitignored, gerado a cada build).
+- ⬜ **Fases 4–10 — Seções restantes:** para cada uma, Lucas manda o frame **desktop**; eu implemento (fidelidade + motion HUD + responsivo mobile) com comparação lado a lado. Agrupar as repetitivas.
 - ⬜ **Fase 11 — Polish global:** transições entre todas as seções, performance (Lighthouse), acessibilidade, reduced-motion, cross-browser, passada mobile completa.
 - ⬜ **Fase 12 — Deploy produção:** Vercel (domínio a decidir).
 - ⬜ **Fase 13 — PDF (posterior):** build de impressão dedicado.
@@ -163,3 +164,7 @@ Legenda de status: ⬜ pendente · 🟡 em andamento · ✅ concluído
 | 2026-07-27 | Mobile é responsabilidade do dev; Lucas só desenha desktop. |
 | 2026-07-27 | Motion refinado: inteligência & programação (ref. contentarchitecture.dev, efeito odometer). Sem cursor custom, sem mira/arma. |
 | 2026-07-27 | GitHub confirmado (lmtts/tte-brand-system). Vercel a conectar no deploy. |
+| 2026-07-28 | Fase 1 (Cover) aprovada; ajuste de escala proporcional (`--u`) para corrigir tamanhos grandes/margens. |
+| 2026-07-29 | Fase 2 (The Brand) aprovada; body 16px→14px vira regra de seção; layout extraído em `SectionShell` reutilizável. |
+| 2026-07-29 | Preferência registrada: evitar Playwright (alto custo de tokens), usar Chrome headless via Bash. |
+| 2026-07-29 | Fase 3 (Logos): 4 lockups representativos + kit de download gerado por script a partir do brand system (nunca duplicado manualmente). |
