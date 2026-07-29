@@ -114,20 +114,22 @@ export default function SectionShell({ id, heading, body, image, children }: Pro
       </div>
 
       {/* ===== MOBILE / TABLET (<1024) ===== */}
+      {/* Text first, then image/content — reads top-down like the rest of the
+          page instead of leading with a visual before its context. */}
       <div className="relative z-10 flex min-h-dvh flex-col lg:hidden">
+        <div className="flex flex-col gap-5 px-6 pb-6 pt-[68px]">
+          <Heading style={{ fontSize: "20px" }} />
+          <Body style={{ fontSize: "14px" }} />
+        </div>
+
         {image ? (
-          <div className="h-[42vh] w-full overflow-hidden">
+          <div className="relative w-full flex-1 overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={image.src} alt={image.alt} className="h-full w-full object-cover object-center" />
           </div>
         ) : (
-          <div className="px-6 pt-[68px]">{children}</div>
+          <div className="flex-1 px-6 pb-24">{children}</div>
         )}
-
-        <div className="flex flex-1 flex-col justify-center gap-5 px-6 pb-24 pt-9">
-          <Heading style={{ fontSize: "20px" }} />
-          <Body style={{ fontSize: "14px" }} />
-        </div>
       </div>
     </section>
   );
