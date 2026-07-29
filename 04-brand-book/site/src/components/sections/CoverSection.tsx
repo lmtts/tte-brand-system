@@ -55,7 +55,7 @@ export default function CoverSection() {
   }, []);
 
   return (
-    <section ref={root} className="cover relative h-dvh min-h-[560px] w-full overflow-hidden bg-ink">
+    <section id="cover" ref={root} className="cover relative h-dvh min-h-[560px] w-full overflow-hidden bg-ink">
       {/* photo */}
       <div ref={photo} className="cv-photo absolute inset-0 will-change-transform">
         {/* eslint-disable-next-line @next/next/no-img-element */}
