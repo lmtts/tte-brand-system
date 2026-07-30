@@ -12,9 +12,9 @@ const PATTERNS: Pattern[] = [
 ];
 
 const TOKEN = "semantic.opacity.topographic-overlay";
-const OPACITY = 0.12;
 
-/** One official pattern asset, shown at its native color and the token's exact opacity — the base spec, not a contextual retint. */
+/** One official pattern asset, shown at full strength (native color, 100% opacity) so the linework
+ * itself reads clearly — the applied token opacity is documented in the body copy, not demonstrated here. */
 function PatternCard({ name, src, file }: Pattern) {
   return (
     <div className="flex h-full w-full flex-col border border-paper/15">
@@ -32,19 +32,13 @@ function PatternCard({ name, src, file }: Pattern) {
       </div>
       <div className="relative flex-1 overflow-hidden bg-ink" style={{ minHeight: "calc(220*var(--u))" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={src}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ opacity: OPACITY }}
-        />
+        <img src={src} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
         <div className="relative font-mono text-paper" style={{ padding: "calc(14*var(--u))" }}>
           <div className="font-bold" style={{ fontSize: "calc(16*var(--u))" }}>
-            {(OPACITY * 100).toFixed(0)}% · Fire Orange
+            Fire Orange
           </div>
           <div className="opacity-70" style={{ fontSize: "calc(10*var(--u))", marginTop: "calc(4*var(--u))" }}>
-            {file} · {TOKEN}
+            {file} · shown at 100% for clarity
           </div>
         </div>
       </div>
@@ -67,18 +61,18 @@ export default function PatternsSection() {
   return (
     <SectionShell
       id="patterns"
-      heading={<>The contour is the field. Twelve percent, Fire Orange, always present.</>}
+      heading={<>The contour is the field. Fire Orange, always present.</>}
       body={
         <>
           <p>
             Two official assets carry the topographic overlay: a simple contour and a denser tile,
-            both native Fire Orange, both set at 12% opacity per token:{" "}
-            <span className="text-fire">{TOKEN}</span>.
+            both native Fire Orange. Shown here at full strength so the linework itself reads
+            clearly.
           </p>
           <p className="mt-[1em]">
-            It sits behind content, never in front of it. Individual applications may retint or
-            soften it for legibility against a photograph, but the base spec here is the one to
-            build from.
+            In application, the token sits at 12% opacity: <span className="text-fire">{TOKEN}</span>.
+            It stays behind content, never in front of it, retinted or softened as each context
+            needs.
           </p>
         </>
       }
