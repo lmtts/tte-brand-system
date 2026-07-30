@@ -33,7 +33,7 @@ export const SECTIONS: Section[] = [
     poweredTone: "light",
     pageIds: ["typography-mona", "typography-space"],
   },
-  { id: "patterns", index: "06", name: "Patterns", status: "pending", poweredTone: "light" },
+  { id: "patterns", index: "06", name: "Patterns", status: "ready", poweredTone: "light" },
   { id: "imagery", index: "07", name: "Imagery", status: "pending", poweredTone: "light" },
   { id: "voice", index: "08", name: "Voice", status: "pending", poweredTone: "light" },
   { id: "system", index: "09", name: "System", status: "pending", poweredTone: "light" },
