@@ -33,7 +33,10 @@ function PatternCard({ name, src, file }: Pattern) {
       <div className="relative flex-1 overflow-hidden bg-ink" style={{ minHeight: "calc(220*var(--u))" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
-        <div className="relative font-mono text-paper" style={{ padding: "calc(14*var(--u))" }}>
+        <div
+          className="relative inline-block bg-ink font-mono text-paper"
+          style={{ margin: "calc(14*var(--u))", padding: "calc(10*var(--u)) calc(12*var(--u))" }}
+        >
           <div className="font-bold" style={{ fontSize: "calc(16*var(--u))" }}>
             Fire Orange
           </div>
