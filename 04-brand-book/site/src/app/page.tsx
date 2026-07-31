@@ -7,6 +7,7 @@ import PatternsSection from "@/components/sections/PatternsSection";
 import ImagerySection from "@/components/sections/ImagerySection";
 import VoiceSection from "@/components/sections/VoiceSection";
 import SystemSection from "@/components/sections/SystemSection";
+import TokensSection from "@/components/sections/TokensSection";
 import MobileNav from "@/components/MobileNav";
 import SectionNav from "@/components/SectionNav";
 import SectionFooter from "@/components/SectionFooter";
@@ -25,6 +26,7 @@ export default function Home() {
       <ImagerySection />
       <VoiceSection />
       <SystemSection />
+      <TokensSection />
       <SectionFooter />
     </main>
   );

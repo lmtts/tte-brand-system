@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/build-logo-kit.mjs && node scripts/sync-voice-doc.mjs",
+    "predev": "node scripts/build-logo-kit.mjs && node scripts/sync-voice-doc.mjs && node scripts/sync-tokens-download.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/build-logo-kit.mjs && node scripts/sync-voice-doc.mjs",
+    "prebuild": "node scripts/build-logo-kit.mjs && node scripts/sync-voice-doc.mjs && node scripts/sync-tokens-download.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "logo-kit": "node scripts/build-logo-kit.mjs",
-    "voice-doc": "node scripts/sync-voice-doc.mjs"
+    "voice-doc": "node scripts/sync-voice-doc.mjs",
+    "tokens-download": "node scripts/sync-tokens-download.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",

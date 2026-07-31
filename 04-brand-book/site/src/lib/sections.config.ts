@@ -51,7 +51,7 @@ export const SECTIONS: Section[] = [
     poweredTone: "light",
     pageIds: ["system", "system-organisms", "system-people-group"],
   },
-  { id: "tokens", index: "10", name: "Tokens", status: "pending", poweredTone: "light" },
+  { id: "tokens", index: "10", name: "Tokens", status: "ready", poweredTone: "light" },
 ];
 
 // All page ids belonging to a section, in scroll order (defaults to [id]).
