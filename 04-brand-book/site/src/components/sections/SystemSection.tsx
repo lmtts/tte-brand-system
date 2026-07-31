@@ -1,68 +1,100 @@
 import SectionShell from "@/components/SectionShell";
+import DecodeText from "@/components/DecodeText";
+import CountUp from "@/components/CountUp";
 
 const CONTROL_SIZES = [
-  { token: "control-sm", height: "36px", use: "Dense · HUD · operate" },
-  { token: "control-default", height: "44px", use: "System default" },
-  { token: "control-lg", height: "56px", use: "Hero CTAs" },
+  { height: "36px", use: "Dense · HUD · operate" },
+  { height: "44px", use: "System default" },
+  { height: "56px", use: "Hero CTAs" },
 ];
 
-type ButtonSpec = {
-  intent: "Mobilize" | "Operate";
-  typeface: string;
-  label: string;
-  variant: "primary" | "secondary";
+type Variant = "default" | "outline" | "secondary" | "ghost" | "link" | "inverted";
+
+// Every treatment lives here verbatim from 03-dev-system/tte-ui's button.tsx
+// (translated to this site's fire/paper/ink tokens) — hover states included,
+// so hovering these in the browser is the real interaction, not a mockup.
+const VARIANT_CLASS: Record<Variant, string> = {
+  default: "bg-fire text-paper hover:bg-fire/90",
+  outline: "border border-paper/30 text-paper hover:border-fire hover:text-fire",
+  secondary: "bg-paper/10 text-paper hover:bg-paper/8",
+  ghost: "bg-transparent text-paper hover:bg-paper/12",
+  link: "bg-transparent text-fire underline-offset-4 hover:underline",
+  inverted: "bg-paper text-ink hover:bg-paper/90",
 };
 
-const BUTTONS: ButtonSpec[] = [
-  { intent: "Mobilize", typeface: "Mona Sans", label: "Pray", variant: "primary" },
-  { intent: "Mobilize", typeface: "Mona Sans", label: "Give", variant: "secondary" },
-  { intent: "Operate", typeface: "Space Mono", label: "Filter", variant: "primary" },
-  { intent: "Operate", typeface: "Space Mono", label: "Export", variant: "secondary" },
+type ButtonDef = { variant: Variant; label: string };
+
+const MOBILIZE_BUTTONS: ButtonDef[] = [
+  { variant: "default", label: "Pray" },
+  { variant: "outline", label: "Give" },
+  { variant: "secondary", label: "Join" },
+  { variant: "ghost", label: "Partner" },
+  { variant: "link", label: "Learn more" },
+  { variant: "inverted", label: "Pray now" },
 ];
 
-/** One demonstrated button — the real height/type/radius rules, not a mockup. */
-function ButtonDemo({ intent, typeface, label, variant }: ButtonSpec) {
-  const fontClass = typeface === "Mona Sans" ? "font-display font-bold" : "font-mono font-bold";
+const OPERATE_BUTTONS: ButtonDef[] = [
+  { variant: "default", label: "Filter" },
+  { variant: "outline", label: "Export" },
+  { variant: "secondary", label: "Sort" },
+  { variant: "ghost", label: "Adjust" },
+  { variant: "link", label: "View log" },
+  { variant: "inverted", label: "View data" },
+];
+
+function ButtonSwatch({ variant, label, fontClass }: ButtonDef & { fontClass: string }) {
   return (
-    <div className="flex flex-col border border-paper/15">
-      <div
-        className="flex items-baseline justify-between border-b border-paper/15 font-mono uppercase tracking-[0.08em] text-muted"
-        style={{ padding: "calc(9*var(--u)) calc(12*var(--u))", fontSize: "calc(10*var(--u))" }}
+    <div className="flex flex-col items-center" style={{ gap: "calc(8*var(--u))" }}>
+      <span
+        className={`inline-flex items-center justify-center whitespace-nowrap uppercase transition-all ${fontClass} ${VARIANT_CLASS[variant]}`}
+        style={{ height: "calc(38*var(--u))", padding: "0 calc(16*var(--u))", fontSize: "calc(11*var(--u))" }}
       >
-        <span>{intent}</span>
-        <span className="text-fire">{typeface}</span>
-      </div>
-      <div className="flex items-center justify-center" style={{ padding: "calc(20*var(--u))" }}>
-        <span
-          className={`inline-flex items-center justify-center ${fontClass} uppercase tracking-[0.06em] ${
-            variant === "primary" ? "bg-fire text-paper" : "border border-paper/40 text-paper"
-          }`}
-          style={{
-            height: "calc(44*var(--u))",
-            padding: "0 calc(24*var(--u))",
-            fontSize: "calc(13*var(--u))",
-          }}
-        >
-          {label}
-        </span>
-      </div>
+        {label}
+      </span>
+      <span className="font-mono uppercase tracking-[0.06em] text-muted" style={{ fontSize: "calc(9*var(--u))" }}>
+        {variant}
+      </span>
     </div>
   );
 }
 
-function ButtonGrid() {
+function ButtonGroupPanel({
+  intent,
+  typeface,
+  fontClass,
+  buttons,
+}: {
+  intent: string;
+  typeface: string;
+  fontClass: string;
+  buttons: ButtonDef[];
+}) {
   return (
-    <div className="flex h-full w-full flex-col justify-center" style={{ gap: "calc(16*var(--u))" }}>
-      <div className="grid grid-cols-2" style={{ gap: "calc(16*var(--u))" }}>
-        {BUTTONS.map((b) => (
-          <ButtonDemo key={`${b.intent}-${b.variant}`} {...b} />
+    <div className="border border-paper/15">
+      <div
+        className="flex items-baseline justify-between border-b border-paper/15"
+        style={{ padding: "calc(8*var(--u)) calc(12*var(--u))" }}
+      >
+        <span className="font-mono uppercase tracking-[0.08em] text-fire" style={{ fontSize: "calc(10*var(--u))" }}>
+          {intent}
+        </span>
+        <span className="font-mono uppercase tracking-[0.08em] text-muted" style={{ fontSize: "calc(10*var(--u))" }}>
+          {typeface}
+        </span>
+      </div>
+      <div
+        className="grid grid-cols-3"
+        style={{ padding: "calc(14*var(--u))", gap: "calc(12*var(--u)) calc(8*var(--u))" }}
+      >
+        {buttons.map((b) => (
+          <ButtonSwatch key={b.variant} {...b} fontClass={fontClass} />
         ))}
       </div>
     </div>
   );
 }
 
-/** Section 09, page 1 — the flagship button rule + control size scale. */
+/** Section 09, page 1 — every button variant, both intents, real hover. */
 function SystemButtonsPage() {
   return (
     <SectionShell
@@ -78,12 +110,12 @@ function SystemButtonsPage() {
           <p className="mt-[1em]">
             <span className="text-fire">Intent</span> fixes the typeface by role.{" "}
             <span className="text-fire">Variant</span> fixes the visual treatment. Mona Sans
-            mobilizes: Pray, Give, Join. Space Mono operates: Filter, Export, View data. The two
-            never cross.
+            mobilizes: Pray, Give, Join. Space Mono operates: Filter, Export, View data. Hover any
+            button below, the motion is live.
           </p>
           <dl className="flex flex-col" style={{ gap: "0.5em", marginTop: "1.4em" }}>
             {CONTROL_SIZES.map((s) => (
-              <div key={s.token} className="flex" style={{ gap: "1em" }}>
+              <div key={s.height} className="flex" style={{ gap: "1em" }}>
                 <dt className="shrink-0 text-fire" style={{ width: "9em" }}>
                   {s.height}
                 </dt>
@@ -94,90 +126,283 @@ function SystemButtonsPage() {
         </>
       }
     >
-      <ButtonGrid />
+      <div className="flex h-full w-full flex-col justify-center" style={{ gap: "calc(16*var(--u))" }}>
+        <ButtonGroupPanel
+          intent="Mobilize"
+          typeface="Mona Sans"
+          fontClass="font-display font-extrabold tracking-[0.04em]"
+          buttons={MOBILIZE_BUTTONS}
+        />
+        <ButtonGroupPanel
+          intent="Operate"
+          typeface="Space Mono"
+          fontClass="font-mono font-bold tracking-[0.08em]"
+          buttons={OPERATE_BUTTONS}
+        />
+      </div>
     </SectionShell>
   );
 }
 
-type Organism = { name: string; description: string };
-
-const ORGANISMS: Organism[] = [
-  {
-    name: "HUD Panel",
-    description: "Tactical mission-intel readout. Fire live-tick, Space Mono LABEL : VALUE rows.",
-  },
-  {
-    name: "People Group Card",
-    description:
-      "The unreached-people dossier. Media falls back to the topographic texture, never a grey box.",
-  },
-  {
-    name: "Mission Stat",
-    description: "The impossible number, set in Mona Sans, fronted by a Fire Orange tick.",
-  },
-  {
-    name: "Biome Badge",
-    description: "Biome as a HUD tag. Biome color stays a secondary accent, never rivals Fire Orange.",
-  },
-  {
-    name: "Topographic Background",
-    description: "The contour texture at 12% opacity, sitting behind any content.",
-  },
-];
-
-function OrganismCard({ name, description }: Organism) {
+function HudDemoRow({ label, value, accent }: { label: string; value: React.ReactNode; accent?: boolean }) {
   return (
-    <div className="flex flex-col border border-paper/15">
-      <div
-        className="flex items-baseline border-b border-paper/15"
-        style={{ gap: "calc(6*var(--u))", padding: "calc(9*var(--u)) calc(12*var(--u))" }}
-      >
-        <span className="shrink-0 bg-fire" style={{ width: "6px", height: "6px" }} />
-        <span
-          className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
-          style={{ fontSize: "calc(11*var(--u))" }}
-        >
-          {name}
-        </span>
-      </div>
-      <p
-        className="font-mono leading-snug text-muted"
-        style={{ padding: "calc(12*var(--u))", fontSize: "calc(11*var(--u))" }}
-      >
-        {description}
-      </p>
+    <div
+      className="flex items-center justify-between border-b border-paper/10 font-mono uppercase tracking-[0.06em] last:border-b-0"
+      style={{ padding: "calc(8*var(--u)) calc(14*var(--u))", fontSize: "calc(11*var(--u))" }}
+    >
+      <span className="text-muted">{label}</span>
+      <span className={accent ? "text-fire" : "text-paper"}>{value}</span>
     </div>
   );
 }
 
-/** Section 09, page 2 — the five TTE-only organisms. */
+/** HUD Panel, live — a real tactical readout, values decode in on scroll. */
+function HudPanelDemo() {
+  return (
+    <div className="border border-paper/15 bg-ink">
+      <div aria-hidden className="w-full bg-fire" style={{ height: "2px" }} />
+      <div
+        className="flex items-center border-b border-paper/15"
+        style={{ gap: "calc(8*var(--u))", padding: "calc(9*var(--u)) calc(14*var(--u))" }}
+      >
+        <span aria-hidden className="shrink-0 bg-fire" style={{ width: "6px", height: "6px" }} />
+        <span
+          className="font-mono font-bold uppercase tracking-[0.06em] text-paper"
+          style={{ fontSize: "calc(11*var(--u))" }}
+        >
+          Target: Tajik
+        </span>
+      </div>
+      <div className="flex flex-col">
+        <HudDemoRow label="Status" value={<DecodeText text="Unreached" />} />
+        <HudDemoRow label="Gospel access" value={<DecodeText text="0.1%" />} accent />
+        <HudDemoRow label="Coords" value={<DecodeText text="33°N, 65°E" />} />
+      </div>
+    </div>
+  );
+}
+
+/** Mission Stat, live — the impossible number, rolling up as it enters view. */
+function MissionStatDemo() {
+  return (
+    <div className="flex flex-col border border-paper/15" style={{ padding: "calc(18*var(--u))" }}>
+      <div className="flex items-stretch" style={{ gap: "calc(10*var(--u))" }}>
+        <span aria-hidden className="shrink-0 self-stretch bg-fire" style={{ width: "3px" }} />
+        <span
+          className="font-display font-black uppercase leading-[0.9] text-paper"
+          style={{ fontSize: "calc(52*var(--u))" }}
+        >
+          <CountUp to={3.6} decimals={1} suffix="B" />
+        </span>
+      </div>
+      <span
+        className="font-mono uppercase tracking-[0.06em] text-muted"
+        style={{ fontSize: "calc(11*var(--u))", marginTop: "calc(10*var(--u))" }}
+      >
+        People still unreached
+      </span>
+    </div>
+  );
+}
+
+const BIOMES = [
+  { key: "desert", name: "Desert" },
+  { key: "arctic", name: "Arctic" },
+  { key: "city", name: "City" },
+  { key: "forest", name: "Forest" },
+] as const;
+
+/** Biome Badge, live — the full set of four tags, biome color as a small swatch only. */
+function BiomeBadgeDemo() {
+  return (
+    <div className="flex flex-col border border-paper/15" style={{ padding: "calc(18*var(--u))" }}>
+      <div className="flex flex-wrap" style={{ gap: "calc(10*var(--u))" }}>
+        {BIOMES.map((b) => (
+          <span
+            key={b.key}
+            className="inline-flex items-center border border-paper/15 font-mono font-bold uppercase text-paper"
+            style={{ gap: "calc(6*var(--u))", padding: "calc(6*var(--u)) calc(10*var(--u))", fontSize: "calc(10*var(--u))" }}
+          >
+            <span aria-hidden className={`shrink-0 bg-biome-${b.key}`} style={{ width: "8px", height: "8px" }} />
+            {b.name}
+          </span>
+        ))}
+      </div>
+      <span
+        className="font-mono uppercase tracking-[0.06em] text-muted"
+        style={{ fontSize: "calc(10*var(--u))", marginTop: "calc(14*var(--u))" }}
+      >
+        Secondary accent only, never rivals Fire Orange
+      </span>
+    </div>
+  );
+}
+
+/** Topographic Background, live — the contour texture at the token's real 12% opacity. */
+function TopographicBackgroundDemo() {
+  return (
+    <div className="relative overflow-hidden border border-paper/15 bg-ink" style={{ height: "calc(96*var(--u))" }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/assets/patterns/pattern-tile.svg"
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ opacity: 0.12 }}
+      />
+      <div className="relative flex h-full items-center" style={{ padding: "calc(16*var(--u))" }}>
+        <span
+          className="font-mono uppercase tracking-[0.06em] text-paper"
+          style={{ fontSize: "calc(10*var(--u))" }}
+        >
+          12% opacity, sits behind any content
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/** Section 09, page 2 — HUD Panel, Mission Stat, Biome Badge, Topographic Background, all live. */
 function SystemOrganismsPage() {
   return (
     <SectionShell
       id="system-organisms"
-      heading={<>Five components no kit ships.</>}
+      heading={<>Four components no kit ships.</>}
       body={
         <p>
           Base components come from the kit: Button, Input, Select, Card, Dialog, Tabs, and the
-          rest, all bound to tokens. These five are the signature layer, built for TTE alone.
+          rest, all bound to tokens. These are the signature layer, built for TTE alone, live below
+          rather than described.
         </p>
       }
     >
       <div className="flex h-full w-full flex-col justify-center" style={{ gap: "calc(14*var(--u))" }}>
-        {ORGANISMS.map((o) => (
-          <OrganismCard key={o.name} {...o} />
-        ))}
+        <HudPanelDemo />
+        <div className="grid grid-cols-2" style={{ gap: "calc(14*var(--u))" }}>
+          <MissionStatDemo />
+          <BiomeBadgeDemo />
+        </div>
+        <TopographicBackgroundDemo />
       </div>
     </SectionShell>
   );
 }
 
-/** Section 09 — System. Two pages: the button flagship rule, then the TTE organisms. */
+function DemoButton({
+  intent,
+  variant,
+  children,
+}: {
+  intent: "mobilize" | "operate";
+  variant: "default" | "outline";
+  children: React.ReactNode;
+}) {
+  const fontClass =
+    intent === "mobilize" ? "font-display font-extrabold tracking-[0.04em]" : "font-mono font-bold tracking-[0.08em]";
+  return (
+    <span
+      className={`inline-flex items-center justify-center whitespace-nowrap uppercase transition-all ${fontClass} ${VARIANT_CLASS[variant]}`}
+      style={{ gap: "calc(6*var(--u))", height: "calc(36*var(--u))", padding: "0 calc(16*var(--u))", fontSize: "calc(11*var(--u))" }}
+    >
+      {children}
+    </span>
+  );
+}
+
+/** People Group Card, live — the unreached-people dossier, the richest organism, on its own page. */
+function PeopleGroupCardDemo() {
+  return (
+    <div className="mx-auto flex w-full flex-col border border-paper/15" style={{ maxWidth: "calc(360*var(--u))" }}>
+      <div className="relative overflow-hidden bg-ink" style={{ aspectRatio: "4/3" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/assets/patterns/pattern-tile.svg"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ opacity: 0.16 }}
+        />
+        <div className="absolute inset-0 flex flex-col justify-between" style={{ padding: "calc(16*var(--u))" }}>
+          <div className="flex items-start justify-between">
+            <span
+              className="border border-paper/30 font-mono font-bold uppercase text-paper"
+              style={{ padding: "calc(4*var(--u)) calc(8*var(--u))", fontSize: "calc(9*var(--u))" }}
+            >
+              Unreached
+            </span>
+            <span
+              className="inline-flex items-center border border-paper/30 font-mono font-bold uppercase text-paper"
+              style={{ gap: "calc(5*var(--u))", padding: "calc(4*var(--u)) calc(8*var(--u))", fontSize: "calc(9*var(--u))" }}
+            >
+              <span aria-hidden className="shrink-0 bg-biome-desert" style={{ width: "7px", height: "7px" }} />
+              Desert
+            </span>
+          </div>
+          <span className="font-mono uppercase tracking-[0.06em] text-paper/80" style={{ fontSize: "calc(9*var(--u))" }}>
+            33°N, 65°E
+          </span>
+        </div>
+      </div>
+
+      <div className="flex flex-col" style={{ gap: "calc(16*var(--u))", padding: "calc(18*var(--u))" }}>
+        <div className="flex flex-col" style={{ gap: "calc(4*var(--u))" }}>
+          <h3
+            className="font-display font-extrabold uppercase leading-none tracking-[0.01em] text-paper"
+            style={{ fontSize: "calc(24*var(--u))" }}
+          >
+            Tajik
+          </h3>
+          <span className="font-mono uppercase tracking-[0.06em] text-muted" style={{ fontSize: "calc(10*var(--u))" }}>
+            Central Asia
+          </span>
+        </div>
+
+        <div className="flex flex-col border-t border-paper/10">
+          <HudDemoRow label="Est. pop" value={<CountUp to={12313000} />} />
+          <HudDemoRow label="Gospel access" value={<CountUp to={0.1} decimals={1} suffix="%" />} accent />
+        </div>
+
+        <div className="flex flex-wrap" style={{ gap: "calc(10*var(--u))" }}>
+          <DemoButton intent="mobilize" variant="default">
+            Pray now
+          </DemoButton>
+          <DemoButton intent="operate" variant="outline">
+            View data
+          </DemoButton>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Section 09, page 3 — the People Group Card, featured alone (the richest organism). */
+function SystemPeopleGroupPage() {
+  return (
+    <SectionShell
+      id="system-people-group"
+      heading={<>The dossier that makes a statistic a people.</>}
+      body={
+        <p>
+          The People Group Card composes every other primitive: the topographic fallback when no
+          photography exists yet, the biome badge, a live HUD data strip, and the mobilize /
+          operate action pair. Dignity over pity, never a grey box.
+        </p>
+      }
+    >
+      <div className="flex h-full w-full items-center justify-center">
+        <PeopleGroupCardDemo />
+      </div>
+    </SectionShell>
+  );
+}
+
+/** Section 09 — System. Three pages: the button rule, the compact organisms, then the People Group Card. */
 export default function SystemSection() {
   return (
     <>
       <SystemButtonsPage />
       <SystemOrganismsPage />
+      <SystemPeopleGroupPage />
     </>
   );
 }

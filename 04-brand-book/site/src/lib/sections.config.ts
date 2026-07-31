@@ -49,7 +49,7 @@ export const SECTIONS: Section[] = [
     name: "System",
     status: "ready",
     poweredTone: "light",
-    pageIds: ["system", "system-organisms"],
+    pageIds: ["system", "system-organisms", "system-people-group"],
   },
   { id: "tokens", index: "10", name: "Tokens", status: "pending", poweredTone: "light" },
 ];

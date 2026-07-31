@@ -22,24 +22,39 @@ export default function CountUp({
 }) {
   const [val, setVal] = useState(prefersReducedMotion() ? to : 0);
   const obj = useRef({ v: 0 });
+  const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (prefersReducedMotion()) return;
-    const tween = gsap.to(obj.current, {
-      v: to,
-      duration: DUR.cinematic,
-      ease: "power2.out",
-      onUpdate: () => setVal(obj.current.v),
-    });
+    const el = ref.current;
+    if (!el) return;
+
+    let tween: gsap.core.Tween | undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        tween = gsap.to(obj.current, {
+          v: to,
+          duration: DUR.cinematic,
+          ease: "power2.out",
+          onUpdate: () => setVal(obj.current.v),
+        });
+        observer.disconnect();
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+
     return () => {
-      tween.kill();
+      observer.disconnect();
+      tween?.kill();
     };
   }, [to]);
 
   return (
-    <span className={className}>
+    <span ref={ref} className={className}>
       {prefix}
-      {val.toFixed(decimals)}
+      {val.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
       {suffix}
     </span>
   );
