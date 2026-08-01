@@ -11,12 +11,14 @@ import TokensSection from "@/components/sections/TokensSection";
 import MobileNav from "@/components/MobileNav";
 import SectionNav from "@/components/SectionNav";
 import SectionFooter from "@/components/SectionFooter";
+import ArrowNav from "@/components/ArrowNav";
 
 export default function Home() {
   return (
     <main>
       <MobileNav />
       <SectionNav />
+      <ArrowNav />
       <CoverSection />
       <BrandSection />
       <LogosSection />

@@ -7,7 +7,29 @@ import { prefersReducedMotion } from "@/lib/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TOPO = "/assets/brand/topo-orange.webp";
+// Vector, not the old raster copy — infinite resolution at any viewport size,
+// and it's already native Fire Orange so no recolor filter is needed here.
+const TOPO = "/assets/patterns/pattern-tile.svg";
+
+// Declared at module scope (not inside SectionShell's render) so they keep a
+// stable component identity across renders instead of remounting each time.
+function Heading({ heading, style }: { heading: React.ReactNode; style?: React.CSSProperties }) {
+  return (
+    <h2
+      className="b-heading font-display font-extrabold uppercase leading-none tracking-[0.02em] text-paper"
+      style={style}
+    >
+      {heading}
+    </h2>
+  );
+}
+function Body({ body, style }: { body: React.ReactNode; style?: React.CSSProperties }) {
+  return (
+    <div className="b-body font-mono leading-[1.4] tracking-[0.01em] text-paper" style={style}>
+      {body}
+    </div>
+  );
+}
 
 type Props = {
   id: string;
@@ -16,6 +38,15 @@ type Props = {
   /** Right side: a full-bleed image, OR content kept within the right margins. */
   image?: { src: string; alt: string };
   children?: React.ReactNode;
+  /**
+   * The divider drawn at the top of this page. "section" (default) is a
+   * full-bleed line marking the start of a new numbered section. "page" is a
+   * lighter, inset line for a continuation page within the same numbered
+   * section (e.g. Typography's second page). "none" omits it — only the
+   * very first page on the site (Cover, which doesn't use SectionShell) has
+   * no divider above it, so every SectionShell page gets one by default.
+   */
+  dividerAbove?: "section" | "page" | "none";
 };
 
 /**
@@ -28,7 +59,7 @@ type Props = {
  * SectionFooter live outside this component (mounted once at page level).
  * Type sizes: heading 22 (Mona H4), body 14 (Space Mono Body/Small).
  */
-export default function SectionShell({ id, heading, body, image, children }: Props) {
+export default function SectionShell({ id, heading, body, image, children, dividerAbove = "section" }: Props) {
   const root = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -50,22 +81,21 @@ export default function SectionShell({ id, heading, body, image, children }: Pro
     return () => ctx.revert();
   }, []);
 
-  const Heading = ({ style }: { style?: React.CSSProperties }) => (
-    <h2
-      className="b-heading font-display font-extrabold uppercase leading-none tracking-[0.02em] text-paper"
-      style={style}
-    >
-      {heading}
-    </h2>
-  );
-  const Body = ({ style }: { style?: React.CSSProperties }) => (
-    <div className="b-body font-mono leading-[1.4] tracking-[0.01em] text-paper" style={style}>
-      {body}
-    </div>
-  );
-
   return (
     <section id={id} ref={root} className="secd relative min-h-dvh w-full overflow-hidden bg-ink">
+      {/* section boundary — full-bleed for a new numbered section, a lighter
+          inset rule between pages of the same section */}
+      {dividerAbove !== "none" &&
+        (dividerAbove === "page" ? (
+          <div
+            aria-hidden
+            className="absolute top-0 z-20 bg-paper/8"
+            style={{ left: "calc(36*var(--u))", right: "calc(36*var(--u))", height: "1px" }}
+          />
+        ) : (
+          <div aria-hidden className="absolute inset-x-0 top-0 z-20 bg-paper/20" style={{ height: "1px" }} />
+        ))}
+
       {/* orange topographic texture */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -77,6 +107,21 @@ export default function SectionShell({ id, heading, body, image, children }: Pro
 
       {/* ===== DESKTOP (≥1024) ===== */}
       <div className="hidden lg:block">
+        {/* vertical rule between text and content — only in "children" mode
+            (a full-bleed photo needs no seam cut into it) */}
+        {!image && (
+          <div
+            aria-hidden
+            className="absolute bg-paper/15"
+            style={{
+              left: "calc(500*var(--u))",
+              top: "calc(150*var(--u))",
+              bottom: "calc(100*var(--u))",
+              width: "1px",
+            }}
+          />
+        )}
+
         {/* right region */}
         {image ? (
           <div className="sec-imgleft absolute inset-y-0 right-0 overflow-hidden">
@@ -108,8 +153,8 @@ export default function SectionShell({ id, heading, body, image, children }: Pro
             gap: "calc(24*var(--u))",
           }}
         >
-          <Heading style={{ fontSize: "calc(22*var(--u))" }} />
-          <Body style={{ fontSize: "calc(14*var(--u))" }} />
+          <Heading heading={heading} style={{ fontSize: "calc(22*var(--u))" }} />
+          <Body body={body} style={{ fontSize: "calc(14*var(--u))" }} />
         </div>
       </div>
 
@@ -118,8 +163,8 @@ export default function SectionShell({ id, heading, body, image, children }: Pro
           page instead of leading with a visual before its context. */}
       <div className="relative z-10 flex min-h-dvh flex-col lg:hidden">
         <div className="flex flex-col gap-5 px-6 pb-6 pt-[68px]">
-          <Heading style={{ fontSize: "20px" }} />
-          <Body style={{ fontSize: "14px" }} />
+          <Heading heading={heading} style={{ fontSize: "20px" }} />
+          <Body body={body} style={{ fontSize: "14px" }} />
         </div>
 
         {image ? (

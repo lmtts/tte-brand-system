@@ -24,12 +24,10 @@ export default function DecodeText({
   const frame = useRef<number>(0);
   const started = useRef(false);
   const ref = useRef<HTMLElement>(null);
+  const reduced = prefersReducedMotion();
 
   useEffect(() => {
-    if (prefersReducedMotion()) {
-      setDisplay(text);
-      return;
-    }
+    if (reduced) return;
     const el = ref.current;
     if (!el) return;
 
@@ -72,11 +70,11 @@ export default function DecodeText({
       observer.disconnect();
       cancelAnimationFrame(frame.current);
     };
-  }, [text, duration, delay]);
+  }, [reduced, text, duration, delay]);
 
   return (
     <Tag ref={ref} className={className}>
-      {display}
+      {reduced ? text : display}
     </Tag>
   );
 }

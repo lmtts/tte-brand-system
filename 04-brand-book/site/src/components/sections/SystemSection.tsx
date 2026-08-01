@@ -110,8 +110,8 @@ function SystemButtonsPage() {
           <p className="mt-[1em]">
             <span className="text-fire">Intent</span> fixes the typeface by role.{" "}
             <span className="text-fire">Variant</span> fixes the visual treatment. Mona Sans
-            mobilizes: Pray, Give, Join. Space Mono operates: Filter, Export, View data. Hover any
-            button below, the motion is live.
+            mobilizes: Pray, Give, Join. Space Mono operates: Filter, Export, View data. Hover to
+            try the motion.
           </p>
           <dl className="flex flex-col" style={{ gap: "0.5em", marginTop: "1.4em" }}>
             {CONTROL_SIZES.map((s) => (
@@ -267,12 +267,13 @@ function SystemOrganismsPage() {
   return (
     <SectionShell
       id="system-organisms"
+      dividerAbove="page"
       heading={<>Four components no kit ships.</>}
       body={
         <p>
           Base components come from the kit: Button, Input, Select, Card, Dialog, Tabs, and the
-          rest, all bound to tokens. These are the signature layer, built for TTE alone, live below
-          rather than described.
+          rest, all bound to tokens. These are the signature layer, built for TTE alone, shown
+          live below.
         </p>
       }
     >
@@ -380,6 +381,7 @@ function SystemPeopleGroupPage() {
   return (
     <SectionShell
       id="system-people-group"
+      dividerAbove="page"
       heading={<>The dossier that makes a statistic a people.</>}
       body={
         <p>

@@ -27,6 +27,15 @@ export default function MobileNav() {
     document.body.style.overflow = openMenu ? "hidden" : "";
   }, [openMenu]);
 
+  useEffect(() => {
+    if (!openMenu) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpenMenu(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openMenu]);
+
   const current = SECTIONS.find((s) => s.index === active);
 
   const go = (id: string, ready: boolean) => {
@@ -64,6 +73,9 @@ export default function MobileNav() {
 
       {/* full-page menu */}
       <div
+        role="dialog"
+        aria-modal={openMenu}
+        aria-label="Brand book index"
         className={`fixed inset-0 z-50 flex flex-col bg-ink transition-opacity duration-300 ${
           openMenu ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}

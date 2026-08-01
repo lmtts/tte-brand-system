@@ -24,8 +24,8 @@ export default function BrandSection() {
           </p>
           <p className="mt-[1em]">
             The number feels impossible. The theology says the outcome is inevitable (Matthew
-            24:14). This is the movement built to close that gap, sending prayer partners and
-            mission partners to the peoples still waiting.
+            24:14). This is the movement built to close that gap: prayer partners and mission
+            partners, sent to the peoples waiting.
           </p>
         </>
       }

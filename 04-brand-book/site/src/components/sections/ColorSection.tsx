@@ -50,7 +50,6 @@ function PrimarySwatch({ name, hex, token, tone: toneOverride, copied, onCopy }:
     <button
       type="button"
       onClick={onCopy}
-      aria-label={`Copy ${name} hex code ${hex}`}
       className="group flex h-full w-full flex-col border border-paper/15 text-left transition-colors hover:border-fire/50"
     >
       <div
@@ -62,6 +61,7 @@ function PrimarySwatch({ name, hex, token, tone: toneOverride, copied, onCopy }:
           className="font-mono uppercase leading-none tracking-[0.08em] text-muted"
           style={{ fontSize: "calc(11*var(--u))" }}
         >
+          <span className="sr-only">Copy hex code: </span>
           {name}
         </span>
       </div>
@@ -90,7 +90,6 @@ function BiomeSwatch({ name, hex, token, copied, onCopy }: Swatch & { copied: bo
       type="button"
       onClick={onCopy}
       title={token}
-      aria-label={`Copy ${name} hex code ${hex}`}
       className="relative h-full w-full border border-paper/15 text-left transition-colors hover:border-fire/50"
       style={{ minHeight: "calc(88*var(--u))", background: hex }}
     >
@@ -99,6 +98,7 @@ function BiomeSwatch({ name, hex, token, copied, onCopy }: Swatch & { copied: bo
           className="font-mono font-bold uppercase leading-none tracking-[0.06em]"
           style={{ fontSize: "calc(11*var(--u))" }}
         >
+          <span className="sr-only">Copy hex code: </span>
           {name}
         </div>
         <div className="font-mono opacity-70" style={{ fontSize: "calc(9*var(--u))", marginTop: "calc(3*var(--u))" }}>
@@ -149,8 +149,8 @@ export default function ColorSection() {
           </p>
           <p className="mt-[1em]">
             Black is the default ground, the color of soil and unreached places. White carries the
-            gospel light, for editorial and text on dark. Biome colors are a secondary accent only,
-            never a rival to Fire Orange.
+            gospel light, for editorial and text on dark. Never a rival to Fire Orange, biome
+            colors stay secondary, used only when context calls for them.
           </p>
         </>
       }

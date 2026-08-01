@@ -99,8 +99,8 @@ function VoiceTraitsPage() {
             constant across every channel and every audience. Only tone flexes by context.
           </p>
           <p className="mt-[1em]">
-            Seven traits anchor everything we write and film, each one paired with the failure mode
-            it guards against.
+            Seven traits anchor everything we write and film, each one a guard against a specific
+            failure.
           </p>
           <a
             href="/downloads/tte-voice-guidelines.md"
@@ -130,6 +130,7 @@ function VoiceTerminologyPage() {
   return (
     <SectionShell
       id="voice-terminology"
+      dividerAbove="page"
       heading={<>Words carry theology. Choose them with precision.</>}
       body={
         <p>

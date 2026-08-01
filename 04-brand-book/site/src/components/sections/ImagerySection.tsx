@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SectionShell from "@/components/SectionShell";
 
 type Layer = {
@@ -125,23 +125,42 @@ function LayersGrid({ onOpen }: { onOpen: (layer: Layer) => void }) {
 
 /** Full-screen lightbox — the uncropped source, for a closer look than the grid crop allows. */
 function ImageLightbox({ layer, onClose }: { layer: Layer; onClose: () => void }) {
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
+    const trigger = document.activeElement as HTMLElement | null;
+    closeBtnRef.current?.focus();
+
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      // The close button is the only focusable element in the dialog —
+      // keep Tab/Shift+Tab from leaking focus out to the page behind it.
+      if (e.key === "Tab") {
+        e.preventDefault();
+        closeBtnRef.current?.focus();
+      }
     }
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      trigger?.focus();
+    };
   }, [onClose]);
 
   return (
     <div
       role="dialog"
       aria-modal="true"
+      aria-label={`${layer.name} full size`}
       onClick={onClose}
       className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 backdrop-blur-sm"
       style={{ padding: "calc(48*var(--u))" }}
     >
       <button
+        ref={closeBtnRef}
         type="button"
         onClick={onClose}
         aria-label="Close"

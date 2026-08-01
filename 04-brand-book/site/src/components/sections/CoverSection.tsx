@@ -5,7 +5,9 @@ import gsap from "gsap";
 import { prefersReducedMotion } from "@/lib/motion";
 
 const PHOTO = "/assets/cover/cover-photo.webp";
-const TOPO = "/assets/cover/pattern-tile.webp";
+// Vector, not the old raster copy — infinite resolution at any viewport
+// size. The source is native Fire Orange; forced white via CSS filter below.
+const TOPO = "/assets/patterns/pattern-tile.svg";
 const LOGO = "/assets/cover/logo-full-white.svg";
 const HC = "/assets/cover/hc-mark.svg";
 
@@ -61,7 +63,7 @@ export default function CoverSection() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={PHOTO}
-          alt="Snow peak above the high steppe — the field the mission is sent to."
+          alt="Snow peak above the high steppe: the field the mission is sent to."
           className="h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-[rgba(40,39,42,0.40)]" />
@@ -74,6 +76,7 @@ export default function CoverSection() {
         alt=""
         aria-hidden
         className="cv-topo pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.06]"
+        style={{ filter: "brightness(0) invert(1)" }}
       />
 
       {/* ===== DESKTOP + TABLET (≥768) — full-width, flexible rule ===== */}

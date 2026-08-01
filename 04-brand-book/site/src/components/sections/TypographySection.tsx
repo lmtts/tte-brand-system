@@ -147,6 +147,7 @@ function SpaceMonoPage() {
   return (
     <SectionShell
       id="typography-space"
+      dividerAbove="page"
       heading={<>Space Mono is the instrument.</>}
       body={
         <>
