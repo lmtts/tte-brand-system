@@ -314,19 +314,45 @@ function DemoButton({
   );
 }
 
+type PeopleGroup = {
+  name: string;
+  region: string;
+  photo: string;
+  biome: (typeof BIOMES)[number];
+  coords: string;
+  pop: number;
+  gospelAccess: number;
+};
+
+const PEOPLE_GROUPS: PeopleGroup[] = [
+  {
+    name: "Turkish",
+    region: "Anatolia",
+    photo: "/assets/system/people-turkish.webp",
+    biome: BIOMES[2], // City
+    coords: "41°N, 29°E",
+    pop: 53900000,
+    gospelAccess: 0.2,
+  },
+  {
+    name: "Brahmin",
+    region: "South Asia",
+    photo: "/assets/system/people-brahmin.webp",
+    biome: BIOMES[2], // City
+    coords: "25°N, 83°E",
+    pop: 92000000,
+    gospelAccess: 0.4,
+  },
+];
+
 /** People Group Card, live — the unreached-people dossier, the richest organism, on its own page. */
-function PeopleGroupCardDemo() {
+function PeopleGroupCardDemo({ group }: { group: PeopleGroup }) {
   return (
-    <div className="mx-auto flex w-full flex-col border border-paper/15" style={{ maxWidth: "calc(360*var(--u))" }}>
+    <div className="flex w-full flex-col border border-paper/15">
       <div className="relative overflow-hidden bg-ink" style={{ aspectRatio: "4/3" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/assets/patterns/pattern-tile.svg"
-          alt=""
-          aria-hidden
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ opacity: 0.16 }}
-        />
+        <img src={group.photo} alt={`${group.name} people group, ${group.region}`} className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-[rgba(40,39,42,0.15)]" />
         <div className="absolute inset-0 flex flex-col justify-between" style={{ padding: "calc(16*var(--u))" }}>
           <div className="flex items-start justify-between">
             <span
@@ -339,12 +365,12 @@ function PeopleGroupCardDemo() {
               className="inline-flex items-center border border-paper/30 font-mono font-bold uppercase text-paper"
               style={{ gap: "calc(5*var(--u))", padding: "calc(4*var(--u)) calc(8*var(--u))", fontSize: "calc(9*var(--u))" }}
             >
-              <span aria-hidden className="shrink-0 bg-biome-desert" style={{ width: "7px", height: "7px" }} />
-              Desert
+              <span aria-hidden className="shrink-0" style={{ width: "7px", height: "7px", background: group.biome.hex }} />
+              {group.biome.name}
             </span>
           </div>
           <span className="font-mono uppercase tracking-[0.06em] text-paper/80" style={{ fontSize: "calc(9*var(--u))" }}>
-            33°N, 65°E
+            {group.coords}
           </span>
         </div>
       </div>
@@ -355,16 +381,16 @@ function PeopleGroupCardDemo() {
             className="font-display font-extrabold uppercase leading-none tracking-[0.01em] text-paper"
             style={{ fontSize: "calc(24*var(--u))" }}
           >
-            Tajik
+            {group.name}
           </h3>
           <span className="font-mono uppercase tracking-[0.06em] text-muted" style={{ fontSize: "calc(10*var(--u))" }}>
-            Central Asia
+            {group.region}
           </span>
         </div>
 
         <div className="flex flex-col border-t border-paper/10">
-          <HudDemoRow label="Est. pop" value={<CountUp to={12313000} />} />
-          <HudDemoRow label="Gospel access" value={<CountUp to={0.1} decimals={1} suffix="%" />} accent />
+          <HudDemoRow label="Est. pop" value={<CountUp to={group.pop} />} />
+          <HudDemoRow label="Gospel access" value={<CountUp to={group.gospelAccess} decimals={1} suffix="%" />} accent />
         </div>
 
         <div className="flex flex-wrap" style={{ gap: "calc(10*var(--u))" }}>
@@ -380,7 +406,7 @@ function PeopleGroupCardDemo() {
   );
 }
 
-/** Section 09, page 3 — the People Group Card, featured alone (the richest organism). */
+/** Section 09, page 3 — the People Group Card, two examples side by side. */
 function SystemPeopleGroupPage() {
   return (
     <SectionShell
@@ -389,14 +415,18 @@ function SystemPeopleGroupPage() {
       heading="The dossier that makes a statistic a people."
       body={
         <p>
-          The People Group Card composes every other primitive: the topographic fallback when no
-          photography exists yet, the biome badge, a live HUD data strip, and the mobilize /
-          operate action pair. Dignity over pity, never a grey box.
+          The People Group Card composes every other primitive: photography or the topographic
+          fallback, the biome badge, a live HUD data strip, and the mobilize / operate action
+          pair. Dignity over pity, never a grey box.
         </p>
       }
     >
       <div className="flex h-full w-full items-center justify-center">
-        <PeopleGroupCardDemo />
+        <div className="grid w-full grid-cols-1 sm:grid-cols-2" style={{ gap: "calc(20*var(--u))", maxWidth: "calc(640*var(--u))" }}>
+          {PEOPLE_GROUPS.map((g) => (
+            <PeopleGroupCardDemo key={g.name} group={g} />
+          ))}
+        </div>
       </div>
     </SectionShell>
   );

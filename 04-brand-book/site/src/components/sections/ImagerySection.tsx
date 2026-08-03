@@ -22,9 +22,9 @@ const LAYERS: Layer[] = [
     name: "The Scale",
     descriptor: "Where the mission takes place",
     src: "/assets/imagery/layer-1-scale.webp",
-    alt: "A hiker in an orange jacket stands on a cliff edge before a vast fog-wrapped mountain range: No border stops the Spirit.",
+    alt: "A hiker in an orange jacket stands on a rock overlooking a vast snow-capped mountain range and glacial valley: no border stops the Spirit.",
     spec: "16–24mm · figure 5–15% of frame",
-    fit: "contain",
+    fit: "cover",
   },
   {
     index: "02",
@@ -34,17 +34,15 @@ const LAYERS: Layer[] = [
     alt: "A woman in a blue headscarf stands with eyes closed in prayer amid a blurred, crowded market.",
     spec: "50–85mm · f/1.4–2.8, eyes closed",
     fit: "cover",
-    position: "50% 42%",
   },
   {
     index: "03",
     name: "The POV",
     descriptor: "The raw moment",
     src: "/assets/imagery/layer-3-pov.webp",
-    alt: "First-person view from inside a vehicle, looking out over open farmland through the window.",
+    alt: "View from a riverboat window over a flooded jungle tributary, a passenger in a canvas cap watching the tree line.",
     spec: "24–35mm · handheld, first person",
     fit: "cover",
-    position: "50% 12%",
   },
   {
     index: "04",
@@ -53,7 +51,7 @@ const LAYERS: Layer[] = [
     src: "/assets/imagery/layer-4-hud.webp",
     alt: "Tight portrait of a man's eye wrapped in a wool scarf, overlaid with HUD mission data for the Tajik people.",
     spec: "85–135mm · tight portrait, data",
-    fit: "contain",
+    fit: "cover",
   },
 ];
 
@@ -89,7 +87,7 @@ function LayerCard({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => 
         onClick={() => onOpen(layer)}
         aria-label={`View ${name} full size`}
         className="group relative block flex-1 cursor-zoom-in overflow-hidden bg-ink"
-        style={{ aspectRatio: "4/5" }}
+        style={{ aspectRatio: "1/1" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -115,7 +113,7 @@ function LayerCard({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => 
 function LayersGrid({ onOpen }: { onOpen: (layer: Layer) => void }) {
   return (
     <div className="flex h-full w-full flex-col justify-center">
-      <div className="grid grid-cols-2 sm:grid-cols-4" style={{ gap: "calc(14*var(--u))" }}>
+      <div className="grid grid-cols-2" style={{ gap: "calc(14*var(--u))" }}>
         {LAYERS.map((l) => (
           <LayerCard key={l.index} layer={l} onOpen={onOpen} />
         ))}

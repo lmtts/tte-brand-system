@@ -48,13 +48,29 @@ export default function LenisProvider() {
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
 
+    // A brief readout flicker exactly as a section/page locks into place —
+    // a panel "recalculating" beat, not a continuous effect.
+    let flickerTimeout = 0;
+    const onSnapComplete = () => {
+      document.body.classList.remove("hud-snap-flicker");
+      // Force reflow so re-adding the class restarts the animation even if
+      // a snap completes again before the previous flicker finished.
+      void document.body.offsetWidth;
+      document.body.classList.add("hud-snap-flicker");
+      window.clearTimeout(flickerTimeout);
+      flickerTimeout = window.setTimeout(() => document.body.classList.remove("hud-snap-flicker"), 200);
+    };
+
     const snap = new Snap(lenis, {
       type: "mandatory",
       duration: 0.95,
+      onSnapComplete,
     });
     snap.addElements(slideEls);
 
     return () => {
+      window.clearTimeout(flickerTimeout);
+      document.body.classList.remove("hud-snap-flicker");
       snap.destroy();
       gsap.ticker.remove(tick);
       lenis.destroy();

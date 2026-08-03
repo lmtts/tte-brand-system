@@ -22,6 +22,7 @@ const HC = "/assets/cover/hc-mark.svg";
 export default function CoverSection() {
   const root = useRef<HTMLElement>(null);
   const photo = useRef<HTMLDivElement>(null);
+  const topo = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const el = root.current;
@@ -44,6 +45,11 @@ export default function CoverSection() {
         const p = Math.min(1, window.scrollY / Math.max(1, window.innerHeight));
         if (photo.current) {
           photo.current.style.transform = `scale(${1 + p * 0.06}) translateY(${p * 32}px)`;
+        }
+        // Slower depth layer behind the photo's own parallax — the texture
+        // reads as farther back, reinforcing depth as the section scrolls out.
+        if (topo.current) {
+          topo.current.style.transform = `scale(1.1) translateY(${p * 14}px)`;
         }
         raf = 0;
       });
@@ -73,6 +79,7 @@ export default function CoverSection() {
       {/* topographic tile — white @0.045, covers the whole area */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
+        ref={topo}
         src={TOPO}
         alt=""
         aria-hidden

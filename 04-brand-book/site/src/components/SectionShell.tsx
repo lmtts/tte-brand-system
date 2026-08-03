@@ -76,6 +76,18 @@ export default function SectionShell({ id, heading, body, image, children, divid
       // triggered character reveal is the entrance moment for it now.
       if (hasImg) tl.from(".b-img", { clipPath: "inset(0 0 0 100%)", duration: 0.9 });
       tl.from(".b-body", { opacity: 0, y: 16, duration: 0.6 }, hasImg ? "-=0.3" : 0.3);
+
+      // Depth parallax: the topo texture drifts slower than the content
+      // riding over it — scaled up first so the drift never reveals an edge.
+      const topo = el.querySelector(".b-topo");
+      if (topo) {
+        gsap.set(topo, { scale: 1.15 });
+        gsap.to(topo, {
+          yPercent: 8,
+          ease: "none",
+          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0.6 },
+        });
+      }
     }, root);
     return () => ctx.revert();
   }, []);
@@ -101,7 +113,7 @@ export default function SectionShell({ id, heading, body, image, children, divid
         src={TOPO}
         alt=""
         aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.0675]"
+        className="b-topo pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.0675]"
       />
 
       {/* ===== DESKTOP (≥1024) ===== */}
