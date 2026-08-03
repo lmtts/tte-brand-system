@@ -113,7 +113,7 @@ function LayerCard({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => 
 function LayersGrid({ onOpen }: { onOpen: (layer: Layer) => void }) {
   return (
     <div className="flex h-full w-full flex-col justify-center">
-      <div className="grid grid-cols-2" style={{ gap: "calc(14*var(--u))" }}>
+      <div className="mx-auto grid grid-cols-2" style={{ gap: "calc(14*var(--u))", maxWidth: "calc(480*var(--u))" }}>
         {LAYERS.map((l) => (
           <LayerCard key={l.index} layer={l} onOpen={onOpen} />
         ))}

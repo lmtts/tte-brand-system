@@ -87,7 +87,8 @@ function MisuseCard({ children, caption }: { children: React.ReactNode; caption:
 /** The 6 official misuse rules (TTE-BrandBook-Figma-Spec.md, Page 18), each demonstrated on the real mark where a live example is meaningful. */
 function MisuseGrid() {
   return (
-    <div className="grid h-full w-full grid-cols-2 sm:grid-cols-3" style={{ gap: "calc(16*var(--u))" }}>
+    <div className="flex h-full w-full items-center">
+    <div className="grid w-full grid-cols-2 sm:grid-cols-3" style={{ gap: "calc(16*var(--u))" }}>
       <MisuseCard caption="Don’t distort or stretch">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/assets/logos/icon.svg" alt="" aria-hidden className="h-auto" style={{ maxHeight: "calc(40*var(--u))", transform: "scaleX(2.1)" }} />
@@ -124,6 +125,7 @@ function MisuseGrid() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/assets/logos/complete.svg" alt="" aria-hidden className="h-auto" style={{ maxHeight: "calc(40*var(--u))" }} />
       </MisuseCard>
+    </div>
     </div>
   );
 }

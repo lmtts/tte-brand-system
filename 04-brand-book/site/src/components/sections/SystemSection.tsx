@@ -388,7 +388,10 @@ function PeopleGroupCardDemo({ group }: { group: PeopleGroup }) {
           </span>
         </div>
 
-        <div className="flex flex-col border-t border-paper/10">
+        <div
+          className="flex flex-col border-t border-paper/10"
+          style={{ marginLeft: "calc(-14*var(--u))", marginRight: "calc(-14*var(--u))" }}
+        >
           <HudDemoRow label="Est. pop" value={<CountUp to={group.pop} />} />
           <HudDemoRow label="Gospel access" value={<CountUp to={group.gospelAccess} decimals={1} suffix="%" />} accent />
         </div>
