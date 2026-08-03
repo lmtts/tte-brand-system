@@ -69,13 +69,13 @@ export default function CoverSection() {
         <div className="absolute inset-0 bg-[rgba(40,39,42,0.40)]" />
       </div>
 
-      {/* topographic tile — white @0.06, covers the whole area */}
+      {/* topographic tile — white @0.045, covers the whole area */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={TOPO}
         alt=""
         aria-hidden
-        className="cv-topo pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.06]"
+        className="cv-topo pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.045]"
         style={{ filter: "brightness(0) invert(1)" }}
       />
 

@@ -51,9 +51,10 @@ export default function ArrowNav() {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       const tag = (e.target as HTMLElement | null)?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA") return;
-      // A lightbox or other modal is open — let it own arrow/tab focus
-      // instead of also paging the whole site behind it.
-      if (document.querySelector('[role="dialog"]')) return;
+      // A lightbox or other modal is actually open (not just present but
+      // hidden, like MobileNav's always-mounted menu) — let it own
+      // arrow/tab focus instead of also paging the whole site behind it.
+      if (document.querySelector('[role="dialog"][aria-modal="true"]')) return;
 
       const idx = NAVIGABLE_IDS.indexOf(activeId);
       if (idx === -1) return;

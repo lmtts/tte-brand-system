@@ -140,7 +140,7 @@ export default function ColorSection() {
   return (
     <SectionShell
       id="color"
-      heading={<>Three colors. Maximum impact. Every pixel intentional.</>}
+      heading="Three colors. Maximum impact. Every pixel intentional."
       body={
         <>
           <p>

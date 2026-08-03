@@ -1,10 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SECTIONS } from "@/lib/sections.config";
+import { SECTIONS, type Section } from "@/lib/sections.config";
 import { useActiveSection } from "@/lib/useActiveSection";
+import ScrambleHover from "@/components/ScrambleHover";
 
 const BIRD = "/assets/brand/bird-index.svg";
+
+/** One full-page-menu row — ScrambleHover finds the <button> itself as its
+ * trigger (matters for resized desktop windows and keyboard users, even
+ * though most visitors at this breakpoint are touch-only). */
+function MenuItem({ section, active, onGo }: { section: Section; active: string; onGo: (id: string, ready: boolean) => void }) {
+  const isActive = section.index === active;
+  const ready = section.status === "ready";
+  return (
+    <button
+      onClick={() => onGo(section.id, ready)}
+      disabled={!ready}
+      className={`flex items-baseline gap-6 font-mono text-[20px] uppercase tracking-[0.05em] ${
+        isActive ? "" : "text-muted"
+      } ${ready ? "" : "opacity-50"}`}
+    >
+      <span className={`text-[13px] ${isActive ? "text-fire" : ""}`}>{section.index}</span>
+      <ScrambleHover text={section.name} className={isActive ? "text-paper" : ""} />
+    </button>
+  );
+}
 
 /**
  * Mobile / tablet navigation — a full-width bar pinned to the top of every
@@ -103,23 +124,9 @@ export default function MobileNav() {
         </div>
 
         <nav className="flex flex-1 flex-col justify-center gap-5 px-6">
-          {SECTIONS.map((s) => {
-            const isActive = s.index === active;
-            const ready = s.status === "ready";
-            return (
-              <button
-                key={s.id}
-                onClick={() => go(s.id, ready)}
-                disabled={!ready}
-                className={`flex items-baseline gap-6 font-mono text-[20px] uppercase tracking-[0.05em] ${
-                  isActive ? "" : "text-muted"
-                } ${ready ? "" : "opacity-50"}`}
-              >
-                <span className={`text-[13px] ${isActive ? "text-fire" : ""}`}>{s.index}</span>
-                <span className={isActive ? "text-paper" : ""}>{s.name}</span>
-              </button>
-            );
-          })}
+          {SECTIONS.map((s) => (
+            <MenuItem key={s.id} section={s} active={active} onGo={go} />
+          ))}
         </nav>
       </div>
     </div>

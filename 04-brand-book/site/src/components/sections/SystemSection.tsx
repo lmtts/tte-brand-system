@@ -99,7 +99,7 @@ function SystemButtonsPage() {
   return (
     <SectionShell
       id="system"
-      heading={<>One rule decides every button: who it&rsquo;s for.</>}
+      heading="One rule decides every button: who it’s for."
       body={
         <>
           <p>
@@ -268,7 +268,7 @@ function SystemOrganismsPage() {
     <SectionShell
       id="system-organisms"
       dividerAbove="page"
-      heading={<>Four components no kit ships.</>}
+      heading="Four components no kit ships."
       body={
         <p>
           Base components come from the kit: Button, Input, Select, Card, Dialog, Tabs, and the
@@ -382,7 +382,7 @@ function SystemPeopleGroupPage() {
     <SectionShell
       id="system-people-group"
       dividerAbove="page"
-      heading={<>The dossier that makes a statistic a people.</>}
+      heading="The dossier that makes a statistic a people."
       body={
         <p>
           The People Group Card composes every other primitive: the topographic fallback when no

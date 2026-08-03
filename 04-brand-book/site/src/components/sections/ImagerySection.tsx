@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import SectionShell from "@/components/SectionShell";
+import DecodeText from "@/components/DecodeText";
 
 type Layer = {
   index: string;
@@ -199,7 +200,7 @@ export default function ImagerySection() {
   return (
     <SectionShell
       id="imagery"
-      heading={<>Light that&rsquo;s been earned, not given.</>}
+      heading="Light that’s been earned, not given."
       body={
         <>
           <p>
@@ -213,12 +214,14 @@ export default function ImagerySection() {
             donation button.
           </p>
           <dl className="flex flex-col" style={{ gap: "0.6em", marginTop: "1.4em" }}>
-            {SPECS.map((s) => (
+            {SPECS.map((s, i) => (
               <div key={s.label} className="flex" style={{ gap: "1em" }}>
                 <dt className="shrink-0 text-fire" style={{ width: "7em" }}>
                   {s.label}
                 </dt>
-                <dd className="opacity-80">{s.value}</dd>
+                <dd className="opacity-80">
+                  <DecodeText text={s.value} duration={500} delay={i * 80} />
+                </dd>
               </div>
             ))}
           </dl>

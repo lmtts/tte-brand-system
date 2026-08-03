@@ -1,4 +1,6 @@
 import SectionShell from "@/components/SectionShell";
+import ScrambleHover from "@/components/ScrambleHover";
+import DecodeText from "@/components/DecodeText";
 
 const FORMATS = [
   { file: "tokens.json", label: "JSON" },
@@ -32,7 +34,7 @@ function FormatDownload({ file, label }: { file: string; label: string }) {
       className="flex items-center justify-between border border-paper/30 font-mono font-bold uppercase tracking-[0.06em] text-paper transition-colors hover:border-fire hover:text-fire"
       style={{ padding: "calc(10*var(--u)) calc(14*var(--u))", fontSize: "calc(11*var(--u))" }}
     >
-      {label}
+      <ScrambleHover text={label} />
       <DownloadArrow />
     </a>
   );
@@ -83,7 +85,10 @@ function TokenChainPanel() {
               {step.layer}
             </div>
             <div className="text-paper" style={{ fontSize: "calc(13*var(--u))", marginTop: "calc(3*var(--u))" }}>
-              {step.key}: <span className="text-muted">{step.value}</span>
+              {step.key}:{" "}
+              <span className="text-muted">
+                <DecodeText text={step.value} duration={500} delay={i * 150} />
+              </span>
             </div>
             {step.note && (
               <div
@@ -105,7 +110,7 @@ export default function TokensSection() {
   return (
     <SectionShell
       id="tokens"
-      heading={<>Primitives become brand. Brand becomes semantic. Nothing floats free.</>}
+      heading="Primitives become brand. Brand becomes semantic. Nothing floats free."
       body={
         <>
           <p>

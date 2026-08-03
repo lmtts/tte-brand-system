@@ -1,0 +1,75 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { SCRAMBLE_CHARS, prefersReducedMotion } from "@/lib/motion";
+
+/**
+ * Text that scrambles to random characters, then resolves left-to-right
+ * back to the real string — a terminal-decrypt beat for interactive labels
+ * (nav links, download buttons).
+ *
+ * Fully self-contained: it finds its own closest interactive ancestor
+ * (<a> or <button>) and listens on THAT, so hovering anywhere in the
+ * clickable area triggers it, not just the exact text pixels. This is
+ * deliberately not an imperative-ref-from-parent design — SectionShell
+ * renders `body` twice (desktop/mobile breakpoints), which would give two
+ * mounted instances a single shared ref fighting over `ref.current`, and
+ * only one of them the visible one. Each instance managing its own
+ * ancestor listener sidesteps that entirely.
+ */
+export default function ScrambleHover({
+  text,
+  className = "",
+  scrambleSpeed = 35,
+  as: Tag = "span",
+}: {
+  text: string;
+  className?: string;
+  scrambleSpeed?: number;
+  as?: React.ElementType;
+}) {
+  const [display, setDisplay] = useState(text);
+  const ref = useRef<HTMLElement>(null);
+  const timeoutId = useRef<number>(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const trigger = el.closest("a, button") ?? el;
+
+    function scramble() {
+      if (prefersReducedMotion()) return;
+      clearTimeout(timeoutId.current);
+      let progress = 0;
+      const tick = () => {
+        progress++;
+        let out = "";
+        for (let i = 0; i < text.length; i++) {
+          if (i < progress || text[i] === " ") out += text[i];
+          else out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        }
+        setDisplay(out);
+        if (progress < text.length) timeoutId.current = window.setTimeout(tick, scrambleSpeed);
+        else setDisplay(text);
+      };
+      tick();
+    }
+
+    trigger.addEventListener("mouseenter", scramble);
+    // focus doesn't bubble, so this needs the capture phase to reach the
+    // trigger from an inner focus target.
+    trigger.addEventListener("focus", scramble, true);
+
+    return () => {
+      trigger.removeEventListener("mouseenter", scramble);
+      trigger.removeEventListener("focus", scramble, true);
+      clearTimeout(timeoutId.current);
+    };
+  }, [text, scrambleSpeed]);
+
+  return (
+    <Tag ref={ref} className={className}>
+      {display}
+    </Tag>
+  );
+}

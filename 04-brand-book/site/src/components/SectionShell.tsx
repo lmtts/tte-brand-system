@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { prefersReducedMotion } from "@/lib/motion";
+import Typewriter from "@/components/Typewriter";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,13 +14,13 @@ const TOPO = "/assets/patterns/pattern-tile.svg";
 
 // Declared at module scope (not inside SectionShell's render) so they keep a
 // stable component identity across renders instead of remounting each time.
-function Heading({ heading, style }: { heading: React.ReactNode; style?: React.CSSProperties }) {
+function Heading({ heading, style }: { heading: string; style?: React.CSSProperties }) {
   return (
     <h2
       className="b-heading font-display font-extrabold uppercase leading-none tracking-[0.02em] text-paper"
       style={style}
     >
-      {heading}
+      <Typewriter text={heading} speed={20} />
     </h2>
   );
 }
@@ -33,7 +34,7 @@ function Body({ body, style }: { body: React.ReactNode; style?: React.CSSPropert
 
 type Props = {
   id: string;
-  heading: React.ReactNode;
+  heading: string;
   body: React.ReactNode;
   /** Right side: a full-bleed image, OR content kept within the right margins. */
   image?: { src: string; alt: string };
@@ -71,12 +72,10 @@ export default function SectionShell({ id, heading, body, image, children, divid
         scrollTrigger: { trigger: el, start: "top 62%" },
         defaults: { ease: "power3.out" },
       });
+      // The heading no longer fades via GSAP — Typewriter's own scroll-
+      // triggered character reveal is the entrance moment for it now.
       if (hasImg) tl.from(".b-img", { clipPath: "inset(0 0 0 100%)", duration: 0.9 });
-      tl.from(".b-heading", { opacity: 0, y: 24, duration: 0.7 }, hasImg ? "-=0.55" : undefined).from(
-        ".b-body",
-        { opacity: 0, y: 16, duration: 0.6 },
-        "-=0.4"
-      );
+      tl.from(".b-body", { opacity: 0, y: 16, duration: 0.6 }, hasImg ? "-=0.3" : 0.3);
     }, root);
     return () => ctx.revert();
   }, []);
@@ -102,7 +101,7 @@ export default function SectionShell({ id, heading, body, image, children, divid
         src={TOPO}
         alt=""
         aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.09]"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.0675]"
       />
 
       {/* ===== DESKTOP (≥1024) ===== */}
@@ -114,9 +113,9 @@ export default function SectionShell({ id, heading, body, image, children, divid
             aria-hidden
             className="absolute bg-paper/15"
             style={{
-              left: "calc(500*var(--u))",
-              top: "calc(150*var(--u))",
-              bottom: "calc(100*var(--u))",
+              left: "calc(540*var(--u))",
+              top: "0",
+              bottom: "0",
               width: "1px",
             }}
           />

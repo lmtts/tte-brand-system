@@ -99,6 +99,22 @@ html.lenis body {
   }
 }
 
+/* Typewriter cursor — terminal-style blink, no easing. */
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 0.04em;
+  animation: tw-blink 1s step-end infinite;
+}
+@keyframes tw-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
 /* Cover (desktop + tablet) — one design-pixel scales with the viewport:
    the smaller of height-ratio (1024) and width-ratio (1440), capped at 1,
    floored so tablet stays legible. Sizes scale; horizontal layout stays full-width. */
@@ -160,6 +176,9 @@ html.lenis body {
     scroll-behavior: auto;
   }
   .cv-chevron {
+    animation: none;
+  }
+  .typewriter-cursor {
     animation: none;
   }
 }

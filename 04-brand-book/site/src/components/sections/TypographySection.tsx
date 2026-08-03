@@ -1,4 +1,5 @@
 import SectionShell from "@/components/SectionShell";
+import ScrambleHover from "@/components/ScrambleHover";
 
 type Weight = { name: string; weight: number };
 
@@ -36,7 +37,7 @@ function DownloadFontButton({ href, label }: { href: string; label: string }) {
         fontSize: "calc(12*var(--u))",
       }}
     >
-      {label}
+      <ScrambleHover text={label} />
       <ExternalArrow />
     </a>
   );
@@ -110,7 +111,7 @@ function MonaSansPage() {
   return (
     <SectionShell
       id="typography-mona"
-      heading={<>Mona Sans carries the voice.</>}
+      heading="Mona Sans carries the voice."
       body={
         <>
           <p>
@@ -148,7 +149,7 @@ function SpaceMonoPage() {
     <SectionShell
       id="typography-space"
       dividerAbove="page"
-      heading={<>Space Mono is the instrument.</>}
+      heading="Space Mono is the instrument."
       body={
         <>
           <p>

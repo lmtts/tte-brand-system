@@ -2,11 +2,35 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { SECTIONS } from "@/lib/sections.config";
+import { SECTIONS, type Section } from "@/lib/sections.config";
 import { useActiveSection } from "@/lib/useActiveSection";
 import { prefersReducedMotion } from "@/lib/motion";
+import ScrambleHover from "@/components/ScrambleHover";
 
 const BIRD = "/assets/brand/bird-index.svg";
+
+/** One index row — ScrambleHover finds the <button> itself as its trigger,
+ * so the whole row (not just the label pixels) scrambles the name on
+ * hover/focus. */
+function NavItem({ section, active, onGo }: { section: Section; active: string; onGo: (id: string, ready: boolean) => void }) {
+  const isActive = section.index === active;
+  const ready = section.status === "ready";
+  return (
+    <li className="nav-item">
+      <button
+        onClick={() => onGo(section.id, ready)}
+        disabled={!ready}
+        className={`flex items-center font-mono uppercase tracking-[0.06em] transition-colors ${
+          ready ? "cursor-pointer" : "cursor-default"
+        } ${isActive ? "" : "text-muted"} ${ready && !isActive ? "hover:text-paper" : ""}`}
+        style={{ gap: "calc(28*var(--u))", fontSize: "calc(14*var(--u))" }}
+      >
+        <span className={isActive ? "text-fire" : ""}>{section.index}</span>
+        <ScrambleHover text={section.name} className={isActive ? "text-paper" : ""} />
+      </button>
+    </li>
+  );
+}
 
 /**
  * The Index — desktop persistent navigation. A single fixed panel (not one
@@ -118,25 +142,9 @@ export default function SectionNav() {
             style={{ height: "1px", marginTop: "calc(35*var(--u))", marginBottom: "calc(32*var(--u))" }}
           />
           <ul className="flex flex-col" style={{ gap: "calc(26*var(--u))" }}>
-            {SECTIONS.map((s) => {
-              const isActive = s.index === active;
-              const ready = s.status === "ready";
-              return (
-                <li key={s.id} className="nav-item">
-                  <button
-                    onClick={() => go(s.id, ready)}
-                    disabled={!ready}
-                    className={`flex items-center font-mono uppercase tracking-[0.06em] transition-colors ${
-                      ready ? "cursor-pointer" : "cursor-default"
-                    } ${isActive ? "" : "text-muted"} ${ready && !isActive ? "hover:text-paper" : ""}`}
-                    style={{ gap: "calc(28*var(--u))", fontSize: "calc(14*var(--u))" }}
-                  >
-                    <span className={isActive ? "text-fire" : ""}>{s.index}</span>
-                    <span className={isActive ? "text-paper" : ""}>{s.name}</span>
-                  </button>
-                </li>
-              );
-            })}
+            {SECTIONS.map((s) => (
+              <NavItem key={s.id} section={s} active={active} onGo={go} />
+            ))}
           </ul>
         </div>
       </nav>

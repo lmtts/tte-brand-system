@@ -1,4 +1,5 @@
 import SectionShell from "@/components/SectionShell";
+import ScrambleHover from "@/components/ScrambleHover";
 
 type LogoCardProps = {
   src: string;
@@ -61,7 +62,7 @@ export default function LogosSection() {
   return (
     <SectionShell
       id="logos"
-      heading={<>The mark is a dove fused with flame: forward, upward, unmistakable.</>}
+      heading="The mark is a dove fused with flame: forward, upward, unmistakable."
       body={
         <>
           <p>
@@ -81,7 +82,7 @@ export default function LogosSection() {
             style={{ gap: "calc(10*var(--u))", padding: "calc(12*var(--u)) calc(18*var(--u))", fontSize: "calc(12*var(--u))" }}
           >
             <DownloadArrow />
-            Download logo kit
+            <ScrambleHover text="Download logo kit" />
           </a>
         </>
       }

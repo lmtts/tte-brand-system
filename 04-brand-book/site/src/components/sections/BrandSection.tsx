@@ -9,12 +9,7 @@ export default function BrandSection() {
         src: "/assets/brand/portrait.webp",
         alt: "A man on the frontier, wrapped against the cold: a face of the unreached world.",
       }}
-      heading={
-        <>
-          To the Ends of the Earth mobilizes prayer and investment for the planet&rsquo;s most
-          unreached peoples.
-        </>
-      }
+      heading="To the Ends of the Earth mobilizes prayer and investment for the planet’s most unreached peoples."
       body={
         <>
           <p>

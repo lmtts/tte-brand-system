@@ -1,4 +1,6 @@
 import SectionShell from "@/components/SectionShell";
+import ScrambleHover from "@/components/ScrambleHover";
+import DecodeText from "@/components/DecodeText";
 
 type Trait = { are: string; areNot: string };
 
@@ -71,7 +73,7 @@ function TraitsTable() {
               className="border-r border-paper/15 font-display font-extrabold uppercase leading-tight text-paper"
               style={{ padding: "calc(9*var(--u)) calc(14*var(--u))", fontSize: "calc(14*var(--u))" }}
             >
-              {t.are}
+              <DecodeText text={t.are} duration={500} delay={i * 60} />
             </div>
             <div
               className="font-mono leading-snug text-muted"
@@ -91,7 +93,7 @@ function VoiceTraitsPage() {
   return (
     <SectionShell
       id="voice"
-      heading={<>The statistic feels impossible. The theology says it&rsquo;s inevitable.</>}
+      heading="The statistic feels impossible. The theology says it’s inevitable."
       body={
         <>
           <p>
@@ -113,7 +115,7 @@ function VoiceTraitsPage() {
             }}
           >
             <DownloadArrow />
-            Download voice guide
+            <ScrambleHover text="Download voice guide" />
           </a>
         </>
       }
@@ -131,7 +133,7 @@ function VoiceTerminologyPage() {
     <SectionShell
       id="voice-terminology"
       dividerAbove="page"
-      heading={<>Words carry theology. Choose them with precision.</>}
+      heading="Words carry theology. Choose them with precision."
       body={
         <p>
           Terminology isn&rsquo;t style, it&rsquo;s doctrine made visible. These are the terms every
@@ -165,7 +167,7 @@ function VoiceTerminologyPage() {
                 className="font-display font-extrabold uppercase leading-tight text-paper"
                 style={{ padding: "calc(7*var(--u)) calc(14*var(--u))", fontSize: "calc(13*var(--u))" }}
               >
-                {t.term}
+                <DecodeText text={t.term} duration={450} delay={i * 55} />
               </div>
               <div
                 className="font-mono leading-snug text-muted"
