@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import SectionShell from "@/components/SectionShell";
 import DecodeText from "@/components/DecodeText";
+import ScrambleHover from "@/components/ScrambleHover";
 
 type Layer = {
   index: string;
@@ -11,9 +12,6 @@ type Layer = {
   src: string;
   alt: string;
   spec: string;
-  /** contain = show the full finished composition (text/logo baked in, can't crop); cover = crop to fill, safe when the frame is a plain photograph. */
-  fit: "contain" | "cover";
-  position?: string;
 };
 
 const LAYERS: Layer[] = [
@@ -24,7 +22,6 @@ const LAYERS: Layer[] = [
     src: "/assets/imagery/layer-1-scale.webp",
     alt: "A hiker in an orange jacket stands on a rock overlooking a vast snow-capped mountain range and glacial valley: no border stops the Spirit.",
     spec: "16–24mm · figure 5–15% of frame",
-    fit: "cover",
   },
   {
     index: "02",
@@ -33,7 +30,6 @@ const LAYERS: Layer[] = [
     src: "/assets/imagery/layer-2-stillness.webp",
     alt: "A woman in a blue headscarf stands with eyes closed in prayer amid a blurred, crowded market.",
     spec: "50–85mm · f/1.4–2.8, eyes closed",
-    fit: "cover",
   },
   {
     index: "03",
@@ -42,7 +38,6 @@ const LAYERS: Layer[] = [
     src: "/assets/imagery/layer-3-pov.webp",
     alt: "View from a riverboat window over a flooded jungle tributary, a passenger in a canvas cap watching the tree line.",
     spec: "24–35mm · handheld, first person",
-    fit: "cover",
   },
   {
     index: "04",
@@ -51,7 +46,6 @@ const LAYERS: Layer[] = [
     src: "/assets/imagery/layer-4-hud.webp",
     alt: "Tight portrait of a man's eye wrapped in a wool scarf, overlaid with HUD mission data for the Tajik people.",
     spec: "85–135mm · tight portrait, data",
-    fit: "cover",
   },
 ];
 
@@ -63,61 +57,63 @@ const SPECS = [
   { label: "Grain", value: "ISO 800–1600 · amount 20–35 / size 25–40" },
 ];
 
-/** One narrative layer — HUD label, the reference image, a technical caption. Click the image to inspect it full size. */
-function LayerCard({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => void }) {
-  const { index, name, descriptor, src, alt, spec, fit, position } = layer;
+/**
+ * One narrative layer, full-bleed — the image alone until hover/focus, when
+ * a scrim + its HUD info (scrambling in) surface over it. Click still opens
+ * the uncropped lightbox.
+ */
+function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => void }) {
+  const { index, name, descriptor, src, alt, spec } = layer;
   return (
-    <div className="flex h-full w-full flex-col border border-paper/15">
+    <button
+      type="button"
+      onClick={() => onOpen(layer)}
+      aria-label={`View ${name} full size`}
+      className="group relative block h-full w-full cursor-zoom-in overflow-hidden bg-ink"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+      />
+      {/* scrim — contrast for the info below, only on hover/focus */}
+      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
       <div
-        className="flex items-baseline border-b border-paper/15"
-        style={{ gap: "calc(6*var(--u))", padding: "calc(7*var(--u)) calc(12*var(--u))" }}
+        className="absolute inset-x-0 bottom-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
+        style={{ padding: "calc(16*var(--u))" }}
       >
-        <span className="shrink-0 text-fire" style={{ fontSize: "calc(11*var(--u))" }}>
-          {index}
-        </span>
-        <span
-          className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
-          style={{ fontSize: "calc(11*var(--u))" }}
-        >
-          {name}
-        </span>
-      </div>
-      <button
-        type="button"
-        onClick={() => onOpen(layer)}
-        aria-label={`View ${name} full size`}
-        className="group relative block flex-1 cursor-zoom-in overflow-hidden bg-ink"
-        style={{ aspectRatio: "1/1" }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={src}
-          alt={alt}
-          className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-[1.04]"
-          style={{ objectFit: fit, objectPosition: position ?? "center" }}
-        />
-      </button>
-      <div
-        className="border-t border-paper/15 font-mono text-muted"
-        style={{ padding: "calc(6*var(--u)) calc(12*var(--u))", fontSize: "calc(9*var(--u))" }}
-      >
-        <div className="uppercase" style={{ opacity: 0.85 }}>
-          {descriptor}
+        <div className="flex items-baseline" style={{ gap: "calc(6*var(--u))" }}>
+          <span className="shrink-0 text-fire" style={{ fontSize: "calc(11*var(--u))" }}>
+            <ScrambleHover text={index} />
+          </span>
+          <span
+            className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
+            style={{ fontSize: "calc(11*var(--u))" }}
+          >
+            <ScrambleHover text={name} />
+          </span>
         </div>
-        <div style={{ marginTop: "calc(3*var(--u))" }}>{spec}</div>
+        <div className="font-mono text-muted" style={{ marginTop: "calc(6*var(--u))", fontSize: "calc(9*var(--u))" }}>
+          <div className="uppercase" style={{ opacity: 0.85 }}>
+            <ScrambleHover text={descriptor} />
+          </div>
+          <div style={{ marginTop: "calc(3*var(--u))" }}>
+            <ScrambleHover text={spec} />
+          </div>
+        </div>
       </div>
-    </div>
+    </button>
   );
 }
 
+/** 2×2, no gap — same edge-to-edge sizing as the single portrait in "The Brand" (Section 02). */
 function LayersGrid({ onOpen }: { onOpen: (layer: Layer) => void }) {
   return (
-    <div className="flex h-full w-full flex-col justify-center">
-      <div className="mx-auto grid grid-cols-2" style={{ gap: "calc(14*var(--u))", maxWidth: "calc(300*var(--u))" }}>
-        {LAYERS.map((l) => (
-          <LayerCard key={l.index} layer={l} onOpen={onOpen} />
-        ))}
-      </div>
+    <div className="grid h-full w-full grid-cols-2 grid-rows-2">
+      {LAYERS.map((l) => (
+        <LayerTile key={l.index} layer={l} onOpen={onOpen} />
+      ))}
     </div>
   );
 }
@@ -198,6 +194,7 @@ export default function ImagerySection() {
   return (
     <SectionShell
       id="imagery"
+      bleed
       heading="Light that’s been earned, not given."
       body={
         <>

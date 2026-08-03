@@ -48,6 +48,13 @@ type Props = {
    * no divider above it, so every SectionShell page gets one by default.
    */
   dividerAbove?: "section" | "page" | "none";
+  /**
+   * When true (with `children`, no `image`), the right region renders
+   * edge-to-edge with no padding and no vertical divider — the same
+   * treatment as `image` mode, for content that composes its own full-bleed
+   * layout (e.g. Imagery's hover grid).
+   */
+  bleed?: boolean;
 };
 
 /**
@@ -60,7 +67,7 @@ type Props = {
  * SectionFooter live outside this component (mounted once at page level).
  * Type sizes: heading 22 (Mona H4), body 14 (Space Mono Body/Small).
  */
-export default function SectionShell({ id, heading, body, image, children, dividerAbove = "section" }: Props) {
+export default function SectionShell({ id, heading, body, image, children, dividerAbove = "section", bleed = false }: Props) {
   const root = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -120,7 +127,7 @@ export default function SectionShell({ id, heading, body, image, children, divid
       <div className="hidden lg:block">
         {/* vertical rule between text and content — only in "children" mode
             (a full-bleed photo needs no seam cut into it) */}
-        {!image && (
+        {!image && !bleed && (
           <div
             aria-hidden
             className="absolute bg-paper/15"
@@ -139,6 +146,8 @@ export default function SectionShell({ id, heading, body, image, children, divid
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={image.src} alt={image.alt} className="b-img h-full w-full object-cover object-center" />
           </div>
+        ) : bleed ? (
+          <div className="sec-imgleft absolute inset-y-0 right-0 overflow-hidden">{children}</div>
         ) : (
           <div
             className="sec-imgleft absolute inset-y-0 right-0"
@@ -183,6 +192,8 @@ export default function SectionShell({ id, heading, body, image, children, divid
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={image.src} alt={image.alt} className="h-full w-full object-cover object-center" />
           </div>
+        ) : bleed ? (
+          <div className="relative w-full flex-1 overflow-hidden">{children}</div>
         ) : (
           <div className="flex-1 px-6 pb-24">{children}</div>
         )}
