@@ -62,7 +62,7 @@ const SPECS = [
  * a scrim + its HUD info (scrambling in) surface over it. Click still opens
  * the uncropped lightbox.
  */
-function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => void }) {
+function LayerTile({ layer, onOpen, bottomRow }: { layer: Layer; onOpen: (layer: Layer) => void; bottomRow: boolean }) {
   const { index, name, descriptor, src, alt, spec } = layer;
   return (
     <button
@@ -80,26 +80,33 @@ function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => 
       {/* scrim — contrast for the info below, only on hover/focus */}
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
       <div
-        className="absolute inset-x-0 bottom-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
-        style={{ padding: "calc(16*var(--u))" }}
+        className="absolute inset-x-0 bottom-0 flex items-start opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
+        style={{
+          gap: "calc(6*var(--u))",
+          padding: "calc(16*var(--u))",
+          // Bottom-row tiles sit flush with the viewport edge, where the
+          // fixed footer bar overlays — extra clearance keeps text from
+          // disappearing under it.
+          paddingBottom: bottomRow ? "calc(56*var(--u))" : "calc(16*var(--u))",
+        }}
       >
-        <div className="flex items-baseline" style={{ gap: "calc(6*var(--u))" }}>
-          <span className="shrink-0 text-fire" style={{ fontSize: "calc(11*var(--u))" }}>
-            <ScrambleHover text={index} />
-          </span>
+        <span className="shrink-0 text-fire" style={{ fontSize: "calc(9*var(--u))" }}>
+          <ScrambleHover text={index} />
+        </span>
+        <div className="flex flex-col" style={{ gap: "calc(6*var(--u))" }}>
           <span
             className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
             style={{ fontSize: "calc(11*var(--u))" }}
           >
             <ScrambleHover text={name} />
           </span>
-        </div>
-        <div className="font-mono text-muted" style={{ marginTop: "calc(6*var(--u))", fontSize: "calc(9*var(--u))" }}>
-          <div className="uppercase" style={{ opacity: 0.85 }}>
-            <ScrambleHover text={descriptor} />
-          </div>
-          <div style={{ marginTop: "calc(3*var(--u))" }}>
-            <ScrambleHover text={spec} />
+          <div className="font-mono text-muted" style={{ fontSize: "calc(11*var(--u))" }}>
+            <div className="uppercase" style={{ opacity: 0.85 }}>
+              <ScrambleHover text={descriptor} />
+            </div>
+            <div style={{ marginTop: "calc(3*var(--u))" }}>
+              <ScrambleHover text={spec} />
+            </div>
           </div>
         </div>
       </div>
@@ -111,8 +118,8 @@ function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => 
 function LayersGrid({ onOpen }: { onOpen: (layer: Layer) => void }) {
   return (
     <div className="grid h-full w-full grid-cols-2 grid-rows-2">
-      {LAYERS.map((l) => (
-        <LayerTile key={l.index} layer={l} onOpen={onOpen} />
+      {LAYERS.map((l, i) => (
+        <LayerTile key={l.index} layer={l} onOpen={onOpen} bottomRow={i >= 2} />
       ))}
     </div>
   );
