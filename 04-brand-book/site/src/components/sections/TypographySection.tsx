@@ -61,7 +61,7 @@ function TypeSpecimen({ fontClass, weights }: { fontClass: "font-display" | "fon
         style={{ padding: "calc(20*var(--u))", minHeight: "calc(140*var(--u))" }}
       >
         <span className={`${fontClass} leading-none text-paper`} style={{ fontSize: "calc(150*var(--u))" }}>
-          Aa
+          <ScrambleHover text="Aa" />
         </span>
       </div>
 

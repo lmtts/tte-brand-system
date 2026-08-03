@@ -57,8 +57,79 @@ function LogosGrid() {
   );
 }
 
-/** Section 03 — Logos. */
-export default function LogosSection() {
+/** A single misuse example — the violation shown live on the real mark, red ✗ flag, rule below. */
+function MisuseCard({ children, caption }: { children: React.ReactNode; caption: string }) {
+  return (
+    <div className="flex flex-col border border-paper/15">
+      <div
+        className="relative flex items-center justify-center overflow-hidden bg-ink"
+        style={{ minHeight: "calc(76*var(--u))", padding: "calc(14*var(--u))" }}
+      >
+        {children}
+        <span
+          aria-hidden
+          className="absolute font-display font-black text-fire"
+          style={{ top: "calc(6*var(--u))", right: "calc(8*var(--u))", fontSize: "calc(16*var(--u))" }}
+        >
+          ✗
+        </span>
+      </div>
+      <p
+        className="border-t border-paper/15 font-mono uppercase leading-[1.3] tracking-[0.06em] text-muted"
+        style={{ padding: "calc(10*var(--u)) calc(12*var(--u))", fontSize: "calc(10*var(--u))" }}
+      >
+        {caption}
+      </p>
+    </div>
+  );
+}
+
+/** The 6 official misuse rules (TTE-BrandBook-Figma-Spec.md, Page 18), each demonstrated on the real mark where a live example is meaningful. */
+function MisuseGrid() {
+  return (
+    <div className="grid h-full w-full grid-cols-2 sm:grid-cols-3" style={{ gap: "calc(16*var(--u))" }}>
+      <MisuseCard caption="Don’t distort or stretch">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/assets/logos/icon.svg" alt="" aria-hidden className="h-auto" style={{ maxHeight: "calc(40*var(--u))", transform: "scaleX(2.1)" }} />
+      </MisuseCard>
+      <MisuseCard caption="Don’t rotate">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/assets/logos/icon.svg" alt="" aria-hidden className="h-auto" style={{ maxHeight: "calc(40*var(--u))", transform: "rotate(24deg)" }} />
+      </MisuseCard>
+      <MisuseCard caption="Don’t recolor outside approved variants">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/assets/logos/icon.svg"
+          alt=""
+          aria-hidden
+          className="h-auto"
+          style={{ maxHeight: "calc(40*var(--u))", filter: "hue-rotate(160deg) saturate(4)" }}
+        />
+      </MisuseCard>
+      <MisuseCard caption="Don’t separate icon from wordmark in lockups">
+        <div className="flex w-full items-center justify-between">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/assets/logos/icon.svg" alt="" aria-hidden style={{ height: "calc(28*var(--u))" }} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/assets/logos/wordmark.svg" alt="" aria-hidden style={{ height: "calc(14*var(--u))" }} />
+        </div>
+      </MisuseCard>
+      <MisuseCard caption="Don’t place on busy backgrounds without overlay">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/assets/patterns/pattern-tile.svg" alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" style={{ opacity: 0.6 }} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/assets/logos/icon.svg" alt="" aria-hidden className="relative" style={{ maxHeight: "calc(36*var(--u))" }} />
+      </MisuseCard>
+      <MisuseCard caption="Don’t use without Hope Channel in official materials">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/assets/logos/complete.svg" alt="" aria-hidden className="h-auto" style={{ maxHeight: "calc(40*var(--u))" }} />
+      </MisuseCard>
+    </div>
+  );
+}
+
+/** Section 03, page 1 — the four lockups. */
+function LogosShowcasePage() {
   return (
     <SectionShell
       id="logos"
@@ -89,5 +160,35 @@ export default function LogosSection() {
     >
       <LogosGrid />
     </SectionShell>
+  );
+}
+
+/** Section 03, page 2 — the 6 official misuse rules. */
+function LogosMisusePage() {
+  return (
+    <SectionShell
+      id="logos-misuse"
+      dividerAbove="page"
+      heading="Six ways to break the mark. Don’t."
+      body={
+        <p>
+          Every violation here has shown up in the wild at least once. The mark only works when
+          it stays exactly as issued: no stretch, no rotation, no unapproved color, no split
+          lockup, no drowning it in noise, no going solo in official materials.
+        </p>
+      }
+    >
+      <MisuseGrid />
+    </SectionShell>
+  );
+}
+
+/** Section 03 — Logos. Two pages: the lockups, then misuse rules. */
+export default function LogosSection() {
+  return (
+    <>
+      <LogosShowcasePage />
+      <LogosMisusePage />
+    </>
   );
 }

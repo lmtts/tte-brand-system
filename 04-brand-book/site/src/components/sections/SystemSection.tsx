@@ -205,11 +205,15 @@ function MissionStatDemo() {
   );
 }
 
+// Hex literals, not `bg-biome-${key}` — Tailwind v4 only keeps a @theme
+// custom property in the compiled :root when a utility using it appears as
+// a literal class somewhere in scanned source; a template-built class name
+// never does, so 3 of these 4 vars were silently dropped from the CSS.
 const BIOMES = [
-  { key: "desert", name: "Desert" },
-  { key: "arctic", name: "Arctic" },
-  { key: "city", name: "City" },
-  { key: "forest", name: "Forest" },
+  { key: "desert", name: "Desert", hex: "#B86C55" },
+  { key: "arctic", name: "Arctic", hex: "#7BA7BC" },
+  { key: "city", name: "City", hex: "#4A4A52" },
+  { key: "forest", name: "Forest", hex: "#2D5A3D" },
 ] as const;
 
 /** Biome Badge, live — the full set of four tags, biome color as a small swatch only. */
@@ -223,7 +227,7 @@ function BiomeBadgeDemo() {
             className="inline-flex items-center border border-paper/15 font-mono font-bold uppercase text-paper"
             style={{ gap: "calc(6*var(--u))", padding: "calc(6*var(--u)) calc(10*var(--u))", fontSize: "calc(10*var(--u))" }}
           >
-            <span aria-hidden className={`shrink-0 bg-biome-${b.key}`} style={{ width: "8px", height: "8px" }} />
+            <span aria-hidden className="shrink-0" style={{ width: "8px", height: "8px", background: b.hex }} />
             {b.name}
           </span>
         ))}

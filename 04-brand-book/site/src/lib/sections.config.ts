@@ -23,7 +23,14 @@ export type Section = {
 export const SECTIONS: Section[] = [
   { id: "cover", index: "01", name: "Cover", status: "ready", poweredTone: "light" },
   { id: "the-brand", index: "02", name: "The Brand", status: "ready", poweredTone: "light" },
-  { id: "logos", index: "03", name: "Logos", status: "ready", poweredTone: "light" },
+  {
+    id: "logos",
+    index: "03",
+    name: "Logos",
+    status: "ready",
+    poweredTone: "light",
+    pageIds: ["logos", "logos-misuse"],
+  },
   { id: "color", index: "04", name: "Color", status: "ready", poweredTone: "light" },
   {
     id: "typography-mona",

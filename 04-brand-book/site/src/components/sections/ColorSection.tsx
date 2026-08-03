@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SectionShell from "@/components/SectionShell";
 import { contrastTextClass } from "@/lib/color";
+import ScrambleHover from "@/components/ScrambleHover";
 
 type Swatch = {
   name: string;
@@ -68,7 +69,7 @@ function PrimarySwatch({ name, hex, token, tone: toneOverride, copied, onCopy }:
       <div className="relative flex-1" style={{ background: hex, minHeight: "calc(150*var(--u))" }}>
         <div className={`absolute left-0 bottom-0 ${tone}`} style={{ padding: "calc(14*var(--u))" }}>
           <div className="font-mono font-bold leading-none" style={{ fontSize: "calc(18*var(--u))" }}>
-            {copied ? "Copied" : hex}
+            {copied ? "Copied" : <ScrambleHover text={hex} />}
           </div>
           <div
             className="font-mono opacity-70"
@@ -99,7 +100,7 @@ function BiomeSwatch({ name, hex, token, copied, onCopy }: Swatch & { copied: bo
           style={{ fontSize: "calc(11*var(--u))" }}
         >
           <span className="sr-only">Copy hex code: </span>
-          {name}
+          <ScrambleHover text={name} />
         </div>
         <div className="font-mono opacity-70" style={{ fontSize: "calc(9*var(--u))", marginTop: "calc(3*var(--u))" }}>
           {copied ? "Copied" : hex}

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { prefersReducedMotion } from "@/lib/motion";
+import ScrambleHover from "@/components/ScrambleHover";
 
 const PHOTO = "/assets/cover/cover-photo.webp";
 // Vector, not the old raster copy — infinite resolution at any viewport
@@ -84,8 +85,8 @@ export default function CoverSection() {
         {/* top row */}
         <div className="cv-pad absolute inset-x-0 top-[7.6%] flex items-start justify-between">
           <div className="cv-reveal cv-hud">
-            <div>v1.0</div>
-            <div>2026</div>
+            <div><ScrambleHover text="v1.0" revealOnMount /></div>
+            <div><ScrambleHover text="2026" revealOnMount /></div>
           </div>
           <div className="cv-reveal cv-pwrgap flex items-center">
             <span className="cv-hud cv-hud-reg">Powered by</span>
@@ -99,7 +100,9 @@ export default function CoverSection() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={LOGO} alt="To the Ends of the Earth" className="cv-logo cv-logo-d shrink-0" />
           <div className="cv-reveal cv-line h-px flex-1 bg-paper/70" />
-          <div className="cv-reveal cv-hud shrink-0 text-right">Brand Guidelines</div>
+          <div className="cv-reveal cv-hud shrink-0 text-right">
+            <ScrambleHover text="Brand Guidelines" revealOnMount />
+          </div>
         </div>
 
         {/* scroll cue */}
@@ -120,8 +123,8 @@ export default function CoverSection() {
       <div className="absolute inset-0 flex flex-col justify-between px-6 py-9 text-paper md:hidden">
         <div className="flex items-start justify-between">
           <div className="cv-reveal font-mono text-[11px] font-bold uppercase leading-[1.3] tracking-[0.06em]">
-            <div>v1.0</div>
-            <div>2026</div>
+            <div><ScrambleHover text="v1.0" revealOnMount /></div>
+            <div><ScrambleHover text="2026" revealOnMount /></div>
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={HC} alt="Hope Channel" className="cv-reveal h-[22px] w-auto -scale-y-100" />
@@ -131,7 +134,7 @@ export default function CoverSection() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={LOGO} alt="To the Ends of the Earth" className="cv-logo h-[44px] w-auto" />
           <div className="cv-reveal font-mono text-[11px] font-bold uppercase leading-[1.4] tracking-[0.06em]">
-            Brand Guidelines
+            <ScrambleHover text="Brand Guidelines" revealOnMount />
           </div>
         </div>
 

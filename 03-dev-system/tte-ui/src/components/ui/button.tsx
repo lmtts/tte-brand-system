@@ -4,6 +4,64 @@ import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#*<>[]"
+
+/**
+ * Terminal-decrypt hover, baked into every Button so any product surface
+ * gets the "mission intel" motion for free. Walks the button's own text
+ * nodes directly (not React state) so it works no matter what `children`
+ * is — a plain label, a label plus an icon, `asChild` composing onto a
+ * different element entirely.
+ */
+function useScrambleOnHover(ref: React.RefObject<HTMLElement | null>) {
+  React.useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+    let timeoutId = 0
+
+    function scramble() {
+      window.clearTimeout(timeoutId)
+      const walker = document.createTreeWalker(el as Node, NodeFilter.SHOW_TEXT)
+      const nodes: Text[] = []
+      for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n as Text)
+      const originals = nodes.map((n) => n.data)
+      const total = Math.max(0, ...originals.map((o) => o.length))
+
+      let progress = 0
+      const tick = () => {
+        progress++
+        nodes.forEach((node, i) => {
+          const original = originals[i]
+          let out = ""
+          for (let c = 0; c < original.length; c++) {
+            out +=
+              c < progress || original[c] === " "
+                ? original[c]
+                : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+          }
+          node.data = out
+        })
+        if (progress < total) {
+          timeoutId = window.setTimeout(tick, 35)
+        } else {
+          nodes.forEach((node, i) => (node.data = originals[i]))
+        }
+      }
+      tick()
+    }
+
+    el.addEventListener("mouseenter", scramble)
+    el.addEventListener("focus", scramble, true)
+    return () => {
+      el.removeEventListener("mouseenter", scramble)
+      el.removeEventListener("focus", scramble, true)
+      window.clearTimeout(timeoutId)
+    }
+  }, [ref])
+}
+
 /**
  * TTE Button
  *
@@ -72,9 +130,12 @@ function Button({
     asChild?: boolean
   }) {
   const Comp = asChild ? Slot.Root : "button"
+  const ref = React.useRef<HTMLElement>(null)
+  useScrambleOnHover(ref)
 
   return (
     <Comp
+      ref={ref as React.Ref<never>}
       data-slot="button"
       data-intent={intent}
       data-variant={variant}

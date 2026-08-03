@@ -21,11 +21,14 @@ export default function ScrambleHover({
   text,
   className = "",
   scrambleSpeed = 35,
+  revealOnMount = false,
   as: Tag = "span",
 }: {
   text: string;
   className?: string;
   scrambleSpeed?: number;
+  /** Also runs the scramble once, on scroll into view — the "decrypting in" beat for hero text. */
+  revealOnMount?: boolean;
   as?: React.ElementType;
 }) {
   const [display, setDisplay] = useState(text);
@@ -60,12 +63,26 @@ export default function ScrambleHover({
     // trigger from an inner focus target.
     trigger.addEventListener("focus", scramble, true);
 
+    let observer: IntersectionObserver | undefined;
+    if (revealOnMount) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+          scramble();
+          observer?.disconnect();
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(el);
+    }
+
     return () => {
       trigger.removeEventListener("mouseenter", scramble);
       trigger.removeEventListener("focus", scramble, true);
       clearTimeout(timeoutId.current);
+      observer?.disconnect();
     };
-  }, [text, scrambleSpeed]);
+  }, [text, scrambleSpeed, revealOnMount]);
 
   return (
     <Tag ref={ref} className={className}>
