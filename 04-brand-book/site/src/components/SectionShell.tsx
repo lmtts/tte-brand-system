@@ -40,7 +40,7 @@ function Heading({
         className="b-tagline font-display font-extrabold uppercase leading-none tracking-[0.04em] text-paper"
         style={taglineStyle}
       >
-        {heading}
+        <Typewriter text={heading} speed={18} delay={500} />
       </p>
     </div>
   );
@@ -112,11 +112,10 @@ export default function SectionShell({
         scrollTrigger: { trigger: el, start: "top 62%" },
         defaults: { ease: "power3.out" },
       });
-      // The kicker no longer fades via GSAP — Typewriter's own scroll-
-      // triggered character reveal is the entrance moment for it now.
-      tl.from(".b-tagline", { opacity: 0, y: 12, duration: 0.5 });
-      if (hasImg) tl.from(".b-img", { clipPath: "inset(0 0 0 100%)", duration: 0.9 }, "-=0.2");
-      tl.from(".b-body", { opacity: 0, y: 16, duration: 0.6 }, hasImg ? "-=0.3" : "-=0.2");
+      // Neither heading line fades via GSAP anymore — Typewriter's own
+      // scroll-triggered character reveal is the entrance moment for both.
+      if (hasImg) tl.from(".b-img", { clipPath: "inset(0 0 0 100%)", duration: 0.9 });
+      tl.from(".b-body", { opacity: 0, y: 16, duration: 0.6 }, hasImg ? "-=0.3" : 0.3);
 
       // Depth parallax: the topo texture drifts slower than the content
       // riding over it — scaled up first so the drift never reveals an edge.
