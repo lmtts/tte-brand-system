@@ -17,7 +17,7 @@ const TOKEN = "semantic.opacity.topographic-overlay";
  * itself reads clearly — the applied token opacity is documented in the body copy, not demonstrated here. */
 function PatternCard({ name, src, file }: Pattern) {
   return (
-    <div className="flex h-full w-full flex-col border border-paper/15">
+    <div className="flex w-full flex-col border border-paper/15 lg:h-full">
       <div
         className="flex items-center border-b border-paper/15"
         style={{ gap: "calc(8*var(--u))", padding: "calc(12*var(--u)) calc(14*var(--u))" }}
@@ -30,7 +30,7 @@ function PatternCard({ name, src, file }: Pattern) {
           {name}
         </span>
       </div>
-      <div className="relative flex-1 overflow-hidden bg-ink" style={{ minHeight: "calc(220*var(--u))" }}>
+      <div className="relative overflow-hidden bg-ink lg:flex-1" style={{ minHeight: "calc(220*var(--u))" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
         <div
@@ -51,7 +51,7 @@ function PatternCard({ name, src, file }: Pattern) {
 
 function PatternsGrid() {
   return (
-    <div className="grid h-full w-full grid-cols-1 sm:grid-cols-2" style={{ gap: "calc(24*var(--u))" }}>
+    <div className="grid w-full grid-cols-1 sm:grid-cols-2 lg:h-full" style={{ gap: "calc(24*var(--u))" }}>
       {PATTERNS.map((p) => (
         <PatternCard key={p.name} {...p} />
       ))}

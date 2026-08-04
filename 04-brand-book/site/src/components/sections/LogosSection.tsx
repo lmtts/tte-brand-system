@@ -23,7 +23,13 @@ function LogoCard({ src, alt, label }: LogoCardProps) {
           {label}
         </span>
       </div>
-      <div className="flex flex-1 items-center justify-center" style={{ padding: "calc(22*var(--u))" }}>
+      {/* lg:flex-1 only — flex-basis:0% in an auto-height flex column is a
+          known WebKit bug (collapses to 0 on iOS Safari); min-height covers
+          mobile, where the parent card isn't height-bound anyway. */}
+      <div
+        className="flex items-center justify-center lg:flex-1"
+        style={{ padding: "calc(22*var(--u))", minHeight: "calc(140*var(--u))" }}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
@@ -48,7 +54,7 @@ function DownloadArrow() {
 /** The four lockups, as a 2×2 grid — clean, spaced, tactical. Sizes scale with --u. */
 function LogosGrid() {
   return (
-    <div className="grid h-full w-full grid-cols-1 sm:grid-cols-2" style={{ gap: "calc(24*var(--u))" }}>
+    <div className="grid w-full grid-cols-1 sm:grid-cols-2 lg:h-full" style={{ gap: "calc(24*var(--u))" }}>
       <LogoCard src="/assets/logos/complete.svg" alt="To the Ends of the Earth: complete lockup" label="Complete Logo" />
       <LogoCard src="/assets/logos/icon.svg" alt="To the Ends of the Earth: icon mark" label="Icon" />
       <LogoCard src="/assets/logos/wordmark.svg" alt="To the Ends of the Earth: wordmark" label="Wordmark" />

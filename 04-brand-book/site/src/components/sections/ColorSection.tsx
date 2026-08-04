@@ -66,7 +66,11 @@ function PrimarySwatch({ name, hex, token, tone: toneOverride, copied, onCopy }:
           {name}
         </span>
       </div>
-      <div className="relative flex-1" style={{ background: hex, minHeight: "calc(150*var(--u))" }}>
+      {/* lg:flex-1 only — flex-basis:0% + min-height inside an auto-height
+          flex column is a known WebKit bug (iOS Safari collapses it to 0;
+          Chrome doesn't), so mobile relies on min-height alone, unambiguous
+          block sizing. Desktop's parent is height-bound, where flex-1 is safe. */}
+      <div className="relative lg:flex-1" style={{ background: hex, minHeight: "calc(150*var(--u))" }}>
         <div className={`absolute left-0 bottom-0 ${tone}`} style={{ padding: "calc(14*var(--u))" }}>
           <div className="font-mono font-bold leading-none" style={{ fontSize: "calc(18*var(--u))" }}>
             {copied ? "Copied" : <ScrambleHover text={hex} />}
