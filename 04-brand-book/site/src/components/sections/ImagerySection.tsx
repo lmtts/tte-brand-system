@@ -84,14 +84,13 @@ function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => 
         className="absolute inset-x-0 top-0 flex flex-col opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
         style={{ gap: "calc(6*var(--u))", padding: "calc(16*var(--u))" }}
       >
-        <span className="text-fire" style={{ fontSize: "calc(9*var(--u))" }}>
-          <ScrambleHover text={index} />
-        </span>
-        <span
-          className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
-          style={{ fontSize: "calc(11*var(--u))" }}
-        >
-          <ScrambleHover text={name} />
+        <span className="font-mono uppercase leading-none tracking-[0.06em]" style={{ fontSize: "calc(11*var(--u))" }}>
+          <span className="text-fire">
+            <ScrambleHover text={index} />
+          </span>{" "}
+          <span className="text-paper">
+            <ScrambleHover text={name} />
+          </span>
         </span>
         <div className="font-mono text-muted" style={{ fontSize: "calc(11*var(--u))" }}>
           <div className="uppercase" style={{ opacity: 0.85 }}>
