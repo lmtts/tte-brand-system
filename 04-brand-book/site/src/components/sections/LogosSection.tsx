@@ -135,6 +135,7 @@ function LogosShowcasePage() {
   return (
     <SectionShell
       id="logos"
+      kicker="Logos"
       heading="The mark is a dove fused with flame: forward, upward, unmistakable."
       body={
         <>
@@ -170,6 +171,7 @@ function LogosMisusePage() {
   return (
     <SectionShell
       id="logos-misuse"
+      kicker="Logos"
       dividerAbove="page"
       heading="Six ways to break the mark. Don’t."
       body={

@@ -110,6 +110,7 @@ export default function TokensSection() {
   return (
     <SectionShell
       id="tokens"
+      kicker="Tokens"
       heading="Primitives become brand. Brand becomes semantic. Nothing floats free."
       body={
         <>

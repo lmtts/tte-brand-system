@@ -99,6 +99,7 @@ function SystemButtonsPage() {
   return (
     <SectionShell
       id="system"
+      kicker="System"
       heading="One rule decides every button: who it’s for."
       body={
         <>
@@ -271,6 +272,7 @@ function SystemOrganismsPage() {
   return (
     <SectionShell
       id="system-organisms"
+      kicker="System"
       dividerAbove="page"
       heading="Four components no kit ships."
       body={
@@ -414,6 +416,7 @@ function SystemPeopleGroupPage() {
   return (
     <SectionShell
       id="system-people-group"
+      kicker="System"
       dividerAbove="page"
       heading="The dossier that makes a statistic a people."
       body={

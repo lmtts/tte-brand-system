@@ -192,6 +192,7 @@ export default function ImagerySection() {
   return (
     <SectionShell
       id="imagery"
+      kicker="Imagery"
       bleed
       heading="Light that’s been earned, not given."
       body={

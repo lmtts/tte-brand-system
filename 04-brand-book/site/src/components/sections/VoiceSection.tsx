@@ -93,6 +93,7 @@ function VoiceTraitsPage() {
   return (
     <SectionShell
       id="voice"
+      kicker="Voice"
       heading="The statistic feels impossible. The theology says it’s inevitable."
       body={
         <>
@@ -132,6 +133,7 @@ function VoiceTerminologyPage() {
   return (
     <SectionShell
       id="voice-terminology"
+      kicker="Voice"
       dividerAbove="page"
       heading="Words carry theology. Choose them with precision."
       body={

@@ -141,6 +141,7 @@ export default function ColorSection() {
   return (
     <SectionShell
       id="color"
+      kicker="Color"
       heading="Three colors. Maximum impact. Every pixel intentional."
       body={
         <>

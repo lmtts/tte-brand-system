@@ -64,6 +64,7 @@ export default function PatternsSection() {
   return (
     <SectionShell
       id="patterns"
+      kicker="Patterns"
       heading="The contour is the field. Fire Orange, always present."
       body={
         <>

@@ -14,14 +14,35 @@ const TOPO = "/assets/patterns/pattern-tile.svg";
 
 // Declared at module scope (not inside SectionShell's render) so they keep a
 // stable component identity across renders instead of remounting each time.
-function Heading({ heading, style }: { heading: string; style?: React.CSSProperties }) {
+// Two-tier heading: a literal section name (Heading 3, typewriter-revealed —
+// "what is this") over the punchy brand line (Label Large — the actual
+// copy), so a reader gets the section's subject before its rhetoric.
+function Heading({
+  kicker,
+  heading,
+  kickerStyle,
+  taglineStyle,
+}: {
+  kicker: string;
+  heading: string;
+  kickerStyle?: React.CSSProperties;
+  taglineStyle?: React.CSSProperties;
+}) {
   return (
-    <h2
-      className="b-heading font-display font-extrabold uppercase leading-none tracking-[0.02em] text-paper"
-      style={style}
-    >
-      <Typewriter text={heading} speed={20} />
-    </h2>
+    <div className="flex flex-col" style={{ gap: "calc(6*var(--u))" }}>
+      <h2
+        className="b-kicker font-display font-extrabold uppercase leading-none tracking-[0.01em] text-fire"
+        style={kickerStyle}
+      >
+        <Typewriter text={kicker} speed={20} />
+      </h2>
+      <p
+        className="b-tagline font-display font-extrabold uppercase leading-none tracking-[0.04em] text-paper"
+        style={taglineStyle}
+      >
+        {heading}
+      </p>
+    </div>
   );
 }
 function Body({ body, style }: { body: React.ReactNode; style?: React.CSSProperties }) {
@@ -34,6 +55,9 @@ function Body({ body, style }: { body: React.ReactNode; style?: React.CSSPropert
 
 type Props = {
   id: string;
+  /** Literal, short section name (e.g. "Patterns") — Heading 3, typewriter-revealed. */
+  kicker: string;
+  /** The punchy brand line — now Label Large, under the kicker. */
   heading: string;
   body: React.ReactNode;
   /** Right side: a full-bleed image, OR content kept within the right margins. */
@@ -67,7 +91,16 @@ type Props = {
  * SectionFooter live outside this component (mounted once at page level).
  * Type sizes: heading 22 (Mona H4), body 14 (Space Mono Body/Small).
  */
-export default function SectionShell({ id, heading, body, image, children, dividerAbove = "section", bleed = false }: Props) {
+export default function SectionShell({
+  id,
+  kicker,
+  heading,
+  body,
+  image,
+  children,
+  dividerAbove = "section",
+  bleed = false,
+}: Props) {
   const root = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -79,10 +112,11 @@ export default function SectionShell({ id, heading, body, image, children, divid
         scrollTrigger: { trigger: el, start: "top 62%" },
         defaults: { ease: "power3.out" },
       });
-      // The heading no longer fades via GSAP — Typewriter's own scroll-
+      // The kicker no longer fades via GSAP — Typewriter's own scroll-
       // triggered character reveal is the entrance moment for it now.
-      if (hasImg) tl.from(".b-img", { clipPath: "inset(0 0 0 100%)", duration: 0.9 });
-      tl.from(".b-body", { opacity: 0, y: 16, duration: 0.6 }, hasImg ? "-=0.3" : 0.3);
+      tl.from(".b-tagline", { opacity: 0, y: 12, duration: 0.5 });
+      if (hasImg) tl.from(".b-img", { clipPath: "inset(0 0 0 100%)", duration: 0.9 }, "-=0.2");
+      tl.from(".b-body", { opacity: 0, y: 16, duration: 0.6 }, hasImg ? "-=0.3" : "-=0.2");
 
       // Depth parallax: the topo texture drifts slower than the content
       // riding over it — scaled up first so the drift never reveals an edge.
@@ -173,7 +207,12 @@ export default function SectionShell({ id, heading, body, image, children, divid
             gap: "calc(24*var(--u))",
           }}
         >
-          <Heading heading={heading} style={{ fontSize: "calc(22*var(--u))" }} />
+          <Heading
+            kicker={kicker}
+            heading={heading}
+            kickerStyle={{ fontSize: "calc(28*var(--u))" }}
+            taglineStyle={{ fontSize: "calc(16*var(--u))" }}
+          />
           <Body body={body} style={{ fontSize: "calc(14*var(--u))" }} />
         </div>
       </div>
@@ -183,7 +222,7 @@ export default function SectionShell({ id, heading, body, image, children, divid
           page instead of leading with a visual before its context. */}
       <div className="relative z-10 flex min-h-dvh flex-col lg:hidden">
         <div className="flex flex-col gap-5 px-6 pb-6 pt-[68px]">
-          <Heading heading={heading} style={{ fontSize: "20px" }} />
+          <Heading kicker={kicker} heading={heading} kickerStyle={{ fontSize: "22px" }} taglineStyle={{ fontSize: "14px" }} />
           <Body body={body} style={{ fontSize: "14px" }} />
         </div>
 

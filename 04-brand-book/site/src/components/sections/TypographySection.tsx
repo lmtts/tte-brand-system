@@ -111,6 +111,7 @@ function MonaSansPage() {
   return (
     <SectionShell
       id="typography-mona"
+      kicker="Typography"
       heading="Mona Sans carries the voice."
       body={
         <>
@@ -148,6 +149,7 @@ function SpaceMonoPage() {
   return (
     <SectionShell
       id="typography-space"
+      kicker="Typography"
       dividerAbove="page"
       heading="Space Mono is the instrument."
       body={
