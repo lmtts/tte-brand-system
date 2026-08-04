@@ -51,7 +51,7 @@ function PrimarySwatch({ name, hex, token, tone: toneOverride, copied, onCopy }:
     <button
       type="button"
       onClick={onCopy}
-      className="group flex w-full flex-col border border-paper/15 text-left transition-colors hover:border-fire/50 lg:h-full"
+      className="group block w-full border border-paper/15 text-left transition-colors hover:border-fire/50 lg:flex lg:h-full lg:flex-col"
     >
       <div
         className="flex items-center border-b border-paper/15"
@@ -66,11 +66,14 @@ function PrimarySwatch({ name, hex, token, tone: toneOverride, copied, onCopy }:
           {name}
         </span>
       </div>
-      {/* lg:flex-1 only — flex-basis:0% + min-height inside an auto-height
-          flex column is a known WebKit bug (iOS Safari collapses it to 0;
-          Chrome doesn't), so mobile relies on min-height alone, unambiguous
-          block sizing. Desktop's parent is height-bound, where flex-1 is safe. */}
-      <div className="relative lg:flex-1" style={{ background: hex, minHeight: "calc(150*var(--u))" }}>
+      {/* Plain block + a real `height` on mobile (not flex-1 + min-height —
+          flex-basis:0% ignoring min-height in an auto-height column is a
+          known WebKit bug that collapsed this to 0 on iOS Safari even
+          though Chrome rendered it fine). Desktop still flexes to fill. */}
+      <div
+        className="relative lg:flex-1"
+        style={{ background: hex, minHeight: "calc(150*var(--u))" }}
+      >
         <div className={`absolute left-0 bottom-0 ${tone}`} style={{ padding: "calc(14*var(--u))" }}>
           <div className="font-mono font-bold leading-none" style={{ fontSize: "calc(18*var(--u))" }}>
             {copied ? "Copied" : <ScrambleHover text={hex} />}

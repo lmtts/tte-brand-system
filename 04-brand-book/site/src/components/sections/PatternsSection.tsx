@@ -17,7 +17,7 @@ const TOKEN = "semantic.opacity.topographic-overlay";
  * itself reads clearly — the applied token opacity is documented in the body copy, not demonstrated here. */
 function PatternCard({ name, src, file }: Pattern) {
   return (
-    <div className="flex w-full flex-col border border-paper/15 lg:h-full">
+    <div className="block w-full border border-paper/15 lg:flex lg:h-full lg:flex-col">
       <div
         className="flex items-center border-b border-paper/15"
         style={{ gap: "calc(8*var(--u))", padding: "calc(12*var(--u)) calc(14*var(--u))" }}

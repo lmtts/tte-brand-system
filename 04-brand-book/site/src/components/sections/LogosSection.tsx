@@ -10,7 +10,11 @@ type LogoCardProps = {
 /** A single logo lockup — thin border, HUD label header, logo centered and never oversized. */
 function LogoCard({ src, alt, label }: LogoCardProps) {
   return (
-    <div className="flex flex-col border border-paper/15">
+    // Plain block on mobile, flex-col only from lg — a flex-col ancestor
+    // plus a flex-1 (flex-basis:0%) descendant is a known WebKit bug that
+    // silently collapses the descendant to zero height on iOS Safari,
+    // even though Chrome renders it correctly.
+    <div className="block border border-paper/15 lg:flex lg:flex-col">
       <div
         className="flex items-center border-b border-paper/15"
         style={{ gap: "calc(8*var(--u))", padding: "calc(12*var(--u)) calc(14*var(--u))" }}
@@ -23,9 +27,6 @@ function LogoCard({ src, alt, label }: LogoCardProps) {
           {label}
         </span>
       </div>
-      {/* lg:flex-1 only — flex-basis:0% in an auto-height flex column is a
-          known WebKit bug (collapses to 0 on iOS Safari); min-height covers
-          mobile, where the parent card isn't height-bound anyway. */}
       <div
         className="flex items-center justify-center lg:flex-1"
         style={{ padding: "calc(22*var(--u))", minHeight: "calc(140*var(--u))" }}
