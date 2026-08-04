@@ -37,12 +37,14 @@ function NavItem({ section, active, onGo }: { section: Section; active: string; 
  * per section — it never scrolls, never repeats). Closed: logo + label +
  * menu. Open: adds the 01–10 index with the current section highlighted.
  * Hidden while on the cover, fades in once scrolled past it (mirrors
- * MobileNav's behavior). Mobile/tablet uses MobileNav instead.
+ * MobileNav's behavior) — and hidden again on the closing section, its
+ * bookend. Mobile/tablet uses MobileNav instead.
  */
 export default function SectionNav() {
   const active = useActiveSection();
   const [open, setOpen] = useState(false);
   const [past, setPast] = useState(false);
+  const visible = past && active !== "11";
   const listRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
@@ -94,7 +96,7 @@ export default function SectionNav() {
   return (
     <div
       className={`secd fixed z-30 hidden transition-opacity duration-300 lg:block ${
-        past ? "opacity-100" : "pointer-events-none opacity-0"
+        visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
       style={{ left: "calc(36*var(--u))", top: "calc(45*var(--u))" }}
     >
