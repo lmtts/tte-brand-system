@@ -99,29 +99,6 @@ html.lenis body {
   }
 }
 
-/* Snap-settle flicker — a HUD panel "recalculating" for a couple frames the
-   instant a section/page locks into place, not a continuous effect. */
-@keyframes hud-snap-flicker {
-  0% {
-    filter: brightness(1);
-  }
-  20% {
-    filter: brightness(1.15) contrast(1.05);
-  }
-  45% {
-    filter: brightness(0.94);
-  }
-  70% {
-    filter: brightness(1.08);
-  }
-  100% {
-    filter: brightness(1);
-  }
-}
-.hud-snap-flicker {
-  animation: hud-snap-flicker 180ms steps(2, end);
-}
-
 /* Typewriter cursor — terminal-style blink, no easing. */
 .typewriter-cursor {
   display: inline-block;
@@ -189,6 +166,16 @@ html.lenis body {
 .secd {
   --u: max(0.66px, min(0.06944vw, 1px));
 }
+/* Below lg, content sections stack single-column (text then content) instead
+   of the 1440-frame two-column layout the fluid scale was tuned for — so the
+   floor above reads cramped (buttons, cards, tables sized for a much wider
+   canvas). Give mobile/tablet a fixed, closer-to-desktop-max scale instead of
+   shrinking with viewport width. */
+@media (max-width: 1023px) {
+  .secd {
+    --u: 0.9px;
+  }
+}
 /* image left edge = Figma col 6 start (616 / 1440), fluid; bleeds to the right. */
 .sec-imgleft {
   left: 42.78%;
@@ -199,9 +186,6 @@ html.lenis body {
     scroll-behavior: auto;
   }
   .cv-chevron {
-    animation: none;
-  }
-  .hud-snap-flicker {
     animation: none;
   }
   .typewriter-cursor {

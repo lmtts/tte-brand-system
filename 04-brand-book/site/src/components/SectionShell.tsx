@@ -220,7 +220,14 @@ export default function SectionShell({
       {/* ===== MOBILE / TABLET (<1024) ===== */}
       {/* Text first, then image/content — reads top-down like the rest of the
           page instead of leading with a visual before its context. */}
-      <div className="relative z-10 flex min-h-dvh flex-col lg:hidden">
+      {/* h-dvh + its own scroll (not min-h-dvh) — a section taller than the
+          viewport scrolls internally instead of growing past it, which was
+          fighting Lenis's mandatory snap (endless re-snap to the top) and
+          collapsing any flex-1 child (image/grid) to zero height. */}
+      <div
+        className="relative z-10 flex h-dvh flex-col overflow-y-auto lg:hidden"
+        data-lenis-prevent
+      >
         <div className="flex flex-col gap-5 px-6 pb-6 pt-[68px]">
           <Heading kicker={kicker} heading={heading} kickerStyle={{ fontSize: "22px" }} taglineStyle={{ fontSize: "14px" }} />
           <Body body={body} style={{ fontSize: "14px" }} />

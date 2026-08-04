@@ -19,7 +19,8 @@ export default function SectionFooter() {
   const [past, setPast] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setPast(window.scrollY > window.innerHeight * 0.72);
+    const onScroll = () =>
+      setPast((prev) => (prev ? window.scrollY > window.innerHeight * 0.55 : window.scrollY > window.innerHeight * 0.72));
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

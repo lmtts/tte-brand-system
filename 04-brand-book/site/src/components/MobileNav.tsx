@@ -38,7 +38,8 @@ export default function MobileNav() {
   const active = useActiveSection();
 
   useEffect(() => {
-    const onScroll = () => setPast(window.scrollY > window.innerHeight * 0.72);
+    const onScroll = () =>
+      setPast((prev) => (prev ? window.scrollY > window.innerHeight * 0.55 : window.scrollY > window.innerHeight * 0.72));
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -57,8 +58,6 @@ export default function MobileNav() {
     return () => window.removeEventListener("keydown", onKey);
   }, [openMenu]);
 
-  const current = SECTIONS.find((s) => s.index === active);
-
   const go = (id: string, ready: boolean) => {
     if (!ready) return;
     setOpenMenu(false);
@@ -76,9 +75,10 @@ export default function MobileNav() {
         <div className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={BIRD} alt="" className="h-[26px] w-auto" aria-hidden />
-          <span className="font-mono text-[12px] uppercase tracking-[0.06em]">
-            <span className="text-fire">{current?.index}</span>
-            <span className="text-paper"> / {current?.name}</span>
+          <span className="font-mono text-[11px] uppercase leading-[1.3] tracking-[0.06em] text-muted">
+            To the Ends of the Earth
+            <br />
+            Brand Guidelines v1.0
           </span>
         </div>
         <button

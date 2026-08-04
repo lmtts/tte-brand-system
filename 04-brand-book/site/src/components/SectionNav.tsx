@@ -49,7 +49,11 @@ export default function SectionNav() {
   const tl = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setPast(window.scrollY > window.innerHeight * 0.72);
+    // Hysteresis (different show/hide thresholds) — a single threshold let
+    // scroll jitter right at the boundary flip `past` back and forth faster
+    // than the opacity transition, reading as a flicker.
+    const onScroll = () =>
+      setPast((prev) => (prev ? window.scrollY > window.innerHeight * 0.55 : window.scrollY > window.innerHeight * 0.72));
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
