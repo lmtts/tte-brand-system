@@ -62,14 +62,14 @@ const SPECS = [
  * a scrim + its HUD info (scrambling in) surface over it. Click still opens
  * the uncropped lightbox.
  */
-function LayerTile({ layer, onOpen, bottomRow }: { layer: Layer; onOpen: (layer: Layer) => void; bottomRow: boolean }) {
+function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => void }) {
   const { index, name, descriptor, src, alt, spec } = layer;
   return (
     <button
       type="button"
       onClick={() => onOpen(layer)}
       aria-label={`View ${name} full size`}
-      className="group relative block h-full w-full cursor-zoom-in overflow-hidden bg-ink"
+      className="group relative block h-full w-full cursor-zoom-in overflow-hidden bg-ink text-left"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -77,36 +77,28 @@ function LayerTile({ layer, onOpen, bottomRow }: { layer: Layer; onOpen: (layer:
         alt={alt}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
       />
-      {/* scrim — contrast for the info below, only on hover/focus */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
+      {/* scrim — contrast for the info above, only on hover/focus. Sits at
+          the top (not bottom) so it never collides with the fixed footer. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
       <div
-        className="absolute inset-x-0 bottom-0 flex items-start opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
-        style={{
-          gap: "calc(6*var(--u))",
-          padding: "calc(16*var(--u))",
-          // Bottom-row tiles sit flush with the viewport edge, where the
-          // fixed footer bar overlays — extra clearance keeps text from
-          // disappearing under it.
-          paddingBottom: bottomRow ? "calc(56*var(--u))" : "calc(16*var(--u))",
-        }}
+        className="absolute inset-x-0 top-0 flex flex-col opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
+        style={{ gap: "calc(6*var(--u))", padding: "calc(16*var(--u))" }}
       >
-        <span className="shrink-0 text-fire" style={{ fontSize: "calc(9*var(--u))" }}>
+        <span className="text-fire" style={{ fontSize: "calc(9*var(--u))" }}>
           <ScrambleHover text={index} />
         </span>
-        <div className="flex flex-col" style={{ gap: "calc(6*var(--u))" }}>
-          <span
-            className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
-            style={{ fontSize: "calc(11*var(--u))" }}
-          >
-            <ScrambleHover text={name} />
-          </span>
-          <div className="font-mono text-muted" style={{ fontSize: "calc(11*var(--u))" }}>
-            <div className="uppercase" style={{ opacity: 0.85 }}>
-              <ScrambleHover text={descriptor} />
-            </div>
-            <div style={{ marginTop: "calc(3*var(--u))" }}>
-              <ScrambleHover text={spec} />
-            </div>
+        <span
+          className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
+          style={{ fontSize: "calc(11*var(--u))" }}
+        >
+          <ScrambleHover text={name} />
+        </span>
+        <div className="font-mono text-muted" style={{ fontSize: "calc(11*var(--u))" }}>
+          <div className="uppercase" style={{ opacity: 0.85 }}>
+            <ScrambleHover text={descriptor} />
+          </div>
+          <div style={{ marginTop: "calc(3*var(--u))" }}>
+            <ScrambleHover text={spec} />
           </div>
         </div>
       </div>
@@ -118,8 +110,8 @@ function LayerTile({ layer, onOpen, bottomRow }: { layer: Layer; onOpen: (layer:
 function LayersGrid({ onOpen }: { onOpen: (layer: Layer) => void }) {
   return (
     <div className="grid h-full w-full grid-cols-2 grid-rows-2">
-      {LAYERS.map((l, i) => (
-        <LayerTile key={l.index} layer={l} onOpen={onOpen} bottomRow={i >= 2} />
+      {LAYERS.map((l) => (
+        <LayerTile key={l.index} layer={l} onOpen={onOpen} />
       ))}
     </div>
   );
