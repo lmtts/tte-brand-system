@@ -93,7 +93,7 @@ export default function OutroSection() {
       </p>
 
       <div
-        className="ot-reveal relative flex flex-col items-center sm:flex-row"
+        className="ot-reveal relative flex w-full max-w-xs flex-col items-stretch sm:max-w-none sm:flex-row sm:items-center"
         style={{ marginTop: "calc(48*var(--u))", gap: "calc(12*var(--u))" }}
       >
         {LINKS.map((l) => (
@@ -102,7 +102,7 @@ export default function OutroSection() {
             href={l.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center border border-paper/30 font-mono font-bold uppercase tracking-[0.08em] text-paper transition-colors hover:border-fire hover:text-fire"
+            className="inline-flex items-center justify-center border border-paper/30 font-mono font-bold uppercase tracking-[0.08em] text-paper transition-colors hover:border-fire hover:text-fire sm:justify-start"
             style={{ gap: "calc(10*var(--u))", padding: "calc(12*var(--u)) calc(18*var(--u))", fontSize: "calc(11*var(--u))" }}
           >
             <ScrambleHover text={l.label} />

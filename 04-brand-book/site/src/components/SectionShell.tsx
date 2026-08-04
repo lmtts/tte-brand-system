@@ -219,29 +219,25 @@ export default function SectionShell({
 
       {/* ===== MOBILE / TABLET (<1024) ===== */}
       {/* Text first, then image/content — reads top-down like the rest of the
-          page instead of leading with a visual before its context. */}
-      {/* h-dvh + its own scroll (not min-h-dvh) — a section taller than the
-          viewport scrolls internally instead of growing past it, which was
-          fighting Lenis's mandatory snap (endless re-snap to the top) and
-          collapsing any flex-1 child (image/grid) to zero height. */}
-      <div
-        className="relative z-10 flex h-dvh flex-col overflow-y-auto lg:hidden"
-        data-lenis-prevent
-      >
+          page instead of leading with a visual before its context. Natural
+          document flow, no per-section height clamp or nested scroll: Lenis
+          and its mandatory snap are desktop-only (see LenisProvider), so
+          mobile is just the page scrolling, one scrollbar, full stop. */}
+      <div className="relative z-10 flex min-h-dvh flex-col lg:hidden">
         <div className="flex flex-col gap-5 px-6 pb-6 pt-[68px]">
           <Heading kicker={kicker} heading={heading} kickerStyle={{ fontSize: "22px" }} taglineStyle={{ fontSize: "14px" }} />
           <Body body={body} style={{ fontSize: "14px" }} />
         </div>
 
         {image ? (
-          <div className="relative w-full flex-1 overflow-hidden">
+          <div className="relative w-full overflow-hidden" style={{ height: "50vh" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={image.src} alt={image.alt} className="h-full w-full object-cover object-center" />
           </div>
         ) : bleed ? (
-          <div className="relative w-full flex-1 overflow-hidden">{children}</div>
+          <div className="relative w-full overflow-hidden">{children}</div>
         ) : (
-          <div className="flex-1 px-6 pb-24">{children}</div>
+          <div className="px-6 pb-24">{children}</div>
         )}
       </div>
     </section>

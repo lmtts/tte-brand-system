@@ -69,7 +69,7 @@ function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => 
       type="button"
       onClick={() => onOpen(layer)}
       aria-label={`View ${name} full size`}
-      className="group relative block h-full w-full cursor-zoom-in overflow-hidden bg-ink text-left"
+      className="group relative block aspect-square w-full cursor-zoom-in overflow-hidden bg-ink text-left lg:aspect-auto lg:h-full"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -108,7 +108,7 @@ function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => 
 /** 2×2, no gap — same edge-to-edge sizing as the single portrait in "The Brand" (Section 02). */
 function LayersGrid({ onOpen }: { onOpen: (layer: Layer) => void }) {
   return (
-    <div className="grid h-full w-full grid-cols-2 grid-rows-2">
+    <div className="grid w-full grid-cols-2 lg:h-full lg:grid-rows-2">
       {LAYERS.map((l) => (
         <LayerTile key={l.index} layer={l} onOpen={onOpen} />
       ))}

@@ -51,7 +51,7 @@ function PrimarySwatch({ name, hex, token, tone: toneOverride, copied, onCopy }:
     <button
       type="button"
       onClick={onCopy}
-      className="group flex h-full w-full flex-col border border-paper/15 text-left transition-colors hover:border-fire/50"
+      className="group flex w-full flex-col border border-paper/15 text-left transition-colors hover:border-fire/50 lg:h-full"
     >
       <div
         className="flex items-center border-b border-paper/15"
@@ -91,7 +91,7 @@ function BiomeSwatch({ name, hex, token, copied, onCopy }: Swatch & { copied: bo
       type="button"
       onClick={onCopy}
       title={token}
-      className="relative h-full w-full border border-paper/15 text-left transition-colors hover:border-fire/50"
+      className="relative w-full border border-paper/15 text-left transition-colors hover:border-fire/50 lg:h-full"
       style={{ minHeight: "calc(88*var(--u))", background: hex }}
     >
       <div className={`absolute left-0 bottom-0 ${tone}`} style={{ padding: "calc(10*var(--u))" }}>
@@ -113,7 +113,7 @@ function BiomeSwatch({ name, hex, token, copied, onCopy }: Swatch & { copied: bo
 function ColorGrid() {
   const { copied, copy } = useCopyHex();
   return (
-    <div className="flex h-full w-full flex-col justify-center" style={{ gap: "calc(28*var(--u))" }}>
+    <div className="flex w-full flex-col lg:h-full lg:justify-center" style={{ gap: "calc(28*var(--u))" }}>
       <div className="grid grid-cols-1 sm:grid-cols-3" style={{ gap: "calc(24*var(--u))" }}>
         {PRIMARY.map((s) => (
           <PrimarySwatch key={s.name} {...s} copied={copied === s.hex} onCopy={() => copy(s.hex)} />
