@@ -101,4 +101,4 @@ Full detail: `DESIGN.md`.
 
 ## Status
 
-All layers built and synchronized (Brand → Design → Dev → Agent). See `01-brand-system/docs/audit-report-2026-07-24.md` for the completion audit, and `01-brand-system/docs/TTE-Brand-Workflow-Master.md` for the full phase history.
+All layers built and synchronized (Brand → Design → Dev → Agent), plus a shipped Phase 7: the interactive brand book is live at `tte-brand-system.vercel.app`. See `01-brand-system/docs/audit-report-2026-07-24.md` for the completion audit, `01-brand-system/docs/TTE-Brand-Workflow-Master.md` for the full phase history, and `04-brand-book/BRAND-GUIDELINES-SITE-PLAN.md` for the site's own build log.

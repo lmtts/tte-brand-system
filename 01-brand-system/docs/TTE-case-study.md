@@ -64,9 +64,19 @@ A brand that exists simultaneously as validated tokens, a running React componen
 
 ---
 
+## Phase 7 — Shipping the interactive brand book
+
+The system above got proven under a real, live artifact: an 11-section interactive brand book (Next.js, GSAP, Lenis), deployed to production at `tte-brand-system.vercel.app` and iterated against real desktop *and* real-device mobile feedback, not just local testing.
+
+**What it does that a static PDF can't:** a "mission intel / spec ops" motion language built for the brand's Explorer archetype — a typewriter reveal on every section heading, a terminal-decode/scramble effect on interactive labels and data, a live scroll-locked "slide" feel on desktop, scroll-linked depth parallax on the background texture — all reduced-motion-safe, and a real interactive lightbox, copy-to-clipboard swatches, and download kits (logo assets, voice guide, tokens) generated at build time from the same single-source-of-truth files as the rest of the system, never duplicated by hand.
+
+**What made it hard, and what it taught:** several real, non-obvious bugs surfaced only once the site was live on a real phone — a WebKit-only flexbox rendering bug that silently hid content on iOS Safari while rendering perfectly in every automated check available; a scroll-snap interaction pattern that worked well on desktop and had to be entirely rethought (not just tuned) for mobile once real content length was longer than one screen; a Tailwind build-time class-purging trap that silently dropped three of four color swatches. None of these were visible to a quick look — each needed either real-device confirmation or direct measurement to catch. Full technical writeup of the pattern: `METHOD.md`.
+
+---
+
 ## Facts for the write-up
 
-- **Scope:** identity system, design system, dev system, brand agent — 6 phases.
-- **Stack:** Figma (source of visual truth) · React + Vite + TypeScript + Tailwind v4 + shadcn/ui · Claude Code as orchestrator.
-- **Deliverables:** 4 token formats · 5 Figma Foundation pages + 2 component pages · 20 components (15 base + 5 organisms) · 3 generation skills + 1 agent · DESIGN.md, specs, dev README, method doc.
-- **Signature artifacts to feature visually:** the HUD Panel, the People Group Card, the Mission Stat, the Button intent system, the topographic texture.
+- **Scope:** identity system, design system, dev system, brand agent, shipped interactive artifact — 7 phases.
+- **Stack:** Figma (source of visual truth) · React + Vite + TypeScript + Tailwind v4 + shadcn/ui · Next.js + GSAP + Lenis for the brand book site · Vercel deploy · Claude Code as orchestrator.
+- **Deliverables:** 4 token formats · 5 Figma Foundation pages + 2 component pages · 20 components (15 base + 5 organisms) · 3 generation skills + 1 agent · DESIGN.md, specs, dev README, method doc · an 11-section live interactive brand book site.
+- **Signature artifacts to feature visually:** the HUD Panel, the People Group Card, the Mission Stat, the Button intent system, the topographic texture, the interactive brand book's typewriter/scramble motion system.
