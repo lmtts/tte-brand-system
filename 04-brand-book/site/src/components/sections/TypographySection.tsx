@@ -160,7 +160,7 @@ function SpaceMonoPage() {
           </p>
           <p className="mt-[1em]">
             HUD and labels run uppercase, wide-tracked, built for a data-readout feel. Body text
-            drops to sentence case for articles and captions, in Regular or Bold.
+            drops to sentence case for articles and captions, set in Regular or Bold weight.
           </p>
           <DownloadFontButton
             href="https://fonts.google.com/specimen/Space+Mono?preview.script=Latn"

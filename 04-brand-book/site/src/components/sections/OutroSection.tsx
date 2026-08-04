@@ -12,8 +12,8 @@ const TOPO = "/assets/patterns/pattern-tile.svg";
 const ICON = "/assets/logos/icon.svg";
 
 const LINKS = [
-  { label: "GitHub — Brand System", href: "https://github.com/lmtts/tte-brand-system" },
-  { label: "Instagram — @ttee_go", href: "https://www.instagram.com/ttee_go/" },
+  { label: "GitHub · Brand System", href: "https://github.com/lmtts/tte-brand-system" },
+  { label: "Instagram · @ttee_go", href: "https://www.instagram.com/ttee_go/" },
   { label: "Hope Channel International", href: "https://hopechannelinternational.org/" },
 ];
 

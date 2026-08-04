@@ -100,13 +100,13 @@ function SystemButtonsPage() {
     <SectionShell
       id="system"
       kicker="System"
-      heading="One rule decides every button: who it’s for."
+      heading="One rule decides every button: exactly who it's for."
       body={
         <>
           <p>
             The interface runs on shadcn/ui, kept neutral by design so the brand disappears into it
             rather than fighting it. Radius, color, and type flow from the token layer, so every
-            component is on-brand by construction.
+            component is on-brand from the start.
           </p>
           <p className="mt-[1em]">
             <span className="text-fire">Intent</span> fixes the typeface by role.{" "}
@@ -418,7 +418,7 @@ function SystemPeopleGroupPage() {
       id="system-people-group"
       kicker="System"
       dividerAbove="page"
-      heading="The dossier that makes a statistic a people."
+      heading="The dossier that turns a cold statistic into a people."
       body={
         <p>
           The People Group Card composes every other primitive: photography or the topographic

@@ -111,13 +111,13 @@ export default function TokensSection() {
     <SectionShell
       id="tokens"
       kicker="Tokens"
-      heading="Primitives become brand. Brand becomes semantic. Nothing floats free."
+      heading="Primitives become brand. Brand becomes semantic. Nothing ever floats free."
       body={
         <>
           <p>
             Every value lives in three layers. A raw primitive means nothing on its own; brand
             assigns it meaning; semantic decides where and how it&rsquo;s applied. Components only
-            ever consume semantic tokens, never the raw values beneath them.
+            ever consume semantic tokens, never the raw values sitting beneath them.
           </p>
           <p className="mt-[1em]">
             Three faces, one system: canonical tokens, the dev project, and Figma stay in sync. A

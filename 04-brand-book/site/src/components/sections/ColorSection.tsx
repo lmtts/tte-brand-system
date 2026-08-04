@@ -142,12 +142,12 @@ export default function ColorSection() {
     <SectionShell
       id="color"
       kicker="Color"
-      heading="Three colors. Maximum impact. Every pixel intentional."
+      heading="Three colors. Maximum impact. Every pixel earns its place."
       body={
         <>
           <p>
             Fire Orange is reserved for emphasis: calls to action, key words, the one accent that
-            matters. It never becomes a background.
+            matters. It never becomes a passive background.
           </p>
           <p className="mt-[1em]">
             Black is the default ground, the color of soil and unreached places. White carries the

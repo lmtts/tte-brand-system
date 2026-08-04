@@ -135,7 +135,7 @@ function VoiceTerminologyPage() {
       id="voice-terminology"
       kicker="Voice"
       dividerAbove="page"
-      heading="Words carry theology. Choose them with precision."
+      heading="Words carry theology. Choose every one with precision."
       body={
         <p>
           Terminology isn&rsquo;t style, it&rsquo;s doctrine made visible. These are the terms every

@@ -142,7 +142,7 @@ function LogosShowcasePage() {
           <p>
             Four lockups cover every use: the complete mark for hero moments, the icon alone, the
             wordmark where the icon already stands nearby, and the Hope Channel co-brand for
-            official materials.
+            official use.
           </p>
           <p className="mt-[1em]">
             Clearspace equals the height of the &ldquo;T&rdquo; in the wordmark. White on dark or
@@ -176,9 +176,8 @@ function LogosMisusePage() {
       heading="Six ways to break the mark. Don’t."
       body={
         <p>
-          Every violation here has shown up in the wild at least once. The mark only works when
-          it stays exactly as issued: no stretch, no rotation, no unapproved color, no split
-          lockup, no drowning it in noise, no going solo in official materials.
+          Every violation here has shown up in the wild at least once. The mark only works
+          exactly as issued, pixel for pixel, every single time.
         </p>
       }
     >
