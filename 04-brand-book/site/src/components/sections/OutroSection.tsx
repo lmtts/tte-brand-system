@@ -93,7 +93,7 @@ export default function OutroSection() {
       </p>
 
       <div
-        className="ot-reveal relative flex w-full max-w-xs flex-col items-stretch sm:max-w-none sm:flex-row sm:items-center"
+        className="ot-reveal relative flex w-full max-w-xs flex-col items-stretch sm:w-auto sm:max-w-none sm:flex-row sm:items-center"
         style={{ marginTop: "calc(48*var(--u))", gap: "calc(12*var(--u))" }}
       >
         {LINKS.map((l) => (

@@ -34,7 +34,7 @@ function Heading({
         className="b-kicker font-display font-extrabold uppercase leading-none tracking-[0.01em] text-fire"
         style={kickerStyle}
       >
-        <Typewriter text={kicker} speed={20} />
+        <Typewriter text={kicker} speed={55} />
       </h2>
       <p
         className="b-tagline font-display font-extrabold uppercase leading-none tracking-[0.04em] text-paper"
