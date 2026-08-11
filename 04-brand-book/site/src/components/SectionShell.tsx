@@ -79,6 +79,13 @@ type Props = {
    * layout (e.g. Imagery's hover grid).
    */
   bleed?: boolean;
+  /**
+   * Force the text/content divider line to draw even in `bleed` mode. Bleed normally
+   * omits it (a full-bleed photo needs no seam cut into it), but content that bleeds only
+   * to the outer edges while still wanting the standard left seam (e.g. Examples' pannable
+   * canvas) can opt back in.
+   */
+  showDivider?: boolean;
 };
 
 /**
@@ -100,6 +107,7 @@ export default function SectionShell({
   children,
   dividerAbove = "section",
   bleed = false,
+  showDivider = false,
 }: Props) {
   const root = useRef<HTMLElement>(null);
 
@@ -160,7 +168,7 @@ export default function SectionShell({
       <div className="hidden lg:block">
         {/* vertical rule between text and content — only in "children" mode
             (a full-bleed photo needs no seam cut into it) */}
-        {!image && !bleed && (
+        {!image && (!bleed || showDivider) && (
           <div
             aria-hidden
             className="absolute bg-paper/15"
@@ -180,7 +188,16 @@ export default function SectionShell({
             <img src={image.src} alt={image.alt} className="b-img h-full w-full object-cover object-center" />
           </div>
         ) : bleed ? (
-          <div className="sec-imgleft absolute inset-y-0 right-0 overflow-hidden">{children}</div>
+          // With showDivider, the bleed region starts AT the divider (540u) instead of
+          // .sec-imgleft's 42.78% — those are two different rulers (42.78% is Figma col 6,
+          // where a full-bleed photo starts; 540u is the text/content seam), and using the
+          // photo ruler here left a ~100px gap between the line and the content.
+          <div
+            className={`absolute inset-y-0 right-0 overflow-hidden ${showDivider ? "" : "sec-imgleft"}`}
+            style={showDivider ? { left: "calc(540*var(--u))" } : undefined}
+          >
+            {children}
+          </div>
         ) : (
           <div
             className="sec-imgleft absolute inset-y-0 right-0"

@@ -1,7 +1,7 @@
 // Single source of truth for the brand book section order (Lucas-defined).
 export type Section = {
   id: string; // primary page id — where nav clicks jump to
-  index: string; // "01".."10"
+  index: string; // "01".."13"
   name: string;
   status: "ready" | "pending";
   /**
@@ -23,43 +23,38 @@ export type Section = {
 export const SECTIONS: Section[] = [
   { id: "cover", index: "01", name: "Cover", status: "ready", poweredTone: "light" },
   { id: "the-brand", index: "02", name: "The Brand", status: "ready", poweredTone: "light" },
+  { id: "brand-system", index: "03", name: "Brand System", status: "ready", poweredTone: "light" },
   {
     id: "logos",
-    index: "03",
+    index: "04",
     name: "Logos",
     status: "ready",
     poweredTone: "light",
     pageIds: ["logos", "logos-misuse"],
   },
-  { id: "color", index: "04", name: "Color", status: "ready", poweredTone: "light" },
+  { id: "color", index: "05", name: "Color", status: "ready", poweredTone: "light" },
   {
     id: "typography-mona",
-    index: "05",
+    index: "06",
     name: "Typography",
     status: "ready",
     poweredTone: "light",
     pageIds: ["typography-mona", "typography-space"],
   },
-  { id: "patterns", index: "06", name: "Patterns", status: "ready", poweredTone: "light" },
-  { id: "imagery", index: "07", name: "Imagery", status: "ready", poweredTone: "light" },
-  {
-    id: "voice",
-    index: "08",
-    name: "Voice",
-    status: "ready",
-    poweredTone: "light",
-    pageIds: ["voice", "voice-terminology"],
-  },
+  { id: "patterns", index: "07", name: "Patterns", status: "ready", poweredTone: "light" },
+  { id: "imagery", index: "08", name: "Imagery", status: "ready", poweredTone: "light" },
+  { id: "examples", index: "09", name: "Examples", status: "ready", poweredTone: "light" },
+  { id: "voice", index: "10", name: "Voice", status: "ready", poweredTone: "light" },
   {
     id: "system",
-    index: "09",
+    index: "11",
     name: "System",
     status: "ready",
     poweredTone: "light",
     pageIds: ["system", "system-organisms", "system-people-group"],
   },
-  { id: "tokens", index: "10", name: "Tokens", status: "ready", poweredTone: "light" },
-  { id: "outro", index: "11", name: "Close", status: "ready", poweredTone: "light" },
+  { id: "tokens", index: "12", name: "Tokens", status: "ready", poweredTone: "light" },
+  { id: "outro", index: "13", name: "Close", status: "ready", poweredTone: "light" },
 ];
 
 // All page ids belonging to a section, in scroll order (defaults to [id]).

@@ -38,11 +38,16 @@ export default function ScrambleHover({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const trigger = el.closest("a, button") ?? el;
+    const trigger = (el.closest("a, button") ?? el) as HTMLElement;
 
     function scramble() {
       if (prefersReducedMotion()) return;
       clearTimeout(timeoutId.current);
+      // Lock the trigger to its resting width for the duration of the scramble — on a
+      // proportional face (Mona Sans), random characters vary in width frame to frame,
+      // which otherwise makes the button visibly resize while it scrambles. A monospace
+      // face (Space Mono) never had this problem, but locking width is harmless there too.
+      trigger.style.width = `${trigger.getBoundingClientRect().width}px`;
       let progress = 0;
       const tick = () => {
         progress++;
@@ -52,8 +57,12 @@ export default function ScrambleHover({
           else out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
         }
         setDisplay(out);
-        if (progress < text.length) timeoutId.current = window.setTimeout(tick, scrambleSpeed);
-        else setDisplay(text);
+        if (progress < text.length) {
+          timeoutId.current = window.setTimeout(tick, scrambleSpeed);
+        } else {
+          setDisplay(text);
+          trigger.style.width = "";
+        }
       };
       tick();
     }

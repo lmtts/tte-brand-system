@@ -16,7 +16,7 @@ const HC = "/assets/cover/hc-mark.svg";
  * Section 01 — Cover. Faithful to Figma frame 411:3.
  * Desktop + tablet: full-width composition; element sizes scale with the
  * viewport (via --u, the size of one design px) while the layout spans edge
- * to edge and the rule between logo and "Brand Guidelines" flexes to fill.
+ * to edge and the rule between logo and "Brand System" flexes to fill.
  * Mobile: centered stack. Topo (pattern-tile, white @0.06) covers the area.
  */
 export default function CoverSection() {
@@ -108,7 +108,7 @@ export default function CoverSection() {
           <img src={LOGO} alt="To the Ends of the Earth" className="cv-logo cv-logo-d shrink-0" />
           <div className="cv-reveal cv-line h-px flex-1 bg-paper/70" />
           <div className="cv-reveal cv-hud shrink-0 text-right">
-            <ScrambleHover text="Brand Guidelines" revealOnMount />
+            <ScrambleHover text="Brand System" revealOnMount />
           </div>
         </div>
 
@@ -141,7 +141,7 @@ export default function CoverSection() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={LOGO} alt="To the Ends of the Earth" className="cv-logo h-[44px] w-auto" />
           <div className="cv-reveal font-mono text-[11px] font-bold uppercase leading-[1.4] tracking-[0.06em]">
-            <ScrambleHover text="Brand Guidelines" revealOnMount />
+            <ScrambleHover text="Brand System" revealOnMount />
           </div>
         </div>
 

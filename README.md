@@ -1,104 +1,128 @@
-# To The Ends of The Earth — Brand System
+# To The Ends of The Earth: Brand System
 
-This repository is the complete brand system for **To The Ends of The Earth (TTE)**, a Hope Channel movement to mobilize prayer and investment for the world's most unreached people groups.
+**To The Ends of The Earth (TTE)** is a Hope Channel movement that mobilizes prayer and investment for the world's most unreached people groups.
 
-It is not just a folder of logos. It is a **living system** with four connected layers: the brand's identity, its design components, its code, and an AI agent that generates on-brand assets. Everything is synchronized — change a color once and it updates everywhere.
+**This repository is TTE's brand system.** It holds every rule, file, and tool needed to make anything on-brand: colors, fonts, logo, voice, imagery, ready-to-use interface components, and an AI assistant that generates on-brand content on request.
 
-**New here? Read this file top to bottom. It tells you what this is, how it's organized, and how to use it — whether you're a designer, a developer, a team member, or an AI.**
+New here and not sure what any of that means, or what "repository" even means? Keep reading: this file explains it from zero.
 
 ---
 
-## What this is, in one picture
+## First, the basics
+
+**This is a GitHub repository.** GitHub is a website that stores a project's files with a complete history of every change. Think of it as a shared folder that never loses a version and that several people (or AIs) can work in without overwriting each other. You're reading this file because it's the first thing GitHub shows when someone opens the repository.
+
+**A "brand system" is everything a brand needs to stay consistent, kept in one synchronized place**, instead of scattered across someone's laptop, an old PDF, and a designer's memory. Change a color once here, and it updates everywhere it's used: the Figma file, the code, the documents. Nothing drifts out of sync because there is only one place the truth lives.
+
+---
+
+## First time here? Start with what you need
+
+| What you want | Do this |
+|---|---|
+| **See the whole brand, browse it visually** | Open the interactive brand system site: **tte-brand-system.vercel.app** |
+| **Get a headline, caption, image prompt, or deck outline written for you** | Skip to [If you're generating content](#if-youre-generating-content) below |
+| **Design something in Figma** | Skip to [If you're a designer](#if-youre-a-designer) below |
+| **Build a screen or product that uses TTE's components** | Skip to [If you're a developer](#if-youre-a-developer) below |
+| **Just want to understand how this is organized** | Keep reading top to bottom |
+
+---
+
+## How it's organized: four layers, one system
 
 ```
 BRAND  →  DESIGN  →  DEV  →  AGENT
 identity   interface  code    generation
 ```
 
-- **Brand** — who TTE is: colors, fonts, logo, voice, imagery. The raw identity.
-- **Design** — those identity pieces turned into reusable interface components (buttons, cards, panels).
-- **Dev** — the same components as real code developers can drop into a product, plus the design "tokens" in every format.
-- **Agent** — an AI that holds all of the above and can write copy, build image prompts, and draft decks in the TTE voice on command.
+Each layer is built on the one before it, and none of them is optional reading. They're just different forms of the same rules:
 
-Each layer builds on the one before it. The rule that keeps it coherent: **one source of truth, mirrored everywhere in the same action.** Change a value in one place and update the copies immediately, so nothing drifts.
+- **Brand:** who TTE is, distilled into rules: which colors, which fonts, the logo, how the brand sounds when it writes. This is the raw identity everything else is built from.
+- **Design:** those rules turned into reusable interface pieces: what a button looks like, what a card looks like, how they behave.
+- **Dev:** the same pieces, but as real code a developer can drop into a working product, plus every brand value in the file formats code actually uses.
+- **Agent:** an AI that has read all three layers above and can write copy, build image prompts, or draft a deck in TTE's voice, on request, without you having to explain the brand to it first.
 
 ---
 
-## How the repository is organized
+## Words you'll see in this repository
 
-| Folder | What's inside | Who uses it |
-|--------|---------------|-------------|
-| `01-brand-system/` | The identity: **tokens** (colors, type, spacing as data), logo files, patterns, imagery guide, voice guidelines, and **`DESIGN.md`** (the master brand file) | Everyone — this is the source of truth |
-| `02-design-system/` | Component **specs** (how each component should look and behave) | Designers, developers |
-| `03-dev-system/` | The **running component library** (React code) + a dev guide | Developers |
-| `04-brand-book/` | The brand book (Figma export, PDF, interactive site) | Stakeholders |
-| `05-applications/` | Final applications (social, print) | Designers |
-| `.claude/` | The **Brand Agent**, its skills, and shortcuts | Anyone generating assets; AI |
-| `00-archive/` | Old versions and source material | Reference only |
+A short glossary, since some of these terms show up constantly below and are easy to gloss over if you've never worked with them:
 
-**Key documents to know:**
-- **`01-brand-system/DESIGN.md`** — the single authoritative brand file. If anything conflicts, this wins.
-- **`METHOD.md`** — the reusable method behind how this was built (for applying it to another brand).
-- **`SHARING.md`** — how to share the Brand Agent and this repo with your team or other AIs.
-- **`03-dev-system/README.md`** — the developer's guide.
-- **`.claude/README.md`** — the Brand Agent guide.
+| Word | What it means, plainly |
+|---|---|
+| **Repository (repo)** | This whole folder of files, tracked by GitHub. |
+| **Token** | A brand value (a color, a font size, a spacing amount) stored as data instead of typed by hand, so it can be reused identically everywhere and updated in one place. |
+| **Design system** | The library of reusable interface pieces (buttons, cards, panels) that a product is built from, so every screen looks consistent without redesigning each one from scratch. |
+| **Component** | One reusable piece from that library: a button is a component, a card is a component. |
+| **Figma** | The design tool where the brand's visual system lives and is edited by hand. |
+| **`npm install` / `npm run dev`** | Commands a developer runs in a terminal to set up and preview the code in this repo. If you're not a developer, you'll never need to type these. |
 
 ---
 
 ## How to use it
 
 ### If you're a **designer**
-The visual truth lives in two synced places: the **Figma file** (`TTE — Brand System`) and the **tokens** in `01-brand-system/tokens/`. Work in Figma; the tokens mirror it. Read `DESIGN.md` for the rules, and `02-design-system/specs/` for component details. When you change a brand value, update the tokens, the dev project, and Figma together.
+The visual truth lives in two places kept in sync: the **Figma file** (`TTE — Brand System`) and the **tokens** in `01-brand-system/tokens/`. Design in Figma; the tokens mirror what's there. Read `DESIGN.md` for the full rulebook, and `02-design-system/specs/` for how each component should look and behave. If you change a brand value, update the tokens, the dev project, and Figma together in the same pass, never just one.
 
 ### If you're a **developer**
-Go to `03-dev-system/README.md`. In short:
+Go to `03-dev-system/README.md` for the full guide. In short:
 ```bash
 cd 03-dev-system/tte-ui
 npm install
-npm run dev        # the live component showcase at localhost:5173
+npm run dev        # opens a live preview of every component at localhost:5173
 ```
-Import the tokens (`tokens.tailwind.js` / `.css`) and use the components in `src/components/`. Everything is angular (radius 0), dark-first, and Fire Orange is emphasis only.
+Import the tokens (`tokens.tailwind.js` or `tokens.css`) and use the components in `src/components/`. Everything is angular (no rounded corners), built dark-first, and Fire Orange is reserved for emphasis, never used as a fill.
 
-### If you're a **team member** (marketing, comms, partnerships)
-Use the **Brand Agent** to generate on-brand material. In Claude Code: type `/tte` followed by what you want. Examples:
+### If you're generating content
+(marketing, comms, partnerships: anyone who needs on-brand material without designing it by hand)
+
+Use the **Brand Agent**. In Claude Code, type `/tte` followed by what you need:
 - `/tte a prayer-partner appeal for the Tajik people`
 - `/tte a social caption with a HUD opener`
 - `/tte an AI image prompt for a Layer-2 portrait at golden hour`
 - `/tte an outline for a partner pitch deck`
 
-Not on Claude Code? See `SHARING.md` — the agent also works in Claude Chat and (with a bit of setup) in other AIs.
+Not using Claude Code? See `SHARING.md`: the same agent works in Claude Chat and, with a little setup, in other AI tools too.
 
-### If you're an **AI**
-Load `01-brand-system/DESIGN.md` as the authoritative brand instruction file, and `tokens.json` for exact values. For generation tasks, use the skills in `.claude/skills/` (copy → `brand-copy`, imagery → `tte-imagery`, decks/docs → `brand-deliverables`) via the `tte-brand-agent`. Never invent a color, font, or size that a token already defines. On brand/design decisions, propose and defer to the human.
+### If you're an **AI** picking up this repository
+Load `01-brand-system/DESIGN.md` as the authoritative brand instruction file, and `tokens.json` for exact values. For generation tasks, use the skills in `.claude/skills/` (copy → `brand-copy`, imagery → `tte-imagery`, decks/docs → `brand-deliverables`) through the `tte-brand-agent`. Never invent a color, font, or size a token already defines. On any brand or design decision, propose it and defer to the human. Don't decide alone.
 
 ---
 
-## What you can make with it
+## What's in each folder
 
-| Want to… | Use |
-|----------|-----|
-| Write copy in the TTE voice | Brand Agent → `brand-copy` |
-| Generate or evaluate imagery | Brand Agent → `tte-imagery` |
-| Build a deck, template, or the brand guidelines | Brand Agent → `brand-deliverables` |
-| Build a product screen or website | The component library in `03-dev-system/` |
-| Design in Figma | The `TTE — Brand System` Figma library |
-| Check the system is healthy | `/audit` (the brand-audit skill) |
+| Folder | What's inside | Who uses it |
+|---|---|---|
+| `01-brand-system/` | The identity: **tokens**, logo files, patterns, imagery guide, voice guidelines, and **`DESIGN.md`** (the master brand rulebook) | Everyone: this is the source of truth |
+| `02-design-system/` | Component **specs**: how each interface piece should look and behave | Designers, developers |
+| `03-dev-system/` | The real, running component library (React code), plus its own dev guide | Developers |
+| `04-brand-book/` | The brand book: Figma export, PDF, and the interactive site | Anyone sharing the brand externally |
+| `05-applications/` | Finished applications: social assets, print | Designers |
+| `.claude/` | The Brand Agent, its skills, and shortcuts | Anyone generating content; AI |
+| `00-archive/` | Old versions and source material, kept for reference | Reference only |
+
+**Key documents to know:**
+- **`01-brand-system/DESIGN.md`**: the single authoritative brand file. If anything else conflicts with it, this wins.
+- **`METHOD.md`**: the reusable method behind how this system was built, for applying the same approach to another brand.
+- **`SHARING.md`**: how to share the Brand Agent and this repository with your team or with other AI tools.
+- **`03-dev-system/README.md`**: the developer's guide.
+- **`.claude/README.md`**: the Brand Agent guide.
 
 ---
 
 ## The rules that never bend
 
-Whatever you make, these hold:
-- **Fire Orange `#FE5442` is emphasis only** — never a dominant background.
-- **Black `#28272A`** is the default surface (the brand is dark-first). **White** for editorial.
-- **Two fonts only:** Mona Sans (headings, UPPERCASE) and Space Mono (data/HUD).
-- **Zero rounded corners** (except circular avatars and radio buttons).
-- **The voice** is urgent, theologically grounded, gritty, dignifying, mobilizing — never churchy, pitying, or passive.
+Whatever you make, these hold, no exceptions:
+- **Fire Orange `#FE5442` is emphasis only**, never a dominant background.
+- **Black `#28272A`** is the default surface (the brand is dark-first). **White** is for editorial, text-on-dark contexts.
+- **Two fonts only:** Mona Sans (headings, always UPPERCASE) and Space Mono (data, HUD, body text).
+- **Zero rounded corners** (the only exceptions are circular avatars and radio buttons).
+- **The voice** is urgent, theologically grounded, gritty, dignifying, mobilizing, never churchy, pitying, or passive.
 
-Full detail: `DESIGN.md`.
+Full detail on all of it: `01-brand-system/DESIGN.md`.
 
 ---
 
 ## Status
 
-All layers built and synchronized (Brand → Design → Dev → Agent), plus a shipped Phase 7: the interactive brand book is live at `tte-brand-system.vercel.app`. See `01-brand-system/docs/audit-report-2026-07-24.md` for the completion audit, `01-brand-system/docs/TTE-Brand-Workflow-Master.md` for the full phase history, and `04-brand-book/BRAND-GUIDELINES-SITE-PLAN.md` for the site's own build log.
+All four layers are built and kept in sync (Brand → Design → Dev → Agent), and the interactive brand system site is live at **tte-brand-system.vercel.app**. See `01-brand-system/docs/audit-report-2026-07-24.md` for the last full audit, `01-brand-system/docs/TTE-Brand-Workflow-Master.md` for the complete phase history, and `04-brand-book/BRAND-GUIDELINES-SITE-PLAN.md` for the site's own build log.

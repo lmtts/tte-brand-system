@@ -111,17 +111,19 @@ export default function TokensSection() {
     <SectionShell
       id="tokens"
       kicker="Tokens"
-      heading="Primitives become brand. Brand becomes semantic. Nothing ever floats free."
+      heading="One value, defined once, reused everywhere it&rsquo;s needed."
       body={
         <>
           <p>
-            Every value lives in three layers. A raw primitive means nothing on its own; brand
-            assigns it meaning; semantic decides where and how it&rsquo;s applied. Components only
-            ever consume semantic tokens, never the raw values sitting beneath them.
+            A token is a brand value (a color, a spacing amount, a font size) stored as data
+            instead of typed by hand. Change it once here, and it updates everywhere it&rsquo;s
+            used, instead of slowly drifting out of sync across a dozen files.
           </p>
           <p className="mt-[1em]">
-            Three faces, one system: canonical tokens, the dev project, and Figma stay in sync. A
-            change to any one propagates to all three in the same action.
+            Values move through three layers: primitives hold the raw value, brand gives it
+            meaning, semantic decides where it applies. Developers import the formats below
+            straight into code; designers see the same values as Figma variables: always the
+            same number, in three different places.
           </p>
           <div
             className="grid grid-cols-2"

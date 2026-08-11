@@ -51,13 +51,13 @@ function TraitsTable() {
       <div className="grid grid-cols-2 border-b border-paper/15">
         <div
           className="border-r border-paper/15 font-mono uppercase tracking-[0.08em] text-fire"
-          style={{ padding: "calc(10*var(--u)) calc(14*var(--u))", fontSize: "calc(11*var(--u))" }}
+          style={{ padding: "calc(8*var(--u)) calc(14*var(--u))", fontSize: "calc(11*var(--u))" }}
         >
           We Are
         </div>
         <div
           className="font-mono uppercase tracking-[0.08em] text-muted"
-          style={{ padding: "calc(10*var(--u)) calc(14*var(--u))", fontSize: "calc(11*var(--u))" }}
+          style={{ padding: "calc(8*var(--u)) calc(14*var(--u))", fontSize: "calc(11*var(--u))" }}
         >
           We Are Not
         </div>
@@ -71,13 +71,13 @@ function TraitsTable() {
           >
             <div
               className="border-r border-paper/15 font-display font-extrabold uppercase leading-tight text-paper"
-              style={{ padding: "calc(9*var(--u)) calc(14*var(--u))", fontSize: "calc(14*var(--u))" }}
+              style={{ padding: "calc(6*var(--u)) calc(14*var(--u))", fontSize: "calc(13*var(--u))" }}
             >
               <DecodeText text={t.are} duration={500} delay={i * 60} />
             </div>
             <div
               className="font-mono leading-snug text-muted"
-              style={{ padding: "calc(9*var(--u)) calc(14*var(--u))", fontSize: "calc(11*var(--u))" }}
+              style={{ padding: "calc(6*var(--u)) calc(14*var(--u))", fontSize: "calc(10*var(--u))" }}
             >
               {t.areNot}
             </div>
@@ -88,8 +88,82 @@ function TraitsTable() {
   );
 }
 
-/** Section 08, page 1 — the voice anchor + download. */
-function VoiceTraitsPage() {
+/** Must-use terms — each with the term it replaces directly below it. */
+function MustUsePanel() {
+  return (
+    <div className="border border-paper/15">
+      <div
+        className="flex items-baseline border-b border-paper/15"
+        style={{ gap: "calc(6*var(--u))", padding: "calc(8*var(--u)) calc(14*var(--u))" }}
+      >
+        <span className="shrink-0 text-fire" style={{ fontSize: "calc(11*var(--u))" }}>
+          &#9679;
+        </span>
+        <span
+          className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
+          style={{ fontSize: "calc(11*var(--u))" }}
+        >
+          Must-Use Terms
+        </span>
+      </div>
+      {MUST_USE.map((t, i) => (
+        <div
+          key={t.term}
+          className="grid grid-cols-[1fr_1.4fr]"
+          style={{ borderTop: i === 0 ? undefined : "1px solid color-mix(in srgb, var(--color-paper) 8%, transparent)" }}
+        >
+          <div
+            className="font-display font-extrabold uppercase leading-tight text-paper"
+            style={{ padding: "calc(5*var(--u)) calc(14*var(--u))", fontSize: "calc(12*var(--u))" }}
+          >
+            <DecodeText text={t.term} duration={450} delay={i * 55} />
+          </div>
+          <div
+            className="font-mono leading-snug text-muted"
+            style={{ padding: "calc(5*var(--u)) calc(14*var(--u))", fontSize: "calc(9*var(--u))" }}
+          >
+            Not: {t.insteadOf}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** Never-use terms — a struck-through strip, compact. */
+function NeverUsePanel() {
+  return (
+    <div className="border border-paper/15">
+      <div
+        className="flex items-baseline border-b border-paper/15"
+        style={{ gap: "calc(6*var(--u))", padding: "calc(8*var(--u)) calc(14*var(--u))" }}
+      >
+        <span className="shrink-0 text-fire" style={{ fontSize: "calc(11*var(--u))" }}>
+          &#9679;
+        </span>
+        <span
+          className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
+          style={{ fontSize: "calc(11*var(--u))" }}
+        >
+          Never Use
+        </span>
+      </div>
+      <div
+        className="flex flex-wrap font-mono uppercase text-muted"
+        style={{ padding: "calc(10*var(--u)) calc(14*var(--u))", gap: "calc(8*var(--u)) calc(18*var(--u))", fontSize: "calc(10*var(--u))" }}
+      >
+        {NEVER_USE.map((term) => (
+          <span key={term} className="line-through decoration-fire/70">
+            {term}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Section 09 — Voice. The trait anchor and terminology together on one page. */
+export default function VoiceSection() {
   return (
     <SectionShell
       id="voice"
@@ -103,7 +177,8 @@ function VoiceTraitsPage() {
           </p>
           <p className="mt-[1em]">
             Seven traits anchor everything we write and film, each one a guard against a specific
-            failure.
+            failure. Terminology carries the same weight: the terms below are non-negotiable, and
+            the ones struck through never make it to print.
           </p>
           <a
             href="/downloads/tte-voice-guidelines.md"
@@ -121,103 +196,11 @@ function VoiceTraitsPage() {
         </>
       }
     >
-      <div className="flex h-full w-full flex-col justify-center">
+      <div className="flex h-full w-full flex-col justify-center" style={{ gap: "calc(12*var(--u))" }}>
         <TraitsTable />
+        <MustUsePanel />
+        <NeverUsePanel />
       </div>
     </SectionShell>
-  );
-}
-
-/** Section 08, page 2 — terminology: must-use vs. never-use. */
-function VoiceTerminologyPage() {
-  return (
-    <SectionShell
-      id="voice-terminology"
-      kicker="Voice"
-      dividerAbove="page"
-      heading="Words carry theology. Choose every one with precision."
-      body={
-        <p>
-          Terminology isn&rsquo;t style, it&rsquo;s doctrine made visible. These are the terms every
-          piece of TTE content is built on, and the ones that never make it to print.
-        </p>
-      }
-    >
-      <div className="flex h-full w-full flex-col justify-center" style={{ gap: "calc(16*var(--u))" }}>
-        <div className="border border-paper/15">
-          <div
-            className="flex items-baseline border-b border-paper/15"
-            style={{ gap: "calc(6*var(--u))", padding: "calc(10*var(--u)) calc(14*var(--u))" }}
-          >
-            <span className="shrink-0 text-fire" style={{ fontSize: "calc(11*var(--u))" }}>
-              &#9679;
-            </span>
-            <span
-              className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
-              style={{ fontSize: "calc(11*var(--u))" }}
-            >
-              Must-Use Terms
-            </span>
-          </div>
-          {MUST_USE.map((t, i) => (
-            <div
-              key={t.term}
-              className="grid grid-cols-[1fr_1.4fr]"
-              style={{ borderTop: i === 0 ? undefined : "1px solid color-mix(in srgb, var(--color-paper) 8%, transparent)" }}
-            >
-              <div
-                className="font-display font-extrabold uppercase leading-tight text-paper"
-                style={{ padding: "calc(7*var(--u)) calc(14*var(--u))", fontSize: "calc(13*var(--u))" }}
-              >
-                <DecodeText text={t.term} duration={450} delay={i * 55} />
-              </div>
-              <div
-                className="font-mono leading-snug text-muted"
-                style={{ padding: "calc(7*var(--u)) calc(14*var(--u))", fontSize: "calc(10*var(--u))" }}
-              >
-                Not: {t.insteadOf}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="border border-paper/15">
-          <div
-            className="flex items-baseline border-b border-paper/15"
-            style={{ gap: "calc(6*var(--u))", padding: "calc(10*var(--u)) calc(14*var(--u))" }}
-          >
-            <span className="shrink-0 text-fire" style={{ fontSize: "calc(11*var(--u))" }}>
-              &#9679;
-            </span>
-            <span
-              className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
-              style={{ fontSize: "calc(11*var(--u))" }}
-            >
-              Never Use
-            </span>
-          </div>
-          <div
-            className="flex flex-wrap font-mono uppercase text-muted"
-            style={{ padding: "calc(12*var(--u)) calc(14*var(--u))", gap: "calc(10*var(--u)) calc(20*var(--u))", fontSize: "calc(11*var(--u))" }}
-          >
-            {NEVER_USE.map((term) => (
-              <span key={term} className="line-through decoration-fire/70">
-                {term}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </SectionShell>
-  );
-}
-
-/** Section 08 — Voice. Two pages: the trait anchor, then terminology. */
-export default function VoiceSection() {
-  return (
-    <>
-      <VoiceTraitsPage />
-      <VoiceTerminologyPage />
-    </>
   );
 }

@@ -1,6 +1,7 @@
 import SectionShell from "@/components/SectionShell";
 import DecodeText from "@/components/DecodeText";
 import CountUp from "@/components/CountUp";
+import ScrambleHover from "@/components/ScrambleHover";
 
 const CONTROL_SIZES = [
   { height: "36px", use: "Dense · HUD · operate" },
@@ -45,12 +46,13 @@ const OPERATE_BUTTONS: ButtonDef[] = [
 function ButtonSwatch({ variant, label, fontClass }: ButtonDef & { fontClass: string }) {
   return (
     <div className="flex flex-col items-center" style={{ gap: "calc(8*var(--u))" }}>
-      <span
+      <button
+        type="button"
         className={`inline-flex items-center justify-center whitespace-nowrap uppercase transition-all ${fontClass} ${VARIANT_CLASS[variant]}`}
         style={{ height: "calc(38*var(--u))", padding: "0 calc(16*var(--u))", fontSize: "calc(11*var(--u))" }}
       >
-        {label}
-      </span>
+        <ScrambleHover text={label} />
+      </button>
       <span className="font-mono uppercase tracking-[0.06em] text-muted" style={{ fontSize: "calc(9*var(--u))" }}>
         {variant}
       </span>
@@ -100,19 +102,19 @@ function SystemButtonsPage() {
     <SectionShell
       id="system"
       kicker="System"
-      heading="One rule decides every button: exactly who it's for."
+      heading="Every button follows one rule: who is it for."
       body={
         <>
           <p>
-            The interface runs on shadcn/ui, kept neutral by design so the brand disappears into it
-            rather than fighting it. Radius, color, and type flow from the token layer, so every
-            component is on-brand from the start.
+            A design system is the shared library of interface pieces (buttons, cards, panels)
+            every screen is built from. This one runs on shadcn/ui, a popular open-source kit for
+            React, left visually plain so TTE&rsquo;s brand sits on top of it, not fighting it.
+            Every color, radius, and font flows from the token layer.
           </p>
           <p className="mt-[1em]">
-            <span className="text-fire">Intent</span> fixes the typeface by role.{" "}
-            <span className="text-fire">Variant</span> fixes the visual treatment. Mona Sans
-            mobilizes: Pray, Give, Join. Space Mono operates: Filter, Export, View data. Hover to
-            try the motion.
+            <span className="text-fire">Intent</span> picks the typeface for the audience: Mona
+            Sans mobilizes, Space Mono operates. <span className="text-fire">Variant</span> picks
+            the visual weight. Hover any button below: it&rsquo;s the real interaction.
           </p>
           <dl className="flex flex-col" style={{ gap: "0.5em", marginTop: "1.4em" }}>
             {CONTROL_SIZES.map((s) => (
@@ -274,12 +276,13 @@ function SystemOrganismsPage() {
       id="system-organisms"
       kicker="System"
       dividerAbove="page"
-      heading="Four components no kit ships."
+      heading="Four components shadcn/ui doesn&rsquo;t have."
       body={
         <p>
-          Base components come from the kit: Button, Input, Select, Card, Dialog, Tabs, and the
-          rest, all bound to tokens. These are the signature layer, built for TTE alone, shown
-          live below.
+          shadcn/ui&rsquo;s kit has no idea what an unreached people group or a spiritual biome is,
+          so these four pieces exist specifically for TTE&rsquo;s data: a live HUD readout, a
+          rolling mission statistic, a biome tag, and the topographic background texture. Built
+          once, reused everywhere below.
         </p>
       }
     >
@@ -295,24 +298,53 @@ function SystemOrganismsPage() {
   );
 }
 
+/** Section 09, page 3 — the People Group Card, two examples side by side. */
+function SystemPeopleGroupPage() {
+  return (
+    <SectionShell
+      id="system-people-group"
+      kicker="System"
+      dividerAbove="page"
+      heading="The card those four components build together."
+      body={
+        <p>
+          The four pieces on the previous page compose into the People Group Card &mdash; TTE&rsquo;s
+          richest piece, and the reason they exist: a photo (or the topographic fallback), the
+          biome tag, a live data strip, and the mobilize / operate actions, all in one card.
+          Dignity over pity, never a grey box.
+        </p>
+      }
+    >
+      <div className="flex h-full w-full items-center justify-center">
+        <div className="grid w-full grid-cols-1 sm:grid-cols-2" style={{ gap: "calc(20*var(--u))", maxWidth: "calc(640*var(--u))" }}>
+          {PEOPLE_GROUPS.map((g) => (
+            <PeopleGroupCardDemo key={g.name} group={g} />
+          ))}
+        </div>
+      </div>
+    </SectionShell>
+  );
+}
+
 function DemoButton({
   intent,
   variant,
-  children,
+  label,
 }: {
   intent: "mobilize" | "operate";
   variant: "default" | "outline";
-  children: React.ReactNode;
+  label: string;
 }) {
   const fontClass =
     intent === "mobilize" ? "font-display font-extrabold tracking-[0.04em]" : "font-mono font-bold tracking-[0.08em]";
   return (
-    <span
+    <button
+      type="button"
       className={`inline-flex items-center justify-center whitespace-nowrap uppercase transition-all ${fontClass} ${VARIANT_CLASS[variant]}`}
       style={{ gap: "calc(6*var(--u))", height: "calc(36*var(--u))", padding: "0 calc(16*var(--u))", fontSize: "calc(11*var(--u))" }}
     >
-      {children}
-    </span>
+      <ScrambleHover text={label} />
+    </button>
   );
 }
 
@@ -399,46 +431,15 @@ function PeopleGroupCardDemo({ group }: { group: PeopleGroup }) {
         </div>
 
         <div className="flex flex-wrap" style={{ gap: "calc(10*var(--u))" }}>
-          <DemoButton intent="mobilize" variant="default">
-            Pray now
-          </DemoButton>
-          <DemoButton intent="operate" variant="outline">
-            View data
-          </DemoButton>
+          <DemoButton intent="mobilize" variant="default" label="Pray now" />
+          <DemoButton intent="operate" variant="outline" label="View data" />
         </div>
       </div>
     </div>
   );
 }
 
-/** Section 09, page 3 — the People Group Card, two examples side by side. */
-function SystemPeopleGroupPage() {
-  return (
-    <SectionShell
-      id="system-people-group"
-      kicker="System"
-      dividerAbove="page"
-      heading="The dossier that turns a cold statistic into a people."
-      body={
-        <p>
-          The People Group Card composes every other primitive: photography or the topographic
-          fallback, the biome badge, a live HUD data strip, and the mobilize / operate action
-          pair. Dignity over pity, never a grey box.
-        </p>
-      }
-    >
-      <div className="flex h-full w-full items-center justify-center">
-        <div className="grid w-full grid-cols-1 sm:grid-cols-2" style={{ gap: "calc(20*var(--u))", maxWidth: "calc(640*var(--u))" }}>
-          {PEOPLE_GROUPS.map((g) => (
-            <PeopleGroupCardDemo key={g.name} group={g} />
-          ))}
-        </div>
-      </div>
-    </SectionShell>
-  );
-}
-
-/** Section 09 — System. Three pages: the button rule, the compact organisms, then the People Group Card. */
+/** Section 09 — System. Three pages: the button rule, the four components, then the People Group Card. */
 export default function SystemSection() {
   return (
     <>

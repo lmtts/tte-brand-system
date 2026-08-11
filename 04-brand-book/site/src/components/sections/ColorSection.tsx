@@ -149,7 +149,7 @@ export default function ColorSection() {
     <SectionShell
       id="color"
       kicker="Color"
-      heading="Three colors. Maximum impact. Every pixel earns its place."
+      heading="Three colors. Each one has a specific job."
       body={
         <>
           <p>

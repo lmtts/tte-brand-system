@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Reserves the scrollbar's own width permanently, so toggling body overflow
+   (nav menu open/close, lightboxes) never changes the page's visible width —
+   without this, hiding the scrollbar reflows the whole layout a few pixels. */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* =============================================================
    TO THE ENDS OF THE EARTH — theme
    Tokens mirrored from 01-brand-system/tokens/tokens.json.
@@ -179,6 +186,35 @@ html.lenis body {
 /* image left edge = Figma col 6 start (616 / 1440), fluid; bleeds to the right. */
 .sec-imgleft {
   left: 42.78%;
+}
+
+/* Examples canvas viewport (desktop only) — the pannable mosaic bleeds past all four
+   edges by design (see ExamplesSection), so every edge gets a thin fade into the section
+   background instead of clipping a thumbnail hard — just enough to soften the cut, thumbnails
+   still run almost edge to edge. mask-composite:intersect layers the horizontal and vertical
+   fades together (Baseline 2023+; -webkit- pair for Safari). Selection is disabled here too:
+   dragging over image/text content would otherwise start a native text/image selection. */
+.examples-viewport {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, black 56px, black calc(100% - 56px), transparent),
+    linear-gradient(to bottom, transparent, black 56px, black calc(100% - 56px), transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, black 56px, black calc(100% - 56px), transparent),
+    linear-gradient(to bottom, transparent, black 56px, black calc(100% - 56px), transparent);
+  mask-composite: intersect;
+}
+
+/* Examples mobile feed — CSS multi-column masonry (Pinterest-style), written by hand
+   because Tailwind's `columns-*` utility generates no CSS at all in this project's v4 setup
+   (confirmed empty in the compiled stylesheet — not a purge/content-scan issue, the utility
+   just never emits). Two columns at every mobile/tablet width the desktop canvas is hidden
+   at (<1024px, see ExamplesSection's lg:hidden branch). */
+.examples-mobile-feed {
+  column-count: 2;
+  column-gap: calc(14 * var(--u));
 }
 
 @media (prefers-reduced-motion: reduce) {

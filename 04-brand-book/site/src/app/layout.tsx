@@ -4,9 +4,9 @@ import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 
 export const metadata: Metadata = {
-  title: "To the Ends of the Earth: Brand Book",
+  title: "To the Ends of the Earth: Brand System",
   description:
-    "The interactive brand guidelines for To the Ends of the Earth, a Hope Channel movement.",
+    "The interactive brand system for To the Ends of the Earth, a Hope Channel movement.",
 };
 
 export default function RootLayout({

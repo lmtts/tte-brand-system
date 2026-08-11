@@ -112,17 +112,17 @@ function MonaSansPage() {
     <SectionShell
       id="typography-mona"
       kicker="Typography"
-      heading="Mona Sans carries the voice."
+      heading="Mona Sans: the display and heading typeface."
       body={
         <>
           <p>
-            The wordmark, the headings, the hero display. A strong, versatile grotesque, chosen for
-            its heaviness and its reach across scales, equally at home editorial and activist.
+            Used for the wordmark, headings, and the hero display. A strong, versatile grotesque
+            that reads clearly at both small and very large sizes.
           </p>
           <p className="mt-[1em]">
-            Display and headings are always uppercase, no exceptions, in Bold, ExtraBold, or Black.
-            The one exception: body copy, set in Medium, reads in sentence case for long-form
-            legibility.
+            Display and headings are always uppercase, no exceptions, set in Bold, ExtraBold, or
+            Black. The one exception is body copy, set in Medium and sentence case for long-form
+            reading.
           </p>
           <DownloadFontButton
             href="https://fonts.google.com/specimen/Mona+Sans?preview.script=Latn"
@@ -151,16 +151,16 @@ function SpaceMonoPage() {
       id="typography-space"
       kicker="Typography"
       dividerAbove="page"
-      heading="Space Mono is the instrument."
+      heading="Space Mono: the data and HUD typeface."
       body={
         <>
           <p>
-            HUD overlays, data, coordinates: the tactical layer beneath the voice. A fixed-width
-            face that signals information as actionable data, not background noise.
+            Used for HUD overlays, data, and coordinates. A fixed-width face that makes information
+            read as data, not decoration.
           </p>
           <p className="mt-[1em]">
-            HUD and labels run uppercase, wide-tracked, built for a data-readout feel. Body text
-            drops to sentence case for articles and captions, set in Regular or Bold weight.
+            HUD and labels run uppercase, wide-tracked, for a data-readout look. Body text drops to
+            sentence case for articles and captions, set in Regular or Bold weight.
           </p>
           <DownloadFontButton
             href="https://fonts.google.com/specimen/Space+Mono?preview.script=Latn"

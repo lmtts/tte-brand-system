@@ -1,52 +1,42 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useEffect, useState } from "react";
 import { SECTIONS, type Section } from "@/lib/sections.config";
 import { useActiveSection } from "@/lib/useActiveSection";
-import { prefersReducedMotion } from "@/lib/motion";
 import ScrambleHover from "@/components/ScrambleHover";
 
 const BIRD = "/assets/brand/bird-index.svg";
 
-/** One index row — ScrambleHover finds the <button> itself as its trigger,
- * so the whole row (not just the label pixels) scrambles the name on
- * hover/focus. */
-function NavItem({ section, active, onGo }: { section: Section; active: string; onGo: (id: string, ready: boolean) => void }) {
+/** One full-page-menu row — ScrambleHover finds the <button> itself as its
+ * trigger, so the whole row (not just the label pixels) scrambles on hover. */
+function MenuItem({ section, active, onGo }: { section: Section; active: string; onGo: (id: string, ready: boolean) => void }) {
   const isActive = section.index === active;
   const ready = section.status === "ready";
   return (
-    <li className="nav-item">
-      <button
-        onClick={() => onGo(section.id, ready)}
-        disabled={!ready}
-        className={`flex items-center font-mono uppercase tracking-[0.06em] transition-colors ${
-          ready ? "cursor-pointer" : "cursor-default"
-        } ${isActive ? "" : "text-muted"} ${ready && !isActive ? "hover:text-paper" : ""}`}
-        style={{ gap: "calc(28*var(--u))", fontSize: "calc(14*var(--u))" }}
-      >
-        <span className={isActive ? "text-fire" : ""}>{section.index}</span>
-        <ScrambleHover text={section.name} className={isActive ? "text-paper" : ""} />
-      </button>
-    </li>
+    <button
+      onClick={() => onGo(section.id, ready)}
+      disabled={!ready}
+      className={`flex items-baseline gap-6 font-mono text-[14px] uppercase tracking-[0.05em] ${
+        isActive ? "" : "text-muted"
+      } ${ready ? "" : "opacity-50"}`}
+    >
+      <span className={isActive ? "text-fire" : ""}>{section.index}</span>
+      <ScrambleHover text={section.name} className={isActive ? "text-paper" : ""} />
+    </button>
   );
 }
 
 /**
- * The Index — desktop persistent navigation. A single fixed panel (not one
- * per section — it never scrolls, never repeats). Closed: logo + label +
- * menu. Open: adds the 01–10 index with the current section highlighted.
- * Hidden while on the cover, fades in once scrolled past it (mirrors
- * MobileNav's behavior) — and hidden again on the closing section, its
- * bookend. Mobile/tablet uses MobileNav instead.
+ * Desktop/laptop navigation — a full-width bar pinned to the top of the
+ * viewport (mirrors MobileNav's own top bar, same border/backdrop
+ * treatment as the fixed footer). The bar itself never moves: opening the
+ * menu only swaps its icon (hamburger → close) and fades in the section
+ * list behind it — no second header re-materializing, no slide.
  */
 export default function SectionNav() {
   const active = useActiveSection();
-  const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
   const [past, setPast] = useState(false);
-  const visible = past && active !== "11";
-  const listRef = useRef<HTMLDivElement>(null);
-  const tl = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
     // Hysteresis (different show/hide thresholds) — a single threshold let
@@ -60,100 +50,82 @@ export default function SectionNav() {
   }, []);
 
   useEffect(() => {
-    const el = listRef.current;
-    if (!el) return;
-    gsap.set(el, { height: 0, opacity: 0, overflow: "hidden" });
-    if (prefersReducedMotion()) {
-      tl.current = null;
-      return;
-    }
-    tl.current = gsap
-      .timeline({ paused: true })
-      .to(el, { height: "auto", opacity: 1, duration: 0.42, ease: "power3.out" })
-      .from(
-        el.querySelectorAll(".nav-item"),
-        { opacity: 0, x: -8, stagger: 0.035, duration: 0.3, ease: "power2.out" },
-        "-=0.22"
-      );
-    return () => {
-      tl.current?.kill();
-    };
-  }, []);
+    // scrollbar-gutter:stable (globals.css) keeps the page width constant
+    // here — without it, hiding the scrollbar on open shifts the whole
+    // layout a few pixels and reads as a jump, not a clean lock.
+    document.body.style.overflow = openMenu ? "hidden" : "";
+  }, [openMenu]);
 
   useEffect(() => {
-    const el = listRef.current;
-    if (!el) return;
-    if (!tl.current) {
-      gsap.set(el, { height: open ? "auto" : 0, opacity: open ? 1 : 0 });
-      return;
+    if (!openMenu) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpenMenu(false);
     }
-    if (open) tl.current.play();
-    else tl.current.reverse();
-  }, [open]);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openMenu]);
+
+  const visible = past && active !== "13";
 
   const go = (id: string, ready: boolean) => {
     if (!ready) return;
-    setOpen(false);
+    setOpenMenu(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <div
-      className={`secd fixed z-30 hidden transition-opacity duration-300 lg:block ${
-        visible ? "opacity-100" : "pointer-events-none opacity-0"
-      }`}
-      style={{ left: "calc(36*var(--u))", top: "calc(45*var(--u))" }}
-    >
-      <nav
-        className="w-fit border border-solid border-fire bg-ink/95 backdrop-blur-sm"
-        style={{ padding: "calc(35*var(--u)) calc(30*var(--u))" }}
-        aria-label="Brand book index"
+    <div className="hidden lg:block">
+      {/* menu panel — sits behind the bar (lower z-index, same opaque ink),
+          so the bar reads as staying in place instead of a second header
+          re-materializing when this fades in. */}
+      <div
+        role="dialog"
+        aria-modal={openMenu}
+        aria-label="Brand system index"
+        className={`fixed inset-0 z-40 flex flex-col bg-ink transition-opacity duration-300 ${
+          openMenu ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        aria-hidden={!openMenu}
       >
-        {/* header row */}
-        <div className="flex items-center" style={{ gap: "calc(40*var(--u))" }}>
-          <div className="flex items-center" style={{ gap: "calc(22*var(--u))" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={BIRD} alt="" style={{ height: "calc(36*var(--u))" }} className="w-auto" aria-hidden />
-            <div
-              className="font-mono uppercase leading-[1.3] tracking-[0.06em] text-paper"
-              style={{ fontSize: "calc(12*var(--u))" }}
-            >
-              <div>To the Ends of the Earth</div>
-              <div>Brand Guidelines v1.0</div>
-            </div>
-          </div>
-          <button
-            onClick={() => setOpen((o) => !o)}
-            className="grid shrink-0 place-items-center text-paper transition-colors hover:text-fire"
-            style={{ width: "calc(24*var(--u))", height: "calc(24*var(--u))" }}
-            aria-expanded={open}
-            aria-label={open ? "Close index" : "Open index"}
-          >
-            {open ? (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
-                <path d="M3 6h18M3 12h18M3 18h18" />
-              </svg>
-            )}
-          </button>
-        </div>
+        <nav className="flex flex-1 flex-col items-center justify-center" style={{ gap: "24px", paddingTop: "76px" }}>
+          {SECTIONS.map((s) => (
+            <MenuItem key={s.id} section={s} active={active} onGo={go} />
+          ))}
+        </nav>
+      </div>
 
-        {/* index list (animated) */}
-        <div ref={listRef}>
-          <div
-            className="w-full bg-paper/15"
-            style={{ height: "1px", marginTop: "calc(35*var(--u))", marginBottom: "calc(32*var(--u))" }}
-          />
-          <ul className="flex flex-col" style={{ gap: "calc(26*var(--u))" }}>
-            {SECTIONS.map((s) => (
-              <NavItem key={s.id} section={s} active={active} onGo={go} />
-            ))}
-          </ul>
+      {/* bar — always in this exact spot; never slides or gets replaced */}
+      <div
+        className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-fire/40 bg-ink/95 px-9 py-6 backdrop-blur-sm transition-opacity duration-300 ${
+          visible ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      >
+        <div className="flex items-center gap-5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={BIRD} alt="" className="h-[30px] w-auto" aria-hidden />
+          <span className="font-mono text-[12px] uppercase leading-[1.3] tracking-[0.06em] text-muted">
+            To the Ends of the Earth
+            <br />
+            Brand System v1.0
+          </span>
         </div>
-      </nav>
+        <button
+          onClick={() => setOpenMenu((o) => !o)}
+          className="grid size-7 place-items-center text-paper transition-colors hover:text-fire"
+          aria-expanded={openMenu}
+          aria-label={openMenu ? "Close index" : "Open index"}
+        >
+          {openMenu ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
+          )}
+        </button>
+      </div>
     </div>
   );
 }

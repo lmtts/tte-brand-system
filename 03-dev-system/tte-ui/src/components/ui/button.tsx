@@ -23,6 +23,12 @@ function useScrambleOnHover(ref: React.RefObject<HTMLElement | null>) {
 
     function scramble() {
       window.clearTimeout(timeoutId)
+      // Lock the button to its resting width for the duration of the scramble — on a
+      // proportional face (Mona Sans, the `mobilize` intent), random characters vary in
+      // width frame to frame, which otherwise makes the button visibly resize while it
+      // scrambles. Space Mono (`operate`) never had this problem, but locking width is
+      // harmless there too.
+      el.style.width = `${el.getBoundingClientRect().width}px`
       const walker = document.createTreeWalker(el as Node, NodeFilter.SHOW_TEXT)
       const nodes: Text[] = []
       for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n as Text)
@@ -47,6 +53,7 @@ function useScrambleOnHover(ref: React.RefObject<HTMLElement | null>) {
           timeoutId = window.setTimeout(tick, 35)
         } else {
           nodes.forEach((node, i) => (node.data = originals[i]))
+          el.style.width = ""
         }
       }
       tick()

@@ -29,8 +29,10 @@ function MenuItem({ section, active, onGo }: { section: Section; active: string;
 
 /**
  * Mobile / tablet navigation — a full-width bar pinned to the top of every
- * content section (hidden on the cover). Tapping it opens a full-page menu to
- * jump to any section. Desktop uses the persistent SectionNav panel instead.
+ * content section (hidden on the cover). The bar itself never moves:
+ * tapping it only swaps its icon (hamburger → close) and fades in the
+ * section list behind it — no second header re-materializing, no slide.
+ * Desktop uses the persistent SectionNav bar instead.
  */
 export default function MobileNav() {
   const [past, setPast] = useState(false); // scrolled past the cover
@@ -46,6 +48,9 @@ export default function MobileNav() {
   }, []);
 
   useEffect(() => {
+    // scrollbar-gutter:stable (globals.css) keeps the page width constant
+    // here — without it, hiding the scrollbar on open shifts the whole
+    // layout a few pixels and reads as a jump, not a clean lock.
     document.body.style.overflow = openMenu ? "hidden" : "";
   }, [openMenu]);
 
@@ -66,68 +71,56 @@ export default function MobileNav() {
 
   return (
     <div className="lg:hidden">
-      {/* top bar */}
+      {/* menu panel — sits behind the bar (lower z-index, same opaque ink),
+          so the bar reads as staying in place instead of a second header
+          re-materializing when this fades in. */}
       <div
-        className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between border-b border-fire/40 bg-ink/95 px-6 py-3 backdrop-blur-sm transition-transform duration-300 ${
-          past && !openMenu ? "translate-y-0" : "-translate-y-full"
+        role="dialog"
+        aria-modal={openMenu}
+        aria-label="Brand system index"
+        className={`fixed inset-0 z-40 flex flex-col bg-ink transition-opacity duration-300 ${
+          openMenu ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        aria-hidden={!openMenu}
+      >
+        <nav className="flex flex-1 flex-col justify-center gap-5 px-6" style={{ paddingTop: "68px" }}>
+          {SECTIONS.map((s) => (
+            <MenuItem key={s.id} section={s} active={active} onGo={go} />
+          ))}
+        </nav>
+      </div>
+
+      {/* bar — always in this exact spot; never slides or gets replaced */}
+      <div
+        className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-fire/40 bg-ink/95 px-6 py-4 backdrop-blur-sm transition-opacity duration-300 ${
+          past ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={BIRD} alt="" className="h-[26px] w-auto" aria-hidden />
           <span className="font-mono text-[11px] uppercase leading-[1.3] tracking-[0.06em] text-muted">
             To the Ends of the Earth
             <br />
-            Brand Guidelines v1.0
+            Brand System v1.0
           </span>
         </div>
         <button
-          onClick={() => setOpenMenu(true)}
+          onClick={() => setOpenMenu((o) => !o)}
           className="grid size-6 place-items-center text-paper"
-          aria-label="Open index"
+          aria-expanded={openMenu}
+          aria-label={openMenu ? "Close index" : "Open index"}
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
-            <path d="M3 6h18M3 12h18M3 18h18" />
-          </svg>
-        </button>
-      </div>
-
-      {/* full-page menu */}
-      <div
-        role="dialog"
-        aria-modal={openMenu}
-        aria-label="Brand book index"
-        className={`fixed inset-0 z-50 flex flex-col bg-ink transition-opacity duration-300 ${
-          openMenu ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-        }`}
-        aria-hidden={!openMenu}
-      >
-        <div className="flex items-center justify-between border-b border-fire/40 px-6 py-3">
-          <div className="flex items-center gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={BIRD} alt="" className="h-[26px] w-auto" aria-hidden />
-            <span className="font-mono text-[12px] uppercase leading-[1.3] tracking-[0.06em] text-muted">
-              To the Ends of the Earth
-              <br />
-              Brand Guidelines v1.0
-            </span>
-          </div>
-          <button
-            onClick={() => setOpenMenu(false)}
-            className="grid size-6 place-items-center text-paper"
-            aria-label="Close index"
-          >
+          {openMenu ? (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
               <path d="M18 6 6 18M6 6l12 12" />
             </svg>
-          </button>
-        </div>
-
-        <nav className="flex flex-1 flex-col justify-center gap-5 px-6">
-          {SECTIONS.map((s) => (
-            <MenuItem key={s.id} section={s} active={active} onGo={go} />
-          ))}
-        </nav>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-full w-full">
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
+          )}
+        </button>
       </div>
     </div>
   );

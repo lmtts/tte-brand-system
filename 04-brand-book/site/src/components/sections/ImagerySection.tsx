@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import SectionShell from "@/components/SectionShell";
 import DecodeText from "@/components/DecodeText";
 import ScrambleHover from "@/components/ScrambleHover";
+import ImageLightbox from "@/components/ImageLightbox";
 
 type Layer = {
   index: string;
@@ -116,75 +117,6 @@ function LayersGrid({ onOpen }: { onOpen: (layer: Layer) => void }) {
   );
 }
 
-/** Full-screen lightbox — the uncropped source, for a closer look than the grid crop allows. */
-function ImageLightbox({ layer, onClose }: { layer: Layer; onClose: () => void }) {
-  const closeBtnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const trigger = document.activeElement as HTMLElement | null;
-    closeBtnRef.current?.focus();
-
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") {
-        onClose();
-        return;
-      }
-      // The close button is the only focusable element in the dialog —
-      // keep Tab/Shift+Tab from leaking focus out to the page behind it.
-      if (e.key === "Tab") {
-        e.preventDefault();
-        closeBtnRef.current?.focus();
-      }
-    }
-    window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      trigger?.focus();
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={`${layer.name} full size`}
-      onClick={onClose}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 backdrop-blur-sm"
-      style={{ padding: "calc(48*var(--u))" }}
-    >
-      <button
-        ref={closeBtnRef}
-        type="button"
-        onClick={onClose}
-        aria-label="Close"
-        className="fixed flex items-center justify-center border border-paper/20 text-paper transition-colors hover:border-fire hover:text-fire"
-        style={{
-          top: "calc(24*var(--u))",
-          right: "calc(24*var(--u))",
-          width: "calc(36*var(--u))",
-          height: "calc(36*var(--u))",
-          fontSize: "calc(18*var(--u))",
-        }}
-      >
-        &times;
-      </button>
-      <figure
-        className="flex max-h-full max-w-full flex-col items-center"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={layer.src} alt={layer.alt} className="block max-h-[78vh] max-w-full object-contain" />
-        <figcaption
-          className="font-mono uppercase tracking-[0.08em] text-muted"
-          style={{ marginTop: "calc(18*var(--u))", fontSize: "calc(11*var(--u))" }}
-        >
-          <span className="text-fire">{layer.index}</span> {layer.name}
-        </figcaption>
-      </figure>
-    </div>
-  );
-}
-
 /** Section 07 — Imagery. */
 export default function ImagerySection() {
   const [openLayer, setOpenLayer] = useState<Layer | null>(null);
@@ -194,7 +126,7 @@ export default function ImagerySection() {
       id="imagery"
       kicker="Imagery"
       bleed
-      heading="Light that’s been earned, not given."
+      heading="Every photo has to feel earned, not staged."
       body={
         <>
           <p>
@@ -203,9 +135,8 @@ export default function ImagerySection() {
             of the four.
           </p>
           <p style={{ marginTop: "1em" }}>
-            Each carries its own shot language, but every frame still has to pass two tests: does
-            it raise your pulse, and could it live on a National Geographic spread instead of a
-            donation button.
+            Each layer has its own shot language, but every photo has to pass the same test: would
+            it belong next to a National Geographic feature, or a church bulletin.
           </p>
           <dl className="flex flex-col" style={{ gap: "0.6em", marginTop: "1.4em" }}>
             {SPECS.map((s, i) => (
@@ -223,7 +154,18 @@ export default function ImagerySection() {
       }
     >
       <LayersGrid onOpen={setOpenLayer} />
-      {openLayer && <ImageLightbox layer={openLayer} onClose={() => setOpenLayer(null)} />}
+      {openLayer && (
+        <ImageLightbox
+          src={openLayer.src}
+          alt={openLayer.alt}
+          caption={
+            <>
+              <span className="text-fire">{openLayer.index}</span> {openLayer.name}
+            </>
+          }
+          onClose={() => setOpenLayer(null)}
+        />
+      )}
     </SectionShell>
   );
 }

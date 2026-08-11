@@ -65,7 +65,7 @@ export default function PatternsSection() {
     <SectionShell
       id="patterns"
       kicker="Patterns"
-      heading="The contour is the field. Fire Orange, always present."
+      heading="The topographic pattern, and where it&rsquo;s used."
       body={
         <>
           <p>

@@ -143,7 +143,7 @@ function LogosShowcasePage() {
     <SectionShell
       id="logos"
       kicker="Logos"
-      heading="The mark is a dove fused with flame: forward, upward, unmistakable."
+      heading="The mark: a dove fused with flame, facing forward and upward."
       body={
         <>
           <p>
@@ -154,7 +154,8 @@ function LogosShowcasePage() {
           <p className="mt-[1em]">
             Clearspace equals the height of the &ldquo;T&rdquo; in the wordmark. White on dark or
             photographic backgrounds, black on light. Never distorted, rotated, or recolored
-            outside these variants.
+            outside these variants. Every complete file lives in the logo kit below, and in the
+            repository on GitHub.
           </p>
           <a
             href="/downloads/tte-logo-kit.zip"
@@ -178,13 +179,13 @@ function LogosMisusePage() {
   return (
     <SectionShell
       id="logos-misuse"
-      kicker="Logos"
+      kicker="Logos Misuse"
       dividerAbove="page"
-      heading="Six ways to break the mark. Don’t."
+      heading="Six ways the mark gets broken."
       body={
         <p>
-          Every violation here has shown up in the wild at least once. The mark only works
-          exactly as issued, pixel for pixel, every single time.
+          Every example here has shown up in real use at least once. The mark only works when
+          it&rsquo;s reproduced exactly as issued: same proportions, same color, every time.
         </p>
       }
     >
