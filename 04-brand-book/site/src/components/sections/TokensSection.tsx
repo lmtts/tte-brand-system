@@ -113,8 +113,8 @@ function TokenChainPanel() {
 type RadiusStep = { key: string; value: string; note: string };
 
 const RADIUS: RadiusStep[] = [
-  { key: "borderRadius.default", value: "0px", note: "Every component — buttons, inputs, cards, badges" },
-  { key: "borderRadius.full", value: "9999px", note: "Exception only — avatars and other circular elements" },
+  { key: "borderRadius.default", value: "0px", note: "Every component: buttons, inputs, cards, badges" },
+  { key: "borderRadius.full", value: "9999px", note: "Exception only: avatars and other circular elements" },
 ];
 
 /** Radius's token — no primitives/brand layer to cascade through in tokens.json (it's set once,
@@ -155,19 +155,19 @@ export default function TokensSection() {
       body={
         <>
           <p>
-            A token is a brand value (a color, a spacing amount, a font size) stored as data
-            instead of being typed by hand. Change it once here, and it updates everywhere
-            it&rsquo;s used, instead of slowly drifting out of sync across a dozen files.
+            A token is a brand value stored as data: a color, a spacing amount, a font size.
+            Change it once here and it updates everywhere, instead of drifting out of sync across
+            a dozen files.
           </p>
           <p className="mt-[1em]">
-            Values move through three layers: primitives hold the raw value, brand gives it
-            meaning, semantic decides where it applies &mdash; though not every token needs all
-            three. Below are two examples: Fire Orange resolves through the full chain; radius is
-            set once, directly, at 0, with one flagged exception.
+            Values move through three layers. Primitives hold the raw value, brand gives it
+            meaning, semantic decides where it applies. Not every token needs all three: Fire
+            Orange resolves through the full chain, radius is set once at 0, with one flagged
+            exception.
           </p>
           <p className="mt-[1em]">
-            Developers import the formats below straight into code; designers see the same values
-            as Figma variables: always the same number, in three different places.
+            Developers import the formats below; designers read the same values as Figma
+            variables. Always the same number, in three places.
           </p>
           <div
             className="grid grid-cols-2"

@@ -152,13 +152,25 @@ export default function ColorSection() {
       body={
         <>
           <p className="font-bold">To the Ends of the Earth has three main colors:</p>
+          {/* Explicit {" "} after each bold lead-in: JSX drops the leading space of a text
+              node that starts on the element's line and then wraps onto further lines. */}
           <p className="mt-[1em]">
-            Fire Orange is reserved for emphasis: calls to action, key words, the one accent that
-            matters. It never becomes a passive background.
+            <strong className="font-bold">Fire Orange</strong>{" "}
+            is reserved for emphasis: calls to action, key words, the one accent that matters. It
+            never becomes a passive background.
           </p>
-          <p className="mt-[1em]">Black is the default ground, the color of soil and unreached places.</p>
-          <p className="mt-[1em]">White carries the gospel light, for editorial and text on dark.</p>
-          <p className="mt-[1em]">Biome colors stay secondary, used only when context calls for them.</p>
+          <p className="mt-[1em]">
+            <strong className="font-bold">Black</strong>{" "}
+            is the default ground, the color of soil and unreached places.
+          </p>
+          <p className="mt-[1em]">
+            <strong className="font-bold">White</strong>{" "}
+            carries the gospel light, for editorial and text on dark.
+          </p>
+          <p className="mt-[1em]">
+            <strong className="font-bold">Biome colors</strong>{" "}
+            stay secondary, used only when context calls for them.
+          </p>
         </>
       }
     >

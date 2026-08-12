@@ -149,13 +149,20 @@ function LogosShowcasePage() {
           <p>The official logo system has variations for every use:</p>
           <BulletList
             items={[
-              "The complete logo (Icon + Wordmark)",
-              "The icon (Fire Dove)",
-              "The wordmark",
               <>
-                The Hope Channel brand connection: it is essential to represent TTE&rsquo;s
-                connection with Hope Channel. The relationship with its parent brand must be
-                visible and clear across all applications.
+                <strong className="font-bold">The complete logo</strong> (Icon + Wordmark)
+              </>,
+              <>
+                <strong className="font-bold">The icon</strong> (Fire Dove)
+              </>,
+              <strong key="wordmark" className="font-bold">The wordmark</strong>,
+              <>
+                {/* Explicit {" "}: JSX drops the leading space of a text node that starts on
+                    the element's line and then wraps onto further lines. */}
+                <strong className="font-bold">The Hope Channel brand connection:</strong>{" "}
+                it is essential to represent TTE&rsquo;s connection with Hope Channel. The
+                relationship with its parent brand must be visible and clear across all
+                applications.
               </>,
             ]}
           />

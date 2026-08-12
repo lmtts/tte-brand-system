@@ -154,10 +154,10 @@ export default function ImagerySection() {
           <p>Four visual narrative layers cover the range:</p>
           <NumberedList
             items={[
-              "The scale of the mission",
-              "The stillness of the person",
-              "The raw point of view",
-              "The mission data itself",
+              <strong key="scale" className="font-bold">The scale of the mission</strong>,
+              <strong key="stillness" className="font-bold">The stillness of the person</strong>,
+              <strong key="pov" className="font-bold">The raw point of view</strong>,
+              <strong key="hud" className="font-bold">The mission data itself</strong>,
             ]}
           />
           <p style={{ marginTop: "1em" }}>
@@ -166,9 +166,9 @@ export default function ImagerySection() {
             bulletin.
           </p>
           <p style={{ marginTop: "1em" }}>
-            The TTE imagery must focus on representing real people, although generating AI content
-            is acceptable in some cases. Consult the brand&rsquo;s repository and brand agent to
-            learn more about photography references, aesthetic, search keywords, and more.
+            Real people come first. AI generation is the fallback for when authentic photography
+            is out of reach. The repository and the brand agent hold the references, search
+            keywords, and full art direction.
           </p>
           <a
             href={IMAGERY_FOLDER_URL}

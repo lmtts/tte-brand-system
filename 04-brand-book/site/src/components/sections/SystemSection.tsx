@@ -285,7 +285,7 @@ function DialogDemo() {
                 className="font-mono text-muted"
                 style={{ fontSize: "calc(11*var(--u))", marginTop: "calc(10*var(--u))", lineHeight: 1.4 }}
               >
-                A dialog interrupts the flow to surface one focused decision — mission intel, a
+                A dialog interrupts the flow to surface one focused decision: mission intel, a
                 confirmation, a single next step.
               </p>
               <button
@@ -519,7 +519,12 @@ function SystemOrganismsPage() {
             exist specifically to complement To the Ends of the Earth&rsquo;s brand data.
           </p>
           <NumberedList
-            items={["Live HUD readout", "Rolling mission statistic", "Biome tags", "Topographic background texture"]}
+            items={[
+              <strong key="hud" className="font-bold">Live HUD readout</strong>,
+              <strong key="stat" className="font-bold">Rolling mission statistic</strong>,
+              <strong key="biome" className="font-bold">Biome tags</strong>,
+              <strong key="topo" className="font-bold">Topographic background texture</strong>,
+            ]}
           />
           <p className="mt-[1em]">
             These are components built once but reusable in different parts of the TTE digital
