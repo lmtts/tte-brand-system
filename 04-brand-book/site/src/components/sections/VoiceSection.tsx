@@ -168,7 +168,6 @@ export default function VoiceSection() {
     <SectionShell
       id="voice"
       kicker="Voice"
-      heading="The statistic feels impossible. The theology says it’s inevitable."
       body={
         <>
           <p>
@@ -176,9 +175,9 @@ export default function VoiceSection() {
             constant across every channel and every audience. Only tone flexes by context.
           </p>
           <p className="mt-[1em]">
-            Seven traits anchor everything we write and film, each one a guard against a specific
-            failure. Terminology carries the same weight: the terms below are non-negotiable, and
-            the ones struck through never make it to print.
+            Seven traits anchor everything we write; each one has what we are not as well.
+            Terminology carries the same weight: the terms presented are non-negotiable, and the
+            ones prohibited should never make it.
           </p>
           <a
             href="/downloads/tte-voice-guidelines.md"

@@ -1,330 +1,330 @@
 # TTE — Imagery System
 **To The Ends of The Earth · Brand Guidelines — Photography & Visual Language**
 
-Este documento define a linguagem visual e fotográfica completa da TTE. Serve para fotógrafos, diretores de arte, editores de redes sociais e produtores de conteúdo criarem imagery consistentemente on-brand, emocionalmente ressonante e estrategicamente alinhada à missão da TTE.
+This document defines TTE's complete visual and photographic language. It serves photographers, art directors, social media editors, and content producers creating imagery that is consistently on-brand, emotionally resonant, and strategically aligned with TTE's mission.
 
-Toda imagem produzida para a TTE — seja de banco de imagem, comissionada em campo, ou adaptada de assets existentes — deve passar em dois testes internos:
+Every image produced for TTE — whether sourced from stock, commissioned in the field, or adapted from existing assets — must pass two internal tests:
 
-> **The Movement Test:** isso parece algo que um jovem adulto vestiria numa camiseta — ou parece um botão de doação?
+> **The Movement Test:** does this look like something a young adult would wear on a t-shirt — or does it look like a donation button?
 
-> **The Pulse Test:** isso eleva a frequência cardíaca do espectador? Deve parecer urgente e levemente perturbador. Nunca confortável.
+> **The Pulse Test:** does this raise the viewer's heart rate? It should feel urgent and slightly unsettling. Never comfortable.
 
 ---
 
-## 01 — Arquétipo de Marca & Território Visual
+## 01 — Brand Archetype & Visual Territory
 
-A TTE vive no arquétipo Explorer — ao lado de The North Face, Patagonia, National Geographic e Arc'teryx. Isso não é posicionamento aspiracional: é uma restrição criativa. Toda imagem deve pertencer a esse mesmo mundo visual: conquistada, não produzida; descoberta, não encenada.
+TTE lives in the Explorer archetype — alongside The North Face, Patagonia, National Geographic, and Arc'teryx. This isn't aspirational positioning: it's a creative constraint. Every image must belong to that same visual world: earned, not produced; discovered, not staged.
 
-A fotografia da marca não é mídia de missão. É mídia de mobilização. O objetivo não é informar — é recrutar. Essa distinção deve ser sentida em cada frame.
+The brand's photography is not mission media. It is mobilization media. The goal isn't to inform — it's to recruit. That distinction has to be felt in every frame.
 
-### As tensões criativas centrais
+### The central creative tensions
 
-Três tensões devem estar presentes — ou ao menos implícitas — na imagery da TTE:
+Three tensions should be present — or at least implied — in TTE's imagery:
 
-| Tensão | Princípio |
+| Tension | Principle |
 |--------|-----------|
-| **SAFETY VS. DANGER** | O espectador deve sentir o peso do impossível. Nunca confortá-lo. |
-| **IMPOSSIBLE VS. INEVITABLE** | 43% do mundo é não alcançado. A estatística parece impossível. A teologia diz que o resultado é inevitável. Essa lacuna é onde a imagery da TTE vive. |
-| **VISIBILITY VS. ANONYMITY** | Numa era de cultura de influencer, a TTE celebra o invisível. O guerreiro de oração que ninguém vê. O missionário num lugar que nenhum algoritmo alcança. |
+| **SAFETY VS. DANGER** | The viewer should feel the weight of the impossible. Never comfort them. |
+| **IMPOSSIBLE VS. INEVITABLE** | 43% of the world is unreached. The statistic feels impossible. The theology says the outcome is inevitable. That gap is where TTE's imagery lives. |
+| **VISIBILITY VS. ANONYMITY** | In an age of influencer culture, TTE celebrates the invisible: the prayer warrior no one sees, the missionary in a place no algorithm reaches. |
 
 ---
 
-## 02 — Estética Visual
+## 02 — Visual Aesthetic
 
-A estética visual da TTE pode ser descrita numa frase:
+TTE's visual aesthetic can be described in one sentence:
 
-> *Fotografia editorial de expedição. A alma da National Geographic. A atitude da Arc'teryx. A urgência de um dispatch do campo.*
+> *Editorial expedition photography. The soul of National Geographic. The attitude of Arc'teryx. The urgency of a dispatch from the field.*
 
-É cinematográfica sem ser ficcional. Emocional sem ser manipuladora. Crua sem ser grosseira. Toda imagem deve parecer ter sido tirada por alguém que realmente estava lá — não por uma equipe com um caminhão de produção.
+It is cinematic without being fictional. Emotional without being manipulative. Raw without being crude. Every image should look like it was taken by someone who was actually there — not by a crew with a production truck.
 
-### Pilares estéticos
+### Aesthetic pillars
 
 **AUTHENTIC GRIT**
-Real acima de polido. Texturas imperfeitas, ambientes genuínos, momentos não roteirizados. A câmera deve parecer ter estado no lugar certo na hora certa — não posicionada. Evitar: luz de estúdio limpa, composições simétricas, linguagem corporal de banco de imagem.
+Real over polished. Imperfect textures, genuine environments, unscripted moments. The camera should feel like it was in the right place at the right time — not positioned. Avoid: clean studio lighting, symmetrical compositions, stock-photo body language.
 
 **DIGNITY, NOT PITY**
-Pessoas de grupos não alcançados nunca são fotografadas como vítimas ou objetos de caridade. São protagonistas com agência, história e beleza. Olhos que encontram a lente transmitem força, não desamparo. Este é um princípio criativo inegociável.
+People from unreached groups are never photographed as victims or objects of charity. They are protagonists with agency, history, and beauty. Eyes that meet the lens convey strength, not helplessness. This is a non-negotiable creative principle.
 
 **SCALE & OBSTACLE**
-O ambiente é um personagem. Paisagens devem comunicar a escala absoluta da tarefa: desertos vastos, densidade urbana, planaltos gelados, selvas impenetráveis. A figura humana nesses frames é pequena, mas com propósito — não perdida.
+The environment is a character. Landscapes must communicate the absolute scale of the task: vast deserts, urban density, frozen plateaus, impenetrable jungle. The human figure in these frames is small, but purposeful — not lost.
 
 **PRAYER AS A WEAPON**
-Intensidade espiritual é física. Olhos fechados no meio do caos, quietude em meio ao motion blur, um rosto em meio a uma respiração. Não são imagens pacíficas — são imagens de poder concentrado.
+Spiritual intensity is physical. Eyes closed amid chaos, stillness within motion blur, a face mid-breath. These aren't peaceful images — they're images of concentrated power.
 
 ---
 
-## 03 — Estilo Fotográfico
+## 03 — Photographic Style
 
-### Gênero
-
-| | |
-|--|--|
-| **GÊNERO PRIMÁRIO** | Documentário / editorial — estética de fotojornalismo com direção de arte. |
-| **GÊNERO SECUNDÁRIO** | Retrato ambiental — sujeitos fotografados em contexto, não contra fundos neutros. |
-| **PUBLICAÇÕES DE REFERÊNCIA** | National Geographic, TIME Magazine long-form, ensaios fotográficos da The New Yorker, features de viagem da Monocle. |
-
-### Composição
-
-Imagens da TTE usam tensão composicional em vez de equilíbrio clássico. Sujeitos raramente são centralizados. O espaço negativo carrega peso. Horizontes ficam frequentemente baixos ou altos — quase nunca no ponto médio matemático.
-
-Estratégias de composição preferidas:
-- Regra dos terços usada como ponto de partida, não prescrição.
-- Elementos de primeiro plano — pedras, mãos, tecido, água — criam profundidade e tatilidade.
-- Figuras humanas posicionadas pequenas contra ambientes vastos (layer Scale) OU recortadas de perto para revelar textura de pele e detalhe de expressão (layers HUD / Stillness).
-- Enquadramento ambiental: portas, janelas, frames de veículos, passagens de montanha usados para compor o plano organicamente.
-- Peso visual de um lado — o outro lado respira. A assimetria comunica tensão.
-
-### Conteúdo do sujeito
+### Genre
 
 | | |
 |--|--|
-| **PESSOAS** | Sujeitos de grupos não alcançados; missionários em campo; crentes locais; intercessores. Sempre retratados com dignidade e especificidade — nunca anônimos ou genéricos. |
-| **PAISAGEM** | Terreno extremo. Desertos, cordilheiras, densidade urbana, bordas de selva. Ambientes que comunicam hostilidade e escuridão espiritual — o que a marca chama de "Spiritual Biomes". |
-| **OBJETOS** | Passaportes, botas, mãos segurando algo, superfícies empoeiradas, interiores de veículos, equipamento de rádio. Close-ups táteis que ancoram o espectador na realidade física. |
-| **ARQUITETURA** | Mesquitas, estruturas de mercado, assentamentos informais, muralhas antigas. Contextualização sem estética de turismo. |
+| **PRIMARY GENRE** | Documentary / editorial — photojournalism aesthetic with art direction. |
+| **SECONDARY GENRE** | Environmental portrait — subjects photographed in context, not against neutral backdrops. |
+| **REFERENCE PUBLICATIONS** | National Geographic, TIME Magazine long-form, The New Yorker photo essays, Monocle travel features. |
+
+### Composition
+
+TTE images use compositional tension rather than classical balance. Subjects are rarely centered. Negative space carries weight. Horizons often sit low or high — almost never at the mathematical midpoint.
+
+Preferred composition strategies:
+- Rule of thirds used as a starting point, not a prescription.
+- Foreground elements — rocks, hands, fabric, water — create depth and tactility.
+- Human figures placed small against vast environments (Scale layer) OR cropped close to reveal skin texture and expression detail (HUD / Stillness layers).
+- Environmental framing: doorways, windows, vehicle frames, mountain passes used to compose the shot organically.
+- Visual weight on one side — the other side breathes. Asymmetry communicates tension.
+
+### Subject content
+
+| | |
+|--|--|
+| **PEOPLE** | Subjects from unreached people groups; missionaries in the field; local believers; intercessors. Always portrayed with dignity and specificity — never anonymous or generic. |
+| **LANDSCAPE** | Extreme terrain. Deserts, mountain ranges, urban density, jungle edges. Environments that communicate hostility and spiritual darkness — what the brand calls "Spiritual Biomes." |
+| **OBJECTS** | Passports, boots, hands holding something, dusty surfaces, vehicle interiors, radio equipment. Tactile close-ups that anchor the viewer in physical reality. |
+| **ARCHITECTURE** | Mosques, market structures, informal settlements, ancient walls. Context without tourism aesthetics. |
 
 ---
 
 ## 04 — Color Grading
 
-Color grading não é um filtro — é uma decisão narrativa. Imagens da TTE devem parecer que a luz é algo conquistado, não dado. A paleta é quente nas sombras, contida nos realces, e dessaturada o suficiente para parecer real sem parecer drenada.
+Color grading is not a filter — it's a narrative decision. TTE images should feel like light is something earned, not given. The palette is warm in the shadows, restrained in the highlights, and desaturated just enough to feel real without feeling drained.
 
-### Direção de cor
+### Color direction
 
 | | |
 |--|--|
-| **TOM GERAL** | Suave, cinematográfico, naturalista. Terroso e quente — nunca frio ou clínico. |
-| **SOMBRAS** | Tons escuros ricos e quentes, puxando âmbar ou teal profundo — nunca preto puro. Sombras devem parecer habitadas. |
-| **MEIOS-TONS** | Dessaturados mas não monocromáticos. Tons de pele retêm calor; tecido retém textura. |
-| **REALCES** | Controlados. Sem brancos estourados. Realces respiram — não explodem. |
-| **SATURAÇÃO** | Saturação global reduzida 15–25%. Canais de cor individuais (laranja, vermelho) podem reter mais calor. |
-| **TEMPERATURA DE COR** | Levemente quente no geral (faixa de luz do dia a golden hour). Evitar tons frios exceto como contraste dramático em cenas específicas (campos de neve, selvas de concreto). |
+| **OVERALL TONE** | Soft, cinematic, naturalistic. Earthy and warm — never cold or clinical. |
+| **SHADOWS** | Rich, warm dark tones, pulling toward amber or deep teal — never pure black. Shadows should feel inhabited. |
+| **MIDTONES** | Desaturated but not monochromatic. Skin tones retain warmth; fabric retains texture. |
+| **HIGHLIGHTS** | Controlled. No blown-out whites. Highlights breathe — they don't explode. |
+| **SATURATION** | Overall saturation reduced 15–25%. Individual color channels (orange, red) may retain more warmth. |
+| **COLOR TEMPERATURE** | Slightly warm overall (daylight to golden-hour range). Avoid cool tones except as dramatic contrast in specific scenes (snowfields, concrete jungles). |
 
-### Integração com cores da marca
+### Integration with brand colors
 
-A fotografia em si não carrega as cores da marca — esse é o trabalho dos elementos gráficos sobrepostos à imagem (tipografia, logo, dados HUD). No entanto, imagens devem ser selecionadas ou tratadas para parecerem harmônicas com a paleta da TTE:
+The photography itself doesn't carry the brand colors — that's the job of the graphic elements layered on top of the image (typography, logo, HUD data). Still, images should be selected or treated to feel harmonious with TTE's palette:
 
-| Cor | Hex | Papel na imagem |
+| Color | Hex | Role in the image |
 |-----|-----|-----------------|
-| **Fire Orange** | #FE5442 | Deve aparecer nos ambientes — luz de brasa, calor de pôr do sol, reflexos de fogo. Nunca introduzido artificialmente. |
-| **Charcoal Black** | #28272A | Sombras profundas, ambientes noturnos, tecido escuro, céus negros como tinta. O tom de base dominante. |
-| **Warm White** | #F4F3F1 | Névoa de horizonte, textura de nuvem, tecido claro, partículas de poeira. Usado como respiração — nunca como fundo. |
+| **Fire Orange** | #FE5442 | Should appear in the environment — ember light, sunset warmth, fire reflections. Never introduced artificially. |
+| **Charcoal Black** | #28272A | Deep shadows, night environments, dark fabric, ink-black skies. The dominant base tone. |
+| **Warm White** | #F4F3F1 | Horizon haze, cloud texture, light fabric, dust particles. Used as breathing room — never as a background. |
 
-> **Nota — duas paletas distintas (decisão intencional):** o Warm White (#F4F3F1) é exclusivo do domínio de **imagery/fotografia**. Nenhuma imagem da TTE usa branco puro — a luz é sempre "suja", conquistada, real. Isso é deliberadamente diferente do White puro (#FFFFFF) dos tokens de identidade, que governa logos, tipografia e UI. Imagery é sobre fotografia; identidade é sobre elementos gráficos. As duas paletas não devem ser confundidas nem unificadas.
+> **Note — two distinct palettes (intentional decision):** Warm White (#F4F3F1) belongs exclusively to the **imagery/photography** domain. No TTE image uses pure white — the light is always "dirty," earned, real. This is deliberately different from the pure White (#FFFFFF) of the identity tokens, which governs logos, typography, and UI. Imagery is about photography; identity is about graphic elements. The two palettes must never be confused or unified.
 
-### Grades de referência
+### Reference grades
 
-Referências de grade de cinema e fotografia:
-- **Roger Deakins** (Sicario, 1917) — calor controlado, ambientes vastos, precisão no detalhe de sombra.
-- **Emmanuel Lubezki** (The Revenant, Children of Men) — ética de luz natural apenas, planos longos, desconforto imersivo.
-- **Arquivo National Geographic** (filosofia de cor de Steve McCurry) — sujeitos saturados, fundos suaves, composição com a história em primeiro lugar.
-- **VSCO Film 01 / simulação Kodak Portra 400** — a referência de filme para trabalho de cor digital.
-
----
-
-## 05 — Luz
-
-Imagens da TTE são iluminadas pelo mundo, não por equipamento. O objetivo não é luz profissional — é luz honesta. Isso não significa imagens tecnicamente ruins; significa que fontes artificiais nunca devem ser visíveis ou dominantes.
-
-### Condições de luz preferidas
-
-| | |
-|--|--|
-| **GOLDEN HOUR (PRIMÁRIA)** | A luz primária da TTE. Luz quente e direcional de sol baixo. Cria sombras longas, tons de pele ricos, e uma sensação de limiar — algo está começando ou terminando. Ideal para layers Scale e Stillness. |
-| **OVERCAST DIFFUSE (SECUNDÁRIA)** | Luz suave e plana que revela textura e expressão sem sombras duras. Ideal para retratos HUD e close-ups. Comum em ambientes de alta altitude e tundra. |
-| **DRAMATIC RIM LIGHT** | Contraluz ou luz lateral forte criando halo ou borda nos sujeitos. Comunica intensidade espiritual. Usada seletivamente em retratos. |
-| **AVAILABLE INDOOR** | Velas, fontes de lâmpada única, fogueira, brilho de painel. Íntima e crua. Útil para o layer POV. |
-| **BLUE HOUR / NIGHT** | Usada com parcimônia. Ambientes urbanos à noite — neon e luz artificial se misturando. Deve parecer habitado, não vazio. |
-
-### Luz a evitar
-- Flash direto na câmera — cria luz plana de cena-de-crime documental.
-- Retrato de estúdio com softbox — comunica segurança e controle, o oposto da TTE.
-- Paisagens processadas em HDR — revela detalhe demais e remove profundidade atmosférica.
-- Vinhetagem pesada como escolha estilística — o mundo já é escuro o suficiente; enquadramento artificial é uma muleta.
-- Ring light — associado a redes sociais e cultura de influencer, antitético à marca.
+Film and cinema color references:
+- **Roger Deakins** (Sicario, 1917) — controlled warmth, vast environments, precision in shadow detail.
+- **Emmanuel Lubezki** (The Revenant, Children of Men) — natural-light-only ethic, long takes, immersive discomfort.
+- **National Geographic archive** (Steve McCurry's color philosophy) — saturated subjects, soft backgrounds, story-first composition.
+- **VSCO Film 01 / Kodak Portra 400 simulation** — the film reference for digital color work.
 
 ---
 
-## 06 — Planos & Perspectivas: O Sistema de 4 Layers
+## 05 — Light
 
-A TTE usa um sistema narrativo de quatro camadas para estruturar a narrativa visual. Cada layer tem sua própria linguagem de plano. Juntas, criam uma gramática visual completa. Todos os layers devem compartilhar o mesmo color grading e filosofia de luz — o que alterna é escala, perspectiva e proximidade.
+TTE images are lit by the world, not by equipment. The goal isn't professional lighting — it's honest lighting. That doesn't mean technically poor images; it means artificial sources should never be visible or dominant.
 
-### Layer 1 — The Scale · *Onde a missão ocorre*
-
-| | |
-|--|--|
-| **FUNÇÃO** | Comunicar a escala impossível da missão. Fazer o espectador se sentir pequeno. |
-| **TIPO DE PLANO** | Extreme wide shot. Panorâmico. Aéreo (quando disponível). |
-| **POSIÇÃO DO SUJEITO** | Figura humana visível mas minúscula — 5–15% da altura do frame. Postura com propósito (de frente para o horizonte, braço erguido, caminhando em direção ao obstáculo). |
-| **AMBIENTE** | Dominante. Montanhas, desertos, cânions urbanos, bordas de selva, mar de multidão. A paisagem é a protagonista. |
-| **PERSPECTIVA** | Nível dos olhos ou levemente elevada. Sem distorção de drone exceto quando disponível e autêntica ao ambiente. |
-| **MOVIMENTO** | Quietude preferida. A pessoa chegou a uma borda. Ou está em movimento contra um mundo estático e imóvel. |
-| **COPYSPACE** | Céu ou espaço negativo significativo para sobreposição de tipografia. |
-
-### Layer 2 — The Stillness · *Foco no protagonista*
+### Preferred lighting conditions
 
 | | |
 |--|--|
-| **FUNÇÃO** | Revelar a intensidade espiritual da pessoa. Calma em meio ao caos. |
-| **TIPO DE PLANO** | Plano médio a médio close-up. Sujeito nítido; ambiente com motion blur ou foco raso. |
-| **POSIÇÃO DO SUJEITO** | Centralizado ou regra dos terços. Olhos fechados (oração) ou fixos na câmera (confronto com o espectador). |
-| **AMBIENTE** | Presente mas secundário. Mercados lotados, metrôs, festivais. Profundidade de campo separa sujeito do mundo. |
-| **PERSPECTIVA** | Nível dos olhos. Direta. Íntima sem ser invasiva. |
-| **MOVIMENTO** | Sujeito completamente parado. Fundo pode ter motion blur de obturador lento ou movimento do ambiente. |
-| **OVERLAY TOPOGRÁFICO** | Composições do Layer 2 são candidatas primárias para o tratamento de overlay de contorno topográfico da marca. |
+| **GOLDEN HOUR (PRIMARY)** | TTE's primary light. Warm, directional light from a low sun. Creates long shadows, rich skin tones, and a sense of threshold — something is beginning or ending. Ideal for the Scale and Stillness layers. |
+| **OVERCAST DIFFUSE (SECONDARY)** | Soft, flat light that reveals texture and expression without hard shadows. Ideal for HUD portraits and close-ups. Common in high-altitude and tundra environments. |
+| **DRAMATIC RIM LIGHT** | Strong backlight or side light creating a halo or edge on subjects. Communicates spiritual intensity. Used selectively in portraits. |
+| **AVAILABLE INDOOR** | Candles, single-bulb sources, campfire, panel glow. Intimate and raw. Useful for the POV layer. |
+| **BLUE HOUR / NIGHT** | Used sparingly. Urban night environments — neon and artificial light blending. Should feel inhabited, not empty. |
 
-### Layer 3 — The POV · *O momento bruto*
+### Light to avoid
+- Direct on-camera flash — creates flat, documentary-crime-scene lighting.
+- Studio portraiture with softbox — communicates safety and control, the opposite of TTE.
+- HDR-processed landscapes — reveals too much detail and removes atmospheric depth.
+- Heavy vignetting as a stylistic choice — the world is already dark enough; artificial framing is a crutch.
+- Ring light — associated with social media and influencer culture, antithetical to the brand.
+
+---
+
+## 06 — Shots & Perspectives: The 4-Layer System
+
+TTE uses a four-layer narrative system to structure its visual storytelling. Each layer has its own shot language. Together, they create a complete visual grammar. All layers should share the same color grading and lighting philosophy — what shifts is scale, perspective, and proximity.
+
+### Layer 1 — The Scale · *Where the mission occurs*
 
 | | |
 |--|--|
-| **FUNÇÃO** | Imersão em primeira pessoa. Colocar o espectador diretamente na missão. |
-| **TIPO DE PLANO** | Primeira pessoa, handheld, levemente instável. Semi-subjetivo. |
-| **SUJEITO** | Mãos, botas, passaportes, janelas de veículo olhando para fora, instrumentação. Ou: um perfil próximo de alguém em trânsito olhando para fora. |
-| **AMBIENTE** | Experienciado, não observado. O mundo passa veloz, se aproxima, ou se abre diante da lente. |
-| **PERSPECTIVA** | Baixa ou nível POV. Ângulos incomuns que espelham o que uma pessoa em movimento realmente veria. |
-| **MOVIMENTO** | Motion blur, granulação e leve instabilidade são apropriados e desejáveis. Imperfeição é igual a autenticidade. |
-| **DETALHE-CHAVE** | Uma textura tátil em foco nítido — um nó de dedo áspero, uma alça gasta, condensação no vidro. |
+| **FUNCTION** | Communicate the impossible scale of the mission. Make the viewer feel small. |
+| **SHOT TYPE** | Extreme wide shot. Panoramic. Aerial (when available). |
+| **SUBJECT POSITION** | Human figure visible but tiny — 5–15% of the frame height. Purposeful posture (facing the horizon, arm raised, walking toward the obstacle). |
+| **ENVIRONMENT** | Dominant. Mountains, deserts, urban canyons, jungle edges, sea of crowds. The landscape is the protagonist. |
+| **PERSPECTIVE** | Eye level or slightly elevated. No drone distortion except when available and authentic to the environment. |
+| **MOVEMENT** | Stillness preferred. The person has reached an edge. Or is in motion against a static, unmoving world. |
+| **COPYSPACE** | Sky or significant negative space for typography overlay. |
+
+### Layer 2 — The Stillness · *Focus on the protagonist*
+
+| | |
+|--|--|
+| **FUNCTION** | Reveal the person's spiritual intensity. Calm amid chaos. |
+| **SHOT TYPE** | Medium to medium close-up. Subject sharp; environment motion-blurred or shallow focus. |
+| **SUBJECT POSITION** | Centered or rule of thirds. Eyes closed (prayer) or fixed on camera (confronting the viewer). |
+| **ENVIRONMENT** | Present but secondary. Crowded markets, subways, festivals. Depth of field separates subject from world. |
+| **PERSPECTIVE** | Eye level. Direct. Intimate without being invasive. |
+| **MOVEMENT** | Subject completely still. Background may carry slow-shutter motion blur or environmental movement. |
+| **TOPOGRAPHIC OVERLAY** | Layer 2 compositions are prime candidates for the brand's topographic contour-overlay treatment. |
+
+### Layer 3 — The POV · *The raw moment*
+
+| | |
+|--|--|
+| **FUNCTION** | First-person immersion. Put the viewer directly in the mission. |
+| **SHOT TYPE** | First person, handheld, slightly unstable. Semi-subjective. |
+| **SUBJECT** | Hands, boots, passports, vehicle windows looking out, instrumentation. Or: a close profile of someone in transit looking outward. |
+| **ENVIRONMENT** | Experienced, not observed. The world rushes by, closes in, or opens up in front of the lens. |
+| **PERSPECTIVE** | Low or POV level. Unusual angles that mirror what a person in motion would actually see. |
+| **MOVEMENT** | Motion blur, grain, and slight instability are appropriate and desirable. Imperfection equals authenticity. |
+| **KEY DETAIL** | One tactile texture in sharp focus — a rough knuckle, a worn strap, condensation on glass. |
 
 ### Layer 4 — The HUD · *Mission intel*
 
 | | |
 |--|--|
-| **FUNÇÃO** | Entregar dados com impacto emocional. Tornar estatísticas humanas. |
-| **TIPO DE PLANO** | Retrato fechado ou close-up extremo de rosto/olho. Ou: plano de estabelecimento wide com área escura significativa para sobreposição de dados. |
-| **SUJEITO** | Um rosto específico — marcado, texturizado, específico. Não genérico. O rosto deve pertencer a alguém, não representar um tipo. |
-| **SOBREPOSIÇÃO DE TIPOGRAFIA** | Fonte Space Mono. Coordenadas monoespaçadas, estatísticas de população, níveis de acesso, dados de bioma. Sem posicionamento decorativo — funcional, tático, alinhado à grid. |
-| **PERSPECTIVA** | Fechada. O espectador está próximo. Não há distância confortável aqui. |
-| **TRATAMENTO DE COR** | Leve dessaturação para acomodar texto branco sobreposto. Tons de pele protegidos. |
+| **FUNCTION** | Deliver data with emotional impact. Make statistics human. |
+| **SHOT TYPE** | Tight portrait or extreme close-up of face/eye. Or: a wide establishing shot with significant dark area for data overlay. |
+| **SUBJECT** | A specific face — marked, textured, specific. Not generic. The face should belong to someone, not represent a type. |
+| **TYPOGRAPHY OVERLAY** | Space Mono typeface. Monospaced coordinates, population statistics, access levels, biome data. No decorative placement — functional, tactical, grid-aligned. |
+| **PERSPECTIVE** | Close. The viewer is near. There's no comfortable distance here. |
+| **COLOR TREATMENT** | Slight desaturation to accommodate overlaid white text. Skin tones protected. |
 
 ---
 
-## 07 — Configurações de Câmera & Especificações Técnicas
+## 07 — Camera Settings & Technical Specifications
 
-A TTE não prescreve um único sistema de câmera — a melhor câmera é a que está presente na missão. No entanto, estes parâmetros definem a faixa de estética técnica que toda imagery deve ocupar.
+TTE doesn't prescribe a single camera system — the best camera is the one present on the mission. Still, these parameters define the range of technical aesthetics every piece of imagery should occupy.
 
-### Sistemas de câmera (modelos de referência)
+### Camera systems (reference models)
 
 | | |
 |--|--|
-| **REFERÊNCIA PRIMÁRIA** | Sony A7R V / Sony A7 IV — full-frame, alto alcance dinâmico, forte desempenho em pouca luz. Baseline documental moderno. |
-| **REFERÊNCIA SECUNDÁRIA** | Leica M series — estética de rangefinder. Perspectiva sutilmente comprimida. Renderização quente. Usada quando intimidade e discrição importam mais que resolução. |
-| **REFERÊNCIA DE CAMPO** | Fujifilm X-T5 / X100V — sensor APS-C com simulação de filme clássica. Mais leve, menos conspícua em ambientes sensíveis. Produz qualidade naturalmente fílmica sem pós-processamento. |
-| **EMERGÊNCIA/AUTÊNTICO** | iPhone Pro (qualquer geração atual) em modo ProRAW. Usado quando discrição é essencial ou em ambientes de acesso restrito. Granulação e imperfeição são assets intencionais, não compromissos. |
+| **PRIMARY REFERENCE** | Sony A7R V / Sony A7 IV — full-frame, high dynamic range, strong low-light performance. Modern documentary baseline. |
+| **SECONDARY REFERENCE** | Leica M series — rangefinder aesthetic. Subtly compressed perspective. Warm rendering. Used when intimacy and discretion matter more than resolution. |
+| **FIELD REFERENCE** | Fujifilm X-T5 / X100V — APS-C sensor with classic film simulation. Lighter, less conspicuous in sensitive environments. Produces naturally filmic quality without post-processing. |
+| **EMERGENCY / AUTHENTIC** | iPhone Pro (any current generation) in ProRAW mode. Used when discretion is essential or in restricted-access environments. Grain and imperfection are intentional assets, not compromises. |
 
-### Linguagem de lente
+### Lens language
 
-| Layer | Lente |
+| Layer | Lens |
 |-------|-------|
-| **SCALE LAYER** | 16–24mm full-frame equiv. Ultra-wide para domínio do ambiente. Alguma distorção aceitável e desejável. |
-| **STILLNESS LAYER** | 50–85mm full-frame equiv. Compressão de retrato clássica. f/1.4–f/2.8 para isolamento do sujeito. |
-| **POV LAYER** | 24–35mm full-frame equiv. Leve wide para imitar visão periférica humana. Handheld. |
-| **HUD / CLOSE-UP** | 85–135mm. Comprimido, íntimo. Sujeito preenche o frame. Distorção mínima. |
-| **EVITAR** | Fisheye para fins não-estilísticos. Distanciamento de teleobjetiva (200mm+) que remove presença da cena. |
+| **SCALE LAYER** | 16–24mm full-frame equiv. Ultra-wide for environmental dominance. Some distortion acceptable and desirable. |
+| **STILLNESS LAYER** | 50–85mm full-frame equiv. Classic portrait compression. f/1.4–f/2.8 for subject isolation. |
+| **POV LAYER** | 24–35mm full-frame equiv. Slight wide to mimic human peripheral vision. Handheld. |
+| **HUD / CLOSE-UP** | 85–135mm. Compressed, intimate. Subject fills the frame. Minimal distortion. |
+| **AVOID** | Fisheye for non-stylistic purposes. Telephoto distancing (200mm+) that removes presence from the scene. |
 
-### Obturador, abertura & ISO
-
-| | |
-|--|--|
-| **PROFUNDIDADE DE CAMPO** | Rasa a média. Faixa f/1.4–f/5.6. Reservar foco profundo (f/8+) para o layer Scale onde pessoa e ambiente precisam estar nítidos. |
-| **VELOCIDADE DE OBTURADOR** | Rápida para congelar heat-haze e movimento de multidão (1/500+). Lenta para motion blur de POV (1/15–1/60 como ferramenta criativa). Evitar motion blur de tremor de câmera não intencional. |
-| **FAIXA ISO** | 800–6400 para ambientes de campo. Granulação de ISO alto é preferida a redução de ruído que destrói textura. Granulação é um asset da marca. |
-| **FORMATO PREFERIDO** | Captura RAW sempre. JPEG aceitável apenas em situações de acesso de emergência. |
-| **PROPORÇÃO** | 3:2 (proporção nativa do sensor) preferida. 16:9 para vídeo e capas landscape. 4:5 para formatos verticais sociais. |
-
-### Granulação de filme & textura
-
-Granulação não é um problema a resolver na imagery da TTE — é um sinal de autenticidade. Todas as imagens finais devem carregar uma estrutura de granulação visível, seja de captura em ISO alto ou de pós-processamento.
+### Shutter, aperture & ISO
 
 | | |
 |--|--|
-| **SIMULAÇÃO RECOMENDADA** | Kodak Portra 400 (quente, granulação fina, sombras ricas) via VSCO Film ou ferramentas de grain do Lightroom. |
-| **SIMULAÇÃO ALTERNATIVA** | Kodak Tri-X 400 (referência preto-e-branco) para uso em aplicações monocromáticas específicas. |
-| **QUANTIDADE DE GRAIN (DIGITAL)** | Lightroom: Amount 20–35 / Size 25–40 / Roughness 50–60. Ajustar por imagem conforme complexidade da cena. |
-| **HALATION** | Halation sutil (brilho ao redor de realces) adiciona um calor analógico. Aplicar com parcimônia. Melhor ferramenta: Dehaze -5 a -15 em realces direcionados. |
-| **EVITAR** | Vinhetagem artificial, sliders pesados de clarity ou texture, tone mapping HDR, presets supersaturados. |
+| **DEPTH OF FIELD** | Shallow to medium. f/1.4–f/5.6 range. Reserve deep focus (f/8+) for the Scale layer, where both person and environment need to be sharp. |
+| **SHUTTER SPEED** | Fast to freeze heat-haze and crowd motion (1/500+). Slow for POV motion blur (1/15–1/60 as a creative tool). Avoid unintentional camera-shake blur. |
+| **ISO RANGE** | 800–6400 for field environments. High-ISO grain is preferred over noise reduction that destroys texture. Grain is a brand asset. |
+| **PREFERRED FORMAT** | Always capture RAW. JPEG acceptable only in emergency-access situations. |
+| **ASPECT RATIO** | 3:2 (native sensor ratio) preferred. 16:9 for video and landscape covers. 4:5 for vertical social formats. |
+
+### Film grain & texture
+
+Grain is not a problem to solve in TTE imagery — it's a signal of authenticity. All final images should carry a visible grain structure, whether from high-ISO capture or post-processing.
+
+| | |
+|--|--|
+| **RECOMMENDED SIMULATION** | Kodak Portra 400 (warm, fine grain, rich shadow detail) via VSCO Film or Lightroom grain tools. |
+| **ALTERNATIVE SIMULATION** | Kodak Tri-X 400 (black-and-white reference) for use in specific monochrome applications. |
+| **GRAIN AMOUNT (DIGITAL)** | Lightroom: Amount 20–35 / Size 25–40 / Roughness 50–60. Adjust per image based on scene complexity. |
+| **HALATION** | Subtle halation (glow around highlights) adds analog warmth. Apply sparingly. Best tool: Dehaze -5 to -15 on targeted highlights. |
+| **AVOID** | Artificial vignetting, heavy clarity/texture sliders, HDR tone mapping, oversaturated presets. |
 
 ---
 
-## 08 — Referências de Fotógrafos & Diretores de Fotografia
+## 08 — Photographer & Cinematographer References
 
-Os artistas a seguir representam o vocabulário visual de onde a imagery da TTE deve beber. Não são templates de estilo — são pontos de referência para qualidade, intenção e abordagem. Estude o trabalho deles para entender como é a fotografia conquistada.
+The following artists represent the visual vocabulary TTE's imagery should draw from. They aren't style templates — they're reference points for quality, intention, and approach. Study their work to understand what earned photography looks like.
 
-### Referências fotográficas primárias
+### Primary photographic references
 
-**STEVE MCCURRY** — Fotógrafo da National Geographic conhecido por retrato humanista em zonas de conflito e ambientes não alcançados. Referência para: dignidade do sujeito, contato visual direto, harmonias de cor ambiental saturadas, e contenção composicional em cenas complexas. Seu retrato de Sharbat Gula de 1984 é o exemplo definitivo do layer Stillness da TTE.
+**STEVE MCCURRY** — National Geographic photographer known for humanist portraiture in conflict zones and unreached environments. Reference for: subject dignity, direct eye contact, saturated environmental color harmonies, and compositional restraint in complex scenes. His 1984 portrait of Sharbat Gula is the definitive example of TTE's Stillness layer.
 
-**JIMMY NELSON** — Fotógrafo de povos indígenas e não alcançados. Referência para: retrato ambiental em escala épica, representação digna de sujeitos não ocidentais, paisagem como declaração cultural. Sua série Homage to Humanity informa diretamente o layer Scale.
+**JIMMY NELSON** — Photographer of indigenous and unreached peoples. Reference for: epic-scale environmental portraiture, dignified representation of non-Western subjects, landscape as cultural statement. His series Homage to Humanity directly informs the Scale layer.
 
-**PAOLO PELLEGRIN** — Fotojornalista da Magnum trabalhando em zonas de conflito. Referência para: o uso de motion blur e granulação como ferramentas emocionais, a crueza e instabilidade do layer POV, imagens que parecem tiradas, não feitas.
+**PAOLO PELLEGRIN** — Magnum photojournalist working in conflict zones. Reference for: the use of motion blur and grain as emotional tools, the rawness and instability of the POV layer, images that feel captured, not made.
 
-**SEBASTIÃO SALGADO** — Fotógrafo documental brasileiro. Referência para: o uso de preto-e-branco para elevar sujeitos além de suas circunstâncias, a relação entre figuras humanas e ambientes naturais avassaladores, e o tratamento de trabalho e resistência como temas sagrados.
+**SEBASTIÃO SALGADO** — Brazilian documentary photographer. Reference for: the use of black-and-white to elevate subjects beyond their circumstances, the relationship between human figures and overwhelming natural environments, and the treatment of labor and endurance as sacred themes.
 
-**CHRIS BURKARD** — Fotógrafo de aventura e surf conhecido por ambientes extremos e figuras humanas pequenas em paisagens vastas. Referência para: a gramática composicional do layer Scale, o uso emocional da luz em ambientes hostis, a estética do arquétipo Explorer. Estudado pelas equipes criativas da North Face e Arc'teryx.
+**CHRIS BURKARD** — Adventure and surf photographer known for extreme environments and small human figures in vast landscapes. Reference for: the compositional grammar of the Scale layer, the emotional use of light in hostile environments, the Explorer archetype aesthetic. Studied by North Face and Arc'teryx creative teams.
 
-**JONAS BENDIKSEN** — Fotógrafo da Magnum especializado em comunidades negligenciadas e lugares esquecidos. Referência para: a intimidade do layer POV, fotografar dentro de ambientes fechados, imagens que parecem dispatches em vez de pautas.
+**JONAS BENDIKSEN** — Magnum photographer specializing in overlooked communities and forgotten places. Reference for: the intimacy of the POV layer, photographing inside enclosed environments, images that feel like dispatches rather than assignments.
 
-### Referências cinematográficas
+### Cinematic references
 
-**ROGER DEAKINS** — Diretor de fotografia: Sicario, Blade Runner 2049, 1917. Referência para: calor controlado em ambientes vastos, o peso emocional do espaço negativo, sombras com detalhe. Sua abordagem à cinematografia de deserto e guerra é o equivalente cinematográfico mais próximo da direção de cor da TTE.
+**ROGER DEAKINS** — Cinematographer: Sicario, Blade Runner 2049, 1917. Reference for: controlled warmth in vast environments, the emotional weight of negative space, shadows with detail. His approach to desert and war cinematography is the closest cinematic equivalent to TTE's color direction.
 
-**EMMANUEL LUBEZKI** — Diretor de fotografia: The Revenant, Children of Men, Gravity. Referência para: compromisso com luz natural apenas, planos-sequência imersivos que criam presença em vez de observação, e a forma como a câmera se torna participante em vez de gravadora.
+**EMMANUEL LUBEZKI** — Cinematographer: The Revenant, Children of Men, Gravity. Reference for: commitment to natural light only, immersive long takes that create presence rather than observation, and the way the camera becomes a participant rather than a recorder.
 
-**BRADFORD YOUNG** — Diretor de fotografia: Arrival, Selma, A Most Violent Year. Referência para: imagens subexpostas e texturizadas que parecem espiritualmente pesadas. Sua abordagem à escuridão e contenção é referência-chave para o tratamento de sombra e ambientes de pouca luz da TTE.
+**BRADFORD YOUNG** — Cinematographer: Arrival, Selma, A Most Violent Year. Reference for: underexposed, textured images that feel spiritually heavy. His approach to darkness and restraint is a key reference for TTE's treatment of shadow and low-light environments.
 
-**HIRO MURAI** — Diretor: Atlanta, videoclipes do Childish Gambino. Referência para: a linguagem visual de tensão sob superfícies comuns, enquadramento perturbador que eleva o pulso sem drama explícito. Seu trabalho informa o critério do Pulse Test da marca.
-
----
-
-## 09 — O Que a Imagery da TTE NÃO É
-
-Definir o que é errado é tão importante quanto definir o que é certo. Os itens a seguir estão explicitamente fora da linguagem visual da TTE.
-
-### Evitar sempre
-
-| | |
-|--|--|
-| **ESTÉTICA DE MÍDIA DE IGREJA** | Lens flares usados como metáforas do "Espírito Santo". Imagens de Jesus em soft-focus. Gráficos de citações inspiradoras sobre fundos de natureza. Qualquer coisa que pareça fundo de pregação de Hillsong. |
-| **TURISMO DE POBREZA** | Imagens que posicionam sujeitos como desamparados, sujos ou dignos de pena para criar doação movida por culpa. Viola o princípio da Dignidade e é contrário à estratégia de recrutamento da TTE. |
-| **ESTÉTICA DE INFLUENCER** | Selfies com ring light, fotos excessivamente posadas de gear outdoor, fotografia lifestyle que comunica segurança e conquista. O arquétipo Explorer na TTE é sobre risco e custo, não aspiração. |
-| **BANCO DE IMAGEM CHAPADO** | Fotos genéricas de diversidade, imagery missionária business-casual, fotos de grupo sorrindo sem contexto ambiental. |
-| **FILTROS SUPERSATURADOS** | Color grading da era Instagram com pretos esmagados e realces neon. Comunica ministério de jovens, não missão de linha de frente. |
-| **IMAGERY GERADA POR IA** | Nunca usar imagens geradas por IA de pessoas ou lugares como imagery primária. Autenticidade é um valor central da marca. Imagery de IA comunica o oposto de presença conquistada. |
-| **DRONE SEM PROPÓSITO** | Planos aéreos são poderosos apenas quando estabelecem escala impossível. Planos de drone que apenas mostram "uma vista bonita de cima" são clichês editoriais. |
-| **MISSIONÁRIO OCIDENTAL COMO HERÓI** | Imagens que centram o missionário estrangeiro como figura salvadora, com pessoas locais como fundo passivo. A TTE celebra o invisível — o que inclui os crentes locais. |
-
-### O auto-teste
-
-Antes de aprovar qualquer imagem para uso da TTE, pergunte:
-- Isso parece conquistado — ou produzido?
-- O sujeito tem agência — ou é um objeto de pena?
-- Isso eleva minha frequência cardíaca — ou me conforta?
-- Um jovem de 25 anos colocaria isso numa camiseta — ou passaria reto no Instagram?
-- Isso parece pertencer ao lado de uma matéria da National Geographic ou de um boletim de igreja?
-
-Se as respostas apontam para conforto, pena ou o boletim de igreja — a imagem está errada para a TTE.
+**HIRO MURAI** — Director: Atlanta, Childish Gambino music videos. Reference for: the visual language of tension beneath ordinary surfaces, unsettling framing that raises the pulse without explicit drama. His work informs the brand's Pulse Test criteria.
 
 ---
 
-## 10 — Resumo de Referência Rápida
+## 09 — What TTE Imagery Is NOT
 
-Folha condensada para uso em briefings criativos, direção de redes sociais e produção de campo.
+Defining what's wrong is as important as defining what's right. The following are explicitly outside TTE's visual language.
+
+### Always avoid
 
 | | |
 |--|--|
-| **GÊNERO** | Documentário editorial / Retrato ambiental |
-| **BENCHMARK ESTÉTICO** | National Geographic × Arc'teryx × Magnum Photos |
-| **TOM DE COR** | Quente, suave, terroso. Dessaturado 15–25%. Sombras puxam âmbar ou teal profundo. |
-| **ILUMINAÇÃO** | Luz natural apenas. Golden hour primária. Overcast difusa secundária. |
-| **GRANULAÇÃO** | Sempre presente. Simulação Kodak Portra 400. Faixa ISO 800–6400. |
-| **REF. DE CÂMERA** | Sony A7 series / Fujifilm X-T5 / Leica M (campo). iPhone ProRAW (acesso restrito). |
-| **LENTE LAYER SCALE** | 16–24mm. Extreme wide. Figura humana minúscula contra a paisagem. |
-| **LENTE LAYER STILLNESS** | 50–85mm. f/1.4–2.8. Sujeito nítido, ambiente desfocado. |
-| **LENTE LAYER POV** | 24–35mm. Handheld. Motion blur aceitável. Detalhe tátil em foco. |
-| **LENTE LAYER HUD** | 85–135mm. Retrato fechado. Sobreposição de dados em Space Mono. |
-| **FOTÓGRAFOS-CHAVE** | McCurry, Burkard, Pellegrin, Salgado, Nelson, Bendiksen |
-| **DIRETORES DE FOTOGRAFIA-CHAVE** | Deakins, Lubezki, Bradford Young |
-| **NUNCA** | Clichês espirituais em soft-focus / turismo de pobreza / estética de influencer / pessoas geradas por IA / ring light / filtros supersaturados |
-| **SEMPRE** | Dignidade / autenticidade / presença conquistada / a sensação de risco / oração como peso físico |
+| **CHURCH MEDIA AESTHETIC** | Lens flares used as metaphors for the "Holy Spirit." Soft-focus images of Jesus. Inspirational-quote graphics over nature backgrounds. Anything that looks like a Hillsong sermon background. |
+| **POVERTY TOURISM** | Images that position subjects as helpless, dirty, or pitiable to drive guilt-based giving. Violates the Dignity principle and works against TTE's recruitment strategy. |
+| **INFLUENCER AESTHETIC** | Ring-light selfies, overly posed outdoor-gear photos, lifestyle photography that communicates safety and achievement. TTE's Explorer archetype is about risk and cost, not aspiration. |
+| **FLAT STOCK IMAGERY** | Generic diversity photos, business-casual missionary imagery, smiling group photos with no environmental context. |
+| **OVERSATURATED FILTERS** | Instagram-era color grading with crushed blacks and neon highlights. Communicates youth ministry, not front-line mission. |
+| **AI-GENERATED IMAGERY AS THE DEFAULT** | Real people and real places are always the priority. AI-generated imagery is not prohibited — it's acceptable as a fallback when authentic photography isn't available — but it should never be reached for first, and it must still pass every test in this document (dignity, grit, earned light, no generic "AI smoothing"). Never use AI to fabricate a specific real person, place, or statistic. |
+| **PURPOSELESS DRONE** | Aerial shots are powerful only when they establish impossible scale. Drone shots that just show "a nice view from above" are editorial clichés. |
+| **WESTERN MISSIONARY AS HERO** | Images that center the foreign missionary as the savior figure, with local people as passive background. TTE celebrates the invisible — which includes local believers. |
+
+### The self-test
+
+Before approving any image for TTE use, ask:
+- Does this look earned — or produced?
+- Does the subject have agency — or are they an object of pity?
+- Does this raise my heart rate — or does it comfort me?
+- Would a 25-year-old put this on a t-shirt — or scroll past it on Instagram?
+- Does this look like it belongs next to a National Geographic feature, or a church bulletin?
+
+If the answers point toward comfort, pity, or the church bulletin — the image is wrong for TTE.
+
+---
+
+## 10 — Quick Reference Summary
+
+Condensed sheet for use in creative briefs, social media direction, and field production.
+
+| | |
+|--|--|
+| **GENRE** | Documentary editorial / Environmental portrait |
+| **AESTHETIC BENCHMARK** | National Geographic × Arc'teryx × Magnum Photos |
+| **COLOR TONE** | Warm, soft, earthy. Desaturated 15–25%. Shadows pull amber or deep teal. |
+| **LIGHTING** | Natural light only. Golden hour primary. Overcast diffuse secondary. |
+| **GRAIN** | Always present. Kodak Portra 400 simulation. ISO range 800–6400. |
+| **CAMERA REF.** | Sony A7 series / Fujifilm X-T5 / Leica M (field). iPhone ProRAW (restricted access). |
+| **SCALE LAYER LENS** | 16–24mm. Extreme wide. Tiny human figure against the landscape. |
+| **STILLNESS LAYER LENS** | 50–85mm. f/1.4–2.8. Sharp subject, blurred environment. |
+| **POV LAYER LENS** | 24–35mm. Handheld. Motion blur acceptable. Tactile detail in focus. |
+| **HUD LAYER LENS** | 85–135mm. Tight portrait. Space Mono data overlay. |
+| **KEY PHOTOGRAPHERS** | McCurry, Burkard, Pellegrin, Salgado, Nelson, Bendiksen |
+| **KEY CINEMATOGRAPHERS** | Deakins, Lubezki, Bradford Young |
+| **NEVER** | Soft-focus spiritual clichés / poverty tourism / influencer aesthetic / AI-generated as the default choice / ring light / oversaturated filters |
+| **ALWAYS** | Dignity / authenticity / earned presence / the feeling of risk / prayer as physical weight |
 
 ---
 

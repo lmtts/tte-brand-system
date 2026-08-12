@@ -53,23 +53,28 @@ const CHAIN: ChainStep[] = [
   },
 ];
 
+function TokenPanelHeader({ title, swatch }: { title: string; swatch: React.ReactNode }) {
+  return (
+    <div
+      className="flex items-center border-b border-paper/15"
+      style={{ gap: "calc(8*var(--u))", padding: "calc(10*var(--u)) calc(14*var(--u))" }}
+    >
+      <span aria-hidden className="shrink-0 bg-fire" style={{ width: "6px", height: "6px" }} />
+      <span className="font-mono uppercase leading-none tracking-[0.06em] text-paper" style={{ fontSize: "calc(11*var(--u))" }}>
+        {title}
+      </span>
+      <span aria-hidden className="ml-auto shrink-0" style={{ width: "calc(16*var(--u))", height: "calc(16*var(--u))" }}>
+        {swatch}
+      </span>
+    </div>
+  );
+}
+
 /** The layer chain, rendered like a resolving code trace — raw value to applied meaning. */
 function TokenChainPanel() {
   return (
     <div className="border border-paper/15 bg-ink">
-      <div
-        className="flex items-center border-b border-paper/15"
-        style={{ gap: "calc(8*var(--u))", padding: "calc(10*var(--u)) calc(14*var(--u))" }}
-      >
-        <span aria-hidden className="shrink-0 bg-fire" style={{ width: "6px", height: "6px" }} />
-        <span
-          className="font-mono uppercase leading-none tracking-[0.06em] text-paper"
-          style={{ fontSize: "calc(11*var(--u))" }}
-        >
-          Token chain · Fire Orange
-        </span>
-        <span aria-hidden className="ml-auto shrink-0 bg-fire" style={{ width: "calc(16*var(--u))", height: "calc(16*var(--u))" }} />
-      </div>
+      <TokenPanelHeader title="Token chain · Fire Orange" swatch={<span className="block h-full w-full bg-fire" />} />
       <div className="flex flex-col font-mono" style={{ padding: "calc(20*var(--u)) calc(16*var(--u))", gap: "calc(4*var(--u))" }}>
         {CHAIN.map((step, i) => (
           <div key={step.layer} style={{ paddingLeft: `calc(${i * 24}*var(--u))` }}>
@@ -105,6 +110,41 @@ function TokenChainPanel() {
   );
 }
 
+type RadiusStep = { key: string; value: string; note: string };
+
+const RADIUS: RadiusStep[] = [
+  { key: "borderRadius.default", value: "0px", note: "Every component — buttons, inputs, cards, badges" },
+  { key: "borderRadius.full", value: "9999px", note: "Exception only — avatars and other circular elements" },
+];
+
+/** Radius's token — no primitives/brand layer to cascade through in tokens.json (it's set once,
+ * directly, at semantic), so this panel shows the rule and its one flagged exception instead of a chain. */
+function RadiusTokenPanel() {
+  return (
+    <div className="border border-paper/15 bg-ink">
+      <TokenPanelHeader title="Token · Radius" swatch={<span className="block h-full w-full border border-fire" />} />
+      <div className="flex flex-col font-mono" style={{ padding: "calc(20*var(--u)) calc(16*var(--u))", gap: "calc(14*var(--u))" }}>
+        {RADIUS.map((r, i) => (
+          <div key={r.key}>
+            <div className="uppercase tracking-[0.08em] text-fire" style={{ fontSize: "calc(9*var(--u))" }}>
+              semantic
+            </div>
+            <div className="text-paper" style={{ fontSize: "calc(13*var(--u))", marginTop: "calc(3*var(--u))" }}>
+              {r.key}:{" "}
+              <span className="text-muted">
+                <DecodeText text={r.value} duration={500} delay={i * 150} />
+              </span>
+            </div>
+            <div className="text-muted" style={{ fontSize: "calc(10*var(--u))", marginTop: "calc(3*var(--u))" }}>
+              {r.note}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /** Section 10 — Tokens. */
 export default function TokensSection() {
   return (
@@ -116,14 +156,18 @@ export default function TokensSection() {
         <>
           <p>
             A token is a brand value (a color, a spacing amount, a font size) stored as data
-            instead of typed by hand. Change it once here, and it updates everywhere it&rsquo;s
-            used, instead of slowly drifting out of sync across a dozen files.
+            instead of being typed by hand. Change it once here, and it updates everywhere
+            it&rsquo;s used, instead of slowly drifting out of sync across a dozen files.
           </p>
           <p className="mt-[1em]">
             Values move through three layers: primitives hold the raw value, brand gives it
-            meaning, semantic decides where it applies. Developers import the formats below
-            straight into code; designers see the same values as Figma variables: always the
-            same number, in three different places.
+            meaning, semantic decides where it applies &mdash; though not every token needs all
+            three. Below are two examples: Fire Orange resolves through the full chain; radius is
+            set once, directly, at 0, with one flagged exception.
+          </p>
+          <p className="mt-[1em]">
+            Developers import the formats below straight into code; designers see the same values
+            as Figma variables: always the same number, in three different places.
           </p>
           <div
             className="grid grid-cols-2"
@@ -137,7 +181,10 @@ export default function TokensSection() {
       }
     >
       <div className="flex h-full w-full flex-col justify-center">
-        <TokenChainPanel />
+        <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "calc(14*var(--u))" }}>
+          <TokenChainPanel />
+          <RadiusTokenPanel />
+        </div>
       </div>
     </SectionShell>
   );

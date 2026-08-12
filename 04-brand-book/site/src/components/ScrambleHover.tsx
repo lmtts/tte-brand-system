@@ -22,6 +22,7 @@ export default function ScrambleHover({
   className = "",
   scrambleSpeed = 35,
   revealOnMount = false,
+  lockWidth = true,
   as: Tag = "span",
 }: {
   text: string;
@@ -29,6 +30,18 @@ export default function ScrambleHover({
   scrambleSpeed?: number;
   /** Also runs the scramble once, on scroll into view — the "decrypting in" beat for hero text. */
   revealOnMount?: boolean;
+  /**
+   * Freezes the trigger's width for the scramble's duration, so a proportional face
+   * doesn't visibly resize it frame to frame — on by default (existing behavior).
+   * Set false when the trigger isn't a text-sized button/link (e.g. a full image
+   * tile several ScrambleHovers share as their closest("a, button")): multiple
+   * instances there each capture and clear the SAME trigger's inline width at
+   * different, unsynchronized moments — a shorter label finishes and clears it
+   * while a longer one is still mid-scramble, unpredictable when caught during a
+   * layout-affecting moment (e.g. a scrollbar toggling elsewhere on the page), which
+   * is how a whole grid tile ends up collapsed to zero width.
+   */
+  lockWidth?: boolean;
   as?: React.ElementType;
 }) {
   const [display, setDisplay] = useState(text);
@@ -47,7 +60,7 @@ export default function ScrambleHover({
       // proportional face (Mona Sans), random characters vary in width frame to frame,
       // which otherwise makes the button visibly resize while it scrambles. A monospace
       // face (Space Mono) never had this problem, but locking width is harmless there too.
-      trigger.style.width = `${trigger.getBoundingClientRect().width}px`;
+      if (lockWidth) trigger.style.width = `${trigger.getBoundingClientRect().width}px`;
       let progress = 0;
       const tick = () => {
         progress++;
@@ -61,7 +74,7 @@ export default function ScrambleHover({
           timeoutId.current = window.setTimeout(tick, scrambleSpeed);
         } else {
           setDisplay(text);
-          trigger.style.width = "";
+          if (lockWidth) trigger.style.width = "";
         }
       };
       tick();
@@ -91,7 +104,7 @@ export default function ScrambleHover({
       clearTimeout(timeoutId.current);
       observer?.disconnect();
     };
-  }, [text, scrambleSpeed, revealOnMount]);
+  }, [text, scrambleSpeed, revealOnMount, lockWidth]);
 
   return (
     <Tag ref={ref} className={className}>

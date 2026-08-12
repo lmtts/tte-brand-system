@@ -1,5 +1,7 @@
 # TTE Keyword Library — Sourcing & Search Reference
 
+**Real people, real places, first.** This library exists to find authentic photography — of real people and real places — before anyone reaches for an AI prompt. AI generation (see `ai-prompts.md`) is a fallback for when the right real photo isn't findable, not the default. Everything sourced still has to pass the Movement Test and the Pulse Test in `SKILL.md`.
+
 Use these keywords to find TTE-aligned imagery on stock libraries, inspiration platforms, and photographer archives. Keywords are grouped by intent. Click or copy any keyword directly into your search field.
 
 When building a search query, combine one keyword from each relevant category:
@@ -55,7 +57,7 @@ Example: `"Steve McCurry" + "Central Asia" + "woman portrait" + "golden hour"`
 ---
 
 ## 03 — Aesthetic & Color Treatment
-*Use in Pinterest, Behance, Are.na boards, and Lightroom preset search*
+*Use in Pinterest, Cosmos, Behance, Are.na boards, and Lightroom preset search*
 
 - earthy tones photography
 - muted color palette
@@ -157,7 +159,7 @@ Example: `"Steve McCurry" + "Central Asia" + "woman portrait" + "golden hour"`
 ---
 
 ## 06 — Brand Archetype Reference
-*Use to find aspirational visual benchmarks on Instagram, Behance, Pinterest*
+*Use to find aspirational visual benchmarks on Instagram, Behance, Pinterest, Cosmos*
 
 - The North Face campaign photography
 - Patagonia editorial photography
@@ -200,6 +202,10 @@ Channels to explore: `expedition photography`, `magnum photos`, `documentary por
 ### Pinterest
 Search: `"NatGeo photography style"`, `"earthy film grain portrait"`, `"Chris Burkard landscape"`
 Pin boards to follow: National Geographic photography, Magnum Photos, VII Photo Agency
+
+### Cosmos (cosmos.so)
+Design-forward visual reference tool — strong for building a fast mood board of color grade, composition, and photographer-style references to brief a shoot or an AI prompt. Search: `"expedition editorial"`, `"earthy documentary portrait"`, `"Deakins teal orange"`
+Best for: assembling a single reference board across Layers 1–4 before a shoot or a generation session
 
 ### Google Images
 Reverse-search existing TTE images to find visual siblings

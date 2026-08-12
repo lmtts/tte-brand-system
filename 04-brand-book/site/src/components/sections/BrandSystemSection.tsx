@@ -83,13 +83,18 @@ export default function BrandSystemSection() {
         <>
           <p>
             You&rsquo;re looking at a live map of TTE&rsquo;s brand system: identity, interface,
-            code, and an AI that generates content, all kept in sync so nothing drifts out of
-            date.
+            code, and an AI agent that knows everything about the brand, all kept in sync in one
+            system and source of truth.
           </p>
           <p className="mt-[1em]">
             The actual files live in a repository: a project folder stored on GitHub, a site
             that keeps a full history of every change. That&rsquo;s where you&rsquo;d go to open
             the Figma files, run the code, or read the complete rules.
+          </p>
+          <p className="mt-[1em]">
+            This system can be used by everyone on the team working on the To the Ends of the
+            Earth brand: designers, developers, writers, marketing, and stakeholders. Learn more
+            in the Read Me section in the GitHub repository.
           </p>
           <a
             href={REPO_URL}

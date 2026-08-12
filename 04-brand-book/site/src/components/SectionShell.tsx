@@ -14,41 +14,74 @@ const TOPO = "/assets/patterns/pattern-tile.svg";
 
 // Declared at module scope (not inside SectionShell's render) so they keep a
 // stable component identity across renders instead of remounting each time.
-// Two-tier heading: a literal section name (Heading 3, typewriter-revealed —
-// "what is this") over the punchy brand line (Label Large — the actual
-// copy), so a reader gets the section's subject before its rhetoric.
-function Heading({
+//
+// Three-tier spacing, deliberately unbalanced: the kicker (H4 — literal
+// section name, typewriter-revealed) sits far from everything under it, with
+// its own rule to close out the "title" beat. The tagline (Label Large, when
+// present) and body sit close together right after — they're one thought,
+// the kicker is a different one.
+/** The desktop TextBlock's own type sizes/gaps — exported so a page that needs to
+ * render this exact block outside its normal SectionShell slot (Design System's
+ * pinned column, see SystemSection) matches it exactly instead of guessing the
+ * numbers again. */
+export const DESKTOP_TEXT_BLOCK_STYLE = {
+  kickerStyle: { fontSize: "calc(28*var(--u))" },
+  taglineStyle: { fontSize: "calc(16*var(--u))" },
+  bodyStyle: { fontSize: "calc(14*var(--u))" },
+  groupGap: "calc(32*var(--u))",
+  kickerGap: "calc(12*var(--u))",
+  innerGap: "calc(8*var(--u))",
+} as const;
+
+export function TextBlock({
   kicker,
   heading,
+  body,
   kickerStyle,
   taglineStyle,
+  bodyStyle,
+  groupGap,
+  kickerGap,
+  innerGap,
 }: {
   kicker: string;
-  heading: string;
+  /** Omitted entirely when the designer dropped the Label Large line for this page — kicker (H4) stands alone. */
+  heading?: string;
+  body: React.ReactNode;
   kickerStyle?: React.CSSProperties;
   taglineStyle?: React.CSSProperties;
+  bodyStyle?: React.CSSProperties;
+  /** Kicker block ↔ tagline/body block — wide, so the kicker reads as a section title, not just another line. */
+  groupGap: string;
+  /** Kicker ↔ its rule. */
+  kickerGap: string;
+  /** Tagline ↔ body — tight, they read as one thought. */
+  innerGap: string;
 }) {
   return (
-    <div className="flex flex-col" style={{ gap: "calc(6*var(--u))" }}>
-      <h2
-        className="b-kicker font-display font-extrabold uppercase leading-none tracking-[0.01em] text-fire"
-        style={kickerStyle}
-      >
-        <Typewriter text={kicker} speed={55} />
-      </h2>
-      <p
-        className="b-tagline font-display font-extrabold uppercase leading-none tracking-[0.04em] text-paper"
-        style={taglineStyle}
-      >
-        <Typewriter text={heading} speed={18} delay={500} />
-      </p>
-    </div>
-  );
-}
-function Body({ body, style }: { body: React.ReactNode; style?: React.CSSProperties }) {
-  return (
-    <div className="b-body font-mono leading-[1.4] tracking-[0.01em] text-paper" style={style}>
-      {body}
+    <div className="sec-textblock flex flex-col" style={{ gap: groupGap }}>
+      <div className="flex flex-col" style={{ gap: kickerGap }}>
+        <h2
+          className="b-kicker font-display font-extrabold uppercase leading-none tracking-[0.01em] text-fire"
+          style={kickerStyle}
+        >
+          <Typewriter text={kicker} speed={55} />
+        </h2>
+        <div aria-hidden className="bg-paper/15" style={{ height: "1px", width: "100%" }} />
+      </div>
+      <div className="flex flex-col" style={{ gap: innerGap }}>
+        {heading && (
+          <p
+            className="b-tagline font-display font-extrabold uppercase leading-none tracking-[0.04em] text-paper"
+            style={taglineStyle}
+          >
+            <Typewriter text={heading} speed={18} delay={500} />
+          </p>
+        )}
+        <div className="b-body font-mono leading-[1.4] tracking-[0.01em] text-paper" style={bodyStyle}>
+          {body}
+        </div>
+      </div>
     </div>
   );
 }
@@ -57,8 +90,8 @@ type Props = {
   id: string;
   /** Literal, short section name (e.g. "Patterns") — Heading 3, typewriter-revealed. */
   kicker: string;
-  /** The punchy brand line — now Label Large, under the kicker. */
-  heading: string;
+  /** The punchy brand line — now Label Large, under the kicker. Omit when the page has no Label Large line. */
+  heading?: string;
   body: React.ReactNode;
   /** Right side: a full-bleed image, OR content kept within the right margins. */
   image?: { src: string; alt: string };
@@ -214,22 +247,25 @@ export default function SectionShell({
         {/* left column — text, vertically centered within the same clearance
             as the right region (clears the fixed nav above, fixed footer below) */}
         <div
-          className="absolute z-10 flex flex-col justify-center"
+          className="sec-textcol absolute z-10 flex flex-col justify-center"
           style={{
             left: "calc(36*var(--u))",
             top: "calc(150*var(--u))",
             bottom: "calc(100*var(--u))",
             width: "calc(440*var(--u))",
-            gap: "calc(24*var(--u))",
           }}
         >
-          <Heading
+          <TextBlock
             kicker={kicker}
             heading={heading}
+            body={body}
             kickerStyle={{ fontSize: "calc(28*var(--u))" }}
             taglineStyle={{ fontSize: "calc(16*var(--u))" }}
+            bodyStyle={{ fontSize: "calc(14*var(--u))" }}
+            groupGap="calc(32*var(--u))"
+            kickerGap="calc(12*var(--u))"
+            innerGap="calc(8*var(--u))"
           />
-          <Body body={body} style={{ fontSize: "calc(14*var(--u))" }} />
         </div>
       </div>
 
@@ -240,9 +276,18 @@ export default function SectionShell({
           and its mandatory snap are desktop-only (see LenisProvider), so
           mobile is just the page scrolling, one scrollbar, full stop. */}
       <div className="relative z-10 flex min-h-dvh flex-col lg:hidden">
-        <div className="flex flex-col gap-5 px-6 pb-6 pt-[68px]">
-          <Heading kicker={kicker} heading={heading} kickerStyle={{ fontSize: "22px" }} taglineStyle={{ fontSize: "14px" }} />
-          <Body body={body} style={{ fontSize: "14px" }} />
+        <div className="px-6 pb-6 pt-[68px]">
+          <TextBlock
+            kicker={kicker}
+            heading={heading}
+            body={body}
+            kickerStyle={{ fontSize: "22px" }}
+            taglineStyle={{ fontSize: "14px" }}
+            bodyStyle={{ fontSize: "14px" }}
+            groupGap="28px"
+            kickerGap="10px"
+            innerGap="8px"
+          />
         </div>
 
         {image ? (

@@ -2,9 +2,27 @@
 
 import { useState } from "react";
 import SectionShell from "@/components/SectionShell";
-import DecodeText from "@/components/DecodeText";
 import ScrambleHover from "@/components/ScrambleHover";
 import ImageLightbox from "@/components/ImageLightbox";
+import { NumberedList } from "@/components/BrandList";
+
+const IMAGERY_FOLDER_URL = "https://github.com/lmtts/tte-brand-system/tree/main/01-brand-system/imagery";
+
+function ExternalArrow() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ width: "calc(14*var(--u))", height: "calc(14*var(--u))" }}
+    >
+      <path d="M7 17 17 7M7 7h10v10" />
+    </svg>
+  );
+}
 
 type Layer = {
   index: string;
@@ -50,18 +68,18 @@ const LAYERS: Layer[] = [
   },
 ];
 
-const SPECS = [
-  { label: "Reference", value: "Kodak Portra 400 · VSCO Film 01" },
-  { label: "Saturation", value: "Desaturated 15–25%, warm channels protected" },
-  { label: "Shadows", value: "Amber or deep teal, never pure black" },
-  { label: "Highlights", value: "Warm white #F4F3F1, never blown out" },
-  { label: "Grain", value: "ISO 800–1600 · amount 20–35 / size 25–40" },
-];
-
 /**
- * One narrative layer, full-bleed — the image alone until hover/focus, when
- * a scrim + its HUD info (scrambling in) surface over it. Click still opens
- * the uncropped lightbox.
+ * One narrative layer, full-bleed — the image alone until hover/focus, when a
+ * solid dark scrim covers it and its HUD info (scrambling in) centers over that.
+ * Click still opens the uncropped lightbox.
+ *
+ * `lockWidth={false}` on every ScrambleHover here: all four share this tile's own
+ * `<button>` as their closest("a, button") trigger, and ScrambleHover's default
+ * width-lock (meant for text-sized buttons/links elsewhere) was the cause of a real
+ * bug — four instances freezing/clearing the SAME giant trigger's inline width at
+ * different, unsynchronized moments could catch it mid-layout-shift and leave the
+ * whole tile collapsed. A grid tile's width is never meant to track its label text
+ * anyway, so the lock served no purpose here even before it started misbehaving.
  */
 function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => void }) {
   const { index, name, descriptor, src, alt, spec } = layer;
@@ -78,27 +96,27 @@ function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => 
         alt={alt}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
       />
-      {/* scrim — contrast for the info above, only on hover/focus. Sits at
-          the top (not bottom) so it never collides with the fixed footer. */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
+      {/* scrim — a solid dark ground across the whole tile, only on hover/focus,
+          so the centered info below reads clearly wherever it falls. */}
+      <div className="absolute inset-0 bg-ink/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
       <div
-        className="absolute inset-x-0 top-0 flex flex-col opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
-        style={{ gap: "calc(6*var(--u))", padding: "calc(16*var(--u))" }}
+        className="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
+        style={{ gap: "calc(8*var(--u))", padding: "calc(16*var(--u))" }}
       >
         <span className="font-mono uppercase leading-none tracking-[0.06em]" style={{ fontSize: "calc(11*var(--u))" }}>
           <span className="text-fire">
-            <ScrambleHover text={index} />
+            <ScrambleHover text={index} lockWidth={false} />
           </span>{" "}
           <span className="text-paper">
-            <ScrambleHover text={name} />
+            <ScrambleHover text={name} lockWidth={false} />
           </span>
         </span>
         <div className="font-mono text-muted" style={{ fontSize: "calc(11*var(--u))" }}>
           <div className="uppercase" style={{ opacity: 0.85 }}>
-            <ScrambleHover text={descriptor} />
+            <ScrambleHover text={descriptor} lockWidth={false} />
           </div>
           <div style={{ marginTop: "calc(3*var(--u))" }}>
-            <ScrambleHover text={spec} />
+            <ScrambleHover text={spec} lockWidth={false} />
           </div>
         </div>
       </div>
@@ -129,27 +147,39 @@ export default function ImagerySection() {
       heading="Every photo has to feel earned, not staged."
       body={
         <>
-          <p>
-            Four narrative layers cover the range: the scale of the mission, the stillness of the
-            person, the raw point of view, and the mission data itself. Every photograph fits one
-            of the four.
+          <p>Four visual narrative layers cover the range:</p>
+          <NumberedList
+            items={[
+              "The scale of the mission",
+              "The stillness of the person",
+              "The raw point of view",
+              "The mission data itself",
+            ]}
+          />
+          <p style={{ marginTop: "1em" }}>
+            Each layer has its own shot language, but every photo has to pass the authenticity,
+            grit, and boldness test. It must fit an explorer magazine, rather than a church
+            bulletin.
           </p>
           <p style={{ marginTop: "1em" }}>
-            Each layer has its own shot language, but every photo has to pass the same test: would
-            it belong next to a National Geographic feature, or a church bulletin.
+            The TTE imagery must focus on representing real people, although generating AI content
+            is acceptable in some cases. Consult the brand&rsquo;s repository and brand agent to
+            learn more about photography references, aesthetic, search keywords, and more.
           </p>
-          <dl className="flex flex-col" style={{ gap: "0.6em", marginTop: "1.4em" }}>
-            {SPECS.map((s, i) => (
-              <div key={s.label} className="flex" style={{ gap: "1em" }}>
-                <dt className="shrink-0 text-fire" style={{ width: "7em" }}>
-                  {s.label}
-                </dt>
-                <dd className="opacity-80">
-                  <DecodeText text={s.value} duration={500} delay={i * 80} />
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <a
+            href={IMAGERY_FOLDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-[1.2em] inline-flex w-fit items-center border border-paper/30 font-mono font-bold uppercase tracking-[0.08em] text-paper transition-colors hover:border-fire hover:text-fire"
+            style={{
+              gap: "calc(10*var(--u))",
+              padding: "calc(12*var(--u)) calc(18*var(--u))",
+              fontSize: "calc(12*var(--u))",
+            }}
+          >
+            <ScrambleHover text="View imagery folder" />
+            <ExternalArrow />
+          </a>
         </>
       }
     >

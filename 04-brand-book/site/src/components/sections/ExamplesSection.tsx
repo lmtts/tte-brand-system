@@ -85,8 +85,23 @@ function RegistrationMarks() {
   );
 }
 
-/** The piece itself, no border, no card chrome — shared by the desktop canvas tiles and
- * the mobile flow tiles, just wrapped in a differently-positioned <button>. */
+/**
+ * The piece itself, no border, no card chrome — shared by the desktop canvas tiles and
+ * the mobile flow tiles, just wrapped in a differently-positioned <button>.
+ *
+ * `lockWidth={false}` on the ScrambleHover: this tile's width comes from React's own
+ * `style` prop as a `calc(N*var(--u))` expression (the masonry pack computes it), not a
+ * plain CSS width. ScrambleHover's default lock imperatively sets `element.style.width`
+ * to a fixed px value for the scramble's duration, then clears it back to `""` — but
+ * clearing an inline style doesn't restore whatever React last rendered there, it just
+ * leaves the property unset. With nothing to re-assert the calc() (nothing here causes
+ * this component to re-render on hover), the button was left with no width rule at all:
+ * an absolutely positioned element with no intrinsic content collapses to zero — the
+ * "thumbnail disappears after hover" bug. Confirmed live: width went
+ * `calc(220*var(--u))` → `217.688px` (locked) → `` (cleared) → the button reporting 0
+ * width. The lock exists for text-sized buttons/links whose width should track their
+ * label; a masonry tile's width never should, so there's nothing for it to protect here.
+ */
 function TileContent({ example }: { example: Example }) {
   return (
     <>
@@ -104,7 +119,7 @@ function TileContent({ example }: { example: Example }) {
         style={{ padding: "calc(8*var(--u))", background: "linear-gradient(to top, rgba(40,39,42,0.92), transparent)" }}
       >
         <span className="font-mono font-bold uppercase leading-tight tracking-[0.06em] text-paper" style={{ fontSize: "calc(9*var(--u))" }}>
-          <ScrambleHover text={example.name} />
+          <ScrambleHover text={example.name} lockWidth={false} />
         </span>
         <span className="font-mono uppercase leading-tight tracking-[0.06em] text-muted" style={{ fontSize: "calc(8*var(--u))" }}>
           {example.type}

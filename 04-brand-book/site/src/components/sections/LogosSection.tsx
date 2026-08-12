@@ -1,5 +1,6 @@
 import SectionShell from "@/components/SectionShell";
 import ScrambleHover from "@/components/ScrambleHover";
+import { BulletList } from "@/components/BrandList";
 
 type LogoCardProps = {
   src: string;
@@ -143,19 +144,27 @@ function LogosShowcasePage() {
     <SectionShell
       id="logos"
       kicker="Logos"
-      heading="The mark: a dove fused with flame, facing forward and upward."
       body={
         <>
-          <p>
-            Four lockups cover every use: the complete mark for hero moments, the icon alone, the
-            wordmark where the icon already stands nearby, and the Hope Channel co-brand for
-            official use.
+          <p>The official logo system has variations for every use:</p>
+          <BulletList
+            items={[
+              "The complete logo (Icon + Wordmark)",
+              "The icon (Fire Dove)",
+              "The wordmark",
+              <>
+                The Hope Channel brand connection: it is essential to represent TTE&rsquo;s
+                connection with Hope Channel. The relationship with its parent brand must be
+                visible and clear across all applications.
+              </>,
+            ]}
+          />
+          <p className="mt-[1em]">
+            Always keep contrast: white on dark or photographic backgrounds, black on light.
           </p>
           <p className="mt-[1em]">
-            Clearspace equals the height of the &ldquo;T&rdquo; in the wordmark. White on dark or
-            photographic backgrounds, black on light. Never distorted, rotated, or recolored
-            outside these variants. Every complete file lives in the logo kit below, and in the
-            repository on GitHub.
+            Every complete file lives in the logo kit below, and in the repository on GitHub.
+            Consult it for all the official logo variations.
           </p>
           <a
             href="/downloads/tte-logo-kit.zip"
@@ -179,14 +188,16 @@ function LogosMisusePage() {
   return (
     <SectionShell
       id="logos-misuse"
-      kicker="Logos Misuse"
+      kicker="Logo Wrong Usage"
       dividerAbove="page"
-      heading="Six ways the mark gets broken."
       body={
-        <p>
-          Every example here has shown up in real use at least once. The mark only works when
-          it&rsquo;s reproduced exactly as issued: same proportions, same color, every time.
-        </p>
+        <>
+          <p>Every example here showcases how you shouldn&rsquo;t use the logo system.</p>
+          <p className="mt-[1em]">
+            The TTE mark only works when it&rsquo;s reproduced exactly as issued: same
+            proportions, same color, every time.
+          </p>
+        </>
       }
     >
       <MisuseGrid />

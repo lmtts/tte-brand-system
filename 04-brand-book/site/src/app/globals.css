@@ -188,6 +188,29 @@ html.lenis body {
   left: 42.78%;
 }
 
+/* "system" and "system-controls" share one write-up, rendered once as a sticky
+   element spanning both (SharedTextSticky in SystemSection.tsx) — so neither
+   page's own desktop text column has anything to show; both would otherwise be a
+   second, static copy sitting right behind the sticky one. Below lg the sticky is
+   display:none and these columns are the real ones again, hence the media query. */
+@media (min-width: 1024px) {
+  #system .sec-textcol,
+  #system-controls .sec-textcol {
+    display: none;
+  }
+
+  /* The sticky box is one viewport tall and sits in normal flow ahead of the two
+     pages; this pulls the first of them back up by exactly that much, so the pair
+     adds no net height and every section keeps the scroll offset it had before.
+     Deliberately NOT a negative bottom margin on the sticky box itself — that would
+     shrink its margin box and, since sticky releases when its margin box hits the
+     bottom of its containing block, push the release far past this wrapper, leaving
+     the text hanging over the next page. */
+  .sec-pingroup > .sec-pinsticky + section {
+    margin-top: -100dvh;
+  }
+}
+
 /* Examples canvas viewport (desktop only) — the pannable mosaic bleeds past all four
    edges by design (see ExamplesSection), so every edge gets a thin fade into the section
    background instead of clipping a thumbnail hard — just enough to soften the cut, thumbnails

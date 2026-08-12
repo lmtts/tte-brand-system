@@ -48,10 +48,10 @@ export const SECTIONS: Section[] = [
   {
     id: "system",
     index: "11",
-    name: "System",
+    name: "Design System",
     status: "ready",
     poweredTone: "light",
-    pageIds: ["system", "system-organisms", "system-people-group"],
+    pageIds: ["system", "system-controls", "system-organisms", "system-people-group"],
   },
   { id: "tokens", index: "12", name: "Tokens", status: "ready", poweredTone: "light" },
   { id: "outro", index: "13", name: "Close", status: "ready", poweredTone: "light" },

@@ -1,94 +1,94 @@
 # TTE Brand Quick Reference
 **To The Ends of The Earth — Brand Knowledge Base**
-*Versão sistematizada para uso por IA, desenvolvedores e equipe de criação*
+*Systematized version for use by AI, developers, and the creative team*
 
 ---
 
-## 1. IDENTIDADE ESTRATÉGICA
+## 1. STRATEGIC IDENTITY
 
-**Nome completo:** To The Ends of The Earth
-**Abreviação:** TTE
-**Submarca de:** Hope Channel (marca mãe)
-**Categoria:** Marca de movimento missionário global
+**Full name:** To The Ends of The Earth
+**Abbreviation:** TTE
+**Sub-brand of:** Hope Channel (parent brand)
+**Category:** Global missionary movement brand
 
-### Propósito
-Inspirar e mobilizar cristãos a irem a lugares onde o Evangelho ainda não chegou — especialmente as regiões "não alcançadas" do mundo. A marca existe para tornar a missão global urgente, tangível e pessoal.
+### Purpose
+To inspire and mobilize Christians to go where the Gospel hasn't reached yet — especially the world's "unreached" regions. The brand exists to make the global mission urgent, tangible, and personal.
 
-### Missão
-Levar o Evangelho a todos os povos e nações, até os confins da terra.
+### Mission
+To carry the Gospel to every people and nation, to the ends of the earth.
 
-### Visão
-Um mundo onde cada pessoa e povo tenha acesso ao Evangelho de Jesus Cristo.
+### Vision
+A world where every person and people group has access to the Gospel of Jesus Christ.
 
-### Valores fundamentais
-- **Urgência** — o tempo é agora, não há espaço para passividade
-- **Coragem** — ir aonde ninguém foi, enfrentar o desconhecido com fé
-- **Fé radical** — confiança total em Deus acima das circunstâncias
-- **Sacrifício** — custo real como parte da identidade missionária
-- **Esperança** — a convicção de que a missão vai se cumprir
+### Core values
+- **Urgency** — the time is now, there's no room for passivity
+- **Courage** — going where no one has gone, facing the unknown with faith
+- **Radical faith** — total trust in God above circumstances
+- **Sacrifice** — real cost as part of missionary identity
+- **Hope** — the conviction that the mission will be fulfilled
 
-### Arquétipo de marca
-**Herói + Explorador**
-A marca não faz evangelismo passivo — mobiliza, chama para ação, desafia o conforto. Usa a linguagem da aventura e da expedição como metáfora para a jornada de fé.
+### Brand archetype
+**Hero + Explorer**
+The brand doesn't do passive evangelism — it mobilizes, calls to action, challenges comfort. It uses the language of adventure and expedition as a metaphor for the journey of faith.
 
-### Tom de voz
-- Direto, urgente, sem rodeios
-- Imperativo e desafiador (não sugestivo)
-- Poético quando fala de missão e propósito
-- Técnico e tático quando apresenta dados de missão
-- **Nunca** condescendente, sentimental ou genérico
-- **Sempre** específico: lugares reais, números reais, histórias reais
+### Tone of voice
+- Direct, urgent, no detours
+- Imperative and challenging (not suggestive)
+- Poetic when speaking of mission and purpose
+- Technical and tactical when presenting mission data
+- **Never** condescending, sentimental, or generic
+- **Always** specific: real places, real numbers, real stories
 
-### Exemplos de copy no tom certo
+### Examples of copy in the right tone
 ✅ "Faith thrives where the map ends."
 ✅ "The unreached are not unknown to God."
 ✅ "Go where the Gospel hasn't been."
 ✅ "This is not a call to comfort."
 
-### Exemplos de copy fora do tom
-❌ Linguagem de autopromoção da organização
-❌ Superlativos vazios ("o melhor ministério")
-❌ Sentimentalismo sem chamada para ação
-❌ Genérico ("compartilhe o amor de Deus")
+### Examples of copy off tone
+❌ Organization self-promotion language
+❌ Empty superlatives ("the best ministry")
+❌ Sentimentality without a call to action
+❌ Generic ("share God's love")
 
 ---
 
-## 2. SISTEMA DE IDENTIDADE VISUAL
+## 2. VISUAL IDENTITY SYSTEM
 
-### Paleta de cores
+### Color palette
 
-#### Cores principais — APROVADAS
-| Token semântico        | Token primitivo           | Hex     | Significado                                  |
+#### Primary colors — APPROVED
+| Semantic token        | Primitive token           | Hex     | Meaning                                  |
 |------------------------|---------------------------|---------|----------------------------------------------|
-| `brand.primary`        | `primitives.fire-orange`  | #FE5442 | Fogo do Espírito Santo, urgência, avanço     |
-| `brand.dark`           | `primitives.black`        | #28272A | A terra, o solo, lugares não alcançados      |
-| `brand.light`          | `primitives.white`        | #FFFFFF | Luz do Evangelho penetrando a escuridão      |
+| `brand.primary`        | `primitives.fire-orange`  | #FE5442 | The Holy Spirit's fire, urgency, advance     |
+| `brand.dark`           | `primitives.black`        | #28272A | The earth, the soil, unreached places      |
+| `brand.light`          | `primitives.white`        | #FFFFFF | The Gospel light piercing the darkness      |
 
-#### Cores de bioma — PENDENTES APROVAÇÃO FINAL
-| Token                    | Hex sugerido | Bioma              |
+#### Biome colors — PENDING FINAL APPROVAL
+| Token                    | Suggested hex | Biome              |
 |--------------------------|-------------|--------------------|
-| `semantic.color.biome.desert` | #B86C55     | Árido / Semi-árido |
-| `semantic.color.biome.arctic` | #7BA7BC     | Ártico / Gelado    |
-| `semantic.color.biome.city`   | #4A4A52     | Urbano / Cidade    |
-| `semantic.color.biome.forest` | #2D5A3D     | Tropical / Floresta|
+| `semantic.color.biome.desert` | #B86C55     | Arid / Semi-arid |
+| `semantic.color.biome.arctic` | #7BA7BC     | Arctic / Frozen    |
+| `semantic.color.biome.city`   | #4A4A52     | Urban / City    |
+| `semantic.color.biome.forest` | #2D5A3D     | Tropical / Forest|
 
-#### Regras de uso de cor
-- O laranja (`brand.primary`) é reservado para **ênfase máxima** — nunca fundo dominante em layouts longos
-- Fundos padrão: preto (`brand.dark`) para feel imersivo/noturno, branco (`brand.light`) para editorial
-- O laranja pode ser usado em: word-marks, palavras de ênfase, ícones de ação, CTAs, bordas de acento
-- As cores de bioma são usadas como acento secundário em contextos específicos de cada região geográfica
-- **Jamais** usar cores fora deste sistema sem aprovação
+#### Color usage rules
+- Orange (`brand.primary`) is reserved for **maximum emphasis** — never a dominant background in long layouts
+- Default backgrounds: black (`brand.dark`) for an immersive/nighttime feel, white (`brand.light`) for editorial
+- Orange can be used for: word-marks, emphasis words, action icons, CTAs, accent borders
+- Biome colors are used as a secondary accent in contexts specific to each geographic region
+- **Never** use colors outside this system without approval
 
-### Tipografia
+### Typography
 
-#### Famílias
-| Fonte       | Papel                          | Pesos usados        |
+#### Families
+| Font       | Role                          | Weights used        |
 |-------------|--------------------------------|---------------------|
 | Mona Sans   | Display, headings, wordmark    | Bold (700), ExtraBold (800), Black (900) |
-| Space Mono  | HUD, dados, coordenadas, body  | Regular (400), Bold (700) |
+| Space Mono  | HUD, data, coordinates, body  | Regular (400), Bold (700) |
 
-#### Mona Sans — Escala de display e headings
-| Style               | Tamanho | Line Height | Letter Spacing | Peso    | Caixa         |
+#### Mona Sans — Display and heading scale
+| Style               | Size | Line Height | Letter Spacing | Weight    | Case         |
 |---------------------|---------|-------------|----------------|---------|---------------|
 | Display / 2XL       | 96px    | 95%         | +2%            | Black   | UPPERCASE     |
 | Display / XL        | 72px    | 95%         | +2%            | Black   | UPPERCASE     |
@@ -100,8 +100,8 @@ A marca não faz evangelismo passivo — mobiliza, chama para ação, desafia o 
 | Label / Large       | 16px    | 100%        | +4%            | ExtraBold | UPPERCASE   |
 | Label / Medium      | 13px    | 100%        | +4%            | ExtraBold | UPPERCASE   |
 
-#### Space Mono — Escala HUD e body
-| Style               | Tamanho | Line Height | Letter Spacing | Peso    | Caixa         |
+#### Space Mono — HUD and body scale
+| Style               | Size | Line Height | Letter Spacing | Weight    | Case         |
 |---------------------|---------|-------------|----------------|---------|---------------|
 | HUD / XL            | 20px    | 120%        | +6%            | Bold    | UPPERCASE     |
 | HUD / Default       | 14px    | 120%        | +6%            | Regular | UPPERCASE     |
@@ -111,71 +111,72 @@ A marca não faz evangelismo passivo — mobiliza, chama para ação, desafia o 
 | Body / Small        | 14px    | 140%        | +1%            | Regular | Sentence case |
 | Label / Default     | 12px    | 140%        | +3%            | Bold    | UPPERCASE     |
 
-#### Regras tipográficas
-- Mona Sans **sempre em UPPERCASE** — sem exceção nos usos de display
-- Space Mono em UPPERCASE para HUD e labels; sentence case apenas para body text
-- **Nunca** misturar as duas fontes no mesmo nível hierárquico (uma é display, outra é data)
-- Letter spacing amplo em Space Mono reforça o feel de leitura de dados militares/táticos
-- Line height abaixo de 100% em Display é intencional — cria bloco editorial compacto
+#### Typographic rules
+- Mona Sans **always UPPERCASE** — no exceptions in display uses
+- Space Mono in UPPERCASE for HUD and labels; sentence case only for body text
+- **Never** mix the two typefaces at the same hierarchical level (one is display, the other is data)
+- Wide letter spacing in Space Mono reinforces the feel of reading tactical/military data
+- Line height under 100% in Display is intentional — it creates a compact editorial block
 
 ---
 
-## 3. SISTEMA DE LOGO
+## 3. LOGO SYSTEM
 
-### Componentes
-| Elemento       | Uso principal                                      |
+### Components
+| Element       | Primary use                                      |
 |----------------|----------------------------------------------------|
-| Logo completo  | Combinação de ícone + wordmark — uso padrão        |
-| Wordmark       | "TO THE ENDS OF THE EARTH" — uso em títulos        |
-| Ícone          | Pássaro estilizado com asa laranja — uso standalone |
-| Lockup com Hope Channel | Versão com barra separadora e logo mãe  |
+| Complete logo  | Icon + wordmark combination — default use        |
+| Wordmark       | "TO THE ENDS OF THE EARTH" — used in titles        |
+| Icon           | Stylized bird with orange wing — standalone use |
+| Hope Channel lockup | Version with divider bar and parent logo  |
 
-### Pássaro — Anatomia e significado
-O ícone TTE é um pássaro estilizado derivado do pássaro da Hope Channel. A distinção visual é a **asa laranja (#FE5442)** — representa o fogo do Espírito Santo e o movimento missionário. O corpo mantém o DNA visual da marca mãe.
+### The bird — Anatomy and meaning
+The TTE icon is a stylized bird derived from the Hope Channel bird. The visual distinction is the **orange wing (#FE5442)** — representing the Holy Spirit's fire and the missionary movement. The body retains the parent brand's visual DNA.
 
-### Regras de uso do logo
-- Zona de proteção mínima: equivalente à altura da letra "T" do wordmark em todos os lados
-- Versão clara (logo branco): em fundos escuros ou fotográficos
-- Versão escura (logo preto): em fundos claros
-- Versão com laranja: apenas quando aprovada para contexto específico
-- **Nunca** distorcer, rotacionar, recolorizar fora das variantes aprovadas
-- **Nunca** separar o ícone do wordmark nos lockups que combinam os dois
+### Logo usage rules
+- Minimum clearspace: equal to the height of the "T" in the wordmark on all sides
+- Light version (white logo): on dark or photographic backgrounds
+- Dark version (black logo): on light backgrounds
+- Orange version: only when approved for a specific context
+- **Never** distort, rotate, or recolor outside approved variants
+- **Never** separate the icon from the wordmark in lockups that combine both
 
-### Relação com Hope Channel
-- O TTE é submarca da Hope Channel
-- Sempre que o TTE aparece em material oficial, o lockup com a Hope Channel deve estar presente
-- A marca mãe aparece no canto superior direito com barra separadora branca
-- O TTE tem autonomia visual mas não pode contradizer os valores visuais da Hope Channel
+### Relationship with Hope Channel
+- TTE is a sub-brand of Hope Channel
+- Whenever TTE appears in official materials, the Hope Channel lockup must be present
+- The parent brand appears in the top-right corner with a white divider bar
+- TTE has visual autonomy but cannot contradict Hope Channel's visual values
 
 ---
 
-## 4. SISTEMA DE IMAGERY
+## 4. IMAGERY SYSTEM
 
-### Os 4 Layers — regra de composição
+### The 4 Layers — composition rule
 
-Toda imagem da TTE é construída em camadas nesta ordem:
+Every TTE image is built in layers, in this order:
 
-**Layer 1 — Fotografia base**
-Foto de alta qualidade de contexto missionário real ou análogo. Biomas específicos: floresta tropical, ártico, deserto, urbano. Pessoas reais em contexto de missão — pastores locais, comunidades, paisagens não alcançadas. Sem stock genérico ou imagens de "cristãos sorridentes em estúdio".
+**Layer 1 — Base photography**
+High-quality photo of a real or analogous missionary context. Specific biomes: tropical forest, arctic, desert, urban. Real people in mission context — local pastors, communities, unreached landscapes. No generic stock or "smiling Christians in a studio" imagery.
 
-**Layer 2 — Overlay topográfico**
-Padrão de linhas topográficas (curvas de nível) aplicado sobre a foto com opacidade de 12% (`--opacity-topographic`). Representa o terreno da missão — lugares físicos e espirituais a serem mapeados. Em vermelho/laranja para aplicações escuras.
+**Layer 2 — Topographic overlay**
+Topographic contour-line pattern applied over the photo at 12% opacity (`--opacity-topographic`). Represents the mission's terrain — physical and spiritual places yet to be mapped. In red/orange for dark applications.
 
 **Layer 3 — HUD (Heads-Up Display)**
-Sobreposição de dados táticos em Space Mono: coordenadas GPS, nome do lugar, população não alcançada, status de acesso, bioma. Cria o feel de "missão em curso" — conecta a identidade visual à realidade dos números missionários.
+Tactical data overlay in Space Mono: GPS coordinates, place name, unreached population, access status, biome. Creates a "mission in progress" feel — connects the visual identity to the reality of mission numbers.
 
-**Layer 4 — Tipografia de impacto**
-Headline em Mona Sans ExtraBold/Black, uppercase, sobre a composição. Parte em branco, palavra-chave em laranja (#FE5442). Cria o contraste visual que define a linguagem editorial da TTE.
+**Layer 4 — Impact typography**
+Headline in Mona Sans ExtraBold/Black, uppercase, over the composition. Part in white, keyword in orange (#FE5442). Creates the visual contrast that defines TTE's editorial language.
 
-### Regras de imagery
-- A fotografia deve sempre ser de **lugares reais** e **pessoas reais** quando possível
-- Evitar clichês de missão (mãos erguidas, sorriso genérico, cruz no céu)
-- Preferir momentos de tensão, contemplação, jornada, chegada
-- O overlay topográfico **nunca** é omitido — é parte integrante do sistema
-- O HUD pode ser simplificado mas nunca completamente removido em aplicações principais
-- A palavra de ênfase no laranja deve ser **uma palavra** — raramente duas
+### Imagery rules
+- Photography should always be of **real places** and **real people** whenever possible
+- Real people and real places come first; AI-generated imagery is not prohibited, but it is a fallback for when authentic photography isn't available — never the default choice
+- Avoid mission clichés (raised hands, generic smile, cross in the sky)
+- Prefer moments of tension, contemplation, journey, arrival
+- The topographic overlay is **never** omitted — it's an integral part of the system
+- The HUD can be simplified but never fully removed in primary applications
+- The orange emphasis word should be **one word** — rarely two
 
-### Prompt base para geração de imagem com IA
+### Base prompt for AI image generation
 ```
 Photojournalism style, [biome: tropical forest / arctic / desert / urban],
 missionary context, real people or landscape, dramatic natural light,
@@ -186,21 +187,21 @@ Reference: National Geographic documentary photography.
 
 ---
 
-## 5. TOKENS DE DESIGN — REFERÊNCIA RÁPIDA
+## 5. DESIGN TOKENS — QUICK REFERENCE
 
-### Cores (semantic tokens para uso em código/design)
+### Colors (semantic tokens for use in code/design)
 ```
-Texto padrão:       var(--color-text-default)    → #28272A
-Texto invertido:    var(--color-text-inverted)   → #FFFFFF
-Texto de ênfase:    var(--color-text-accent)     → #FE5442
+Default text:       var(--color-text-default)    → #28272A
+Inverted text:    var(--color-text-inverted)   → #FFFFFF
+Accent text:    var(--color-text-accent)     → #FE5442
 
-Fundo escuro:       var(--color-surface-dark)    → #28272A
-Fundo claro:        var(--color-surface-light)   → #FFFFFF
-Fundo de acento:    var(--color-surface-accent)  → #FE5442
+Dark surface:       var(--color-surface-dark)    → #28272A
+Light surface:       var(--color-surface-light)   → #FFFFFF
+Accent surface:    var(--color-surface-accent)  → #FE5442
 
-HUD texto:          var(--color-hud-text)        → #FFFFFF
-HUD rótulo:         var(--color-hud-accent)      → #FE5442
-HUD fundo:          var(--color-hud-background)  → #28272A
+HUD text:          var(--color-hud-text)        → #FFFFFF
+HUD label:          var(--color-hud-accent)      → #FE5442
+HUD background:          var(--color-hud-background)  → #28272A
 ```
 
 ### Spacing
@@ -211,89 +212,89 @@ xs: 8px  |  sm: 12px  |  md: 16px  |  lg: 24px  |  xl: 32px  |  2xl: 48px
 
 ### Border Radius
 ```
-0px para tudo — a marca é angular e tática.
-Exceção: 9999px (--radius-full) apenas para avatares circulares.
+0px for everything — the brand is angular and tactical.
+Exception: 9999px (--radius-full) for circular avatars only.
 ```
 
-### Elevação HUD
+### HUD elevation
 ```
 box-shadow: 0 0 24px rgba(254, 84, 66, 0.20)
-Efeito de brilho laranja suave — exclusivo para painéis HUD.
+Soft orange glow effect — exclusive to HUD panels.
 ```
 
 ---
 
-## 6. REGRAS DE APLICAÇÃO — CHECKLIST
+## 6. APPLICATION RULES — CHECKLIST
 
-Antes de publicar ou entregar qualquer material da TTE, verificar:
+Before publishing or delivering any TTE material, verify:
 
 **Visual**
-- [ ] Paleta de cores dentro do sistema aprovado
-- [ ] Tipografia usando apenas Mona Sans e Space Mono
-- [ ] Logo na versão correta para o fundo
-- [ ] Zona de proteção do logo respeitada
-- [ ] Lockup com Hope Channel presente (se material oficial)
-- [ ] Border radius zero em todos os elementos
+- [ ] Color palette within the approved system
+- [ ] Typography using only Mona Sans and Space Mono
+- [ ] Logo in the correct version for the background
+- [ ] Logo clearspace respected
+- [ ] Hope Channel lockup present (if official material)
+- [ ] Zero border radius on every element
 
 **Imagery**
-- [ ] Fotografia de contexto missionário real
-- [ ] Layer topográfico presente
-- [ ] HUD com dados presentes (ao menos parcialmente)
-- [ ] Palavra de ênfase em laranja (se houver headline)
-- [ ] Nenhum elemento de stock genérico
+- [ ] Photography of a real missionary context
+- [ ] Topographic layer present
+- [ ] HUD with data present (at least partially)
+- [ ] Emphasis word in orange (if there's a headline)
+- [ ] No generic stock elements
 
-**Copy e tom**
-- [ ] Linguagem direta e imperativa
-- [ ] Específico — lugar, número, história real quando possível
-- [ ] Sem sentimentalismo sem chamada para ação
-- [ ] Sem superlativos vazios
+**Copy and tone**
+- [ ] Direct and imperative language
+- [ ] Specific — real place, number, story whenever possible
+- [ ] No sentimentality without a call to action
+- [ ] No empty superlatives
 
-**Técnico**
-- [ ] Cores aplicadas via tokens (não hardcoded)
-- [ ] Text styles do sistema aplicados
-- [ ] Assets exportados nos formatos corretos (SVG para logos, PNG/WebP para fotos)
+**Technical**
+- [ ] Colors applied via tokens (not hardcoded)
+- [ ] System text styles applied
+- [ ] Assets exported in the correct formats (SVG for logos, PNG/WebP for photos)
 
 ---
 
-## 7. ARQUITETURA DO SISTEMA
+## 7. SYSTEM ARCHITECTURE
 
-### Arquivos do brand system
+### Brand system files
 ```
 tte-brand/
 ├── tokens/
-│   ├── tokens.json          ← fonte de verdade para devs e ferramentas
-│   ├── tokens.css           ← CSS custom properties prontas para uso
-│   └── tokens.scss          ← variáveis SCSS (a gerar)
+│   ├── tokens.json          ← source of truth for devs and tools
+│   ├── tokens.css           ← CSS custom properties, ready to use
+│   └── tokens.scss          ← SCSS variables (to be generated)
 ├── brand/
-│   ├── brand-project.md     ← SPARK doc completo (estratégia e decisões)
-│   └── brand-quick-reference.md ← este arquivo
+│   ├── brand-project.md     ← full SPARK doc (strategy and decisions)
+│   └── brand-quick-reference.md ← this file
 ├── assets/
-│   ├── logos/               ← SVGs de todas as variantes do logo
+│   ├── logos/               ← SVGs of every logo variant
 │   ├── patterns/            ← topographic-overlay.svg
-│   └── icons/               ← ícones do sistema
+│   └── icons/               ← system icons
 └── imagery/
-    ├── imagery-guide.md     ← guia detalhado dos 4 layers
-    └── ai-prompts.md        ← prompts por bioma e contexto
+    ├── imagery-guide.md     ← detailed guide to the 4 layers
+    └── ai-prompts.md        ← prompts by biome and context
 ```
 
-### Status do sistema (atualizar conforme evolução)
-| Componente              | Status         |
+### System status (update as it evolves)
+| Component              | Status         |
 |-------------------------|----------------|
-| Estratégia e identidade | ✅ Aprovado    |
-| Color Variables (Figma) | ✅ Criado      |
-| Text Styles (Figma)     | ✅ Criado      |
-| tokens.json             | ✅ Gerado      |
-| tokens.css              | ✅ Gerado      |
-| Spacing tokens          | ✅ Definido    |
-| Border radius tokens    | ✅ Definido    |
-| Componentes UI          | 🔲 A construir |
-| Patterns (HUD, social)  | 🔲 A formalizar|
-| Templates               | 🔲 A construir |
-| Brand Book (Figma)      | 🔲 A construir |
-| Brand Book (HTML/site)  | 🔲 A construir |
-| Repositório GitHub      | 🔲 A estruturar|
-| Brand Agent (IA)        | 🔲 A construir |
+| Strategy and identity | ✅ Approved    |
+| Color Variables (Figma) | ✅ Created      |
+| Text Styles (Figma)     | ✅ Created      |
+| tokens.json             | ✅ Generated      |
+| tokens.css              | ✅ Generated      |
+| Spacing tokens          | ✅ Defined    |
+| Border radius tokens    | ✅ Defined    |
+| UI Components          | 🔲 To build |
+| Patterns (HUD, social)  | 🔲 To formalize|
+| Templates               | 🔲 To build |
+| Brand Book (Figma)      | 🔲 To build |
+| Brand Book (HTML/site)  | 🔲 To build |
+| GitHub repository      | 🔲 To structure|
+| Brand Agent (AI)        | 🔲 To build |
 
 ---
 
-*Este documento é a fonte de contexto primária para qualquer IA ou membro da equipe trabalhando com a marca TTE. Em caso de conflito entre este documento e materiais antigos, este prevalece. Para decisões fora do escopo deste guia, consultar o SPARK doc completo ou o designer responsável.*
+*This document is the primary source of context for any AI or team member working with the TTE brand. In case of conflict between this document and older materials, this one takes precedence. For decisions outside the scope of this guide, consult the full SPARK doc or the designer responsible.*

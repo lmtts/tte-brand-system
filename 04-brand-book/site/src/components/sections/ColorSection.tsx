@@ -149,18 +149,16 @@ export default function ColorSection() {
     <SectionShell
       id="color"
       kicker="Color"
-      heading="Three colors. Each one has a specific job."
       body={
         <>
-          <p>
+          <p className="font-bold">To the Ends of the Earth has three main colors:</p>
+          <p className="mt-[1em]">
             Fire Orange is reserved for emphasis: calls to action, key words, the one accent that
             matters. It never becomes a passive background.
           </p>
-          <p className="mt-[1em]">
-            Black is the default ground, the color of soil and unreached places. White carries the
-            gospel light, for editorial and text on dark. Never a rival to Fire Orange, biome
-            colors stay secondary, used only when context calls for them.
-          </p>
+          <p className="mt-[1em]">Black is the default ground, the color of soil and unreached places.</p>
+          <p className="mt-[1em]">White carries the gospel light, for editorial and text on dark.</p>
+          <p className="mt-[1em]">Biome colors stay secondary, used only when context calls for them.</p>
         </>
       }
     >
