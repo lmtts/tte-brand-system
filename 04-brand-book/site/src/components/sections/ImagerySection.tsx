@@ -147,6 +147,7 @@ export default function ImagerySection() {
       kicker="Imagery"
       bleed
       bleedClearance
+      showDivider
       heading="Every photo has to feel earned, not staged."
       body={
         <>
