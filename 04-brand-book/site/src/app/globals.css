@@ -183,9 +183,12 @@ html.lenis body {
     --u: 0.9px;
   }
 }
-/* image left edge = Figma col 6 start (616 / 1440), fluid; bleeds to the right. */
+/* Right region's left edge, fluid; bleeds to the right. Was Figma col 6 (616/1440 =
+   42.78%) back when the text column was 440u wide; it moved left with the column
+   (536/1440) so the seam-to-content gap stayed put. Kept in sync with RIGHT_EDGE in
+   SectionShell.tsx, which documents why this one stayed a percentage. */
 .sec-imgleft {
-  left: 42.78%;
+  left: 37.22%;
 }
 
 /* "system" and "system-controls" share one write-up, rendered once as a sticky

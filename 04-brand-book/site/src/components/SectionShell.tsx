@@ -22,6 +22,28 @@ const TOPO = "/assets/patterns/pattern-tile.svg";
 const NAV_BAR_HEIGHT = "80px";
 const FOOTER_BAR_HEIGHT = "51px";
 
+/*
+ * Desktop column geometry, in 1440-frame design px (multiply by --u).
+ *
+ * Two gaps set the rhythm and both are deliberate: 64u from the end of the text column
+ * to the seam, 76u from the seam to where the right region starts. Change TEXT_COL and
+ * both of the others have to follow, or the rhythm breaks.
+ *
+ * The third number, the right region's own left edge, is NOT here — it lives in
+ * `.sec-imgleft` (globals.css) because it is a viewport percentage rather than --u-based,
+ * which is what it has always been. Below 1440 the two units are the same thing
+ * (--u = vw/1440); they only diverge above it, where --u caps at 1px, and keeping that
+ * edge on its original unit keeps wide-screen behavior unchanged. Move one, move both.
+ */
+const TEXT_COL = 360; // text column width — 36u left margin, so it ends at 396u
+const SEAM = 460; // the vertical rule between text and content
+/*
+ * The right region got wider when the text column narrowed, but its contents must not:
+ * the cards and grids in there are almost all w-full/h-full, so a wider box would stretch
+ * every one of them. This caps them at the width they already had and centers the surplus.
+ */
+const CONTENT_MAX = 788;
+
 // Declared at module scope (not inside SectionShell's render) so they keep a
 // stable component identity across renders instead of remounting each time.
 //
@@ -30,17 +52,37 @@ const FOOTER_BAR_HEIGHT = "51px";
 // its own rule to close out the "title" beat. The tagline (Label Large, when
 // present) and body sit close together right after — they're one thought,
 // the kicker is a different one.
-/** The desktop TextBlock's own type sizes/gaps — exported so a page that needs to
+/**
+ * The desktop TextBlock's own type sizes/gaps — exported so a page that needs to
  * render this exact block outside its normal SectionShell slot (Design System's
  * pinned column, see SystemSection) matches it exactly instead of guessing the
- * numbers again. */
+ * numbers again.
+ *
+ * Editorial scale: supporting text sits one documented step down from where it used
+ * to (H3→H4, Label/Large→Label/Medium, Body/Small→Body/XS) so the application beside
+ * it carries the page — the proportion big brand guidelines use. Every value is a real
+ * token, never an invented in-between size. The looser body leading belongs to
+ * Body/XS itself, not to this layout.
+ */
 export const DESKTOP_TEXT_BLOCK_STYLE = {
-  kickerStyle: { fontSize: "calc(28*var(--u))" },
-  taglineStyle: { fontSize: "calc(16*var(--u))" },
-  bodyStyle: { fontSize: "calc(14*var(--u))" },
-  groupGap: "calc(32*var(--u))",
-  kickerGap: "calc(12*var(--u))",
-  innerGap: "calc(8*var(--u))",
+  kickerStyle: { fontSize: "calc(22*var(--u))" }, // Mona Heading/H4
+  taglineStyle: { fontSize: "calc(13*var(--u))" }, // Mona Label/Medium
+  bodyStyle: { fontSize: "calc(12*var(--u))", lineHeight: 1.6 }, // Space Mono Body/XS
+  groupGap: "calc(40*var(--u))",
+  kickerGap: "calc(14*var(--u))",
+  innerGap: "calc(10*var(--u))",
+} as const;
+
+/**
+ * Where the desktop text column sits. Exported for the same reason as the block style
+ * above: SystemSection pins its own copy of this column across two pages and must not
+ * re-type these numbers.
+ */
+export const DESKTOP_TEXT_COL_STYLE = {
+  left: "calc(36*var(--u))",
+  top: "calc(150*var(--u))",
+  bottom: "calc(100*var(--u))",
+  width: `calc(${TEXT_COL}*var(--u))`,
 } as const;
 
 export function TextBlock({
@@ -88,7 +130,9 @@ export function TextBlock({
             <Typewriter text={heading} speed={18} delay={500} />
           </p>
         )}
-        <div className="b-body font-mono leading-[1.4] tracking-[0.01em] text-paper" style={bodyStyle}>
+        {/* Leading comes from bodyStyle, not a class here — it belongs with the size it
+            ships with (Body/XS on desktop at 1.6, Body/Small on mobile at 1.4). */}
+        <div className="b-body font-mono tracking-[0.01em] text-paper" style={bodyStyle}>
           {body}
         </div>
       </div>
@@ -149,7 +193,8 @@ type Props = {
  * edge instead, since the footer bar carries its own opaque backing).
  * Everything scales with --u. The persistent SectionNav, MobileNav and
  * SectionFooter live outside this component (mounted once at page level).
- * Type sizes: heading 22 (Mona H4), body 14 (Space Mono Body/Small).
+ * Type sizes come from DESKTOP_TEXT_BLOCK_STYLE and the column geometry from
+ * DESKTOP_TEXT_COL_STYLE / the TEXT_COL-SEAM-RIGHT_EDGE constants above.
  */
 export default function SectionShell({
   id,
@@ -227,7 +272,7 @@ export default function SectionShell({
             aria-hidden
             className="absolute bg-paper/15"
             style={{
-              left: "calc(540*var(--u))",
+              left: `calc(${SEAM}*var(--u))`,
               top: "0",
               bottom: "0",
               width: "1px",
@@ -242,14 +287,14 @@ export default function SectionShell({
             <img src={image.src} alt={image.alt} className="b-img h-full w-full object-cover object-center" />
           </div>
         ) : bleed ? (
-          // With showDivider, the bleed region starts AT the divider (540u) instead of
-          // .sec-imgleft's 42.78% — those are two different rulers (42.78% is Figma col 6,
-          // where a full-bleed photo starts; 540u is the text/content seam), and using the
+          // With showDivider, the bleed region starts AT the divider instead of the photo
+          // edge — those are two different rulers (.sec-imgleft/RIGHT_EDGE is Figma col 6,
+          // where a full-bleed photo starts; SEAM is the text/content seam), and using the
           // photo ruler here left a ~100px gap between the line and the content.
           <div
             className={`absolute right-0 overflow-hidden ${showDivider ? "" : "sec-imgleft"}`}
             style={{
-              ...(showDivider ? { left: "calc(540*var(--u))" } : {}),
+              ...(showDivider ? { left: `calc(${SEAM}*var(--u))` } : {}),
               ...(bleedClearance
                 ? { top: NAV_BAR_HEIGHT, bottom: FOOTER_BAR_HEIGHT }
                 : { top: 0, bottom: 0 }),
@@ -266,32 +311,19 @@ export default function SectionShell({
               paddingBottom: "calc(100*var(--u))",
             }}
           >
-            {children}
+            {/* CONTENT_MAX keeps the cards and grids in here at the width they had before
+                the text column narrowed — see the constant. h-full so h-full children still
+                measure against the same box as before. */}
+            <div className="h-full" style={{ maxWidth: `calc(${CONTENT_MAX}*var(--u))`, marginInline: "auto" }}>
+              {children}
+            </div>
           </div>
         )}
 
         {/* left column — text, vertically centered within the same clearance
             as the right region (clears the fixed nav above, fixed footer below) */}
-        <div
-          className="sec-textcol absolute z-10 flex flex-col justify-center"
-          style={{
-            left: "calc(36*var(--u))",
-            top: "calc(150*var(--u))",
-            bottom: "calc(100*var(--u))",
-            width: "calc(440*var(--u))",
-          }}
-        >
-          <TextBlock
-            kicker={kicker}
-            heading={heading}
-            body={body}
-            kickerStyle={{ fontSize: "calc(28*var(--u))" }}
-            taglineStyle={{ fontSize: "calc(16*var(--u))" }}
-            bodyStyle={{ fontSize: "calc(14*var(--u))" }}
-            groupGap="calc(32*var(--u))"
-            kickerGap="calc(12*var(--u))"
-            innerGap="calc(8*var(--u))"
-          />
+        <div className="sec-textcol absolute z-10 flex flex-col justify-center" style={DESKTOP_TEXT_COL_STYLE}>
+          <TextBlock kicker={kicker} heading={heading} body={body} {...DESKTOP_TEXT_BLOCK_STYLE} />
         </div>
       </div>
 
@@ -309,7 +341,7 @@ export default function SectionShell({
             body={body}
             kickerStyle={{ fontSize: "22px" }}
             taglineStyle={{ fontSize: "14px" }}
-            bodyStyle={{ fontSize: "14px" }}
+            bodyStyle={{ fontSize: "14px", lineHeight: 1.4 }}
             groupGap="28px"
             kickerGap="10px"
             innerGap="8px"

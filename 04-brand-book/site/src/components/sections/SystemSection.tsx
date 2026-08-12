@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Compass, Target, MapPin, Radar, Mountain, Satellite } from "lucide-react";
-import SectionShell, { TextBlock, DESKTOP_TEXT_BLOCK_STYLE } from "@/components/SectionShell";
+import SectionShell, { TextBlock, DESKTOP_TEXT_BLOCK_STYLE, DESKTOP_TEXT_COL_STYLE } from "@/components/SectionShell";
 import DecodeText from "@/components/DecodeText";
 import CountUp from "@/components/CountUp";
 import ScrambleHover from "@/components/ScrambleHover";
@@ -715,17 +715,13 @@ function PeopleGroupCardDemo({ group }: { group: PeopleGroup }) {
 function SharedTextSticky() {
   return (
     <div className="sec-pinsticky pointer-events-none sticky top-0 z-[5] hidden h-dvh lg:block">
-      {/* .secd carries the --u scale every size below is expressed in; the inset
-          values match SectionShell's own text column exactly, so this lines up
-          pixel-for-pixel with every other section's left column. */}
+      {/* .secd carries the --u scale the geometry below is expressed in. The insets come
+          straight from SectionShell's own exported constant rather than being retyped —
+          they drifted apart once already, and a hardcoded copy here silently keeps the
+          old column width whenever the shared one changes. */}
       <div
         className="secd pointer-events-auto absolute flex flex-col justify-center"
-        style={{
-          left: "calc(36*var(--u))",
-          top: "calc(150*var(--u))",
-          bottom: "calc(100*var(--u))",
-          width: "calc(440*var(--u))",
-        }}
+        style={DESKTOP_TEXT_COL_STYLE}
       >
         <TextBlock kicker={SYSTEM_KICKER} heading={SYSTEM_HEADING} body={SYSTEM_BODY} {...DESKTOP_TEXT_BLOCK_STYLE} />
       </div>
