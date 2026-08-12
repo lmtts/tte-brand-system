@@ -119,6 +119,15 @@ type Props = {
    * canvas) can opt back in.
    */
   showDivider?: boolean;
+  /**
+   * With `bleed`, clear the fixed top nav and bottom footer bars vertically (same
+   * top/bottom clearance as the non-bleed layout) instead of spanning the full
+   * viewport edge to edge. Plain `bleed` deliberately runs full-bleed vertically too
+   * (a full-bleed photo reads fine with the nav/footer bars floating over it), but
+   * content with its own hard edges — a grid of image tiles, say — visibly loses
+   * its top/bottom row under those fixed bars without this.
+   */
+  bleedClearance?: boolean;
 };
 
 /**
@@ -141,6 +150,7 @@ export default function SectionShell({
   dividerAbove = "section",
   bleed = false,
   showDivider = false,
+  bleedClearance = false,
 }: Props) {
   const root = useRef<HTMLElement>(null);
 
@@ -226,8 +236,13 @@ export default function SectionShell({
           // where a full-bleed photo starts; 540u is the text/content seam), and using the
           // photo ruler here left a ~100px gap between the line and the content.
           <div
-            className={`absolute inset-y-0 right-0 overflow-hidden ${showDivider ? "" : "sec-imgleft"}`}
-            style={showDivider ? { left: "calc(540*var(--u))" } : undefined}
+            className={`absolute right-0 overflow-hidden ${showDivider ? "" : "sec-imgleft"}`}
+            style={{
+              ...(showDivider ? { left: "calc(540*var(--u))" } : {}),
+              ...(bleedClearance
+                ? { top: "calc(150*var(--u))", bottom: "calc(100*var(--u))" }
+                : { top: 0, bottom: 0 }),
+            }}
           >
             {children}
           </div>

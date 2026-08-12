@@ -124,7 +124,9 @@ function LayerTile({ layer, onOpen }: { layer: Layer; onOpen: (layer: Layer) => 
   );
 }
 
-/** 2×2, no gap — same edge-to-edge sizing as the single portrait in "The Brand" (Section 02). */
+/** 2×2, no gap — bleeds horizontally edge to edge, but clears the fixed nav/footer bars
+ * vertically (`bleedClearance` on SectionShell), so tiles land as landscape rectangles
+ * here rather than the near-squares a full 0–100dvh bleed produced. */
 function LayersGrid({ onOpen }: { onOpen: (layer: Layer) => void }) {
   return (
     <div className="grid w-full grid-cols-2 lg:h-full lg:grid-rows-2">
@@ -144,6 +146,7 @@ export default function ImagerySection() {
       id="imagery"
       kicker="Imagery"
       bleed
+      bleedClearance
       heading="Every photo has to feel earned, not staged."
       body={
         <>
