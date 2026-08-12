@@ -12,6 +12,16 @@ gsap.registerPlugin(ScrollTrigger);
 // and it's already native Fire Orange so no recolor filter is needed here.
 const TOPO = "/assets/patterns/pattern-tile.svg";
 
+// SectionNav's and SectionFooter's own real rendered heights at desktop widths (measured
+// live, not derived from --u: both bars are built entirely from fixed px — py-6/px-9 and
+// fixed text/image sizes in SectionNav, py-3 and fixed sizes in SectionFooter/PoweredByHope
+// — so unlike in-section content they don't scale with the fluid unit, and bleedClearance
+// needs to clear their true height, not the larger 150u/100u breathing room tuned for
+// vertically centering text). If either bar's own padding or content size changes, these
+// need to move with it.
+const NAV_BAR_HEIGHT = "80px";
+const FOOTER_BAR_HEIGHT = "51px";
+
 // Declared at module scope (not inside SectionShell's render) so they keep a
 // stable component identity across renders instead of remounting each time.
 //
@@ -120,11 +130,12 @@ type Props = {
    */
   showDivider?: boolean;
   /**
-   * With `bleed`, clear the fixed top nav and bottom footer bars vertically (same
-   * top/bottom clearance as the non-bleed layout) instead of spanning the full
-   * viewport edge to edge. Plain `bleed` deliberately runs full-bleed vertically too
-   * (a full-bleed photo reads fine with the nav/footer bars floating over it), but
-   * content with its own hard edges — a grid of image tiles, say — visibly loses
+   * With `bleed`, clear the fixed top nav and bottom footer bars vertically — their
+   * own real height (NAV_BAR_HEIGHT/FOOTER_BAR_HEIGHT), not the larger 150u/100u
+   * breathing room tuned for vertically centering text — instead of spanning the
+   * full viewport edge to edge. Plain `bleed` deliberately runs full-bleed vertically
+   * too (a full-bleed photo reads fine with the nav/footer bars floating over it),
+   * but content with its own hard edges — a grid of image tiles, say — visibly loses
    * its top/bottom row under those fixed bars without this.
    */
   bleedClearance?: boolean;
@@ -240,7 +251,7 @@ export default function SectionShell({
             style={{
               ...(showDivider ? { left: "calc(540*var(--u))" } : {}),
               ...(bleedClearance
-                ? { top: "calc(150*var(--u))", bottom: "calc(100*var(--u))" }
+                ? { top: NAV_BAR_HEIGHT, bottom: FOOTER_BAR_HEIGHT }
                 : { top: 0, bottom: 0 }),
             }}
           >
