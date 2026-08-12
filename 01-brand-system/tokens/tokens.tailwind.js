@@ -148,6 +148,7 @@ module.exports = {
     'hud-micro':   ['10px', { lineHeight: '1.20',  letterSpacing: '0.06em' }], // 400 · uppercase
     'body':        ['16px', { lineHeight: '1.40',  letterSpacing: '0.01em' }], // 400 · sentence case
     'body-sm':     ['14px', { lineHeight: '1.40',  letterSpacing: '0.01em' }], // 400 · sentence case
+    'body-xs':     ['12px', { lineHeight: '1.60',  letterSpacing: '0.01em' }], // 400 · sentence case — smallest body; looser leading is part of the token
     'mono-label':  ['12px', { lineHeight: '1.40',  letterSpacing: '0.03em' }], // 700 · uppercase
   },
 

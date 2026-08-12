@@ -327,6 +327,16 @@ $text-body-small-height:    1.40;                    // 140%
 $text-body-small-spacing:   0.01em;                  // 1%
 $text-body-small-case:      none;                    // sentence case
 
+// Body / XS — 12px · 1.60 lh · 0.01em ls · 400 · sentence case
+// Smallest body size — dense supporting copy subordinate to the application beside it.
+// The looser leading is part of the token, not an ad-hoc fix. Never set body below 12px.
+$text-body-xs-font:         $font-secondary;
+$text-body-xs-size:         $primitive-font-size-12; // 12px
+$text-body-xs-weight:       400;                     // Regular
+$text-body-xs-height:       1.60;                    // 160%
+$text-body-xs-spacing:      0.01em;                  // 1%
+$text-body-xs-case:         none;                    // sentence case
+
 // Label / Default (mono) — 12px · 1.40 lh · 0.03em ls · 700 · UPPERCASE
 $text-mono-label-font:      $font-secondary;
 $text-mono-label-size:      $primitive-font-size-12; // 12px

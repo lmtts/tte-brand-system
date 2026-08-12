@@ -109,6 +109,7 @@ The brand doesn't do passive evangelism — it mobilizes, calls to action, chall
 | HUD / Micro         | 10px    | 120%        | +6%            | Regular | UPPERCASE     |
 | Body / Regular      | 16px    | 140%        | +1%            | Regular | Sentence case |
 | Body / Small        | 14px    | 140%        | +1%            | Regular | Sentence case |
+| Body / XS           | 12px    | 160%        | +1%            | Regular | Sentence case |
 | Label / Default     | 12px    | 140%        | +3%            | Bold    | UPPERCASE     |
 
 #### Typographic rules

@@ -152,6 +152,7 @@ Two families only. All values validated against Figma.
 | HUD / Micro | 10px | Regular 400 | 120% | 6% | UPPERCASE |
 | Body / Regular | 16px | Regular 400 | 140% | 1% | Sentence |
 | Body / Small | 14px | Regular 400 | 140% | 1% | Sentence |
+| Body / XS | 12px | Regular 400 | 160% | 1% | Sentence |
 | Label / Default | 12px | Bold 700 | 140% | 3% | UPPERCASE |
 
 ### Type rules

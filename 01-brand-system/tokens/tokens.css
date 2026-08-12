@@ -264,6 +264,11 @@
   --text-body-small-spacing: 0.01em;
   --text-body-small-weight:  400;
 
+  --text-body-xs-size:       var(--primitive-font-size-12);
+  --text-body-xs-height:     1.60;
+  --text-body-xs-spacing:    0.01em;
+  --text-body-xs-weight:     400;
+
   --text-mono-label-size:    var(--primitive-font-size-12);
   --text-mono-label-height:  1.40;
   --text-mono-label-spacing: 0.03em;
@@ -423,6 +428,13 @@
   font-weight:     var(--text-body-small-weight);
   line-height:     var(--text-body-small-height);
   letter-spacing:  var(--text-body-small-spacing);
+}
+.type-body-xs {
+  font-family:     var(--font-secondary);
+  font-size:       var(--text-body-xs-size);
+  font-weight:     var(--text-body-xs-weight);
+  line-height:     var(--text-body-xs-height);
+  letter-spacing:  var(--text-body-xs-spacing);
 }
 .type-mono-label {
   font-family:     var(--font-secondary);
