@@ -69,8 +69,8 @@ export const DESKTOP_TEXT_BLOCK_STYLE = {
   taglineStyle: { fontSize: "calc(13*var(--u))" }, // Mona Label/Medium
   bodyStyle: { fontSize: "calc(12*var(--u))", lineHeight: 1.6 }, // Space Mono Body/XS
   groupGap: "calc(40*var(--u))",
-  kickerGap: "calc(14*var(--u))",
-  innerGap: "calc(10*var(--u))",
+  kickerGap: "calc(12*var(--u))",
+  innerGap: "calc(12*var(--u))",
 } as const;
 
 /**
@@ -254,13 +254,29 @@ export default function SectionShell({
           <div aria-hidden className="absolute inset-x-0 top-0 z-20 bg-paper/20" style={{ height: "1px" }} />
         ))}
 
-      {/* orange topographic texture */}
+      {/* orange topographic texture — full-bleed under everything else */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={TOPO}
         alt=""
         aria-hidden
-        className="b-topo pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.0675]"
+        className="b-topo pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.04]"
+      />
+
+      {/* solid ink fill over the left text column on desktop (≥1024) — a flat
+          block, not a clip-path on the topo image itself: the topo carries a
+          GSAP scroll parallax (scale + transform), and clip-path measured
+          against a transformed, scaling element doesn't track it reliably
+          across browsers/zoom/devtools viewports. A same-color block sitting
+          in front is transform-independent, so it can't drift out of place. */}
+      {/* z-[1]: strictly below SystemSection's SharedTextSticky (z-[5]) — that shared
+          column is sticky-positioned outside this section's own stacking order, and at
+          the same z-index it would paint on top of (hide) it whenever this section's
+          markup lands later in the DOM than the sticky's. */}
+      <div
+        aria-hidden
+        className="absolute inset-y-0 left-0 z-[1] hidden bg-ink lg:block"
+        style={{ width: "calc(460*var(--u))" }}
       />
 
       {/* ===== DESKTOP (≥1024) ===== */}
@@ -343,7 +359,7 @@ export default function SectionShell({
             taglineStyle={{ fontSize: "14px" }}
             bodyStyle={{ fontSize: "14px", lineHeight: 1.4 }}
             groupGap="28px"
-            kickerGap="10px"
+            kickerGap="12px"
             innerGap="8px"
           />
         </div>

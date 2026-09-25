@@ -67,7 +67,7 @@ export default function OutroSection() {
         src={TOPO}
         alt=""
         aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.0675]"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.04]"
       />
 
       {/* eslint-disable-next-line @next/next/no-img-element */}

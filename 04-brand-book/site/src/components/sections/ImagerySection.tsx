@@ -174,7 +174,7 @@ export default function ImagerySection() {
             href={IMAGERY_FOLDER_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-[1.2em] inline-flex w-fit items-center border border-paper/30 font-mono font-bold uppercase tracking-[0.08em] text-paper transition-colors hover:border-fire hover:text-fire"
+            className="mt-[1.6em] inline-flex w-fit items-center border border-paper/30 font-mono font-bold uppercase tracking-[0.08em] text-paper transition-colors hover:border-fire hover:text-fire"
             style={{
               gap: "calc(10*var(--u))",
               padding: "calc(12*var(--u)) calc(18*var(--u))",
