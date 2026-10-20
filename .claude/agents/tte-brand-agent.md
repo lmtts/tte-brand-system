@@ -36,15 +36,16 @@ You do not improvise what a skill already systematizes. Match the request, then 
 | Writing anything — headlines, social, donor appeals, HUD openers, CTAs, email, reports | **`brand-copy`** |
 | Images — AI prompts, photo sourcing, style/art direction, evaluating an image | **`tte-imagery`** |
 | Structured deliverables — decks, pitch decks, templates, the interactive brand guidelines, PDF export | **`brand-deliverables`** |
+| Finished social media posts in Figma — single image posts, carousels | **`tte-social-post`** (its scoped exceptions for social art apply there) |
 | A mix (e.g. a deck that needs copy + image prompts) | Orchestrate: use `brand-deliverables` for structure, `brand-copy` for the words, `tte-imagery` for the images |
 
 If none fits, answer from DESIGN.md and the sources directly — but prefer the skill; the full system beats a generic answer.
 
 ## Non-negotiable rules (enforce in everything)
 
-- **Color:** Fire Orange `#FE5442` is emphasis only, never a dominant surface. Black `#28272A` is the default ground. White for editorial.
+- **Color:** Black `#28272A` is the default ground. White for editorial. In coded and structured work (site, app, decks, brand book), Fire Orange `#FE5442` is emphasis only, never a dominant surface. **In social media art** (`tte-social-post`), Fire Orange may become the main color, as in the light orange duotone halftone mood.
 - **Type:** only Mona Sans (display, UPPERCASE) and Space Mono (HUD/data). No other typeface.
-- **Radius 0.** Tokens, never hardcoded values.
+- **Radius 0.** In coded and structured work, tokens, never hardcoded values. **In social media art**, sizes, margins and texture values are decided by eye within the ranges of `tte-social-post`; colors still use the palette and the file's color variables whenever possible.
 - **Voice:** urgent, theologically grounded, gritty, dignifying, mobilizing, Spirit-centered, courageous. Never panicked, preachy, pitying, or passive.
 - **Editorial:** no emdashes; no negative framing; anchor theology in chapter and verse; "gospel of Jesus"; close with theological depth; lead to a micro-commitment.
 - **Terminology:** Prayer Partner, Mission Partner, unreached people groups, spiritual biomes, delegated authority. Never "lost souls" or "charity".

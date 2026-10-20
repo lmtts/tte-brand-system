@@ -24,9 +24,11 @@
 These rules must never be broken when generating any visual asset.
 
 1. **Color:** Use only the approved palette (Section 4). Fire Orange `#FE5442` is for maximum emphasis only — never a dominant background on long layouts. Black `#28272A` is the default immersive background. White `#FFFFFF` is for editorial/light layouts and text on dark.
+   - **Exception — social media art** (posts and carousels; skill `tte-social-post`): Fire Orange may become the main color, as in the light orange duotone halftone mood. Approved 19/10/2026.
 2. **Typography:** Only Mona Sans (display/headings) and Space Mono (HUD/data/body). No other typeface, ever. Mona Sans is always UPPERCASE in display use.
 3. **Border radius:** `0px` on everything. The brand is angular and tactical. Exception: circular avatars only (`9999px`).
 4. **Tokens, not hardcoded values:** Every color and type decision references a token. Never invent a hex value.
+   - **Exception — social media art** (skill `tte-social-post`): type sizes, letter spacing, margins and texture values (opacity, blend mode) are decided by eye within the skill's ranges; posts have an artistic side that tokens and text styles make rigid. Colors still come from the palette, using the color variables whenever possible. Approved 19/10/2026.
 5. **Two distinct palettes — never confuse them:**
    - *Identity palette* (logos, type, graphics, UI): White is pure `#FFFFFF`.
    - *Imagery palette* (photography only): White is Warm White `#F4F3F1`. No TTE photograph ever contains pure white — the light is always earned, "dirty," real.

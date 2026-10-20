@@ -23,6 +23,7 @@ The agent does **not** decide brand identity alone. On genuine creative forks it
 │   ├── brand-copy/             ← copy in the TTE voice (from brand-voice-guidelines)
 │   ├── tte-imagery/            ← AI imagery prompts + sourcing (4 layers, blocks, keywords, HTML builder)
 │   ├── brand-deliverables/     ← decks, templates, interactive brand guidelines + PDF
+│   ├── tte-social-post/        ← finished social media posts in Figma (single + carousel)
 │   └── brand-audit/            ← audit the brand system against a high standard
 └── commands/
     ├── tte.md                  ← /tte — invoke the Brand Agent
@@ -36,6 +37,7 @@ The agent does **not** decide brand identity alone. On genuine creative forks it
 | **brand-copy** | Headlines, social, donor appeals, HUD openers, CTAs, email, reports | `docs/brand-voice-guidelines-tte.md` |
 | **tte-imagery** | AI image prompts, photo sourcing, art direction, image evaluation | `imagery/imagery-guide.md` + `ai-prompts.md` + skill references |
 | **brand-deliverables** | Slide/pitch decks, templates, interactive brand guidelines, PDF | `DESIGN.md` + tokens + `TTE-BrandBook-Figma-Spec.md` |
+| **tte-social-post** | Finished social media posts in Figma (single image + carousel, 1080x1350) | Figma page "06 · Social Media" base pieces + the skill's recipe repertoire |
 
 ## The principle that keeps it aligned
 
@@ -44,5 +46,5 @@ The agent and skills **point to the authoritative sources — they do not duplic
 ## What the agent will not do
 
 - Make brand/design decisions on its own (it proposes and applies; the designer decides).
-- Produce finished social-media art (that needs a designer; `brand-deliverables` produces structure and templates, not final posts).
+- Publish social-media art without the designer's review. `tte-social-post` builds posts in Figma from the base pieces and an evaluator rubric; the designer adjusts and approves (tested 19/10/2026: 9/10, ~10 min of designer adjustment).
 - Invent hex values, fonts, or sizes that a token already defines.
