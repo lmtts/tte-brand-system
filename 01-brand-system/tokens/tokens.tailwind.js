@@ -27,6 +27,18 @@ module.exports = {
   // -----------------------------------------------------------
   colors: {
 
+    // Theme — mode-aware, resolved at runtime by tokens.css ([data-theme="light"]).
+    // Requires tokens.css to be loaded. Dark is the default mode.
+    theme: {
+      surface:           'var(--theme-surface)',
+      'surface-inverse': 'var(--theme-surface-inverse)',
+      text:              'var(--theme-text)',
+      'text-muted':      'var(--theme-text-muted)',
+      'text-accent':     'var(--theme-text-accent)',
+      border:            'var(--theme-border)',
+      topo:              'var(--theme-topo)',
+    },
+
     // Brand — core identity colors
     brand: {
       primary: '#FE5442', // Fire of the Holy Spirit, urgency  | primitives.color.fire-orange
@@ -195,6 +207,13 @@ module.exports = {
   // -----------------------------------------------------------
   opacity: {
     'topo':     '0.12', // semantic.opacity.topographic-overlay — pattern on dark backgrounds
+    'topo-flat-subtle':  '0.04', // semantic.pattern.topo.opacity.flat.subtle
+    'topo-flat-light':   '0.08', // semantic.pattern.topo.opacity.flat.light
+    'topo-flat-strong':  '0.16', // semantic.pattern.topo.opacity.flat.strong
+    'topo-fade-subtle':  '0.24', // semantic.pattern.topo.opacity.fade.subtle — peak
+    'topo-fade':         '0.40', // semantic.pattern.topo.opacity.fade.default — peak
+    'topo-fade-strong':  '0.64', // semantic.pattern.topo.opacity.fade.strong — peak
+    'topo-fade-max':     '1',    // semantic.pattern.topo.opacity.fade.max — peak
     'overlay-light':  '0.08', // semantic.opacity.overlay-light
     'overlay-mid':    '0.24', // semantic.opacity.overlay-medium
     'overlay-heavy':  '0.64', // semantic.opacity.overlay-heavy — HUD scrim

@@ -162,11 +162,49 @@ $border-width-default:      2px;    // Standard borders
 $border-width-thick:        4px;    // Active states, emphasis
 
 // --- Opacity ---
-$opacity-topographic:       0.12;   // Topographic pattern overlay on dark backgrounds
+$opacity-topographic:       0.12;   // alias of $topo-opacity-flat-default
 $opacity-overlay-light:     0.08;   // Subtle background tint
 $opacity-overlay-medium:    0.24;   // Image overlay for text legibility
 $opacity-overlay-heavy:     0.64;   // Strong scrim — HUD background
 $opacity-disabled:          0.40;   // Disabled interactive elements
+
+// --- Topographic Pattern ---
+// FLAT = no fade, classic texture. FADE = with a gradient; the value is the PEAK.
+$topo-opacity-flat-subtle:  0.04;
+$topo-opacity-flat-light:   0.08;
+$topo-opacity-flat-default: 0.12;   // canonical TTE texture
+$topo-opacity-flat-strong:  0.16;
+$topo-opacity-fade-subtle:  0.24;
+$topo-opacity-fade-default: 0.40;   // Prayer Partner hero
+$topo-opacity-fade-strong:  0.64;
+$topo-opacity-fade-max:     1.00;   // Home hero — hairline lines
+$topo-fade-down:  linear-gradient(to bottom, #000 0%, transparent 100%);
+$topo-fade-left:  linear-gradient(to left,   #000 0%, transparent 85%);
+$topo-fade-right: linear-gradient(to right,  #000 0%, transparent 85%);
+$topo-color-fire:  $brand-color-primary;   // default
+$topo-color-white: $brand-color-light;     // over photography
+
+// --- Theme (dark default / light) ---
+// Runtime switching needs CSS custom properties — see tokens.css [data-theme].
+// These maps mirror the values for build-time use.
+$theme-dark: (
+  surface:         $brand-color-dark,
+  surface-inverse: $brand-color-light,
+  text:            $brand-color-light,
+  text-muted:      $primitive-color-grey,
+  text-accent:     $brand-color-primary,
+  border:          rgba($brand-color-light, 0.16),
+  topo:            $brand-color-primary,
+);
+$theme-light: (
+  surface:         $brand-color-light,
+  surface-inverse: $brand-color-dark,
+  text:            $brand-color-dark,
+  text-muted:      mix($brand-color-dark, $brand-color-light, 72%),   // #646364 — 6.0:1
+  text-accent:     $brand-color-primary,                              // display/heading sizes only
+  border:          rgba($brand-color-dark, 0.16),
+  topo:            $brand-color-primary,
+);
 
 // --- Elevation / Shadow ---
 $elevation-none:            none;

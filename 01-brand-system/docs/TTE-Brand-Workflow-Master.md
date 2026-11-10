@@ -186,6 +186,12 @@ A marca sistematizada existe simultaneamente em:
 
 **Entrega:** Workflow reutilizável + template para a próxima marca.
 
+### Extensão pós-sistematização — Tema claro/escuro + topografia com degradê (2026-11-10)
+Pedido dos stakeholders na revisão do tte.earth (`05-applications/website/review`).
+- **Tema:** camada `--theme-*` com modos Dark (padrão) e Light, sem cor nova. Código: `tokens.css` `[data-theme]` + json/scss/tailwind. Figma: coleção **TTE Theme** (Dark/Light) + `Primitives/grey`, que faltava no Figma.
+- **Topografia:** duas escalas: flat 4/8/12/16% e fade (pico) 24/40/64/100%. Direções down/left/right, cor Fire ou White. Código: `.tte-topo` + modificadores. Figma: variáveis `Pattern/topo/*` + componente **Topo overlay** (8 variantes) na página ✦ Patterns.
+- Docs: DESIGN.md §4, brand-quick-reference. Preview: `tokens/theme-preview.html`.
+
 ---
 
 ## PADRÃO REPLICÁVEL (preenchido conforme extraímos do TTE)

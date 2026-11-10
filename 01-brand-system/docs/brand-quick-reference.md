@@ -161,6 +161,7 @@ High-quality photo of a real or analogous missionary context. Specific biomes: t
 
 **Layer 2 — Topographic overlay**
 Topographic contour-line pattern applied over the photo at 12% opacity (`--opacity-topographic`). Represents the mission's terrain — physical and spiritual places yet to be mapped. In red/orange for dark applications.
+Two opacity scales (2026-11-10): **flat** 4 · 8 · 12 · 16% (no fade; 12% canonical) and **fade** 24 · 40 · 64 · 100% (peak of a gradient that fades down, left or right). Line color follows the background: Fire Orange by default, White over photography. CSS: `.tte-topo`, `.tte-topo--fade-down|left|right`, `.tte-topo--white`, strength modifiers. Full table in `DESIGN.md` §4.
 
 **Layer 3 — HUD (Heads-Up Display)**
 Tactical data overlay in Space Mono: GPS coordinates, place name, unreached population, access status, biome. Creates a "mission in progress" feel — connects the visual identity to the reality of mission numbers.
@@ -204,6 +205,19 @@ HUD text:          var(--color-hud-text)        → #FFFFFF
 HUD label:          var(--color-hud-accent)      → #FE5442
 HUD background:          var(--color-hud-background)  → #28272A
 ```
+
+### Theme — dark (default) / light
+For interfaces with a theme switch. Dark is default; `<html data-theme="light">` switches. No new colors.
+```
+                    DARK                 LIGHT
+--theme-surface     #28272A              #FFFFFF
+--theme-text        #FFFFFF              #28272A
+--theme-text-muted  #949494              #646364 (Black 72%; Grey fails on White)
+--theme-text-accent #FE5442              #FE5442 (display/heading sizes only)
+--theme-border      White 16%            Black 16%
+--theme-topo        #FE5442              #FE5442
+```
+HUD stays dark in both modes.
 
 ### Spacing
 ```

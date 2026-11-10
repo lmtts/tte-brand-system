@@ -120,6 +120,35 @@ hud.accent       → Fire Orange HUD labels
 hud.background   → Black      HUD panel background
 ```
 
+### Theme — dark (default) / light
+
+For interfaces with a dark/light switch (approved 2026-11-10 for tte.earth). **Dark is the default.** Switch with `<html data-theme="light">`. No new colors.
+
+| Token (`--theme-*`) | Dark | Light |
+|---|---|---|
+| `surface` | Black | White |
+| `surface-inverse` | White | Black |
+| `text` | White | Black |
+| `text-muted` | Grey `#949494` (5.0:1) | Black 72% → `#646364` (6.0:1). Grey on White is only 3.0:1 |
+| `text-accent` | Fire Orange (4.8:1) | Fire Orange (3.1:1): **display/heading sizes only**, never body |
+| `border` | White 16% | Black 16% |
+| `topo` | Fire Orange | Fire Orange |
+
+HUD tokens stay dark in both modes: a HUD panel is a dark island on a light page.
+
+### Topographic overlay — two opacity scales
+
+Calibrated against the designer's hero frames (2026-11-10). Classes in `tokens.css`: `.tte-topo` + modifiers.
+
+| Scale | Values | Use |
+|---|---|---|
+| **Flat** (no fade) | 4 · 8 · **12** · 16% | The classic texture. 12% stays canonical (`.tte-topo`) |
+| **Fade** (peak value) | 24 · **40** · 64 · 100% | With a gradient; the visible average is about half the peak |
+
+- **Fade directions:** `down` (strongest at the top), `left` (strongest at the right edge), `right`. Classes `.tte-topo--fade-down / -left / -right`.
+- **Line color follows the background:** Fire Orange by default (dark and light), White over photography (`.tte-topo--white`).
+- References: Home hero = fade down, peak 100% (hairline lines). Prayer Partner hero = fade left, peak 40%.
+
 ---
 
 ## 5. Typography System

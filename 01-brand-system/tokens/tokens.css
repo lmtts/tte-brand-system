@@ -159,11 +159,27 @@
   --border-width-thick:   4px; /* Active states, emphasis */
 
   /* --- Opacity --- */
-  --opacity-topographic:    0.12; /* Topographic pattern overlay */
+  --opacity-topographic:    var(--topo-opacity-flat-default); /* alias — 12% */
   --opacity-overlay-light:  0.08; /* Subtle background tint */
   --opacity-overlay-medium: 0.24; /* Image overlay for legibility */
   --opacity-overlay-heavy:  0.64; /* Strong scrim — HUD backgrounds */
   --opacity-disabled:       0.40; /* Disabled interactive elements */
+
+  /* --- Topographic Pattern ---
+     FLAT = no fade, classic texture. FADE = with a gradient; the value is the PEAK. */
+  --topo-opacity-flat-subtle:  0.04;
+  --topo-opacity-flat-light:   0.08;
+  --topo-opacity-flat-default: 0.12; /* canonical TTE texture */
+  --topo-opacity-flat-strong:  0.16;
+  --topo-opacity-fade-subtle:  0.24;
+  --topo-opacity-fade-default: 0.40; /* Prayer Partner hero */
+  --topo-opacity-fade-strong:  0.64;
+  --topo-opacity-fade-max:     1.00; /* Home hero — hairline lines */
+  --topo-fade-down:  linear-gradient(to bottom, #000 0%, transparent 100%);
+  --topo-fade-left:  linear-gradient(to left,   #000 0%, transparent 85%);
+  --topo-fade-right: linear-gradient(to right,  #000 0%, transparent 85%);
+  --topo-color-fire:  var(--brand-color-primary); /* default */
+  --topo-color-white: var(--brand-color-light);   /* over photography */
 
   /* --- Elevation / Shadow --- */
   --elevation-none: none;
@@ -274,6 +290,37 @@
   --text-mono-label-spacing: 0.03em;
   --text-mono-label-weight:  700;
 
+}
+
+
+/* ==========================================================
+   THEME — dark (default) / light.
+   Switch with <html data-theme="light">. No attribute = dark.
+   No new colors: Black, White, Fire Orange, Grey only.
+   HUD tokens (--color-hud-*) stay dark in both modes.
+   ========================================================== */
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --theme-surface:         var(--brand-color-dark);
+  --theme-surface-inverse: var(--brand-color-light);
+  --theme-text:            var(--brand-color-light);
+  --theme-text-muted:      var(--primitive-color-grey);                                  /* 5.0:1 */
+  --theme-text-accent:     var(--brand-color-primary);                                   /* 4.8:1 */
+  --theme-border:          color-mix(in srgb, var(--brand-color-light) 16%, transparent);
+  --theme-topo:            var(--topo-color-fire);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --theme-surface:         var(--brand-color-light);
+  --theme-surface-inverse: var(--brand-color-dark);
+  --theme-text:            var(--brand-color-dark);
+  --theme-text-muted:      color-mix(in srgb, var(--brand-color-dark) 72%, var(--brand-color-light)); /* 6.0:1 */
+  --theme-text-accent:     var(--brand-color-primary);  /* 3.1:1 — display/heading sizes only */
+  --theme-border:          color-mix(in srgb, var(--brand-color-dark) 16%, transparent);
+  --theme-topo:            var(--topo-color-fire);
 }
 
 
@@ -460,16 +507,47 @@
 .elevation-lg  { box-shadow: var(--elevation-lg); }
 .elevation-hud { box-shadow: var(--elevation-hud); }
 
-/* Topographic pattern overlay */
-.topo-overlay::after {
+/* Topographic pattern overlay
+   <section class="tte-topo">                         flat 12%, Fire Orange
+   <section class="tte-topo tte-topo--fade-down">         fade from top, peak 40%
+   <section class="tte-topo tte-topo--fade-left tte-topo--white tte-topo--max">
+   The line color is painted through the SVG as a mask, so any token color works. */
+.tte-topo,
+.topo-overlay {
+  position: relative;
+  isolation: isolate;
+  --topo-fade:    linear-gradient(#000 0 0);         /* no fade */
+  --topo-opacity: var(--topo-opacity-flat-default);
+  --topo-color:   var(--theme-topo);
+}
+.tte-topo::before,
+.topo-overlay::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../assets/patterns/topographic-overlay.svg');
-  background-size: cover;
-  opacity: var(--opacity-topographic);
+  z-index: -1;
   pointer-events: none;
+  background-color: var(--topo-color);
+  opacity: var(--topo-opacity);
+  -webkit-mask: var(--topo-fade), url('../atoms/pattern/optimized/pattern-simple.svg') center / cover no-repeat;
+  -webkit-mask-composite: source-in;
+          mask: var(--topo-fade), url('../atoms/pattern/optimized/pattern-simple.svg') center / cover no-repeat;
+          mask-composite: intersect;
 }
+/* Direction — a fade switches the default to the FADE scale */
+.tte-topo--fade-down  { --topo-fade: var(--topo-fade-down);  --topo-opacity: var(--topo-opacity-fade-default); }
+.tte-topo--fade-left  { --topo-fade: var(--topo-fade-left);  --topo-opacity: var(--topo-opacity-fade-default); }
+.tte-topo--fade-right { --topo-fade: var(--topo-fade-right); --topo-opacity: var(--topo-opacity-fade-default); }
+/* Color */
+.tte-topo--white { --topo-color: var(--topo-color-white); }
+/* Strength — flat scale */
+.tte-topo--flat-subtle  { --topo-opacity: var(--topo-opacity-flat-subtle); }
+.tte-topo--flat-light   { --topo-opacity: var(--topo-opacity-flat-light); }
+.tte-topo--flat-strong  { --topo-opacity: var(--topo-opacity-flat-strong); }
+/* Strength — fade scale (use with a direction) */
+.tte-topo--subtle { --topo-opacity: var(--topo-opacity-fade-subtle); }
+.tte-topo--strong { --topo-opacity: var(--topo-opacity-fade-strong); }
+.tte-topo--max    { --topo-opacity: var(--topo-opacity-fade-max); }
 
 /* HUD Panel */
 .hud-panel {
