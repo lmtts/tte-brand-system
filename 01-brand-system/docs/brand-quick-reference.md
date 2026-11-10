@@ -200,6 +200,8 @@ Accent text:    var(--color-text-accent)     → #FE5442
 Dark surface:       var(--color-surface-dark)    → #28272A
 Light surface:       var(--color-surface-light)   → #FFFFFF
 Accent surface:    var(--color-surface-accent)  → #FE5442
+Accent hover:      var(--color-surface-accent-hover)   → #E44F3F (Fire Orange 88% + Black)
+Accent pressed:    var(--color-surface-accent-pressed) → #CB493C (Fire Orange 76% + Black)
 
 HUD text:          var(--color-hud-text)        → #FFFFFF
 HUD label:          var(--color-hud-accent)      → #FE5442

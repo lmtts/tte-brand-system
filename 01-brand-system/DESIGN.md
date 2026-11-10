@@ -115,6 +115,8 @@ text.muted       → Grey #949494 Muted/secondary — inactive nav, labels on da
 surface.dark     → Black      Dark panels, immersive bg
 surface.light    → White      Light/editorial layouts
 surface.accent   → Fire Orange CTA backgrounds only
+surface.accent-hover   → #E44F3F  Primary action hover (Fire Orange 88% + Black)
+surface.accent-pressed → #CB493C  Primary action pressed (Fire Orange 76% + Black)
 hud.text         → White      HUD data text
 hud.accent       → Fire Orange HUD labels
 hud.background   → Black      HUD panel background

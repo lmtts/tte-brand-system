@@ -104,6 +104,8 @@ $color-text-muted:          $primitive-color-grey; // Muted/secondary — inacti
 $color-surface-dark:        $brand-color-dark;     // brand.dark → #28272A
 $color-surface-light:       $brand-color-light;    // brand.light → #FFFFFF
 $color-surface-accent:      $brand-color-primary;  // brand.primary → #FE5442
+$color-surface-accent-hover:   mix($brand-color-primary, $brand-color-dark, 88%); // #E44F3F — primary action hover
+$color-surface-accent-pressed: mix($brand-color-primary, $brand-color-dark, 76%); // #CB493C — primary action pressed
 
 // --- Icons ---
 $color-icon-primary:        $brand-color-primary;  // TTE bird orange wing, action icons → #FE5442

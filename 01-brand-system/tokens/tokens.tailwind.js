@@ -57,6 +57,8 @@ module.exports = {
       dark:   '#28272A', // brand.dark
       light:  '#FFFFFF', // brand.light
       accent: '#FE5442', // brand.primary
+      'accent-hover':   '#E44F3F', // semantic.color.surface.accent-hover — Fire Orange 88% + Black
+      'accent-pressed': '#CB493C', // semantic.color.surface.accent-pressed — Fire Orange 76% + Black
     },
     icon: {
       primary: '#FE5442', // TTE bird orange wing, action icons

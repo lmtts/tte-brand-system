@@ -101,6 +101,8 @@
   --color-surface-dark:   var(--brand-color-dark);    /* Dark backgrounds, cards */
   --color-surface-light:  var(--brand-color-light);   /* Light backgrounds */
   --color-surface-accent: var(--brand-color-primary); /* CTA, highlighted elements */
+  --color-surface-accent-hover:   color-mix(in srgb, var(--brand-color-primary) 88%, var(--brand-color-dark)); /* #E44F3F */
+  --color-surface-accent-pressed: color-mix(in srgb, var(--brand-color-primary) 76%, var(--brand-color-dark)); /* #CB493C */
 
   /* --- Icons --- */
   --color-icon-primary: var(--brand-color-primary); /* TTE bird orange wing, action icons */
