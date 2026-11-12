@@ -6,7 +6,7 @@ Template `1002:291` · Referência TTE-0029 Bhil (`941:319`) · Imagem: [refs/S1
 Convite semanal à oração por um povo, com retrato.
 
 ## Fixo
-"TONIGHT," em Space Mono (Fixed / Lead-in) · ficha HUD de 4 dados à direita do lead-in · Lockup / Compact no rodapé central · topografia + 2 glows no topo · grão ~9–12%.
+"TONIGHT," em Space Mono (Fixed / Lead-in) · ficha HUD de 4 dados à direita do lead-in · Lockup / Compact no rodapé central, **pássaro laranja com contorno branco** (padrão do S1, decisão do Lucas 12/11/2026) · topografia + 2 glows no topo · grão ~9–12%.
 
 ## Slots
 SLOT / Photo · SLOT / Photo · Cutout (remover fundo) · SLOT / Headline · Povo · SLOT / HUD (4 dados: região, população, presença cristã, status)

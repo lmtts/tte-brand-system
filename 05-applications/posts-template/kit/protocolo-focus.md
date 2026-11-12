@@ -1,6 +1,6 @@
 # Protocolo de imagem — retângulo FOCUS
 
-> Fase 3 do plano de templetização (12/11/2026). Em teste: o Lucas valida na primeira peça.
+> Fase 3 do plano de templetização (12/11/2026). Aprovado pelo Lucas após o teste 1 (S1 Malay).
 
 ## Por quê
 A curadoria da imagem é humana. O que a IA erra é **onde está o sujeito**: compõe o texto por cima do rosto,
@@ -49,6 +49,8 @@ Tiradas das peças de referência. Medidas no slide de 1080×1350.
 - Agente: FOCUS já estava centrado em x; subiu foto + Cutout + FOCUS 123px para o topo do cabelo encostar no headline. Mesma geometria que o Lucas usou na TTE-0030 original (ele subiu 136px com escala 1,036).
 - Diferenças restantes vs. original: (1) **recorte não feito** → a topografia passa por cima do rosto (no original o Cutout cobre a topografia); (2) pássaro do lockup: o template usa o branco vazado, a TTE-0030 usa o laranja.
 - Correção do protocolo: a posição-alvo dos olhos do S1 estava errada (y 420–560); medida real ~700–760.
+- Lucas removeu o fundo do Cutout → topografia saiu do rosto. **Teste aprovado pelo Lucas.** Lockup do S1 passou a usar o pássaro laranja como padrão.
+- Status: protocolo FOCUS **aprovado** (deixa de estar "em teste").
 
 ## Limites conhecidos
 - O FOCUS diz onde **não** cobrir; não julga se a foto é boa. Curadoria continua com o Lucas.

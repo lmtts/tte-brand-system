@@ -30,7 +30,7 @@ Cópia em texto do kit de posts que vive no Figma, para o sistema não depender 
 
 S3 · Field Report / BTS fica para depois (raro).
 
-**Imagem:** fotos reais seguem o [protocolo FOCUS](protocolo-focus.md) (em teste). Imagens geradas (figuras do Editorial, mapas) seguem as receitas do Magnific em `.claude/skills/tte-imagery/references/magnific-social-recipes.md`.
+**Imagem:** fotos reais seguem o [protocolo FOCUS](protocolo-focus.md) (aprovado em 12/11/2026). Imagens geradas (figuras do Editorial, mapas) seguem as receitas do Magnific em `.claude/skills/tte-imagery/references/magnific-social-recipes.md`.
 
 ## Componentes (seção `1002:319`) — [refs/00-componentes.jpg](refs/00-componentes.jpg)
 
