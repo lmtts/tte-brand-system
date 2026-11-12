@@ -121,6 +121,7 @@ Load these when you need full specs:
 
 - `references/layers.md` — Complete DNA for all 4 layers including copy-ready base prompts
 - `references/prompt-blocks.md` — All modular prompt blocks (layer, shot, light, grade, grain, style)
+- `references/magnific-social-recipes.md` — Magnific recipes for the generated images of the social post kit: Editorial B&W figures (simple illustration, simple photography, rich) and tactical maps, with models, style-reference ids and prompt templates
 - `references/keywords.md` — Full keyword library for stock sourcing (Getty, Unsplash, Pexels, Stocksy) and inspiration/mood-board search (Behance, Pinterest, Cosmos, Are.na), plus platform-specific search tips and negative keywords
 
 ## Deliverable Assets
