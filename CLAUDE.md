@@ -21,6 +21,13 @@ TTE chama cristãos a irem aos lugares onde o Evangelho ainda não chegou. Arqu�
 - **Border radius:** 0px em tudo. Exceção: avatares circulares (9999px).
 - **Tokens:** cores e tipo sempre via tokens, nunca hardcoded.
 
+### Exceção — redes sociais (posts e carrosséis)
+
+O design system foi construído para interface (site, app). Arte de rede social tem uma veia artística e segue regras próprias (skill `tte-social-post`; espelhado no `01-brand-system/DESIGN.md`, regras 1 e 4). Aprovado por Lucas em 12/11/2026.
+
+- **Livre em social:** Fire Orange pode virar a cor principal (ex.: mood claro de duotone halftone); tamanhos de texto, espaçamento entre letras, margens e valores de textura (opacidade, modo de mesclagem) são decididos no olho, fora dos tokens e dos text styles; os text styles do sistema não se aplicam a posts.
+- **Continua fixo em social:** paleta (Fire Orange, Black, White; via variáveis de cor sempre que possível), só Mona Sans + Space Mono, radius 0, regras do lockup (pássaro TTE nunca recolorido) e contraste mínimo legível.
+
 ## Princípios do workflow
 
 1. **Fluxo de três sistemas em ordem:** Brand → Design → Dev. Nunca pule camadas.
