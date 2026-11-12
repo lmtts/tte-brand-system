@@ -37,7 +37,7 @@ The agent does **not** decide brand identity alone. On genuine creative forks it
 | **brand-copy** | Headlines, social, donor appeals, HUD openers, CTAs, email, reports | `docs/brand-voice-guidelines-tte.md` |
 | **tte-imagery** | AI image prompts, photo sourcing, art direction, image evaluation | `imagery/imagery-guide.md` + `ai-prompts.md` + skill references |
 | **brand-deliverables** | Slide/pitch decks, templates, interactive brand guidelines, PDF | `DESIGN.md` + tokens + `TTE-BrandBook-Figma-Spec.md` |
-| **tte-social-post** | Finished social media posts in Figma (single image + carousel, 1080x1350) | Figma page "06 · Social Media" base pieces + the skill's recipe repertoire |
+| **tte-social-post** | Finished social media posts in Figma (single image + carousel, 1080x1350) | v2: Figma page "06.1 · Post Kit" (slot templates + components) + `05-applications/posts-template/kit/` (fichas, brief, FOCUS protocol) |
 
 ## The principle that keeps it aligned
 
@@ -46,5 +46,5 @@ The agent and skills **point to the authoritative sources — they do not duplic
 ## What the agent will not do
 
 - Make brand/design decisions on its own (it proposes and applies; the designer decides).
-- Publish social-media art without the designer's review. `tte-social-post` builds posts in Figma from the base pieces and an evaluator rubric; the designer adjusts and approves (tested 19/10/2026: 9/10, ~10 min of designer adjustment).
+- Publish social-media art without the designer's review. `tte-social-post` builds posts in Figma from the Post Kit templates, the brief and the designer's FOCUS rectangles, with an evaluator rubric; the designer curates images, adjusts and approves (v1 tested 20/10/2026: singles 7.5/10, carousels 6.5/10; v2 from 12/11/2026, round 3 pending).
 - Invent hex values, fonts, or sizes that a token already defines.
