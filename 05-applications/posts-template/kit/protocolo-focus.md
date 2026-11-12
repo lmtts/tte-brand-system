@@ -33,7 +33,7 @@ Tiradas das peças de referência. Medidas no slide de 1080×1350.
 
 | Template / slide | Onde o FOCUS deve cair | Texto vai |
 |---|---|---|
-| S1 · Tonight, Pray | rosto centrado em x (~540), topo da cabeça na altura do headline, olhos entre y ~420 e ~560 | headline em cima (cabeça atrás com recorte), HUD à direita do lead-in, lockup no rodapé |
+| S1 · Tonight, Pray | cabeça centrada em x (~540); **topo do cabelo/véu encostando na base do headline (y ~245–265)**, olhos em y ~700–760, queixo acima do lockup (y < ~1150). Medido no Bhil (TTE-0029) e no Malay (TTE-0030); validado no teste de 12/11 | headline em cima (cabeça atrás com recorte), HUD à direita do lead-in, lockup no rodapé |
 | F1 · 01 Capa-retrato | rosto abaixo do nome do povo (y > ~420), espaço escuro embaixo | nome no topo esquerdo, ficha HUD embaixo |
 | F1 · 02 Culture Briefing | livre: baixo, direita ou centro | blocos na área oposta ao FOCUS |
 | F1 · 05 Impossible Tension | metade direita (x > ~540) | coluna de texto à esquerda |
@@ -43,6 +43,12 @@ Tiradas das peças de referência. Medidas no slide de 1080×1350.
 | S2 · Statement | onde o objeto estiver; headline no maior vazio | S2b: headline partido em volta do FOCUS |
 | S4a · Dossiê (retrato) | rosto centrado no quadro 271×387 | — |
 | F3 / F4 / mapas | não usa FOCUS (figura gerada e posicionada no vazio; mapa usa o Micro / Target) | — |
+
+## Teste 1 — S1 Malay (12/11/2026)
+- FOCUS do Lucas: cabeça com margem (764×927), marcado `livre · recorte`.
+- Agente: FOCUS já estava centrado em x; subiu foto + Cutout + FOCUS 123px para o topo do cabelo encostar no headline. Mesma geometria que o Lucas usou na TTE-0030 original (ele subiu 136px com escala 1,036).
+- Diferenças restantes vs. original: (1) **recorte não feito** → a topografia passa por cima do rosto (no original o Cutout cobre a topografia); (2) pássaro do lockup: o template usa o branco vazado, a TTE-0030 usa o laranja.
+- Correção do protocolo: a posição-alvo dos olhos do S1 estava errada (y 420–560); medida real ~700–760.
 
 ## Limites conhecidos
 - O FOCUS diz onde **não** cobrir; não julga se a foto é boa. Curadoria continua com o Lucas.
