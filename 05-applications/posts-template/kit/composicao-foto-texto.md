@@ -24,6 +24,20 @@ Ordem das camadas, de baixo para cima:
 - Sujeitos embaixo (slide 3) ou à direita (slide 4), **sem tocar o texto**; o texto fica sobre o fundo P&B + glow.
 - Resultado medido: corpo branco com contraste ≥ 7:1 sem nenhum degradê.
 
+### Enquadramento na Receita 1 (correções do Lucas, 13/11/2026)
+- **Retrato = Camada 2 (Stillness): plano médio ou curto** (cabeça e ombros, até o peito). **Nunca corpo
+  inteiro, nunca gerar corpo na expansão** (fica deformado). Expandir só fundo: céu e paisagem para cima e
+  para o lado oposto ao sujeito, com a foto original encostada embaixo e no lado do sujeito.
+- O sujeito fica **inteiro fora da coluna de texto** (slide 4: x ≥ ~560); o rosto nunca sob caixa ou texto.
+  A caixa da pergunta pode passar sobre ombro/peito (como na 0037), nunca sobre o rosto.
+- **Nada do sujeito encosta em texto**, inclusive cabeça de quem está montado (cavaleiro) — deixar folga
+  clara abaixo do último bloco.
+- **Fonte (`Sources:`) vai no pé da página**, mesmo y da fonte do slide anterior (y 1247), à esquerda; swipe
+  no canto inferior direito. Não subir a fonte para perto dos blocos.
+- **Recorte de grupo (várias pessoas): o Lucas faz no Figma (Isolate)** — o resultado é melhor que SAM/Magnific.
+  O agente deixa a camada `SLOT / Photo · Cutout` com a foto expandida, oculta, e avisa. Sujeito único: o
+  `images_remove_background` do Magnific funcionou bem.
+
 ## Receita 2 — Capa de bioma com texto no céu (TTE-2026-10-019)
 - Texto escuro `#28272A` sobre céu claro. **A caixa inteira do texto precisa estar limpa** (sem árvore,
   palmeira, poste, linha do horizonte). Se não estiver: expandir o céu (teto) e descer a foto.
@@ -32,6 +46,8 @@ Ordem das camadas, de baixo para cima:
 - Micrografia com função: linha laranja fina saindo do sujeito pelo horizonte até a borda (0019) — aponta o
   protagonista pequeno na paisagem. Usar quando o sujeito é pequeno e não colide com outros elementos.
 - **Lockup:** a cor do divisor e do símbolo Hope Channel segue o **fundo atrás deles** (ver regra abaixo).
+- Aprovada pelo Lucas na rodada 3 v2 (capa Sahel), com um ajuste dele: bloco de título desceu ~50px
+  (título em y ~284) — mais respiro entre lockup e título.
 
 ## Regra de contraste do lockup (Lucas, 13/11/2026)
 - Cada marca é decidida pelo contraste **do que está atrás dela**, não pela cor do texto. "Acompanhar o
@@ -50,8 +66,8 @@ As ferramentas de IA do Figma (Isolate/Expand) não estão na Plugin API. O flux
    Conferir o resultado (`creations_read`) — corpo gerado (roupa, chão) costuma funcionar; mãos e rostos, não pedir.
 3. **Recortar:**
    - sujeito único → `images_remove_background` (3 créditos);
-   - grupo em terreno aberto → `images_remove_background` **mantém o chão**; usar `images_segment`
-     (SAM, 35 créditos) **uma caixa por pessoa** e juntar com `tools/merge_masks.py`.
+   - grupo → **o Lucas recorta no Figma (Isolate)**. (`images_remove_background` mantém o chão; SAM por
+     pessoa + `tools/merge_masks.py` deu recorte ruim na rodada 3 — só como último recurso.)
 4. Subir no Figma (`upload_assets`) no fundo e no Cutout — mesma geometria, encaixe exato.
 
 Custo típico de um carrossel de bioma com 3 fotos: ~400–800 créditos.
