@@ -58,6 +58,7 @@ Não são componentes: copiar e ajustar no olho.
 
 ## Regras gerais do kit
 
+- **Camada de grão sempre BLOQUEADA** (cadeado) em todo template e peça — facilita editar o que está embaixo (Lucas, 13/11/2026).
 - Caixas HUD vetoriais (HUD Box, Question Box, Title Box, rótulo em caixa, pílula de referência): o texto nunca passa da borda — se o texto crescer, **redimensiona-se a caixa**, não só o texto.
 - Recorte de profundidade é condicional: só com sujeito único e nítido. Sem isso, apagar a camada Cutout.
 - Elementos que atravessam slides: duplicar no slide vizinho com x deslocado em −1080.

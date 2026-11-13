@@ -80,7 +80,11 @@ the brief (default: Test page `754:2`).
   - `Lockup / Compact`: Bird = Laranja contorno branco (default: Biomes, S1, S2) or Branco vazado (S4).
   - `Lockup / Full`: Fundo = Escuro or Claro (Editorial, Halftone).
   - `Micro / Swipe`: override the text color to the background (white on photo/dark, #28272A on off-white).
-  - `Texture / Grain`: always the top layer; change only the instance opacity (9–12%).
+  - `Texture / Grain`: always the top layer and **always locked** (`locked = true`); change only the instance opacity (9–12%).
+- **Subject first, text adapts:** size the subject as a big protagonist first (medium/short portrait, head
+  ~25–40% of slide width), then pick the text layout that lives with it — full-width text on top with the
+  subject below, or a narrower text block with the subject large beside it (slight rotation allowed). Never
+  shrink the subject to fit the template's text column. See `composicao-foto-texto.md`.
 - **Elements crossing slides** (Editorial rich figure, F5 maps/photos): duplicate into the neighbor slide at
   x − 1080 so the seam matches.
 - **Editorial figure** = two layers with the same image: Multiply below, Screen with the dither shader above.
@@ -140,7 +144,8 @@ text, bigger gap between groups).
 - [ ] Variant matches the image (Biomes cover a/b, Editorial simple/rich per brief).
 - [ ] Lockup: right variant, right slide (compact on cover/singles, full only on the last slide).
 - [ ] Swipe only on inner slides, color matched to the background.
-- [ ] Grain is the top layer on every slide.
+- [ ] Grain is the top layer on every slide, and locked.
+- [ ] Subject is a big protagonist (no tiny subject with empty sky); text layout adapted to it.
 - [ ] Contrast checked at the worst point.
 - [ ] Generated maps checked against a real map.
 

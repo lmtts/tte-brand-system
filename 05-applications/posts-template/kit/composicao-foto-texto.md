@@ -24,6 +24,22 @@ Ordem das camadas, de baixo para cima:
 - Sujeitos embaixo (slide 3) ou à direita (slide 4), **sem tocar o texto**; o texto fica sobre o fundo P&B + glow.
 - Resultado medido: corpo branco com contraste ≥ 7:1 sem nenhum degradê.
 
+### Sujeito primeiro, texto se adapta (Lucas, 13/11/2026)
+O erro da rodada 3 v2 no slide 4: o agente fixou a coluna de texto do template e **encolheu o sujeito** até
+caber — o sujeito ficou minúsculo, com céu vazio em cima. A ordem certa é a inversa:
+1. **Defina o tamanho do sujeito primeiro**: protagonista grande (retrato médio/curto, cabeça ocupando
+   ~25–40% da largura do slide), enchendo o quadro. Nada de vazio grande sem função.
+2. **Depois escolha o layout do texto** que convive com esse sujeito. Opções válidas no mesmo slide-tipo
+   (ex.: "Let the landscape shape your prayers", `1060:275` e `1060:252` na página Test):
+   - **A · Texto em cima, largura total, sujeito embaixo:** lista em ~890px de largura no terço superior,
+     glow no alto atrás do texto, sujeito grande centralizado embaixo; a caixa da pergunta sobre o peito.
+   - **B · Coluna estreita + sujeito grande ao lado:** reduzir a largura do bloco de texto inteiro
+     (ex.: lista de 467 → ~373px) e posicionar o sujeito grande à direita, **pode girar levemente**
+     (~10–15°) para caber e dar movimento.
+   - (o layout do template, coluna 467px + sujeito à direita, só quando o sujeito já é estreito, como na 0037).
+3. Largura do bloco de texto, posição e leve rotação do sujeito são **variáveis de composição**, não regras
+   do template. Fixo continua: ordem dos elementos, rótulos, copy, caixa da pergunta, swipe, grão.
+
 ### Enquadramento na Receita 1 (correções do Lucas, 13/11/2026)
 - **Retrato = Camada 2 (Stillness): plano médio ou curto** (cabeça e ombros, até o peito). **Nunca corpo
   inteiro, nunca gerar corpo na expansão** (fica deformado). Expandir só fundo: céu e paisagem para cima e
