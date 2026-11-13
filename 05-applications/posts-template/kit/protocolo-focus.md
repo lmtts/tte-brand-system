@@ -52,6 +52,12 @@ Tiradas das peças de referência. Medidas no slide de 1080×1350.
 - Lucas removeu o fundo do Cutout → topografia saiu do rosto. **Teste aprovado pelo Lucas.** Lockup do S1 passou a usar o pássaro laranja como padrão.
 - Status: protocolo FOCUS **aprovado** (deixa de estar "em teste").
 
+## Rodada 3 — Sahel (13/11/2026), nota 5
+- FOCUS funcionou para **onde** está o sujeito; o que faltou foi **preparar a imagem**: expandir quando falta
+  área, separar o sujeito do fundo, e nunca usar degradê grande. Ver [composicao-foto-texto.md](composicao-foto-texto.md).
+- A escolha da variante da capa também considera **contraste e obstáculos atrás do texto** (não só a área livre):
+  a palmeira atrás do lead-in reprovou a capa v1 no verificador (1,77:1).
+
 ## Limites conhecidos
 - O FOCUS diz onde **não** cobrir; não julga se a foto é boa. Curadoria continua com o Lucas.
 - Contraluz, céu estourado e fotos muito cheias podem não ter área livre suficiente: o agente avisa em vez de forçar (glow só como último recurso).

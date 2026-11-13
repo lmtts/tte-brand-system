@@ -24,6 +24,8 @@ Lucas over the subject.
 | What the finished template looks like | `05-applications/posts-template/kit/refs/*.jpg` |
 | Brief format and the 4-step flow | `05-applications/posts-template/kit/brief-template.md` |
 | Image protocol (FOCUS) | `05-applications/posts-template/kit/protocolo-focus.md` |
+| **Photo + text composition** (subject separation, expand, lockup contrast, Magnific pipeline, checker) | `05-applications/posts-template/kit/composicao-foto-texto.md` — read before placing any photo |
+| Composition checker / mask merger | `05-applications/posts-template/tools/check_composition.py`, `merge_masks.py` |
 | Generated images (Editorial figures, maps) | `.claude/skills/tte-imagery/references/magnific-social-recipes.md` |
 | Figma templates | file `QJpddccb8biAnsDiSKjcNf`, page `06.1 · Post Kit` (`1002:316`) |
 
@@ -56,7 +58,11 @@ the brief (default: Test page `754:2`).
    position (only with `· livre`), pick the variant by free area, keep all text and HUD outside FOCUS (except
    headline behind the subject with `· recorte`), decide text color by contrast, hide FOCUS as
    `FOCUS (oculto)`.
-5. **Fit text and boxes** (see Figma mechanics), then run the **delivery checklist**.
+   **Prepare the image for the text, never rescue text with big gradients** (round 3 lesson): no clean area →
+   expand the photo (Magnific, exact canvas); busy background or subject near text → subject separation
+   (B&W + dither background, glow, colour cut-out). Recipes and values in `composicao-foto-texto.md`.
+5. **Fit text and boxes** (see Figma mechanics), then run `check_composition.py --plate` on every slide with
+   a photo (plate = render with text hidden) and the **delivery checklist**.
 6. **Self-review**: screenshot → compare with the ref image → rubric → fix. At most 2 rounds.
 7. **Deliver** with a short note: template + variant, where FOCUS landed and what it decided, anything that
    needs Lucas (copy over limit, missing image, contrast fallback used).
@@ -85,7 +91,8 @@ the brief (default: Test page `754:2`).
 
 1. Palette: Fire Orange `#FE5442`, Black `#28272A`, white — color variables when possible.
 2. Typefaces: Mona Sans (commanding voice, uppercase) and Space Mono (HUD, data, body). Nothing else.
-3. Lockup per the template; TTE bird never recolored; Hope Channel symbol contrasts with the background.
+3. Lockup per the template; TTE bird never recolored; divider + Hope Channel symbol take the colour that
+   contrasts with the background **behind them** (not the text's colour by default), always the same colour as each other.
 4. Carousel semantics: swipe `>>>>>>>` on inner slides only; last slide = CTA + SAVE // PRAY // SHARE +
    Lockup / Full, no swipe; no lockup on inner slides.
 5. Grain on every slide/single, top layer.
