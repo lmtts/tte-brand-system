@@ -28,6 +28,18 @@ Ordem dos 7 slides · rótulos de seção · "WITHIN REACH. STILL UNREACHED." ·
 - Nota de rodapé: até ~90 caracteres.
 - Caixas HUD vetoriais (Micro / HUD Box, slide 03): o texto nunca passa da borda — se crescer, redimensionar a caixa junto.
 
+## Capa com nome em 2 linhas (regra do Lucas, rodada 4, 13/11/2026)
+Referência: capa Han Chinese (página Test, `1070:69`), ajustada pelo Lucas.
+- **Topography** (frame ao lado do nome): x = borda direita do nome + ~35px (ex.: nome 65→647, topografia em
+  x 682) e **altura = altura do bloco do nome** (1 linha 102px → 2 linhas 223px). Nunca deixar a topografia
+  com a altura de 1 linha quando o nome tem 2.
+- **Sujeito centralizado** no eixo horizontal (centro da cabeça ≈ x 540), com o **topo da cabeça entrando
+  ~15–20px por trás da última linha do nome** (Cutout por cima do texto). Rosto sempre abaixo do nome.
+- **Glow de baixo** (elipse `#28272A`, blur 330): topo em y ~935, altura ~940 — escurece só a faixa da ficha
+  HUD e do rodapé, **sem cobrir o rosto**.
+- Fundo com folhas/textura nítida atrás do nome: desfocar só a foto de fundo (layer blur ~26), já que o
+  sujeito está no Cutout — profundidade de campo, sem degradê.
+
 ## Muda conforme a imagem
 - 01: retrato com rosto abaixo do nome, espaço escuro embaixo para a ficha.
 - 02: posição da foto livre (baixo, direita, centro) — compor pelo FOCUS.

@@ -80,8 +80,9 @@ As ferramentas de IA do Figma (Isolate/Expand) não estão na Plugin API. O flux
    posicionando a foto original dentro do novo quadro (ex.: `imageY` alto = ganha teto). Prompt curto
    descrevendo a continuação ("continuation of the same pale sky above, clear and empty"). 130 créditos.
    Conferir o resultado (`creations_read`) — corpo gerado (roupa, chão) costuma funcionar; mãos e rostos, não pedir.
-3. **Recortar:**
-   - sujeito único → `images_remove_background` (3 créditos);
+3. **Recortar:** o recorte final é do **Lucas no Figma (Isolate)**, ~1 min no total (rodada 4). O do Magnific
+   serve como **provisório** para o agente medir o sujeito e compor; o Lucas troca pelo dele.
+   - sujeito único → `images_remove_background` (3 créditos) como provisório;
    - grupo → **o Lucas recorta no Figma (Isolate)**. (`images_remove_background` mantém o chão; SAM por
      pessoa + `tools/merge_masks.py` deu recorte ruim na rodada 3 — só como último recurso.)
 4. Subir no Figma (`upload_assets`) no fundo e no Cutout — mesma geometria, encaixe exato.

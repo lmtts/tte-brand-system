@@ -250,3 +250,35 @@ Textos completos dos prompts: `e8-teste-motor/` na pasta da ideia, e no históri
 | Skill de imagem | `.claude/skills/tte-imagery/` |
 | Registro completo do teste (PT) | `C:\.jarvis\projects\empreendimentos\ideias-saas-startup\design-as-a-service\e8-teste-motor\` — `01-engenharia-reversa.md`, `02-skill-tte-social-post.md` (v0 congelada), `03-resultados.md` |
 | Peças do teste | Figma, página `Test` (`754:2`), y ≥ 13600 |
+
+---
+
+## 10. Depois da templetização (plano de 5 fases, 12–13/11/2026)
+
+O plano da seção 8 foi executado: Post Kit no Figma (`06.1 · Post Kit`), fichas em texto e imagens de
+referência em `kit/`, protocolo FOCUS, receitas do Magnific, brief padrão, skill `tte-social-post` v2,
+referência de composição foto + texto e verificador de legibilidade (`tools/`).
+
+| Rodada | Peça | Nota do Lucas | Ajuste do Lucas | Agente | O que decidiu |
+|---|---|---|---|---|---|
+| 2 (20/10, antes do kit) | Carrossel Monsoon (F2) | 6,5 | 7 min (capa refeita) | — | baseline |
+| 3 (12/11, kit v1) | Carrossel Sahel/Fulani (F2) | **5** | não medido | ~9 min | texto certo; **imagem errada** (degradês grandes, sujeito pequeno, palmeira atrás do texto, recorte ruim) |
+| 3 v2 (13/11) | Sahel refeito com a receita 0037 | capa e slide 3 aprovados; slide 4 refeito pelo Lucas | — | — | nasceu `kit/composicao-foto-texto.md` + verificador |
+| Teste "sujeito primeiro" (13/11) | Slide 4 com foto nova | aprovado ("gostei") | 0 | — | regra: o sujeito define o layout do texto |
+| **4 (13/11, kit final)** | **Carrossel Han Chinese/Xiang (F1, 7 slides)** | **9** | **~2 min** (recortes + capa) | **~9,5 min, sem intervenção** | **critério de fechamento atingido** (nota ≥ 8, ajuste ≪ 32 min à mão) |
+
+**O que fez a diferença entre a rodada 3 e a 4:**
+- Preparar a imagem para o texto (expandir teto/fundo, separar sujeito do fundo, desfocar só o fundo) em vez
+  de salvar o texto com degradê.
+- **Sujeito primeiro:** protagonista grande; o layout do texto se adapta a ele.
+- Medir o sujeito pelo recorte provisório (topo e largura da cabeça) e enquadrar por números.
+- Verificador com render sem texto (`--plate`): pegou a palmeira (v1) e as folhas atrás do nome (rodada 4).
+
+**Ajustes do Lucas na rodada 4 que viraram regra:** capa F1 com nome em 2 linhas — topografia com a altura
+do nome, sujeito centralizado entrando um pouco por trás do título, glow de baixo sem cobrir o rosto
+(`kit/F1-mission-briefing.md`). Recortes finais são do Lucas no Figma (~1 min).
+
+**Custo de imagem por carrossel:** ~200–400 créditos do Magnific (mapa + expansões + recortes provisórios).
+
+**Ainda não testado com o kit final:** F3 Editorial P&B (figuras geradas), F4 Halftone, F5 Gerais, singles S2/S4.
+Testar quando surgir um pedido real de cada.

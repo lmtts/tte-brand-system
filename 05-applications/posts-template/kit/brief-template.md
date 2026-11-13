@@ -37,7 +37,9 @@
 
 1. **Lucas** manda o brief e cura as fotos (coloca na página ou passa o link/arquivo).
 2. **Agente, passada 1:** duplica o template, preenche a copy, coloca as imagens nos slots (sem enquadrar), gera as imagens marcadas como "gerar" e entrega a lista do que falta: quais fotos precisam de `FOCUS` e quais Cutouts precisam de remoção de fundo.
-3. **Lucas** desenha os `FOCUS` (`· livre`, `· recorte` quando quiser) e remove o fundo dos Cutouts. ~1–2 min por foto.
+3. **Lucas** faz os recortes finais no Figma (Isolate) nas camadas Cutout. ~1–2 min no carrossel inteiro.
+   O `FOCUS` é opcional: na rodada 4 o agente mediu o sujeito pelo recorte provisório do Magnific e acertou o
+   enquadramento sem FOCUS. Use o FOCUS quando quiser forçar uma área (ex.: foto com vários sujeitos).
 4. **Agente, passada 2:** compõe pelo protocolo FOCUS, ajusta texto e caixas, passa o checklist, se autoavalia por screenshot (até 2 rodadas) e entrega com a nota.
 
 Se as fotos já vierem com FOCUS e recorte, os passos 2 e 4 viram uma passada só.
